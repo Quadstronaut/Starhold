@@ -34,5 +34,7 @@ npm run build        # Astro static site → dist/
 ## Notes
 
 - Runtime secrets (Stripe keys, Discord webhook URLs) are supplied via environment
-  variables at deploy time — never committed. See each app's `.env.example`.
+  variables at deploy time — never committed. `.env.example` files are not yet
+  present; required vars are `STRIPE_SECRET_KEY`, `STRIPE_PRICE_CUSTOM_BOT`,
+  `STRIPE_WEBHOOK_SECRET`, `DISCORD_WEBHOOK_ORDERS`, `DISCORD_WEBHOOK_INTAKE`.
 - This repository holds the public site code only.
