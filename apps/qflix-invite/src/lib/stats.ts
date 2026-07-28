@@ -11,17 +11,26 @@ export interface LibraryCount {
 	items: number;
 }
 
+/*
+ * Only `generatedAt` is required. Every metric is optional because the
+ * collectors have different reliability: Plex and the disk quota are read
+ * directly, while request totals and monitor counts depend on services that
+ * may be unreachable. A tile with no data is simply not rendered — the page
+ * never shows a zero it did not measure, and never a figure it cannot source.
+ */
 export interface Stats {
 	/** ISO 8601, UTC. Written by qflix-stats.py at emit time. */
 	generatedAt: string;
 	libraries: LibraryCount[];
-	titlesTotal: number;
-	diskBytes: number;
-	requestsFulfilled: number;
-	medianFillMinutes: number;
-	monitorsUp: number;
-	monitorsTotal: number;
-	canaries: number;
+	films?: number;
+	series?: number;
+	episodes?: number;
+	diskBytes?: number;
+	requestsFulfilled?: number;
+	medianFillMinutes?: number;
+	monitorsUp?: number;
+	monitorsTotal?: number;
+	canaries?: number;
 }
 
 /** Beyond this the page stops saying "just now" and shows a plain timestamp. */
@@ -42,25 +51,8 @@ export function parseStats(raw: unknown): Stats | null {
 	const generatedAt = r.generated_at;
 	if (typeof generatedAt !== 'string' || Number.isNaN(Date.parse(generatedAt))) return null;
 
-	const titlesTotal = num(r.titles_total);
-	const diskBytes = num(r.disk_bytes);
-	const requestsFulfilled = num(r.requests_fulfilled);
-	const medianFillMinutes = num(r.median_fill_minutes);
-	const canaries = num(r.canaries);
-	if (
-		titlesTotal === null ||
-		diskBytes === null ||
-		requestsFulfilled === null ||
-		medianFillMinutes === null ||
-		canaries === null
-	) {
-		return null;
-	}
-
 	const mon = (r.monitors ?? {}) as Record<string, unknown>;
-	const monitorsUp = num(mon.up);
-	const monitorsTotal = num(mon.total);
-	if (monitorsUp === null || monitorsTotal === null) return null;
+	const opt = (v: number | null) => (v === null ? undefined : v);
 
 	const libsRaw = Array.isArray(r.libraries) ? r.libraries : [];
 	const libraries: LibraryCount[] = [];
@@ -74,13 +66,15 @@ export function parseStats(raw: unknown): Stats | null {
 	return {
 		generatedAt,
 		libraries,
-		titlesTotal,
-		diskBytes,
-		requestsFulfilled,
-		medianFillMinutes,
-		monitorsUp,
-		monitorsTotal,
-		canaries
+		films: opt(num(r.films)),
+		series: opt(num(r.series)),
+		episodes: opt(num(r.episodes)),
+		diskBytes: opt(num(r.disk_bytes)),
+		requestsFulfilled: opt(num(r.requests_fulfilled)),
+		medianFillMinutes: opt(num(r.median_fill_minutes)),
+		monitorsUp: opt(num(mon.up)),
+		monitorsTotal: opt(num(mon.total)),
+		canaries: opt(num(r.canaries))
 	};
 }
 

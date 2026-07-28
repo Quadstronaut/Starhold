@@ -88,9 +88,9 @@
 			{@render thanks()}
 		{/if}
 
-		{#if data.stats}
+		{#if data.stats?.diskBytes}
 			<p class="glance tabular">
-				{formatCount(data.stats.titlesTotal)} titles on the shelf right now.
+				{formatSize(data.stats.diskBytes)} on the shelf right now.
 			</p>
 		{/if}
 
@@ -118,22 +118,42 @@
 	{#if data.stats}
 		<section class="proof" id="proof">
 			<h2>It's already running.</h2>
+			<!-- Every tile is conditional. A metric that could not be measured is
+			     omitted rather than shown as zero. -->
 			<dl class="tabular">
-				<div><dt>Titles</dt><dd>{formatCount(data.stats.titlesTotal)}</dd></div>
-				<div><dt>On disk</dt><dd>{formatSize(data.stats.diskBytes)}</dd></div>
-				<div>
-					<dt>Requests filled</dt>
-					<dd>{formatCount(data.stats.requestsFulfilled)}</dd>
-				</div>
-				<div>
-					<dt>Typical wait</dt>
-					<dd>{formatDuration(data.stats.medianFillMinutes)}</dd>
-				</div>
-				<div>
-					<dt>Monitors up</dt>
-					<dd>{data.stats.monitorsUp}/{data.stats.monitorsTotal}</dd>
-				</div>
-				<div><dt>Canaries</dt><dd>{data.stats.canaries}</dd></div>
+				{#if data.stats.diskBytes}
+					<div><dt>On disk</dt><dd>{formatSize(data.stats.diskBytes)}</dd></div>
+				{/if}
+				{#if data.stats.episodes}
+					<div><dt>Episodes</dt><dd>{formatCount(data.stats.episodes)}</dd></div>
+				{/if}
+				{#if data.stats.films}
+					<div><dt>Films</dt><dd>{formatCount(data.stats.films)}</dd></div>
+				{/if}
+				{#if data.stats.series}
+					<div><dt>Series</dt><dd>{formatCount(data.stats.series)}</dd></div>
+				{/if}
+				{#if data.stats.requestsFulfilled}
+					<div>
+						<dt>Requests filled</dt>
+						<dd>{formatCount(data.stats.requestsFulfilled)}</dd>
+					</div>
+				{/if}
+				{#if data.stats.medianFillMinutes}
+					<div>
+						<dt>Typical wait</dt>
+						<dd>{formatDuration(data.stats.medianFillMinutes)}</dd>
+					</div>
+				{/if}
+				{#if data.stats.monitorsUp && data.stats.monitorsTotal}
+					<div>
+						<dt>Monitors up</dt>
+						<dd>{data.stats.monitorsUp}/{data.stats.monitorsTotal}</dd>
+					</div>
+				{/if}
+				{#if data.stats.canaries}
+					<div><dt>Canaries</dt><dd>{data.stats.canaries}</dd></div>
+				{/if}
 			</dl>
 			{#if fresh}
 				<p class="stamp" class:stale={fresh.stale}>{fresh.label}</p>
