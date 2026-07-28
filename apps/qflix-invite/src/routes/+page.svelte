@@ -114,7 +114,16 @@
 		</a>
 	</section>
 
-	<!-- ── Screen 2 ── proof: real numbers, never rounded for effect ── -->
+	<!-- ── 2 ── coverage: the argument the price can't make ── -->
+	<!-- Owns the scroll-cue anchor whenever the proof wall has no data. -->
+	<section class="coverage" id={data.stats ? undefined : 'proof'}>
+		<p>
+			Netflix's catalog is different in Canada. Max drops titles on the 30th. QFlix isn't a
+			catalog — <strong>you ask, it appears.</strong>
+		</p>
+	</section>
+
+	<!-- ── 3 ── proof: real numbers, never rounded for effect ── -->
 	{#if data.stats}
 		<section class="proof" id="proof">
 			<h2>It's already running.</h2>
@@ -161,52 +170,7 @@
 		</section>
 	{/if}
 
-	<!-- ── coverage: the argument the price can't make ── -->
-	<!-- Owns the scroll-cue anchor whenever the proof wall has no data. -->
-	<section class="coverage" id={data.stats ? undefined : 'proof'}>
-		<p>
-			Netflix's catalog is different in Canada. Max drops titles on the 30th. QFlix isn't a
-			catalog — <strong>you ask, it appears.</strong>
-		</p>
-	</section>
-
-	<!-- ── Screen 3 ── the ladder ── -->
-	<section class="ladder">
-		<p class="beta">Beta seat: {betaSeat}</p>
-
-		<h2>Every member unlocks the next thing.</h2>
-
-		<ol>
-			{#each rows as r (r.id)}
-				<li class={r.state}>
-					<span class="mark" aria-hidden="true">
-						{r.state === 'achieved' ? '✓' : r.state === 'next' ? '◆' : '🔒'}
-					</span>
-					<div>
-						<h3>{r.title}</h3>
-						<p>{r.detail}</p>
-						{#if r.state === 'achieved' && r.reason}
-							<!-- The head start only works when the reason is shown. -->
-							<p class="reason">{r.reason}</p>
-						{/if}
-						{#if r.state === 'next'}
-							<p class="away">
-								{r.membersAway === 1
-									? 'One more member unlocks this.'
-									: `${r.membersAway} more members unlock this.`}
-							</p>
-						{/if}
-					</div>
-				</li>
-			{/each}
-		</ol>
-
-		<p class="always">
-			Support requests are open to everyone from day one. That's not a tier and never will be.
-		</p>
-	</section>
-
-	<!-- ── Screen 4 ── the operator: what the $50 actually buys ── -->
+	<!-- ── 4 ── the operator: what the $50 actually buys ── -->
 	<section class="operator">
 		<h2>You're not renting a folder.</h2>
 		<ul>
@@ -226,7 +190,43 @@
 		</ul>
 	</section>
 
-	<!-- ── Screen 5 ── demo, one honest limit, FAQ ── -->
+	<!-- ── 5 ── the ladder ── -->
+	<section class="ladder">
+		<p class="beta">Beta seat: {betaSeat}</p>
+
+		<h2>Every member unlocks the next thing.</h2>
+
+		<ol>
+			{#each rows as r (r.id)}
+				<li class={r.state}>
+					<span class="mark" aria-hidden="true">
+						{r.state === 'achieved' ? '✓' : r.state === 'next' ? '◆' : '🔒'}
+					</span>
+					<div>
+						<h3>{r.title}</h3>
+						<p>{r.detail}</p>
+						{#if r.state === 'achieved' && r.reason}
+							<!-- Naming what earned the rung is what makes it read as momentum. -->
+							<p class="reason">{r.reason}</p>
+						{/if}
+						{#if r.state === 'next'}
+							<p class="away">
+								{r.membersAway === 1
+									? 'One more member unlocks this.'
+									: `${r.membersAway} more members unlock this.`}
+							</p>
+						{/if}
+					</div>
+				</li>
+			{/each}
+		</ol>
+
+		<p class="always">
+			Support requests are open to everyone from day one. That's not a tier and never will be.
+		</p>
+	</section>
+
+	<!-- ── 6 ── demo, one honest limit ── -->
 	<section class="demo">
 		<h2>Not sure it'll play on your TV?</h2>
 		<p>

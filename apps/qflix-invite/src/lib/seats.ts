@@ -16,14 +16,13 @@ export interface Tier {
 	title: string;
 	detail: string;
 	/**
-	 * Why this tier was already achieved before anyone joined.
+	 * Optional note shown under an achieved tier, saying what earned it.
 	 *
-	 * Load-bearing, not decorative: the endowed-progress effect (Nunes & Drèze
-	 * 2006) only occurs when a REASON for the head start is displayed. Cards
-	 * with a free stamp and no explanation performed no better than cards
-	 * without one. Never render a pre-achieved tier without this string.
+	 * Naming the cause is what makes the row read as momentum rather than
+	 * decoration — a reader who cannot tell why a rung went green has no
+	 * reason to believe the next one will.
 	 */
-	preAchievedReason?: string;
+	achievedNote?: string;
 }
 
 /** Paying members today. Beta seat is tracked separately and is NOT counted. */
@@ -41,7 +40,7 @@ export const tiers: Tier[] = [
 		unlocksAt: 1,
 		title: 'Torrents + Usenet',
 		detail: 'Two sources, not one. If one drought hits, the other still delivers.',
-		preAchievedReason: 'Landed before anyone joined. You start one rung up.'
+		achievedNote: 'Unlocked when the first member joined.'
 	},
 	{
 		id: 2,

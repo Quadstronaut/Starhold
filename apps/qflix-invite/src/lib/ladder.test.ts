@@ -3,15 +3,17 @@ import { buildLadder } from './ladder';
 import { tiers } from './seats';
 
 describe('buildLadder', () => {
-	it('always marks tier 1 achieved, even at zero paying members', () => {
-		const rows = buildLadder(tiers, 0);
-		expect(rows[0].state).toBe('achieved');
+	it('marks tier 1 achieved once the first member has joined', () => {
+		// Nothing is granted — tier 1 went green because someone paid.
+		expect(buildLadder(tiers, 1)[0].state).toBe('achieved');
 	});
 
-	it('carries a non-empty reason on the pre-achieved tier', () => {
-		// The endowed-progress effect requires a stated reason for the head
-		// start. Rendering tier 1 green without one buys nothing.
-		const rows = buildLadder(tiers, 0);
+	it('does not mark tier 1 achieved at zero paying members', () => {
+		expect(buildLadder(tiers, 0)[0].state).not.toBe('achieved');
+	});
+
+	it('carries a note saying what earned the achieved tier', () => {
+		const rows = buildLadder(tiers, 1);
 		expect(rows[0].reason).toBeTruthy();
 		expect(rows[0].reason!.length).toBeGreaterThan(10);
 	});

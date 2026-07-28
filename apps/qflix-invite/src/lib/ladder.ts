@@ -9,7 +9,7 @@ export interface LadderRow {
 	state: TierState;
 	/** How many more paying members before this tier unlocks. Never negative. */
 	membersAway: number;
-	/** Present only on a pre-achieved tier. Must be rendered when present. */
+	/** What earned this tier. Rendered only on an achieved row. */
 	reason?: string;
 }
 
@@ -17,16 +17,16 @@ export interface LadderRow {
  * Pure: map the operator's tier config plus the current paying-member count
  * onto display rows.
  *
- * Tier 1 is achieved unconditionally — it landed before the first member did.
- * Every other tier N unlocks at N paying members. Exactly one unachieved tier
- * is marked `next`, because the goal-gradient effect works on the rung you can
- * see yourself reaching, not on a wall of locked ones.
+ * Tier N unlocks at N paying members — nothing is granted, every rung is
+ * earned. Exactly one unachieved tier is marked `next`, because the
+ * goal-gradient effect works on the rung a reader can see themselves
+ * reaching, not on a wall of locked ones.
  */
 export function buildLadder(tiers: Tier[], payingMembers: number): LadderRow[] {
 	let nextAssigned = false;
 
 	return tiers.map((t) => {
-		const achieved = t.id === 1 || payingMembers >= t.unlocksAt;
+		const achieved = payingMembers >= t.unlocksAt;
 
 		let state: TierState;
 		if (achieved) {
@@ -44,7 +44,7 @@ export function buildLadder(tiers: Tier[], payingMembers: number): LadderRow[] {
 			detail: t.detail,
 			state,
 			membersAway: Math.max(0, t.unlocksAt - payingMembers),
-			reason: t.preAchievedReason
+			reason: t.achievedNote
 		};
 	});
 }
