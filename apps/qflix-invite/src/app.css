@@ -1,0 +1,110 @@
+/*
+ * QFlix invite — its own theme. Deliberately NOT the Starhold storefront look.
+ * Palette echoes the QFlix dashboard so the page and the dashboard a member
+ * lands on afterwards read as the same product.
+ *
+ * Hard constraints from the spec:
+ *   - zero external network requests (no web fonts, no CDN, no remote images)
+ *   - must render and be convertible above the fold on a 390x844 phone
+ *   - sub-2s load, so: system fonts, no framework CSS, no icon set
+ */
+
+:root {
+	/* Surfaces — deep navy, lifted in steps rather than with shadows. */
+	--bg: #0a1628;
+	--surface: #101f36;
+	--surface-2: #17293f;
+	--line: #22384f;
+
+	/* Ink */
+	--ink: #eaf2ff;
+	--ink-dim: #a8bcd4;
+	--ink-faint: #6f88a3;
+
+	/* Accents — amber is the primary action, sky is informational,
+	   green is reserved EXCLUSIVELY for an achieved ladder tier. */
+	--amber: #ff8c42;
+	--amber-hot: #ffa563;
+	--sky: #7dd3fc;
+	--gold: #d4af37;
+	--green: #45d483;
+
+	/* Type scale — fluid, tuned so the hero fits a 390px viewport. */
+	--step--1: clamp(0.82rem, 0.79rem + 0.15vw, 0.9rem);
+	--step-0: clamp(1rem, 0.95rem + 0.25vw, 1.13rem);
+	--step-1: clamp(1.25rem, 1.15rem + 0.5vw, 1.55rem);
+	--step-2: clamp(1.6rem, 1.4rem + 1vw, 2.2rem);
+	--step-3: clamp(2.1rem, 1.7rem + 2vw, 3.2rem);
+
+	--radius: 12px;
+	--tap: 48px; /* minimum touch target — cold hands, one thumb */
+
+	color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--ink);
+	font-family:
+		ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+		sans-serif;
+	font-size: var(--step-0);
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+	line-height: 1.1;
+	text-wrap: balance;
+	margin: 0;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+p {
+	margin: 0;
+	text-wrap: pretty;
+}
+
+a {
+	color: var(--sky);
+	text-underline-offset: 0.2em;
+}
+
+/* Numerals in the proof wall and ladder must line up in columns. */
+.tabular {
+	font-variant-numeric: tabular-nums;
+}
+
+/* Respect the setting — no motion is a correctness issue, not a preference. */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* Visible focus. People will be tabbing this on a phone keyboard. */
+:focus-visible {
+	outline: 2px solid var(--amber);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
