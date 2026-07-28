@@ -29,8 +29,11 @@ export interface Tier {
 /** Paying members today. Beta seat is tracked separately and is NOT counted. */
 export const payingMembers = 1;
 
-/** Shown above the ladder. Named people out-persuade an anonymous count. */
-export const betaSeat = 'filled — the Brintons';
+/**
+ * Shown above the ladder. Deliberately unnamed — this page sits on a public,
+ * guessable URL and naming a real member exposes them without their consent.
+ */
+export const betaSeat = 'filled';
 
 export const tiers: Tier[] = [
 	{
