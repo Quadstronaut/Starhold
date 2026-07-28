@@ -215,10 +215,6 @@
 			</p>
 		</details>
 		<details>
-			<summary>Can my kids have their own profile?</summary>
-			<p>Yes. Separate profiles, separate watch history, and you set what they can reach.</p>
-		</details>
-		<details>
 			<summary>What if it breaks at 11pm?</summary>
 			<p>
 				Open a support request from the dashboard — it reaches me directly, and it's open to
