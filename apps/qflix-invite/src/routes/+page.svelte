@@ -86,9 +86,6 @@
 
 		{#if form?.ok}
 			{@render thanks()}
-		{:else}
-			{@render signupForm('email', 'Claim a seat')}
-			<p class="price"><strong>$50</strong>/month. Flat.</p>
 		{/if}
 
 		{#if data.stats}
@@ -96,11 +93,30 @@
 				{formatCount(data.stats.titlesTotal)} titles on the shelf right now.
 			</p>
 		{/if}
+
+		<!--
+		  A 100svh hero with nothing below the fold reads as the whole page.
+		  This is the affordance that says "keep going" — and the ask waits
+		  until the evidence below has actually argued for it.
+		-->
+		<a class="cue" href="#proof">
+			<span>See what's actually running</span>
+			<svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+				<path
+					d="M12 4v14m0 0l-6-6m6 6l6-6"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+			</svg>
+		</a>
 	</section>
 
 	<!-- ── Screen 2 ── proof: real numbers, never rounded for effect ── -->
 	{#if data.stats}
-		<section class="proof">
+		<section class="proof" id="proof">
 			<h2>It's already running.</h2>
 			<dl class="tabular">
 				<div><dt>Titles</dt><dd>{formatCount(data.stats.titlesTotal)}</dd></div>
@@ -126,7 +142,8 @@
 	{/if}
 
 	<!-- ── coverage: the argument the price can't make ── -->
-	<section class="coverage">
+	<!-- Owns the scroll-cue anchor whenever the proof wall has no data. -->
+	<section class="coverage" id={data.stats ? undefined : 'proof'}>
 		<p>
 			Netflix's catalog is different in Canada. Max drops titles on the 30th. QFlix isn't a
 			catalog — <strong>you ask, it appears.</strong>
@@ -255,12 +272,12 @@
 	}
 
 	/* ── hero ── sized so the field and button clear a 390x844 viewport ── */
+	/* Deliberately NOT full-height. A 100svh hero buys a dramatic first
+	   screen and pays for it with a page that looks like it ends. Letting the
+	   proof wall break the fold is the stronger signal — the evidence is the
+	   pitch, so it should be visible without being asked for. */
 	.hero {
-		min-height: 100svh;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		padding: 1.5rem 0;
+		padding: 2.6rem 0 1.9rem;
 		border-bottom: 1px solid var(--line);
 	}
 
@@ -357,6 +374,41 @@
 		margin-top: 1.4rem;
 		color: var(--ink-faint);
 		font-size: var(--step--1);
+	}
+
+	/* Scroll affordance. Sits at the bottom of the hero so the fold never
+	   reads as the end of the document. */
+	.cue {
+		margin-top: 1.5rem;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: var(--amber);
+		text-decoration: none;
+		font-size: var(--step--1);
+		font-weight: 600;
+	}
+
+	.cue svg {
+		width: 22px;
+		height: 22px;
+		animation: nudge 1.8s ease-in-out infinite;
+	}
+
+	@keyframes nudge {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(7px);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.cue svg {
+			animation: none;
+		}
 	}
 
 	.err {
