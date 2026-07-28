@@ -243,19 +243,41 @@
 		</p>
 	</section>
 
+	<!-- ── 7 ── straight answers ── -->
 	<section class="faq">
+		<h2>Straight answers.</h2>
+
 		<details>
 			<summary>Which app do I use?</summary>
 			<p>
-				Plex. It's on every TV, phone, console and browser you already own. You sign in with your
-				own account — I never see your password.
+				Plex — the same app everyone else uses. It's already on your TV, phone, tablet, console
+				and browser, and it costs you nothing to install. You sign in with your own Plex account,
+				so your watch history and your resume points are yours, on every device you own.
 			</p>
 		</details>
+
 		<details>
-			<summary>What if it breaks at 11pm?</summary>
+			<summary>What if it breaks?</summary>
 			<p>
-				Open a support request from the dashboard — it reaches me directly, and it's open to
-				everyone regardless of tier. Most things fix themselves before you notice.
+				Open a support request and it comes straight to me — no ticket queue, no bot. That's open
+				to everyone from day one and it is never locked behind a tier. Most failures never reach
+				you anyway: monitors catch them, recovery fires on its own, and my phone buzzes whether
+				or not anyone noticed.
+			</p>
+		</details>
+
+		<details>
+			<summary>Is this safe?</summary>
+			<p>
+				Every connection is encrypted in transit — the same TLS your bank uses. You sign in
+				through Plex itself, so <strong>I never see your password</strong>, and I can't: it's
+				never typed into anything of mine.
+			</p>
+			<p>
+				Your email address is used for exactly one thing — sending you the library invitation.
+				It isn't on a mailing list, it isn't sold, and there is nothing here that tracks what you
+				watch in order to advertise at you. That's the whole promise at the top of this page, and
+				it's the easiest one to keep, because there's no business model that would want it broken.
 			</p>
 		</details>
 	</section>
@@ -608,20 +630,44 @@
 		font-size: var(--step--1);
 	}
 
-	details {
+	.faq details {
 		border-bottom: 1px solid var(--line);
-		padding: 0.85rem 0;
+		padding: 0.9rem 0;
+	}
+
+	/* The trailing rule read as an empty row above the section divider. */
+	.faq details:last-of-type {
+		border-bottom: 0;
+		padding-bottom: 0;
+	}
+
+	.faq details:first-of-type {
+		margin-top: 1.1rem;
+		border-top: 1px solid var(--line);
 	}
 
 	summary {
 		cursor: pointer;
 		font-weight: 600;
+		list-style-position: outside;
+	}
+
+	summary::marker {
+		color: var(--amber);
 	}
 
 	details p {
 		margin-top: 0.6rem;
 		color: var(--ink-dim);
 		font-size: var(--step--1);
+	}
+
+	details p + p {
+		margin-top: 0.75rem;
+	}
+
+	details strong {
+		color: var(--ink);
 	}
 
 	.closer {
