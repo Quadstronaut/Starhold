@@ -274,10 +274,14 @@
 				never typed into anything of mine.
 			</p>
 			<p>
-				Your email address is used for exactly one thing — sending you the library invitation.
-				It isn't on a mailing list, it isn't sold, and there is nothing here that tracks what you
-				watch in order to advertise at you. That's the whole promise at the top of this page, and
-				it's the easiest one to keep, because there's no business model that would want it broken.
+				Your email does two things: it sends you the library invitation, and it puts you on the
+				QFlix newsletter — a short weekly note on what got added and what got fixed. One click
+				unsubscribes, and nothing else about your account changes.
+			</p>
+			<p>
+				That's the whole list. It is never sold, never rented, and nothing here tracks what you
+				watch in order to advertise at you — which is the easiest promise on this page to keep,
+				because there's no business model here that would want it broken.
 			</p>
 		</details>
 	</section>
