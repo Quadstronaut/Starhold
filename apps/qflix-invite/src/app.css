@@ -19,7 +19,9 @@
 	/* Ink */
 	--ink: #eaf2ff;
 	--ink-dim: #a8bcd4;
-	--ink-faint: #6f88a3;
+	/* Was #6f88a3 (4.94:1) — technically AA, genuinely hard to read at 13px
+	   under bad lighting. This is ~6.3:1. */
+	--ink-faint: #8098b4;
 
 	/* Accents — amber is the primary action, sky is informational,
 	   green is reserved EXCLUSIVELY for an achieved ladder tier. */
@@ -107,4 +109,33 @@ a {
 	outline: 2px solid var(--amber);
 	outline-offset: 2px;
 	border-radius: 4px;
+}
+
+/* Scroll targets take focus programmatically — never draw a ring on them. */
+[tabindex='-1']:focus {
+	outline: none;
+}
+
+/*
+ * Browsers default "print background graphics" to off, so without this the
+ * dark page prints as near-white text on white paper — an apparently blank
+ * sheet. Anyone who tries to print this concludes the site is broken.
+ */
+@media print {
+	body {
+		background: #fff;
+		color: #000;
+	}
+
+	:root {
+		--ink: #000;
+		--ink-dim: #333;
+		--ink-faint: #555;
+		--sky: #0b4f6c;
+		--amber: #b45309;
+		--green: #1b6b3a;
+		--line: #bbb;
+		--surface: #fff;
+		--surface-2: #f4f4f4;
+	}
 }

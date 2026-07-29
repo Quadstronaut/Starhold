@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { tick } from 'svelte';
 	import { enhance } from '$app/forms';
 	import { buildLadder } from '$lib/ladder';
 	import { payingMembers, betaSeat, tiers } from '$lib/seats';
@@ -7,35 +8,58 @@
 	let { data, form } = $props();
 
 	const rows = buildLadder(tiers, payingMembers);
-	const nextTier = rows.find((r) => r.state === 'next');
 
 	const fresh = $derived(data.stats ? freshness(data.stats.generatedAt) : null);
+
+	/*
+	 * Whether the proof wall has anything to actually show.
+	 *
+	 * parseStats only guarantees generatedAt, so a collector that resolved zero
+	 * libraries — say a Plex library got renamed — still yields a valid, fresh
+	 * payload with every counter absent. Gating the section on `data.stats`
+	 * alone rendered a heading, an empty grid and a timestamp: the page's
+	 * strongest section reduced to an assertion with nothing behind it.
+	 */
+	const hasProof = $derived(
+		!!data.stats &&
+			[
+				data.stats.diskBytes,
+				data.stats.episodes,
+				data.stats.films,
+				data.stats.series,
+				data.stats.requestsFulfilled,
+				data.stats.medianFillMinutes,
+				data.stats.monitorsTotal,
+				data.stats.canaries
+			].some((v) => v !== undefined)
+	);
 
 	let showDemo = $state(false);
 	let sending = $state(false);
 
-	/** Focus the closing form — used by the demo button. */
-	function focusCloser() {
-		showDemo = true;
+	/** Reveal the demo field and put the cursor in it. Toggles back off. */
+	async function toggleDemo() {
+		showDemo = !showDemo;
+		if (!showDemo) return;
+		await tick(); // the title field does not exist until this resolves
 		const el = document.getElementById('email-closer');
+		el?.focus({ preventScroll: true });
 		el?.scrollIntoView({ block: 'center' });
-		el?.focus();
 	}
 </script>
 
-<!--
-  The form appears twice: once above the fold for people who arrive already
-  sold (they scanned a QR after being pitched in person — they are not cold
-  traffic), and once at the close for people who needed the proof first.
--->
 {#snippet signupForm(id: string, cta: string)}
 	<form
 		method="POST"
 		use:enhance={() => {
 			sending = true;
 			return async ({ update }) => {
-				await update();
+				await update({ reset: false });
 				sending = false;
+				// Without this the error paints below the fold and the page looks
+				// dead: the user taps submit, nothing visibly happens.
+				await tick();
+				document.getElementById(id)?.scrollIntoView({ block: 'center' });
 			};
 		}}
 	>
@@ -48,31 +72,58 @@
 			autocomplete="email"
 			required
 			placeholder="the email you want on Plex"
+			aria-invalid={form?.error ? 'true' : undefined}
+			aria-describedby={form?.error ? `${id}-err` : undefined}
 		/>
 
-		<!-- honeypot: off-screen, no label, never tabbable -->
-		<input class="hp" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
+		<!-- Honeypot. Named so no password manager recognises it: a field called
+		     "website" gets autofilled by 1Password and Chrome, which would drop a
+		     real signup and tell the visitor it succeeded. -->
+		<input
+			class="hp"
+			name="hp_ref_2"
+			type="text"
+			tabindex="-1"
+			autocomplete="new-password"
+			aria-hidden="true"
+		/>
+
+		<!-- Carries intent explicitly so the server never has to guess it. -->
+		<input type="hidden" name="kind" value={showDemo ? 'demo' : 'member'} />
 
 		{#if showDemo}
 			<label class="sr-only" for="{id}-title">One title to test with</label>
-			<input id="{id}-title" name="title" type="text" placeholder="one title to test with" />
+			<input
+				id="{id}-title"
+				name="title"
+				type="text"
+				required
+				maxlength="120"
+				placeholder="one title to test with"
+			/>
+		{/if}
+
+		{#if form?.error}
+			<p class="err" role="alert" id="{id}-err">{form.error}</p>
 		{/if}
 
 		<button type="submit" disabled={sending}>
 			{sending ? 'Sending…' : showDemo ? 'Send me the test title' : cta}
 		</button>
-
-		{#if form?.error}
-			<p class="err" role="alert">{form.error}</p>
-		{/if}
 	</form>
 {/snippet}
 
-{#snippet thanks()}
+{#snippet thanks(kind: string)}
 	<div class="done" role="status">
-		<h2>You're in the queue.</h2>
-		<p>Watch for the Plex invitation email — accept it and you're live.</p>
-		<p>I'll message you payment details.</p>
+		{#if kind === 'demo'}
+			<h2>Test library incoming.</h2>
+			<p>Watch for the Plex invitation — that title will be in it.</p>
+			<p>Nothing to pay. Try it on your own TV and your own internet first.</p>
+		{:else}
+			<h2>You're in the queue.</h2>
+			<p>Watch for the Plex invitation email — accept it and you're live.</p>
+			<p>I'll message you payment details.</p>
+		{/if}
 		<p><a href="https://qflix.quadstronix.dev">Your dashboard lives here →</a></p>
 	</div>
 {/snippet}
@@ -82,11 +133,11 @@
 	<section class="hero">
 		<h1>No ads.<br />No price hikes.<br />No selling your data.<br /><em>Ever.</em></h1>
 
-		<p class="sub">Not a catalog. A request line. Everything on demand.</p>
+		<p class="sub">Not a catalog. A request line. If it exists, you ask and it appears.</p>
 
-		{#if form?.ok}
-			{@render thanks()}
-		{/if}
+		<!-- No confirmation here: the form lives at the close, so that is where
+		     the reader is standing when it succeeds. Rendering it twice collided
+		     with the headline and announced itself twice to screen readers. -->
 
 		{#if data.stats?.diskBytes}
 			<p class="glance tabular">
@@ -100,7 +151,7 @@
 		  until the evidence below has actually argued for it.
 		-->
 		<a class="cue" href="#proof">
-			<span>See what's actually running</span>
+			<span>{hasProof ? "See what's actually running" : 'How it actually works'}</span>
 			<svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
 				<path
 					d="M12 4v14m0 0l-6-6m6 6l6-6"
@@ -116,7 +167,7 @@
 
 	<!-- ── 2 ── coverage: the argument the price can't make ── -->
 	<!-- Owns the scroll-cue anchor whenever the proof wall has no data. -->
-	<section class="coverage" id={data.stats ? undefined : 'proof'}>
+	<section class="coverage" id={hasProof ? undefined : 'proof'} tabindex="-1">
 		<p>
 			Netflix's catalog is different in Canada. Max drops titles on the 30th. QFlix isn't a
 			catalog — <strong>you ask, it appears.</strong>
@@ -124,8 +175,8 @@
 	</section>
 
 	<!-- ── 3 ── proof: real numbers, never rounded for effect ── -->
-	{#if data.stats}
-		<section class="proof" id="proof">
+	{#if hasProof && data.stats}
+		<section class="proof" id="proof" tabindex="-1">
 			<h2>It's already running.</h2>
 			<!-- Every tile is conditional. A metric that could not be measured is
 			     omitted rather than shown as zero. -->
@@ -154,7 +205,10 @@
 						<dd>{formatDuration(data.stats.medianFillMinutes)}</dd>
 					</div>
 				{/if}
-				{#if data.stats.monitorsUp && data.stats.monitorsTotal}
+				<!-- Presence, not truthiness: "0 of 57 up" is a real measurement and
+				     the one worth showing most. Hiding it would be the only
+				     dishonest omission on a page about measured honesty. -->
+				{#if data.stats.monitorsUp !== undefined && data.stats.monitorsTotal}
 					<div>
 						<dt>Monitors up</dt>
 						<dd>{data.stats.monitorsUp}/{data.stats.monitorsTotal}</dd>
@@ -173,35 +227,48 @@
 	<!-- ── 4 ── the operator: what the $50 actually buys ── -->
 	<section class="operator">
 		<h2>You're not renting a folder.</h2>
-		<ul>
-			<li><strong>Always closing gaps.</strong> I added another canary this week.</li>
+		<ul role="list">
+			<!-- No number here on purpose — the live canary count in the proof wall
+			     carries it, so it can never drift out of date. -->
+			<li>
+				<strong>Always closing gaps.</strong> Automated checks watch this thing around the clock,
+				and I keep adding them.
+			</li>
 			<li><strong>Audited on a schedule — and at random.</strong> I go looking for breakage.</li>
 			<li>
-				<strong>Self-healing.</strong> Monitors catch a failure, recovery fires, my phone buzzes.
-				Most breaks are fixed before anyone notices.
+				<strong>Self-healing.</strong> If an app dies, the watchdog restarts it — three tries, backing
+				off each time — and pages me either way. What it can't fix itself, I fix by hand.
 			</li>
 			<li>
-				<strong>It gets better every week.</strong> There's a newsletter that says exactly what
-				changed.
+				<strong>It gets better every week.</strong> A weekly email covers what got added, plus a
+				plain-English note on what I fixed.
 			</li>
 			<li>
-				<strong>Encrypted end to end in transit</strong> — the same TLS your bank uses.
+				<strong>Encrypted in transit</strong> — the same TLS your bank uses.
 			</li>
 		</ul>
 	</section>
 
 	<!-- ── 5 ── the ladder ── -->
 	<section class="ladder">
-		<p class="beta">Beta seat: {betaSeat}</p>
+		<!-- "filled" alone reads as "you're too late" to anyone scanning. -->
+		<p class="beta">Beta seat: {betaSeat} · regular seats open</p>
 
 		<h2>Every member unlocks the next thing.</h2>
 
-		<ol>
+		<!-- role=list: WebKit strips list semantics when the marker is removed,
+		     and the ladder's whole effect depends on hearing "list, 5 items". -->
+		<ol role="list">
 			{#each rows as r (r.id)}
 				<li class={r.state}>
 					<span class="mark" aria-hidden="true">
 						{r.state === 'achieved' ? '✓' : r.state === 'next' ? '◆' : '🔒'}
 					</span>
+					<!-- The glyph is hidden from assistive tech, so state has to be
+					     said in words or a locked tier reads as an available one. -->
+					<span class="sr-only"
+						>{r.state === 'achieved' ? 'Unlocked.' : r.state === 'next' ? 'Next up.' : 'Locked.'}</span
+					>
 					<div>
 						<h3>{r.title}</h3>
 						<p>{r.detail}</p>
@@ -234,7 +301,9 @@
 			it works on your own hardware and your own internet before you pay a cent.
 		</p>
 		{#if !form?.ok}
-			<button type="button" class="ghost" onclick={focusCloser}>Try one title first</button>
+			<button type="button" class="ghost" onclick={toggleDemo}>
+				{showDemo ? 'Never mind — claim a seat' : 'Try one title first'}
+			</button>
 		{/if}
 
 		<p class="limit">
@@ -259,10 +328,10 @@
 		<details>
 			<summary>What if it breaks?</summary>
 			<p>
-				Open a support request and it comes straight to me — no ticket queue, no bot. That's open
-				to everyone from day one and it is never locked behind a tier. Most failures never reach
-				you anyway: monitors catch them, recovery fires on its own, and my phone buzzes whether
-				or not anyone noticed.
+				Hit <em>Report Issue</em> in the app, or just text me — either one reaches me directly,
+				and there's no support org to get lost in. That's open to everyone from day one and it is
+				never locked behind a tier. A lot of failures you'll never see: the watchdog restarts the
+				app and pages me whether or not anyone noticed.
 			</p>
 		</details>
 
@@ -289,19 +358,29 @@
 	<!-- ── the close ── same ask, now that everything above has argued for it ── -->
 	<section class="closer">
 		{#if form?.ok}
-			{@render thanks()}
+			{@render thanks(form.kind ?? 'member')}
+		{:else if showDemo}
+			<h2>Try it first.</h2>
+			<p class="closer-sub">
+				One title, a private library, your own hardware. Nothing to pay and nothing to cancel.
+			</p>
+			{@render signupForm('email-closer', 'Send me the test title')}
 		{:else}
 			<h2>Want in?</h2>
+			<!-- Price stated BEFORE the button. Reading "no card, no autopay",
+			     tapping, and only then learning it is $50 has the shape of a
+			     bait-and-switch even though it isn't one. -->
 			<p class="closer-sub">
-				Drop the email you want on Plex. No card, no autopay — that isn't even built yet.
+				<strong>$50/month, flat.</strong> Drop the email you want on Plex — no card, no autopay,
+				that isn't even built yet.
 			</p>
 			{@render signupForm('email-closer', 'Claim a seat')}
-			<p class="price"><strong>$50</strong>/month. Flat. Cancel by telling me.</p>
+			<p class="price">Cancel by telling me.</p>
 		{/if}
 	</section>
 
 	<footer>
-		<p>QFlix · private · invitation only</p>
+		<p>QFlix · unlisted · invitation only</p>
 	</footer>
 </main>
 
@@ -356,7 +435,9 @@
 		font-size: 16px; /* < 16px makes iOS zoom on focus */
 		color: var(--ink);
 		background: var(--surface);
-		border: 1px solid var(--line);
+		/* --line is only 1.37:1 here and fails WCAG 1.4.11 — under rink glare
+		   the box you need people to tap barely exists. This is 3.06:1. */
+		border: 1px solid #3d5f80;
 		border-radius: var(--radius);
 		font-family: inherit;
 	}
@@ -424,11 +505,15 @@
 
 	/* Scroll affordance. Sits at the bottom of the hero so the fold never
 	   reads as the end of the document. */
+	/* This is the primary affordance on the first screen and it was a 22px tap
+	   target — below the WCAG 2.5.8 floor, aimed at cold thumbs. */
 	.cue {
-		margin-top: 1.5rem;
+		margin-top: 1rem;
+		min-height: var(--tap);
 		display: inline-flex;
 		align-items: center;
 		gap: 0.5rem;
+		padding-right: 0.6rem;
 		color: var(--amber);
 		text-decoration: none;
 		font-size: var(--step--1);
@@ -554,8 +639,11 @@
 		background: var(--surface-2);
 	}
 
-	li.locked {
-		opacity: 0.62;
+	/* Blanket opacity dropped the detail text to 4.23:1. Dim explicitly instead,
+	   which keeps it legible and still clearly secondary. */
+	li.locked h3,
+	li.locked p {
+		color: var(--ink-dim);
 	}
 
 	.mark {
@@ -654,6 +742,8 @@
 		cursor: pointer;
 		font-weight: 600;
 		list-style-position: outside;
+		/* ~48px tap target, matching --tap, at no visual cost */
+		padding: 0.7rem 0;
 	}
 
 	summary::marker {

@@ -23,9 +23,22 @@ export interface LadderRow {
  * reaching, not on a wall of locked ones.
  */
 export function buildLadder(tiers: Tier[], payingMembers: number): LadderRow[] {
+	// seats.ts is hand-edited by the operator, so guard the edits they will
+	// actually make. A duplicate id throws during hydration in production
+	// while server-rendering fine — the page would look healthy to curl and be
+	// dead in a real browser.
+	if (!Number.isInteger(payingMembers) || payingMembers < 0) {
+		throw new Error(`payingMembers must be a non-negative integer, got ${payingMembers}`);
+	}
+	if (new Set(tiers.map((t) => t.id)).size !== tiers.length) {
+		throw new Error('duplicate tier id in seats.ts');
+	}
+
+	// Sort by threshold so a reordered array still marks the nearest rung next.
+	const ordered = [...tiers].sort((a, b) => a.unlocksAt - b.unlocksAt);
 	let nextAssigned = false;
 
-	return tiers.map((t) => {
+	return ordered.map((t) => {
 		const achieved = payingMembers >= t.unlocksAt;
 
 		let state: TierState;

@@ -49,4 +49,22 @@ describe('buildLadder', () => {
 		const rows = buildLadder(tiers, 3);
 		expect(rows.map((r) => r.id)).toEqual([1, 2, 3, 4, 5]);
 	});
+
+	// seats.ts is hand-edited; these are the edits that actually get made.
+	it('orders by threshold even when the config array is shuffled', () => {
+		const shuffled = [tiers[0], tiers[2], tiers[1], tiers[4], tiers[3]];
+		const rows = buildLadder(shuffled, 1);
+		expect(rows.map((r) => r.id)).toEqual([1, 2, 3, 4, 5]);
+		expect(rows[1].state).toBe('next');
+	});
+
+	it('rejects a duplicated tier id rather than breaking hydration', () => {
+		expect(() => buildLadder([...tiers, tiers[1]], 1)).toThrow(/duplicate tier id/);
+	});
+
+	it('rejects a nonsense member count', () => {
+		expect(() => buildLadder(tiers, -2)).toThrow();
+		expect(() => buildLadder(tiers, 1.5)).toThrow();
+		expect(() => buildLadder(tiers, NaN)).toThrow();
+	});
 });

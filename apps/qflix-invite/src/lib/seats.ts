@@ -39,7 +39,7 @@ export const tiers: Tier[] = [
 		id: 1,
 		unlocksAt: 1,
 		title: 'Torrents + Usenet',
-		detail: 'Two sources, not one. If one drought hits, the other still delivers.',
+		detail: 'Two sources, not one — torrents and Usenet. When one comes up empty, the other usually has it.',
 		achievedNote: 'Unlocked when the first member joined.'
 	},
 	{
