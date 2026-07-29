@@ -31,6 +31,8 @@ export interface Stats {
 	monitorsUp?: number;
 	monitorsTotal?: number;
 	canaries?: number;
+	tests?: number;
+	apps?: number;
 }
 
 /** Beyond this the page stops saying "just now" and shows a plain timestamp. */
@@ -74,7 +76,9 @@ export function parseStats(raw: unknown): Stats | null {
 		medianFillMinutes: opt(num(r.median_fill_minutes)),
 		monitorsUp: opt(num(mon.up)),
 		monitorsTotal: opt(num(mon.total)),
-		canaries: opt(num(r.canaries))
+		canaries: opt(num(r.canaries)),
+		tests: opt(num(r.tests)),
+		apps: opt(num(r.apps))
 	};
 }
 

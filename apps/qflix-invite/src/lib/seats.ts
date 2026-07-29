@@ -28,26 +28,13 @@ export interface Tier {
 /** Paying members today. Beta seat is tracked separately and is NOT counted. */
 export const payingMembers = 1;
 
-/**
- * Automated tests in the QFlix repo, from `grep -c 'def test_' tests/`.
- *
- * Hand-maintained rather than collected: the test suite lives in the QFlix
- * repo and never lands on the seedbox, so the hourly stats job has nothing to
- * count. Safe to let drift — tests get added far more often than deleted, so a
- * stale figure understates rather than overstates. Re-run the grep and bump it
- * when you think of it.
+/*
+ * App and test counts are NOT here — they come from stats.json, counted
+ * hourly by qflix-stats.py against a fresh checkout of the QFlix repo.
+ * They were briefly hand-maintained and the hand-maintained test figure was
+ * already wrong: it had been taken on a machine where tests/.venv existed,
+ * so it counted pytest's own bundled tests along with ours.
  */
-export const testsPassing = 1299;
-
-/**
- * Apps in the QFlix stack, from `manifest/apps.yaml`.
- *
- * The manifest is the single source of truth and never lands on the seedbox,
- * so this is hand-maintained too. Counts every class — the UCC-installed apps
- * plus the systemd services, cron jobs and libraries. `~/.apps` on the box
- * shows only 33 because it holds just the UCC subset.
- */
-export const appsInStack = 35;
 
 /**
  * Shown above the ladder. Deliberately unnamed — this page sits on a public,

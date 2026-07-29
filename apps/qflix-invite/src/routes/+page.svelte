@@ -2,7 +2,7 @@
 	import { tick } from 'svelte';
 	import { enhance } from '$app/forms';
 	import { buildLadder } from '$lib/ladder';
-	import { payingMembers, betaSeat, tiers, testsPassing, appsInStack } from '$lib/seats';
+	import { payingMembers, betaSeat, tiers } from '$lib/seats';
 	import { freshness, formatSize, formatCount, formatDuration } from '$lib/stats';
 
 	let { data, form } = $props();
@@ -30,7 +30,9 @@
 				data.stats.requestsFulfilled,
 				data.stats.medianFillMinutes,
 				data.stats.monitorsTotal,
-				data.stats.canaries
+				data.stats.canaries,
+				data.stats.tests,
+				data.stats.apps
 			].some((v) => v !== undefined)
 	);
 
@@ -219,8 +221,12 @@
 				{#if data.stats.canaries}
 					<div><dt>Live checks</dt><dd>{data.stats.canaries}</dd></div>
 				{/if}
-				<div><dt>Apps behind it</dt><dd>{appsInStack}</dd></div>
-				<div><dt>Tests passing</dt><dd>{formatCount(testsPassing)}</dd></div>
+				{#if data.stats.apps}
+					<div><dt>Apps behind it</dt><dd>{formatCount(data.stats.apps)}</dd></div>
+				{/if}
+				{#if data.stats.tests}
+					<div><dt>Tests passing</dt><dd>{formatCount(data.stats.tests)}</dd></div>
+				{/if}
 			</dl>
 
 			<p class="wall-note">
