@@ -2,7 +2,7 @@
 	import { tick } from 'svelte';
 	import { enhance } from '$app/forms';
 	import { buildLadder } from '$lib/ladder';
-	import { payingMembers, betaSeat, tiers } from '$lib/seats';
+	import { payingMembers, betaSeat, tiers, testsPassing, appsInStack } from '$lib/seats';
 	import { freshness, formatSize, formatCount, formatDuration } from '$lib/stats';
 
 	let { data, form } = $props();
@@ -214,10 +214,22 @@
 						<dd>{data.stats.monitorsUp}/{data.stats.monitorsTotal}</dd>
 					</div>
 				{/if}
+				<!-- "Canaries" is in-house jargon; nobody being handed a phone knows
+				     what one is. Same reasoning for labelling the test count. -->
 				{#if data.stats.canaries}
-					<div><dt>Canaries</dt><dd>{data.stats.canaries}</dd></div>
+					<div><dt>Live checks</dt><dd>{data.stats.canaries}</dd></div>
 				{/if}
+				<div><dt>Apps behind it</dt><dd>{appsInStack}</dd></div>
+				<div><dt>Tests passing</dt><dd>{formatCount(testsPassing)}</dd></div>
 			</dl>
+
+			<p class="wall-note">
+				<strong>Apps behind it</strong> is how many moving pieces it takes to make Plex feel this
+				simple — finding things, fetching them, naming them, subtitling them, keeping them tidy.
+				<strong>Live checks</strong> run around the clock and prove a real request still makes it
+				all the way to something you can press play on. <strong>Tests passing</strong> have to go
+				green before I'm allowed to change any of it.
+			</p>
 			{#if fresh}
 				<p class="stamp" class:stale={fresh.stale}>{fresh.label}</p>
 			{/if}
@@ -581,6 +593,16 @@
 		font-size: var(--step-1);
 		font-weight: 700;
 		color: var(--sky);
+	}
+
+	.wall-note {
+		margin-top: 1.4rem;
+		color: var(--ink-dim);
+		font-size: var(--step--1);
+	}
+
+	.wall-note strong {
+		color: var(--ink);
 	}
 
 	.stamp {
