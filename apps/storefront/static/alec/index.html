@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Starhold — The Build, for Alec</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="A gaming PC spec'd for Alec — what it is, what it costs, and where it falls short.">
+<style>
+  /* ============================================================
+     STARHOLD × ALEC — "the loadout"
+     Mission-Control (near-black + patch-red, wide caps, hex mark)
+     fused with the one UI he already reads fluently: item tooltips.
+     All fonts native to Windows 11 — nothing loads externally.
+     ============================================================ */
+
+  :root{
+    --void:#0a0a0b;
+    --panel:#141417;
+    --panel-2:#1b1b20;
+    --line:#2a2a31;
+    --line-2:#3a3a44;
+    --bone:#ece7dd;
+    --bone-dim:#a8a39a;
+    --ash:#71717b;
+    --red:#e63b2e;        /* mission-patch red — the Starhold signature */
+    --steel:#8697a6;
+    --steel-dim:#4b5560;
+    --ok:#5ec27e;
+    --warn:#e0a33a;
+
+    /* item rarity — the tooltip language */
+    --legendary:#ff8000;
+    --epic:#a335ee;
+    --rare:#0070dd;
+    --uncommon:#1eff00;
+
+    --display:"Bahnschrift","DIN Alternate","Arial Narrow",system-ui,sans-serif;
+    --body:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif;
+    --mono:"Cascadia Code","Cascadia Mono",Consolas,ui-monospace,monospace;
+
+    --maxw:940px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--void);color:var(--bone);
+    font-family:var(--body);font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    background-image:
+      radial-gradient(1100px 520px at 50% -8%, rgba(230,59,46,.10), transparent 70%),
+      linear-gradient(rgba(255,255,255,.014) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.014) 1px, transparent 1px);
+    background-size:auto, 46px 46px, 46px 46px;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--red);color:#fff}
+  a{color:var(--steel);text-underline-offset:3px}
+  a:hover{color:var(--bone)}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+
+  .eyebrow{
+    font-family:var(--display);font-weight:600;text-transform:uppercase;
+    letter-spacing:.26em;font-size:12.5px;color:var(--ash);
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow .tick{color:var(--red)}
+  h1,h2,h3{font-family:var(--display);font-weight:700;font-stretch:87.5%;line-height:1.02;margin:0}
+  h1{font-size:clamp(40px,8.5vw,84px);letter-spacing:.005em;text-transform:uppercase}
+  h2{font-size:clamp(26px,4.4vw,42px);letter-spacing:.02em;text-transform:uppercase}
+  h3{font-size:19px;letter-spacing:.02em}
+
+  /* ============ HEADER ============ */
+  header.top{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,10,11,.72);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:54px;gap:12px}
+  .brand{font-family:var(--display);font-weight:700;letter-spacing:.24em;font-size:15px;text-transform:uppercase;display:flex;align-items:center;gap:9px}
+  .brand .hex{color:var(--red);font-size:16px}
+  .top .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ash);text-transform:uppercase;text-align:right}
+
+  /* ============ HERO ============ */
+  .hero{padding:64px 0 40px;border-bottom:1px solid var(--line)}
+  .hero h1{margin:18px 0 0}
+  .hero h1 .em{color:var(--red)}
+  .hero .lede{max-width:640px;color:var(--bone-dim);margin:22px 0 0;font-size:18px}
+
+  .cut{display:flex;align-items:baseline;gap:clamp(12px,4vw,30px);margin:36px 0 4px;flex-wrap:wrap}
+  .price{font-family:var(--mono);font-weight:600;line-height:1;letter-spacing:-.01em}
+  .price .u{font-size:.40em;color:var(--ash);letter-spacing:.04em;margin-left:3px}
+  .price-main{font-size:clamp(40px,8vw,74px);color:var(--bone)}
+  .price-main .u{color:var(--ok)}
+  .price-alt{font-size:clamp(15px,3vw,19px);color:var(--bone-dim);font-family:var(--mono)}
+  .price-alt b{color:var(--ok);font-weight:600}
+  .hero .sub{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--ash);margin-top:16px;text-transform:uppercase}
+
+  /* rail — the recurring signature stripe */
+  .rail{height:6px;border:0;margin:0;
+    background:repeating-linear-gradient(115deg,var(--red) 0 10px,transparent 10px 22px);
+    opacity:.55}
+
+  /* ============ SECTION SCAFFOLD ============ */
+  section{padding:60px 0;border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:26px;flex-wrap:wrap}
+  .sec-no{font-family:var(--mono);color:var(--red);font-size:13px;letter-spacing:.1em;padding-top:6px}
+  .sec-head p.k{color:var(--bone-dim);margin:0;max-width:560px}
+  .prose{max-width:660px}
+  .prose p{margin:0 0 16px}
+  .prose strong{color:var(--bone);font-weight:600}
+
+  /* ============ 01 · THE LOADOUT (gear slots) ============ */
+  .loadout{display:grid;gap:10px;margin-top:26px}
+  .slot{
+    border:1px solid var(--line);border-left:3px solid var(--r,var(--steel-dim));
+    border-radius:9px;background:var(--panel);
+    display:grid;grid-template-columns:98px 1fr auto;gap:14px;align-items:start;
+    padding:15px 17px;transition:border-color .15s, background .15s;
+  }
+  .slot:hover{border-color:var(--line-2);border-left-color:var(--r,var(--steel));background:var(--panel-2)}
+  .slot .slotname{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ash);padding-top:4px;
+  }
+  .slot .item{min-width:0}
+  .slot .item b{display:block;font-weight:600;font-size:16.5px;color:var(--r,var(--bone));line-height:1.3}
+  .slot .item .why{color:var(--bone-dim);font-size:14.5px;margin-top:5px;line-height:1.5}
+  .slot .cost{text-align:right;white-space:nowrap}
+  .slot .cost .n{font-family:var(--mono);font-size:16px;color:var(--bone);font-weight:600}
+  .slot .cost .v{display:block;font-family:var(--mono);font-size:10.5px;color:var(--ash);letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+  .slot .cost a{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);text-decoration:none;border:1px solid var(--steel-dim);border-radius:5px;padding:3px 8px}
+  .slot .cost a:hover{color:var(--bone);border-color:var(--steel)}
+
+  .totals{
+    margin-top:16px;border:1px solid var(--line);border-radius:9px;background:var(--panel-2);
+    padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  .totals .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ash)}
+  .totals .big{font-family:var(--mono);font-size:26px;font-weight:600;color:var(--bone)}
+
+  .carts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  .cart{border:1px solid var(--line);border-radius:9px;background:var(--panel);padding:14px 16px}
+  .cart .v{font-family:var(--display);font-size:17px;letter-spacing:.08em;text-transform:uppercase;color:var(--bone)}
+  .cart .n{font-family:var(--mono);font-size:19px;color:var(--bone);margin-top:4px}
+  .cart .m{font-family:var(--mono);font-size:11px;color:var(--ash);margin-top:4px;letter-spacing:.04em}
+
+  .callout{border:1px solid var(--steel-dim);border-left:3px solid var(--steel);
+    background:linear-gradient(90deg,rgba(134,151,166,.08),transparent);
+    border-radius:8px;padding:15px 18px;margin:22px 0 0;font-size:15.5px;color:var(--bone-dim)}
+  .callout b{color:var(--bone)}
+  .callout.warn{border-color:rgba(224,163,58,.5);border-left-color:var(--warn);
+    background:linear-gradient(90deg,rgba(224,163,58,.09),transparent)}
+  .callout.good{border-color:rgba(94,194,126,.45);border-left-color:var(--ok);
+    background:linear-gradient(90deg,rgba(94,194,126,.09),transparent)}
+
+  /* ============ 02 · YOUR GAMES ============ */
+  .games{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:26px}
+  .game{border:1px solid var(--line);border-radius:9px;background:var(--panel);padding:14px 16px}
+  .game .g-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .game b{font-weight:600;font-size:16px;color:var(--bone)}
+  .game .verdict{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  .v-easy{color:var(--ok)}
+  .v-good{color:var(--steel)}
+  .v-hedge{color:var(--warn)}
+  .game .note{color:var(--bone-dim);font-size:14px;margin-top:6px;line-height:1.5}
+
+  /* ============ 03 · BAR CHART ============ */
+  .bars{margin-top:24px;display:grid;gap:9px}
+  .bar-row{display:grid;grid-template-columns:190px 1fr 54px;gap:12px;align-items:center}
+  .bar-row .who{font-size:14.5px;color:var(--bone-dim);text-align:right;line-height:1.25}
+  .bar-row.me .who{color:var(--bone);font-weight:600}
+  .bar-track{height:26px;background:var(--panel-2);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+  .bar-fill{height:100%;background:linear-gradient(90deg,rgba(134,151,166,.55),rgba(134,151,166,.28));border-right:1px solid var(--steel-dim)}
+  .bar-row.me .bar-fill{background:linear-gradient(90deg,var(--red),rgba(230,59,46,.35));border-right-color:var(--red)}
+  .bar-row .val{font-family:var(--mono);font-size:13px;color:var(--bone-dim);text-align:right}
+  .bar-row.me .val{color:var(--bone);font-weight:600}
+  .bar-note{font-size:13.5px;color:var(--ash);margin-top:14px;line-height:1.55;max-width:660px}
+  .bar-note code{font-family:var(--mono);color:var(--steel);font-size:.92em}
+
+  /* ============ TABLE (prebuilts) ============ */
+  .scroller{overflow-x:auto;margin-top:24px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+  table{border-collapse:collapse;width:100%;min-width:660px}
+  th,td{text-align:left;padding:13px 15px;border-bottom:1px solid var(--line);font-size:14.5px;vertical-align:top}
+  thead th{background:var(--panel-2);font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ash);font-weight:400}
+  tbody tr:last-child td{border-bottom:0}
+  td.num{font-family:var(--mono);white-space:nowrap}
+  tr.mine{background:linear-gradient(90deg,rgba(230,59,46,.09),transparent)}
+  tr.mine td{color:var(--bone)}
+  tr.mine td b{color:var(--bone)}
+  .tag-bad{color:var(--warn);font-family:var(--mono);font-size:11.5px}
+  .tag-ok{color:var(--ok);font-family:var(--mono);font-size:11.5px}
+
+  /* ============ SHORTFALLS ============ */
+  .falls{display:grid;gap:10px;margin-top:24px}
+  .fall{border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:9px;
+    background:var(--panel);padding:14px 17px}
+  .fall b{display:block;font-weight:600;font-size:16px;color:var(--bone);margin-bottom:4px}
+  .fall p{margin:0;color:var(--bone-dim);font-size:14.5px;line-height:1.55}
+
+  /* ============ CLOSER ============ */
+  .closer{padding:60px 0 80px}
+  .closer h2{margin-bottom:18px}
+  .steps{counter-reset:s;display:grid;gap:12px;margin-top:24px;max-width:680px}
+  .step{display:grid;grid-template-columns:32px 1fr;gap:14px;align-items:start}
+  .step .n{font-family:var(--mono);color:var(--red);font-size:13px;padding-top:3px}
+  .step .t{color:var(--bone-dim);font-size:15.5px;line-height:1.55}
+  .step .t b{color:var(--bone);font-weight:600}
+  footer{border-top:1px solid var(--line);padding:22px 0 34px;text-align:center}
+  footer .f{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ash)}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:760px){
+    body{font-size:16px}
+    .games{grid-template-columns:1fr}
+    .carts{grid-template-columns:1fr}
+    .slot{grid-template-columns:1fr auto;gap:10px}
+    .slot .slotname{grid-column:1/-1;padding-top:0}
+    .bar-row{grid-template-columns:1fr;gap:5px}
+    .bar-row .who{text-align:left}
+    .bar-row .val{text-align:left;margin-top:-2px}
+    .hero{padding:44px 0 32px}
+    section{padding:48px 0}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="brand"><span class="hex">⬡</span> Starhold</span>
+    <span class="tag">Build Proposal · For Alec</span>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <div class="eyebrow"><span class="tick">◆</span> Spec'd 31 July 2026 · Prices verified live</div>
+  <h1>One rig. Built<br>around <span class="em">your</span> games.</h1>
+  <p class="lede">
+    Not a generic gaming PC. Every part in here was picked because of something
+    specific you play — mostly <strong>WoW</strong> and <strong>Rust</strong>, which
+    are fussier than they look. Here's the whole thing, including the parts that
+    aren't perfect.
+  </p>
+
+  <div class="cut">
+    <span class="price price-main">$1,628<span class="u">.17</span></span>
+    <span class="price-alt">or <b>$1,589.16</b><br>with the Micro&nbsp;Center CPU</span>
+  </div>
+  <div class="sub">Everything included · Tower + 27" 165 Hz monitor · Windows not included</div>
+</div>
+
+<hr class="rail">
+
+<!-- ============ 01 · THE LOADOUT ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">01</span>
+      <div>
+        <h2>The Loadout</h2>
+        <p class="k">Nine parts. Colour-coded the way you'd read gear — the brighter the name, the more it's carrying the build.</p>
+      </div>
+    </div>
+
+    <div class="loadout">
+
+      <div class="slot" style="--r:var(--legendary)">
+        <div class="slotname">Processor</div>
+        <div class="item">
+          <b>AMD Ryzen 5 7600X3D</b>
+          <div class="why">The single best decision in here. It has extra memory stacked right on the chip, and WoW and Rust are the two games that benefit most from exactly that. It beats CPUs that cost more.</div>
+        </div>
+        <div class="cost">
+          <span class="n">$239.00</span><span class="v">Amazon</span>
+          <a href="https://pcpartpicker.com/product/RVhv6h/" target="_blank" rel="noopener">Buy</a>
+        </div>
+      </div>
+
+      <div class="slot" style="--r:var(--epic)">
+        <div class="slotname">Graphics</div>
+        <div class="item">
+          <b>XFX Swift RX 9060 XT · 16 GB</b>
+          <div class="why">Drives your monitor at full speed today. The 16 GB is deliberate — it's the insurance policy for GTA VI. The cheaper 8 GB cards are already running out of room in new games.</div>
+        </div>
+        <div class="cost">
+          <span class="n">$449.99</span><span class="v">Newegg</span>
+          <a href="https://pcpartpicker.com/product/DRYfrH/" target="_blank" rel="noopener">Buy</a>
+        </div>
+      </div>
+
+      <div class="slot" style="--r:var(--epic)">
+        <div class="slotname">Memory</div>
+        <div class="item">
+          <b>TEAMGROUP Vulcan Eco · 32 GB DDR5</b>
+          <div class="why">This exists because of Rust. Rust chews through memory on a busy server and 16 GB isn't enough anymore. It's also the most expensive thing in here for annoying reasons — see section 04.</div>
+        </div>
+        <div class="cost">
+          <span class="n">$379.99</span><span class="v">Newegg</span>
+          <a href="https://pcpartpicker.com/product/LfQwrH/" target="_blank" rel="noopener">Buy</a>
+        </div>
+      </div>
+
+      <div class="slot" style="--r:var(--rare)">
+        <div class="slotname">Storage</div>
+        <div class="item">
+          <b>WD Blue SN5100 · 1 TB NVMe</b>
+          <div class="why">Fast solid-state drive — Windows and your games both live here. Picked the reliable version over a cheaper one that has a bad reputation for slowing to a crawl once it fills up.</div>
+        </div>
+        <div class="cost">
+          <span class="n">$182.00</span><span class="v">Amazon</span>
+          <a href="https://pcpartpicker.com/product/YM2j4D/" target="_blank" rel="noopener">Buy</a>
+        </div>
+      </div>
+
+      <div class="slot" style="--r:var(--rare)">
+        <div class="slotname">Motherboard</div>
+        <div class="item">
+          <b>Gigabyte B650M Gaming Plus WiFi</b>
+          <div class="why">The board everything plugs into. Wi-Fi is built in, and this socket is supported for years yet — meaning you can drop in a faster processor later without replacing the whole thing.</div>
+        </div>
+        <div class="cost">
+          <span class="n">$109.99</span><span class="v">Newegg</span>
+          <a href="https://pcpartpicker.com/product/9HTZxr/" target="_blank" rel="noopener">Buy</a>
+        </div>
+      </div>
+
+      <div class="slot" style="--r:var(--rare)">
+        <div class="slotname">Monitor</div>
+        <div class="item">
+          <b>ASRock PG27FFT1A · 27" 180 Hz</b>
+          <div class="why">27 inches, 1080p, and it refreshes 180 times a second instead of the usual 60. That difference is the one you'll actually feel the moment you move the mouse.</div>
+        </div>
+        <div class="cost">
+          <span class="n">$96.77</span><span class="v">Newegg</span>
+          <a href="https://pcpartpicker.com/product/TBMMnQ/" target="_blank" rel="noopener">Buy</a>
+        </div>
+      </div>
+
+      <div class="slot" style="--r:var(--uncommon)">
+        <div class="slotname">Power</div>
+        <div class="item">
+          <b>MSI MAG A750GL · 750 W Gold</b>
+          <div class="why">Boring and that's the point. This is the part that can take everything else with it when it dies, so it's a named unit with a real review history rather than a mystery box.</div>
+        </div>
+        <div class="cost">
+          <span class="n">$69.99</span><span class="v">Newegg</span>
+          <a href="https://pcpartpicker.com/product/dbCZxr/" target="_blank" rel="noopener">Buy</a>
+        </div>
+      </div>
+
+      <div class="slot" style="--r:var(--uncommon)">
+        <div class="slotname">Case</div>
+        <div class="item">
+          <b>Montech AIR 100 ARGB</b>
+          <div class="why">Good airflow, fans already included, and it doesn't look like a spaceship. Cases are mostly personal taste — swap this one freely if you hate it.</div>
+        </div>
+        <div class="cost">
+          <span class="n">$69.90</span><span class="v">Amazon</span>
+          <a href="https://pcpartpicker.com/product/M7Z9TW/" target="_blank" rel="noopener">Buy</a>
+        </div>
+      </div>
+
+      <div class="slot" style="--r:var(--uncommon)">
+        <div class="slotname">Cooling</div>
+        <div class="item">
+          <b>ARCTIC Freezer 36</b>
+          <div class="why">Keeps the processor cool and quiet. The chip we picked runs cool on purpose, so this doesn't need to be expensive.</div>
+        </div>
+        <div class="cost">
+          <span class="n">$30.54</span><span class="v">Amazon</span>
+          <a href="https://pcpartpicker.com/product/N6bRsY/" target="_blank" rel="noopener">Buy</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="totals">
+      <span class="lbl">Everything above</span>
+      <span class="big">$1,628.17</span>
+    </div>
+
+    <div class="carts">
+      <div class="cart">
+        <div class="v">Newegg</div>
+        <div class="n">$1,106.73</div>
+        <div class="m">Board · RAM · GPU · PSU · Monitor</div>
+      </div>
+      <div class="cart">
+        <div class="v">Amazon</div>
+        <div class="n">$521.44</div>
+        <div class="m">CPU · Cooler · SSD · Case</div>
+      </div>
+    </div>
+
+    <div class="callout good">
+      <b>If there's a Micro Center you can drive to</b> — that exact processor is
+      <b>$199.99</b> there instead of $239.00, in-store only. Brings the whole build to
+      <b>$1,589.16</b>. Buy <em>only</em> the CPU there though; their memory prices are wild
+      right now — the same 32 GB kit runs about $650 in-store versus $380 online.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 · YOUR GAMES ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">02</span>
+      <div>
+        <h2>Your Games On It</h2>
+        <p class="k">The actual list you gave, and what to expect from each. The monitor runs at 165–180 frames per second, so that's the ceiling worth aiming at.</p>
+      </div>
+    </div>
+
+    <div class="games">
+      <div class="game">
+        <div class="g-top"><b>World of Warcraft</b><span class="verdict v-good">Built for this</span></div>
+        <div class="note">Raids and busy cities lean on the processor, not the graphics card — which is the entire reason for the chip we chose. This is the game the build is tuned around.</div>
+      </div>
+      <div class="game">
+        <div class="g-top"><b>Rust</b><span class="verdict v-good">Handled</span></div>
+        <div class="note">The demanding one. It's hungry for memory on full servers, and the 32 GB is what keeps it from stuttering. This is why the build costs what it costs.</div>
+      </div>
+      <div class="game">
+        <div class="g-top"><b>GTA V</b><span class="verdict v-easy">Easy</span></div>
+        <div class="note">Comfortably past your monitor's refresh rate. It's an older game now and this hardware is well beyond it.</div>
+      </div>
+      <div class="game">
+        <div class="g-top"><b>StarCraft II</b><span class="verdict v-easy">Easy</span></div>
+        <div class="note">Runs on nearly anything modern. Won't break a sweat.</div>
+      </div>
+      <div class="game">
+        <div class="g-top"><b>PlanetSide 2</b><span class="verdict v-easy">Easy</span></div>
+        <div class="note">Leans on the processor in big fights — again, the strong suit here. Otherwise modest.</div>
+      </div>
+      <div class="game">
+        <div class="g-top"><b>Roblox</b><span class="verdict v-easy">Trivial</span></div>
+        <div class="note">Nothing to worry about at all.</div>
+      </div>
+      <div class="game">
+        <div class="g-top"><b>Wizard101</b><span class="verdict v-easy">Trivial</span></div>
+        <div class="note">Nothing to worry about at all.</div>
+      </div>
+      <div class="game">
+        <div class="g-top"><b>GTA VI</b><span class="verdict v-hedge">Hedged, not promised</span></div>
+        <div class="note">Nobody has real numbers yet — it isn't out. The 16 GB graphics card and 32 GB of memory are the honest best guess at being ready. That's a bet, not a guarantee.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>For scale:</b> the graphics card in here averages <b>98 frames per second</b> across a
+      punishing modern-blockbuster test suite at 1080p with everything maxed. Almost nothing on
+      your list is that demanding — most of it is far lighter, which is why the ceiling is your
+      monitor rather than the hardware.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 · THE ONE NUMBER ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">03</span>
+      <div>
+        <h2>The One Number That Matters</h2>
+        <p class="k">Gaming performance for the processor, measured by Tom's Hardware. Higher is better. This chart is the whole argument for this build.</p>
+      </div>
+    </div>
+
+    <div class="bars">
+      <div class="bar-row me">
+        <div class="who">Ryzen 5 7600X3D<br><span style="color:var(--ash);font-size:12.5px">— what we picked</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:80.6%"></div></div>
+        <div class="val">80.6%</div>
+      </div>
+      <div class="bar-row">
+        <div class="who">Ryzen 7 7700</div>
+        <div class="bar-track"><div class="bar-fill" style="width:69.4%"></div></div>
+        <div class="val">69.4%</div>
+      </div>
+      <div class="bar-row">
+        <div class="who">Ryzen 5 7600</div>
+        <div class="bar-track"><div class="bar-fill" style="width:64.2%"></div></div>
+        <div class="val">64.2%</div>
+      </div>
+      <div class="bar-row">
+        <div class="who">Core i5-14400F</div>
+        <div class="bar-track"><div class="bar-fill" style="width:58%"></div></div>
+        <div class="val">58.0%</div>
+      </div>
+      <div class="bar-row">
+        <div class="who">Core i5-13400F</div>
+        <div class="bar-track"><div class="bar-fill" style="width:57%"></div></div>
+        <div class="val">~57%</div>
+      </div>
+      <div class="bar-row">
+        <div class="who">Ryzen 7 5700</div>
+        <div class="bar-track"><div class="bar-fill" style="width:55.9%"></div></div>
+        <div class="val">&lt;55.9%</div>
+      </div>
+    </div>
+
+    <p class="bar-note">
+      Every processor below the top bar is what you get in a pre-built machine at this price —
+      see section 05. Two of those numbers are honest estimates rather than direct measurements:
+      the <code>i5-13400F</code> isn't ranked by Tom's Hardware, so it's placed using the
+      near-identical <code>i5-14400</code>, and the <code>Ryzen 7 5700</code> is shown as a
+      ceiling rather than a reading because it carries half the cache of the chip it's named after.
+      Everything else is read straight off the chart.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 04 · SHORTFALLS ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">04</span>
+      <div>
+        <h2>Where It Falls Short</h2>
+        <p class="k">The parts of this you should know before you spend anything. None of it is a dealbreaker, but you shouldn't find out later.</p>
+      </div>
+    </div>
+
+    <div class="falls">
+      <div class="fall">
+        <b>It's over the original budget, and it's the memory's fault</b>
+        <p>The target was around $1,500 all-in. Memory and storage prices have gone insane this year — data centres buying everything for AI. That 32 GB kit is <strong>$379.99</strong>; a year ago it was about $90. Same part, four times the price. Nothing clever gets around it, and waiting probably makes it worse, not better.</p>
+      </div>
+      <div class="fall">
+        <b>1 TB of storage, not 2 TB</b>
+        <p>Same reason. It's enough for Windows and a healthy stack of games, but Rust and modern titles are big. Doubling it is <strong>+$97.95</strong> whenever you want, and it's the first upgrade worth making.</p>
+      </div>
+      <div class="fall">
+        <b>GTA VI readiness is a bet</b>
+        <p>The game isn't out and nobody has benchmarks. The 16 GB graphics card is the informed hedge — it's what you'd want if it turns out demanding. It is not a promise, and anyone telling you otherwise is guessing too.</p>
+      </div>
+      <div class="fall">
+        <b>Two separate orders</b>
+        <p>Cheapest prices are split across Newegg and Amazon, so it's two carts and two lots of shipping. Buying everything from one shop is simpler but costs more.</p>
+      </div>
+      <div class="fall">
+        <b>Windows isn't in the price</b>
+        <p>You can install Windows and run it <strong>unactivated</strong> — free, legal, works fully. You get a small watermark in the corner and can't change some personalisation settings. Most people run like that for years. A real licence is about $139 whenever you feel like it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 · PREBUILTS ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">05</span>
+      <div>
+        <h2>What About Just Buying One?</h2>
+        <p class="k">Fair question, and worth answering properly. These are Skytech's current prices — no coupons, no sale trickery. Compared tower-to-tower, so ours is shown without the monitor.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>Where they genuinely win, first:</b> the cheapest one below is <b>$1,229.99</b>, includes
+      a Windows licence, arrives assembled, and its graphics card is actually <em>faster</em> than
+      ours. That's a real ~$440 swing once you count the licence. If you want a box that turns up
+      working and never think about it again, it's a legitimate buy.
+    </div>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr>
+            <th>Machine</th><th>Price</th><th>Processor</th><th>Gaming score</th><th>Memory</th><th>Power supply</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Skytech ARCHANGEL 4</b></td><td class="num">$1,229.99</td>
+            <td>i5-13400F</td><td class="num tag-bad">~57%</td><td class="num">16 GB</td><td class="tag-bad">"650W GOLD"</td>
+          </tr>
+          <tr>
+            <td>Skytech SHADOW 4</td><td class="num">$1,399.99</td>
+            <td>Ryzen 7 7700</td><td class="num tag-bad">69.4%</td><td class="num">16 GB</td><td class="tag-bad">unbranded</td>
+          </tr>
+          <tr>
+            <td>Skytech SHADOW 4</td><td class="num">$1,399.99</td>
+            <td>Ryzen 7 5700</td><td class="num tag-bad">&lt;55.9%</td><td class="num">32 GB</td><td class="tag-bad">unbranded</td>
+          </tr>
+          <tr>
+            <td>Skytech SHADOW 4</td><td class="num">$1,449.99</td>
+            <td>i5-14400F</td><td class="num tag-bad">58.0%</td><td class="num">16 GB</td><td class="tag-bad">unbranded</td>
+          </tr>
+          <tr>
+            <td>Skytech AZURE 3</td><td class="num">$1,499.99</td>
+            <td>i5-14400F</td><td class="num tag-bad">58.0%</td><td class="num">16 GB</td><td class="tag-bad">unbranded</td>
+          </tr>
+          <tr>
+            <td>Skytech AZURE 3</td><td class="num">$1,649.99</td>
+            <td>Ryzen 5 7600</td><td class="num tag-bad">64.2%</td><td class="num">16 GB</td><td class="tag-bad">unbranded</td>
+          </tr>
+          <tr class="mine">
+            <td><b>This build</b> <span style="color:var(--ash)">(no monitor)</span></td><td class="num"><b>$1,531.40</b></td>
+            <td><b>Ryzen 5 7600X3D</b></td><td class="num tag-ok"><b>80.6%</b></td><td class="num"><b>32 GB</b></td><td class="tag-ok">MSI MAG A750GL</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose" style="margin-top:26px">
+      <p><strong>Now the catch.</strong> Look at the gaming score column. Every one of those machines is between <strong>16% and 44% behind</strong> on the processor — and WoW, the game you'll play most, depends on the processor rather than the graphics card. A faster graphics card can't fix that.</p>
+      <p>Two more things worth noticing:</p>
+      <p>The <strong>AZURE 3 costs $1,649.99 — more than this entire build</strong> — while being slower and shipping half the memory. It only ever looks competitive with a coupon stapled to it.</p>
+      <p>And every one of them lists its power supply as just <strong>"650W GOLD"</strong>. No brand. No model. That's the one component that can kill everything else when it fails, and you're not told what it is. Ours is a named MSI unit you can go read reviews of. Their warranty is <strong>one year on everything</strong>; buying the parts yourself you'd hold <strong>10 years on the power supply, 5 on the drive, 3 on the graphics card</strong>, each claimed directly with the manufacturer.</p>
+    </div>
+
+    <div class="callout warn">
+      <b>Straight answer:</b> if you mostly play WoW and Rust, build this one. If you'd rather have
+      something that shows up in a box and you genuinely don't want a project, the ARCHANGEL 4 is a
+      fair buy — just know WoW will run worse and you'll want more memory within a year.
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSER ============ -->
+<div class="wrap closer">
+  <div class="eyebrow"><span class="tick">◆</span> If you want to go ahead</div>
+  <h2 style="margin-top:16px">How This Actually Happens</h2>
+
+  <div class="steps">
+    <div class="step"><span class="n">01</span><span class="t"><b>Tell Kyle yes</b>, or tell him which bits you want changed. Nothing here is locked.</span></div>
+    <div class="step"><span class="n">02</span><span class="t"><b>Check the prices again</b> before ordering. Memory and drives have been moving weekly and these were read on 31 July.</span></div>
+    <div class="step"><span class="n">03</span><span class="t"><b>Two carts</b> — Newegg and Amazon. Hit the Buy button on each part above, or Kyle can just place them.</span></div>
+    <div class="step"><span class="n">04</span><span class="t"><b>Kyle builds it.</b> Takes an evening. You get Windows installed, drivers sorted, and the monitor set to its full 180 Hz — which does not happen automatically and is the number one thing people miss.</span></div>
+  </div>
+
+  <div class="callout" style="margin-top:30px">
+    Everything on this page is backed by live prices pulled from the vendors on
+    <b>31 July 2026</b>, and benchmark figures from <b>Tom's Hardware</b>. Where a number is an
+    estimate rather than a measurement, it says so.
+  </div>
+</div>
+
+<footer>
+  <div class="wrap"><span class="f">⬡ Starhold Software · Built for Alec · Not for public distribution</span></div>
+</footer>
+
+</body>
+</html>
