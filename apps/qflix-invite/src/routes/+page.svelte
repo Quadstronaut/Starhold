@@ -385,12 +385,15 @@
 			{@render signupForm('email-closer', 'Send me the test title')}
 		{:else}
 			<h2>Want in?</h2>
-			<!-- Price stated BEFORE the button. Reading "no card, no autopay",
-			     tapping, and only then learning it is $50 has the shape of a
-			     bait-and-switch even though it isn't one. -->
+			<!-- Price stated BEFORE the button. Reading "no card", tapping, and
+			     only then learning it is $50 has the shape of a bait-and-switch
+			     even though it isn't one.
+			     Autopay line updated 2026-07-31: it is now a stated near-term
+			     plan rather than an absence. Still "no card" TODAY, which is the
+			     part that governs what a visitor is agreeing to right now. -->
 			<p class="closer-sub">
-				<strong>$50/month, flat.</strong> Drop the email you want on Plex — no card, no autopay,
-				that isn't even built yet.
+				<strong>$50/month, flat.</strong> Drop the email you want on Plex — no card today,
+				autopay coming this weekend.
 			</p>
 			{@render signupForm('email-closer', 'Claim a seat')}
 			<p class="price">Cancel by telling me.</p>
