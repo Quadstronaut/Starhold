@@ -36,18 +36,7 @@
 			].some((v) => v !== undefined)
 	);
 
-	let showDemo = $state(false);
 	let sending = $state(false);
-
-	/** Reveal the demo field and put the cursor in it. Toggles back off. */
-	async function toggleDemo() {
-		showDemo = !showDemo;
-		if (!showDemo) return;
-		await tick(); // the title field does not exist until this resolves
-		const el = document.getElementById('email-closer');
-		el?.focus({ preventScroll: true });
-		el?.scrollIntoView({ block: 'center' });
-	}
 </script>
 
 {#snippet signupForm(id: string, cta: string)}
@@ -91,41 +80,23 @@
 		/>
 
 		<!-- Carries intent explicitly so the server never has to guess it. -->
-		<input type="hidden" name="kind" value={showDemo ? 'demo' : 'member'} />
-
-		{#if showDemo}
-			<label class="sr-only" for="{id}-title">One title to test with</label>
-			<input
-				id="{id}-title"
-				name="title"
-				type="text"
-				required
-				maxlength="120"
-				placeholder="one title to test with"
-			/>
-		{/if}
+		<input type="hidden" name="kind" value="member" />
 
 		{#if form?.error}
 			<p class="err" role="alert" id="{id}-err">{form.error}</p>
 		{/if}
 
 		<button type="submit" disabled={sending}>
-			{sending ? 'Sending…' : showDemo ? 'Send me the test title' : cta}
+			{sending ? 'Sending…' : cta}
 		</button>
 	</form>
 {/snippet}
 
-{#snippet thanks(kind: string)}
+{#snippet thanks()}
 	<div class="done" role="status">
-		{#if kind === 'demo'}
-			<h2>Test library incoming.</h2>
-			<p>Watch for the Plex invitation — that title will be in it.</p>
-			<p>Nothing to pay. Try it on your own TV and your own internet first.</p>
-		{:else}
-			<h2>You're in the queue.</h2>
-			<p>Watch for the Plex invitation email — accept it and you're live.</p>
-			<p>I'll message you payment details.</p>
-		{/if}
+		<h2>You're in the queue.</h2>
+		<p>Watch for the Plex invitation email — accept it and you're live.</p>
+		<p>I'll message you payment details.</p>
 		<p><a href="https://qflix.quadstronix.dev">Your dashboard lives here →</a></p>
 	</div>
 {/snippet}
@@ -311,26 +282,10 @@
 		</p>
 	</section>
 
-	<!-- ── 6 ── demo, one honest limit ── -->
-	<section class="demo">
-		<h2>Not sure it'll play on your TV?</h2>
-		<p>
-			Name one title. I'll stand up a private library with it in it, invite you, and you can prove
-			it works on your own hardware and your own internet before you pay a cent.
-		</p>
-		{#if !form?.ok}
-			<button type="button" class="ghost" onclick={toggleDemo}>
-				{showDemo ? 'Never mind — claim a seat' : 'Try one title first'}
-			</button>
-		{/if}
-
-		<p class="limit">
-			Occasionally something rare or same-day-new isn't findable yet. I'll tell you straight when
-			that happens.
-		</p>
-	</section>
-
-	<!-- ── 7 ── straight answers ── -->
+	<!-- ── 6 ── straight answers ── -->
+	<!-- The "try one title first" demo section lived here until 2026-08-08.
+	     The QFlix - Welcome library every invitee gets is the try-before-you-pay
+	     path now; anything extra gets uploaded to Welcome by hand. -->
 	<section class="faq">
 		<h2>Straight answers.</h2>
 
@@ -376,13 +331,7 @@
 	<!-- ── the close ── same ask, now that everything above has argued for it ── -->
 	<section class="closer">
 		{#if form?.ok}
-			{@render thanks(form.kind ?? 'member')}
-		{:else if showDemo}
-			<h2>Try it first.</h2>
-			<p class="closer-sub">
-				One title, a private library, your own hardware. Nothing to pay and nothing to cancel.
-			</p>
-			{@render signupForm('email-closer', 'Send me the test title')}
+			{@render thanks()}
 		{:else}
 			<h2>Want in?</h2>
 			<!-- Price stated BEFORE the button. Reading "no card", tapping, and
@@ -486,18 +435,6 @@
 	button:disabled {
 		opacity: 0.6;
 		cursor: default;
-	}
-
-	.ghost {
-		color: var(--amber);
-		background: transparent;
-		border: 1px solid var(--amber);
-		padding: 0 1.1rem;
-		margin-top: 1rem;
-	}
-
-	.ghost:hover {
-		background: rgba(255, 140, 66, 0.1);
 	}
 
 	.hp {
@@ -741,18 +678,7 @@
 		color: var(--ink);
 	}
 
-	/* ── demo + faq ── */
-	.demo p {
-		margin-top: 0.8rem;
-		color: var(--ink-dim);
-	}
-
-	.limit {
-		margin-top: 1.4rem;
-		color: var(--ink-faint);
-		font-size: var(--step--1);
-	}
-
+	/* ── faq ── */
 	.faq details {
 		border-bottom: 1px solid var(--line);
 		padding: 0.9rem 0;
