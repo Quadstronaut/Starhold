@@ -27,11 +27,19 @@ export function evidence(id: string): EvidenceItem {
 	return item;
 }
 
+/**
+ * The gate itself, split out so it can be tested against a pending item even
+ * when the registry happens to contain none. Throws unless the item is
+ * confirmed — an unverified claim must fail loudly, not render quietly.
+ */
+export function assertRenderable(item: EvidenceItem): void {
+	if (item.status !== 'verified')
+		throw new Error(`evidence ${item.id} is ${item.status} — it must not render`);
+}
+
 /** Attribute value for a claim. Pending evidence never ships. */
 export function ev(id: string): string {
-	const item = evidence(id);
-	if (item.status !== 'verified')
-		throw new Error(`evidence ${id} is ${item.status} — it must not render`);
+	assertRenderable(evidence(id));
 	return id;
 }
 

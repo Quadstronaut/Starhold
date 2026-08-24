@@ -7,6 +7,7 @@ import { join } from 'node:path';
 import registry from '../lib/content/evidence.json';
 import stats from '../lib/content/stats.json';
 import * as copy from '../lib/content/copy';
+import { ev, assertRenderable } from '../lib/content/evidence';
 import { computeStats } from '../../scripts/count-tests.mjs';
 import {
 	REPO_ROOT,
@@ -121,9 +122,26 @@ describe('A3 · anti-fabrication', () => {
 	it('A3.5 no pending claim ships', () => {
 		const pendingShipped = [...USED].filter((id) => BY_ID.get(id)?.status !== 'verified');
 		expect(pendingShipped).toEqual([]);
-		// and the registry really does carry at least one pending row, so this
-		// rule is exercised rather than vacuously true
-		expect(ITEMS.some((i) => i.status === 'pending')).toBe(true);
+	});
+
+	// A3.5 is only meaningful if the gate it relies on actually bites. The
+	// registry legitimately has no pending rows right now (the last one,
+	// starhold-repo, was confirmed public on 2026-08-24), so the enforcement is
+	// asserted against the gate itself rather than against registry contents —
+	// otherwise A3.5 silently becomes vacuous the day the registry is fully
+	// verified, which is exactly when nobody is looking.
+	it('A3.5b the gate rejects a pending claim and an unknown id', () => {
+		expect(() =>
+			assertRenderable({
+				id: 'synthetic-pending',
+				claim: 'a claim nobody confirmed',
+				status: 'pending',
+				verifier: 'https://example.com'
+			})
+		).toThrow(/must not render/);
+
+		expect(() => ev('no-such-evidence-id')).toThrow(/unknown evidence id/);
+		expect(() => ev('starhold-repo')).not.toThrow(); // verified — renders
 	});
 
 	it('A3.6 no employer is named and no entity suffix appears on a marketing surface', () => {

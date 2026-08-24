@@ -1,5 +1,9 @@
 <script lang="ts">
 	import { home, capabilities, work, principles, operator, site } from '$lib/content/copy';
+
+	// availableFrom is computed per request in +page.server.ts so the quarter
+	// never goes stale; see src/lib/availability.ts.
+	let { data } = $props();
 </script>
 
 <svelte:head>
@@ -88,6 +92,9 @@
 			<li data-evidence={p.evidence}>
 				<strong>{p.title}</strong>
 				{p.detail}
+				{#if p.link}
+					<a href={p.link.href} rel="noopener">{p.link.label} →</a>
+				{/if}
 			</li>
 		{/each}
 	</ul>
@@ -116,6 +123,7 @@
 	<p class="eyebrow">{home.contact.eyebrow}</p>
 	<h2>{home.contact.h2}</h2>
 	<p class="lede">{home.contact.body}</p>
+	<p class="availability">{home.contact.availability(data.availableFrom)}</p>
 	<div class="btn-row">
 		<a class="btn btn-primary" href={home.contact.cta.href}>{home.contact.cta.label}</a>
 		<a class="btn btn-secondary" href={'mailto:' + site.email}>{site.email}</a>
@@ -146,5 +154,23 @@
 	}
 	.principles li {
 		max-width: var(--measure);
+	}
+	/* Availability reads as a live status, not as marketing copy — hence the
+	   accent dot and the quieter weight. */
+	.availability {
+		color: var(--text);
+		font-size: var(--fs-1);
+		margin-top: var(--sp-3);
+		display: flex;
+		align-items: center;
+		gap: var(--sp-2);
+	}
+	.availability::before {
+		content: '';
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--accent);
+		flex-shrink: 0;
 	}
 </style>

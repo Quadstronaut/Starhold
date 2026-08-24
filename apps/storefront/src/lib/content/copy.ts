@@ -110,7 +110,11 @@ export const home = {
 		eyebrow: 'Next step',
 		h2: 'Tell me what you keep doing by hand.',
 		body: 'Send me the process, the two systems that refuse to talk to each other, or the thing that keeps breaking overnight. I will tell you what it takes to fix it and what it costs.',
-		cta: { label: 'Request a quote', href: '/contact?intent=quote' }
+		cta: { label: 'Request a quote', href: '/contact?intent=quote' },
+		// The quarter is filled in at request time from src/lib/availability.ts.
+		// Deliberately not stored here: a hardcoded quarter goes stale and a stale
+		// availability line reads worse than no availability line at all.
+		availability: (quarter: string) => `Currently taking work for ${quarter}.`
 	}
 };
 
@@ -251,7 +255,13 @@ export const work = {
 };
 
 // ── Operating principles ─────────────────────────────────────────────────────
-export type Principle = { title: string; detail: string; evidence: string };
+export type Principle = {
+	title: string;
+	detail: string;
+	evidence: string;
+	/** Optional "go and check it yourself" link. Only for claims a reader can verify. */
+	link?: { href: string; label: string };
+};
 
 export const principles: Principle[] = [
 	{
@@ -267,7 +277,9 @@ export const principles: Principle[] = [
 	{
 		title: 'Tests ship with the work.',
 		detail: `This storefront alone carries ${stats.unitTests} unit tests and ${stats.e2eTests} browser tests, and the counts on this page are generated from the repository rather than typed in.`,
-		evidence: ev('automated-tests')
+		evidence: ev('automated-tests'),
+		// The repository is public, so this claim is checkable rather than asserted.
+		link: { href: 'https://github.com/Quadstronaut/Starhold', label: 'Read them' }
 	},
 	{
 		title: 'Money is verified, not trusted.',
@@ -295,7 +307,7 @@ export const operator = {
 	],
 	certsHeading: 'Certifications',
 	certs: [
-		{ text: 'AWS Certified Solutions Architect — Associate', evidence: ev('cert-aws-saa') },
+		{ text: 'AWS Certified Solutions Architect', evidence: ev('cert-aws-saa') },
 		{ text: 'Certified in Python', evidence: ev('cert-python') },
 		{ text: 'Certified in log aggregation at the administration tier', evidence: ev('cert-log-admin') }
 	],

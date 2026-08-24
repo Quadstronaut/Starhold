@@ -151,8 +151,13 @@ test('B2.6 Kyle Green is named on the home page and on /operator', async ({ page
 
 test('B3.1 no pending evidence renders and no employer entity is named', async ({ page }) => {
 	const pending = EVIDENCE.items.filter((i) => i.status !== 'verified').map((i) => i.id);
-	expect(pending.length, 'the pending rule must be exercised').toBeGreaterThan(0);
-
+	// The registry may legitimately hold zero pending rows (it does since
+	// starhold-repo was confirmed public on 2026-08-24). The gate that makes a
+	// pending claim un-renderable is unit-tested directly in
+	// src/acceptance/a3-evidence.test.ts (A3.5b), so this test no longer
+	// requires a pending row to exist in order to be meaningful — it enforces
+	// that whatever IS pending never reaches a page, and that every rendered id
+	// resolves to a real row.
 	for (const route of MARKETING) {
 		await page.goto(route);
 		const ids = await page.locator('[data-evidence]').evaluateAll((els) =>
@@ -170,8 +175,17 @@ test('B3.1 no pending evidence renders and no employer entity is named', async (
 });
 
 test('B3.2 every number on a marketing page is derived, except the founding year', async ({ page }) => {
+	// The availability quarter is derived from the clock on the server, so its
+	// digits are legitimate — but they are computed here independently rather
+	// than scraped from the page, so a hardcoded quarter would still fail.
+	const now = new Date();
+	const q = Math.floor(now.getUTCMonth() / 3) + 1;
+	const rollsOver = q === 4;
+	const availability = [String(rollsOver ? 1 : q + 1), String(rollsOver ? now.getUTCFullYear() + 1 : now.getUTCFullYear())];
+
 	const allowed = new Set([
 		'2026',
+		...availability,
 		...Object.values(STATS)
 			.filter((v) => typeof v === 'number')
 			.map(String)
@@ -181,6 +195,22 @@ test('B3.2 every number on a marketing page is derived, except the founding year
 		const numbers = ((await bodyText(page)).match(/\d+/g) ?? []).filter((n) => !allowed.has(n));
 		expect(numbers, `${route} renders an undocumented number`).toEqual([]);
 	}
+});
+
+// Regression guard for the availability line: it must state the quarter AFTER
+// the current one, and it must come from the server rather than a copy string.
+// If someone ever hardcodes a quarter, this fails the moment the clock moves on.
+test('B3.4 the availability line names the next quarter, derived at request time', async ({ page }) => {
+	const now = new Date();
+	const q = Math.floor(now.getUTCMonth() / 3) + 1;
+	const expected = q === 4 ? `Q1 ${now.getUTCFullYear() + 1}` : `Q${q + 1} ${now.getUTCFullYear()}`;
+
+	await page.goto('/');
+	const line = page.locator('.availability');
+	await expect(line).toBeVisible();
+	await expect(line).toContainText(expected);
+	// The current quarter must not be what is advertised.
+	await expect(line).not.toContainText(`Q${q} ${now.getUTCFullYear()}`);
 });
 
 test('B3.3 the home page carries a proof strip of 3-5 checkable outbound links', async ({ page }) => {

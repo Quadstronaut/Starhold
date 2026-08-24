@@ -38,10 +38,11 @@
 		},
 		{
 			"id": "cert-aws-saa",
-			"claim": "AWS Certified Solutions Architect - Associate.",
+			"claim": "AWS Certified Solutions Architect.",
 			"status": "verified",
 			"verifier": "https://www.linkedin.com/in/quadstronaut",
-			"sources": []
+			"sources": [],
+			"note": "Tier deliberately omitted. The owner stated 'AWS Solutions Architect' without a tier; an earlier draft rendered 'Associate', which was an inference, not something anyone confirmed. Do not re-add a tier without owner confirmation."
 		},
 		{
 			"id": "cert-python",
@@ -103,10 +104,10 @@
 		{
 			"id": "starhold-repo",
 			"claim": "The source for this site, including its tests, is on GitHub.",
-			"status": "pending",
+			"status": "verified",
 			"verifier": "https://github.com/Quadstronaut/Starhold",
 			"sources": [],
-			"note": "UNVERIFIED Q1 - nobody has confirmed the repository is public. Stays pending, so nothing on the site may cite it."
+			"note": "Q1 resolved 2026-08-24: `gh repo view` reports visibility PUBLIC. No .env files are tracked and no live key patterns appear in tracked content. If the repository is ever made private, set this back to pending — ev() will then fail the build wherever it is cited, which is the intended behaviour."
 		}
 	]
 }
