@@ -11,7 +11,23 @@
 		"sourceMap": true,
 		"strict": true,
 		"moduleResolution": "bundler"
-	}
+	},
+	// The acceptance harness and the stats generator are plain Node programs:
+	// they read the filesystem, they never ship, and they are the only things in
+	// the tree that touch node:fs. Type-checking them would need @types/node,
+	// and this cycle's non-goals forbid adding dependencies — so svelte-check
+	// skips them. Vitest still executes every one of them.
+	"exclude": [
+		"node_modules/**",
+		"src/service-worker.js",
+		"src/service-worker/**/*.js",
+		"src/service-worker.ts",
+		"src/service-worker/**/*.ts",
+		"src/service-worker.d.ts",
+		"src/service-worker/**/*.d.ts",
+		"src/acceptance/**",
+		"scripts/**"
+	]
 	// Path aliases are handled by https://svelte.dev/docs/kit/configuration#alias
 	// except $lib which is handled by https://svelte.dev/docs/kit/configuration#files
 	//

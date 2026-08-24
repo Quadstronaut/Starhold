@@ -1,11 +1,16 @@
 <script lang="ts">
 	import '../app.css';
 	import Header from '$lib/components/Header.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 	let { children } = $props();
 </script>
 
+<svelte:head>
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+</svelte:head>
+
 <Header />
-{@render children()}
-<footer style="padding:24px; text-align:center; color:var(--muted2); font-size:12px; letter-spacing:1px;">
-	STARHOLD SOFTWARE · EST. 2026 · <a href="/legal/terms">Terms</a> · <a href="/legal/privacy">Privacy</a> · <a href="/legal/refunds">Refunds</a>
-</footer>
+<!-- every page renders `main > section` children; the acceptance suite scopes
+     its structural assertions to exactly that shape -->
+<main>{@render children()}</main>
+<Footer />

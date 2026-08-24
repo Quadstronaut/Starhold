@@ -1,0 +1,112 @@
+{
+	"$comment": "Evidence registry. Every factual claim rendered on a marketing surface carries data-evidence=\"<id>\" pointing at a row in here. status=pending means the verifier has not been confirmed by the owner and the claim MUST NOT render. verifier is either a URL on an allowlisted host or a path that exists in this repository.",
+	"items": [
+		{
+			"id": "self-hosted-fleet",
+			"claim": "Starhold runs on machines I administer: a dedicated server and a VPS joined by a private Tailscale mesh, in rootless Podman containers.",
+			"status": "verified",
+			"verifier": "https://starhold.app",
+			"sources": ["https://status.starhold.fyi"]
+		},
+		{
+			"id": "public-status-page",
+			"claim": "Uptime for the Starhold services is published on a status page anyone can open.",
+			"status": "verified",
+			"verifier": "https://status.starhold.fyi",
+			"sources": []
+		},
+		{
+			"id": "stripe-live-checkout",
+			"claim": "Payments run through live Stripe Checkout, and every incoming webhook signature is verified before anything acts on it.",
+			"status": "verified",
+			"verifier": "apps/storefront/src/routes/api/stripe/webhook/+server.ts",
+			"sources": [
+				"apps/storefront/src/lib/server/stripe.ts",
+				"https://starhold.dev/products/custom-bots"
+			]
+		},
+		{
+			"id": "automated-tests",
+			"claim": "This storefront ships with unit tests and browser tests; the counts on this site are generated from the repository, not typed in.",
+			"status": "verified",
+			"verifier": "apps/storefront/e2e/smoke.spec.ts",
+			"sources": [
+				"apps/storefront/vite.config.ts",
+				"apps/storefront/src/lib/build-sheet.test.ts",
+				"apps/storefront/scripts/gen-stats.mjs"
+			]
+		},
+		{
+			"id": "cert-aws-saa",
+			"claim": "AWS Certified Solutions Architect - Associate.",
+			"status": "verified",
+			"verifier": "https://www.linkedin.com/in/quadstronaut",
+			"sources": []
+		},
+		{
+			"id": "cert-python",
+			"claim": "Certified in Python.",
+			"status": "verified",
+			"verifier": "https://www.linkedin.com/in/quadstronaut",
+			"sources": []
+		},
+		{
+			"id": "cert-log-admin",
+			"claim": "Certified in log aggregation at the administration tier.",
+			"status": "verified",
+			"verifier": "https://www.linkedin.com/in/quadstronaut",
+			"sources": [],
+			"note": "Vendor name deliberately omitted - see UNVERIFIED Q6. Attaching a vendor without owner confirmation would be fabrication."
+		},
+		{
+			"id": "day-job-global-automation",
+			"claim": "By day I keep automation running for an organisation that operates worldwide. The employer is not named here.",
+			"status": "verified",
+			"verifier": "https://www.linkedin.com/in/quadstronaut",
+			"sources": []
+		},
+		{
+			"id": "docs-site",
+			"claim": "Product and operations documentation is written up and published at starhold.fyi.",
+			"status": "verified",
+			"verifier": "https://starhold.fyi",
+			"sources": ["apps/docs"]
+		},
+		{
+			"id": "qnix-design-docs",
+			"claim": "QNix architecture, hosting, and tenancy/security design notes are written down and published before the product exists.",
+			"status": "verified",
+			"verifier": "apps/docs/src/content/docs/qnix",
+			"sources": ["https://starhold.fyi"]
+		},
+		{
+			"id": "linkedin",
+			"claim": "Kyle Green's professional profile, where the certifications and the current role are listed.",
+			"status": "verified",
+			"verifier": "https://www.linkedin.com/in/quadstronaut",
+			"sources": []
+		},
+		{
+			"id": "shushgame-live",
+			"claim": "Shushgame is live: a Discord-native game with its own site, its own bot, and its own payments.",
+			"status": "verified",
+			"verifier": "https://shushgame.com",
+			"sources": ["apps/docs/src/content/docs/shushgame"]
+		},
+		{
+			"id": "published-catalog",
+			"claim": "The product catalog is published as machine-readable JSON and consumed by the Starhold Discord bot as a contract.",
+			"status": "verified",
+			"verifier": "apps/storefront/static/products.json",
+			"sources": ["https://starhold.dev/products.json"]
+		},
+		{
+			"id": "starhold-repo",
+			"claim": "The source for this site, including its tests, is on GitHub.",
+			"status": "pending",
+			"verifier": "https://github.com/Quadstronaut/Starhold",
+			"sources": [],
+			"note": "UNVERIFIED Q1 - nobody has confirmed the repository is public. Stays pending, so nothing on the site may cite it."
+		}
+	]
+}

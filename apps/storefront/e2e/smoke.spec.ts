@@ -1,8 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-test('home renders a tagline hero and the fleet grid', async ({ page }) => {
+// REPLACED. The old assertion pinned the randomised tagline hero, which is the
+// thing the redesign removed: the headline is now one deterministic positioning
+// line. Determinism and the above-fold contract are covered by B1.1/B1.2 in
+// e2e/redesign.spec.ts; this stays as a cheap structural smoke check.
+test('home renders the positioning hero and the selected-work section', async ({ page }) => {
 	await page.goto('/');
-	await expect(page.locator('h1')).toContainText(/Hold Your Own Star|Reach for the Stars/i);
+	await expect(page.locator('h1')).toHaveCount(1);
+	await expect(page.locator('h1')).toContainText(/automation/i);
 	await expect(page.locator('#fleet')).toBeVisible();
 });
 
@@ -40,6 +45,7 @@ test('checkout hands off to Stripe', async ({ page }) => {
 	await page.locator('label.feature', { hasText: /moderation/i }).locator('input[type="checkbox"]').check();
 	await page.getByRole('button', { name: /add to cart/i }).click();
 	await page.goto('/cart');
-	await page.getByRole('button', { name: /launch checkout/i }).click();
+	// button-name change only: "Launch checkout" -> "Continue to payment"
+	await page.getByRole('button', { name: /checkout|continue to payment/i }).click();
 	await page.waitForURL(/checkout\.stripe\.com/, { timeout: 15_000 });
 });

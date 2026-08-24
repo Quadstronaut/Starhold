@@ -1,6 +1,6 @@
 <svelte:head><title>Refund Policy · Starhold Software</title></svelte:head>
 
-<section class="page-section" style="font-size:14px; line-height:1.7;">
+<section class="section legal">
 	<div class="label">Effective 13 June 2026</div>
 	<h1>Refund Policy</h1>
 

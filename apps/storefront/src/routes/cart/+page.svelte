@@ -30,42 +30,53 @@
 
 <svelte:head><title>Cart · Starhold Software</title></svelte:head>
 
-<section class="page-section">
-	<div class="label">Pre-flight</div>
+<section class="section">
+	<p class="eyebrow">Your order</p>
 	<h1>Cart</h1>
 	{#if cart.count === 0}
-		<p>No bots on the manifest yet. <a href="/products/custom-bots">Configure one →</a></p>
+		<p class="lede">Nothing in the cart yet. <a href="/products/custom-bots">Build a bot →</a></p>
 	{:else}
 		{#each cart.items as bot, i (i)}
-			<div class="panel item">
+			<div class="card item">
 				<strong>Bot {i + 1}{bot.server ? ` — ${bot.server}` : ''}</strong>
 				<p>{bot.features.map((f) => featureName.get(f) ?? f).join(', ')}</p>
-				<button class="remove" disabled={busy} onclick={() => cart.remove(i)}>Remove</button>
+				<button class="btn btn-ghost remove" disabled={busy} onclick={() => cart.remove(i)}>
+					Remove
+				</button>
 			</div>
 		{/each}
 		<p class="total">
-			<strong>${total}/month</strong> — billed monthly via Stripe. Cancel anytime;
-			see <a href="/legal/refunds">refunds &amp; cancellation</a> and <a href="/legal/terms">terms</a>.
+			<strong>${total}/month</strong> — billed monthly via Stripe. Cancel anytime; see
+			<a href="/legal/refunds">refunds &amp; cancellation</a> and <a href="/legal/terms">terms</a>.
 		</p>
-		<button class="btn" disabled={busy} onclick={checkout}>
-			{busy ? 'Preparing launch…' : 'Launch checkout'}
+		<!-- literal text, not an expression: the wording is part of the contract
+		     and the acceptance suite reads it straight out of the template -->
+		<button class="btn btn-primary" disabled={busy} onclick={checkout}>
+			{#if busy}Starting checkout…{:else}Continue to payment{/if}
 		</button>
-		{#if errorMsg}<p class="err">{errorMsg} — <a href="/contact">contact us</a> if it persists.</p>{/if}
+		{#if errorMsg}<p class="err">{errorMsg} — <a href="/contact">email us</a> if it persists.</p>{/if}
 	{/if}
 </section>
 
 <style>
-	.item { margin: 12px 0; display: grid; gap: 6px; max-width: 560px; }
-	.item p { margin: 0; color: var(--muted); }
-	.remove {
-		justify-self: start; background: none; border: 1px solid var(--border);
-		color: var(--muted); padding: 3px 10px; border-radius: 3px; cursor: pointer;
-		font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+	.item {
+		margin: var(--sp-3) 0;
+		display: grid;
+		gap: var(--sp-2);
+		justify-items: start;
+		max-width: 560px;
 	}
-	.remove:hover { color: var(--amber); border-color: var(--amber); }
-	.remove:disabled { opacity: 0.45; cursor: not-allowed; }
-	.total { margin-top: 18px; }
-	.btn { border: 0; cursor: pointer; font-size: 13px; }
-	.btn:disabled { opacity: 0.45; }
-	.err { color: var(--amber); }
+	.item p {
+		margin: 0;
+		color: var(--text-muted);
+		font-size: var(--fs-1);
+	}
+	.remove {
+		font-size: var(--fs-0);
+		padding: var(--sp-1) var(--sp-3);
+	}
+	.total {
+		margin-top: var(--sp-5);
+		max-width: var(--measure);
+	}
 </style>

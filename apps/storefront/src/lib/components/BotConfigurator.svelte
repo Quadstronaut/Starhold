@@ -21,42 +21,80 @@
 	}
 </script>
 
-<div class="panel configurator">
-	<div class="label">Build sheet</div>
+<div class="card configurator">
+	<p class="eyebrow">Build sheet</p>
 	<label class="field">
-		<span>Server name <em>(optional)</em></span>
+		<span class="eyebrow">Server name <em>(optional)</em></span>
 		<input bind:value={server} maxlength="80" placeholder="e.g. The Lounge" />
 	</label>
 	<fieldset>
-		<legend class="label">Features</legend>
+		<legend class="eyebrow">Features</legend>
 		{#each BOT_FEATURES as f (f.id)}
 			<label class="feature">
-				<input type="checkbox" checked={selected.includes(f.id)} onchange={() => toggle(f.id)} />
+				<input
+					class="check"
+					type="checkbox"
+					checked={selected.includes(f.id)}
+					onchange={() => toggle(f.id)}
+				/>
 				<span><strong>{f.name}</strong> — {f.blurb}</span>
 			</label>
 		{/each}
 	</fieldset>
-	<button class="btn" disabled={selected.length === 0} onclick={add}>
+	<button class="btn btn-primary" disabled={selected.length === 0} onclick={add}>
 		Add to cart — ${monthlyUsd}/mo
 	</button>
 	{#if justAdded}
-		<p class="label added">Added to manifest. <a href="/cart">Go to cart →</a></p>
+		<p class="added">Added. <a href="/cart">Go to cart →</a></p>
 	{/if}
 </div>
 
 <style>
-	.configurator { display: grid; gap: 14px; margin-top: 18px; max-width: 560px; }
-	.field { display: grid; gap: 4px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
-	.field em { text-transform: none; letter-spacing: 0; }
-	.field input {
-		background: var(--bg); border: 1px solid var(--border); color: var(--text);
-		padding: 8px; border-radius: 3px; font-family: inherit;
+	.configurator {
+		display: grid;
+		gap: var(--sp-4);
+		margin-top: var(--sp-5);
+		max-width: 560px;
 	}
-	fieldset { border: 1px solid var(--border); border-radius: 3px; display: grid; gap: 8px; padding: 12px; }
-	.feature { display: flex; gap: 10px; align-items: baseline; font-size: 14px; cursor: pointer; }
-	.feature span { color: var(--muted); }
-	.feature strong { color: var(--text); }
-	.btn { border: 0; cursor: pointer; font-size: 13px; }
-	.btn:disabled { opacity: 0.45; cursor: not-allowed; }
-	.added a { color: var(--amber); }
+	.field {
+		display: grid;
+		gap: var(--sp-1);
+	}
+	.field em {
+		text-transform: none;
+		letter-spacing: 0;
+	}
+	fieldset {
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		display: grid;
+		gap: var(--sp-3);
+		padding: var(--sp-4);
+		margin: 0;
+	}
+	.feature {
+		display: flex;
+		gap: var(--sp-3);
+		align-items: baseline;
+		font-size: var(--fs-1);
+		cursor: pointer;
+	}
+	.feature span {
+		color: var(--text-muted);
+	}
+	.feature strong {
+		color: var(--text);
+	}
+	.check {
+		width: auto;
+		flex-shrink: 0;
+	}
+	.btn {
+		justify-self: start;
+	}
+	.added {
+		font-size: var(--fs-1);
+		color: var(--text-muted);
+		margin: 0;
+	}
 </style>

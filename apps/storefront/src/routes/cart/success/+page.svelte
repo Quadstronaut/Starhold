@@ -2,15 +2,21 @@
 	import { onMount } from 'svelte';
 	import { cart } from '$lib/cart.svelte';
 
-	// the order is in Stripe's hands now — empty the local manifest
+	// the order is with Stripe now — clear the local cart
 	onMount(() => cart.clear());
 </script>
 
 <svelte:head><title>Order received · Starhold Software</title></svelte:head>
 
-<section class="page-section">
-	<div class="label">Liftoff</div>
+<section class="section">
+	<p class="eyebrow">Payment received</p>
 	<h1>Order received</h1>
-	<p>Your build sheet just hit our console. Your bot will be assembled and deployed, and you'll hear from us at your checkout email — usually within 24 hours.</p>
-	<a class="btn" href="/">Back to base</a>
+	<p class="lede">
+		Your build sheet reached me. I will assemble and deploy the bot, and I will email you at your
+		checkout address — usually within a day.
+	</p>
+	<div class="btn-row">
+		<a class="btn btn-secondary" href="/">Home</a>
+		<a class="btn btn-ghost" href="/contact">Ask me something</a>
+	</div>
 </section>

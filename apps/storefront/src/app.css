@@ -1,23 +1,477 @@
+/* ═════════════════════════════════════════════════════════════════════════
+   Starhold design tokens.
+
+   Rule of the house: every colour, size, and space in the app resolves from a
+   token declared here. Components never hard-code a hex. That is what makes a
+   future light theme a token swap instead of a rewrite — and it is enforced by
+   src/acceptance/a1-visual.test.ts, not by good intentions.
+
+   Dark is canonical for v1.
+   ═════════════════════════════════════════════════════════════════════════ */
 :root {
-	--bg: #0a0a0f; --panel: #14141c; --border: #2a2a38;
-	--red: #b22222; --text: #d8dce6; --muted: #8a93a6; --muted2: #6f7889;
-	--amber: #ffb347; --white: #ffffff;
+	/* ── surfaces + ink ───────────────────────────────────────────────── */
+	--bg: #0b0d12;
+	--bg-raised: #11141b;
+	--surface: #14171f;
+	--surface-2: #1b1f2a;
+	--border: #2b303d;
+	--border-strong: #3c4354;
+	--text: #e6e9f0;
+	--text-muted: #9aa3b5;
+
+	/* ── brand accent ─────────────────────────────────────────────────────
+	   Warm signal amber. Red is deliberately NOT a brand colour: a saturated
+	   danger hue used decoratively collides with error semantics and reads
+	   "hobby dashboard" on a near-black ground. Red survives below as --danger
+	   and is used for exactly one thing — something went wrong.            */
+	--accent: #ffb347;
+	--accent-hover: #ffc770;
+	--accent-ink: #14100a;
+	--accent-quiet: #2b2216;
+
+	/* ── semantic status only, never decorative ───────────────────────── */
+	--danger: #ff6b6b;
+	--ok: #6fdf9a;
+
+	/* ── focus ────────────────────────────────────────────────────────── */
+	--focus: #9ecbff;
+
+	/* ── radii ────────────────────────────────────────────────────────── */
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 16px;
+
+	/* ── type scale: 8 steps, consecutive ratios 1.12–1.29 ────────────── */
+	--fs-0: 12px;
+	--fs-1: 14px;
+	--fs-2: 16px;
+	--fs-3: 18px;
+	--fs-4: 22px;
+	--fs-5: 28px;
+	--fs-6: 36px;
+	--fs-7: 46px;
+
+	/* ── spacing: 9 steps on a 4px base ───────────────────────────────── */
+	--sp-1: 4px;
+	--sp-2: 8px;
+	--sp-3: 12px;
+	--sp-4: 16px;
+	--sp-5: 24px;
+	--sp-6: 32px;
+	--sp-7: 48px;
+	--sp-8: 64px;
+	--sp-9: 96px;
+
+	/* ── layout ───────────────────────────────────────────────────────── */
+	--measure: 68ch; /* prose line length — about 68 characters */
+	--page: 1080px;
+	--header-h: 60px;
+
+	/* ── type stacks: system only. No third-party font request is made,
+	   because "self-hosted" is part of what is being sold. ───────────── */
+	--font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+		'Helvetica Neue', Arial, sans-serif;
+	--font-mono: ui-monospace, SFMono-Regular, 'Cascadia Mono', Menlo, Consolas,
+		monospace;
 }
-* { box-sizing: border-box; }
+
+/* ═══ base ════════════════════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	/* anchored sections (#fleet) must not hide under the header */
+	scroll-padding-top: var(--sp-8);
+}
+
 body {
-	margin: 0; background: var(--bg); color: var(--text);
-	font-family: 'Segoe UI', system-ui, sans-serif;
-	/* prevent any overflowing child (e.g. a wide nav) from creating a horizontal scrollbar */
+	margin: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--font-sans);
+	font-size: var(--fs-2);
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
 	overflow-x: hidden;
 }
-h1, h2, h3 { letter-spacing: 3px; text-transform: uppercase; font-weight: 800; }
-a { color: var(--amber); text-decoration: none; }
-.btn {
-	display: inline-block; padding: 10px 28px; background: var(--red); color: var(--white);
-	font-weight: bold; letter-spacing: 2px; border-radius: 3px; text-transform: uppercase;
+
+/* SvelteKit's body wrapper — a class, so no template needs a style attribute */
+#app-shell {
+	display: contents;
 }
-.panel { background: var(--panel); border: 1px solid var(--border); border-top: 3px solid var(--red); border-radius: 4px; padding: 16px; }
-.panel h3 { color: var(--text); }
-.panel:hover { border-color: var(--amber); }
-.label { font-size: 11px; letter-spacing: 4px; color: var(--muted); text-transform: uppercase; }
-.page-section { max-width: 760px; margin: 0 auto; padding: 48px 24px; }
+
+h1,
+h2,
+h3,
+h4 {
+	/* No uppercase. No wide tracking. Those two together were the loudest
+	   amateur tell in the previous build. */
+	font-weight: 650;
+	letter-spacing: -0.01em;
+	line-height: 1.18;
+	margin: 0 0 var(--sp-3);
+	text-wrap: balance;
+}
+
+h1 {
+	font-size: var(--fs-6);
+}
+h2 {
+	font-size: var(--fs-5);
+}
+h3 {
+	font-size: var(--fs-3);
+}
+h4 {
+	font-size: var(--fs-2);
+}
+
+@media (max-width: 520px) {
+	/* a five-line display headline eats the whole phone fold */
+	h1 {
+		font-size: var(--fs-5);
+	}
+}
+
+@media (min-width: 800px) {
+	h1 {
+		font-size: var(--fs-7);
+	}
+}
+
+p {
+	margin: 0 0 var(--sp-4);
+}
+
+a {
+	color: var(--accent);
+	text-decoration: none;
+}
+a:hover {
+	color: var(--accent-hover);
+	text-decoration: underline;
+}
+
+ul,
+ol {
+	margin: 0 0 var(--sp-4);
+	padding-left: var(--sp-5);
+}
+li {
+	margin-bottom: var(--sp-2);
+}
+
+hr {
+	border: 0;
+	border-top: 1px solid var(--border);
+	margin: var(--sp-7) 0;
+}
+
+/* one visible focus treatment, applied globally */
+:focus-visible {
+	outline: 2px solid var(--focus);
+	outline-offset: 3px;
+	border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+	}
+}
+
+/* ═══ layout primitives ═══════════════════════════════════════════════════ */
+.section {
+	max-width: var(--page);
+	margin: 0 auto;
+	padding: var(--sp-7) var(--sp-5);
+}
+
+.section-tight {
+	padding-top: var(--sp-5);
+	padding-bottom: var(--sp-5);
+}
+
+.section-divided {
+	border-top: 1px solid var(--border);
+}
+
+/* prose column — the reason --measure exists */
+.prose {
+	max-width: var(--measure);
+}
+.prose p,
+.prose li {
+	color: var(--text-muted);
+}
+.prose strong {
+	color: var(--text);
+}
+
+.page-section {
+	max-width: var(--measure);
+	margin: 0 auto;
+	padding: var(--sp-7) var(--sp-5);
+}
+
+.lede {
+	font-size: var(--fs-3);
+	color: var(--text-muted);
+	max-width: var(--measure);
+}
+
+.grid {
+	display: grid;
+	gap: var(--sp-4);
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* Two up on desktop, one up on mobile. Deliberately not auto-fit at a small
+   minimum: four cards in a three-column grid strand the fourth on its own row,
+   which reads like a bug. */
+.grid-2 {
+	display: grid;
+	gap: var(--sp-4);
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+	max-width: 900px;
+}
+
+/* ═══ micro-type utilities — the ONLY place uppercase is allowed ══════════ */
+.eyebrow,
+.kicker,
+.label,
+.tag,
+.badge {
+	text-transform: uppercase;
+	letter-spacing: 0.09em;
+	font-size: var(--fs-0);
+	font-weight: 600;
+	color: var(--text-muted);
+	margin: 0 0 var(--sp-2);
+	display: block;
+}
+
+.tag,
+.badge {
+	display: inline-block;
+	border: 1px solid var(--border-strong);
+	border-radius: 999px;
+	padding: 2px var(--sp-3);
+	margin: 0;
+}
+
+.badge-accent {
+	color: var(--accent);
+	border-color: var(--accent-quiet);
+	background: var(--accent-quiet);
+}
+
+/* ═══ buttons ════════════════════════════════════════════════════════════ */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--sp-2);
+	padding: var(--sp-3) var(--sp-5);
+	border-radius: var(--radius-sm);
+	border: 1px solid transparent;
+	font: inherit;
+	font-size: var(--fs-1);
+	font-weight: 600;
+	line-height: 1.2;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background-color 0.15s ease, border-color 0.15s ease,
+		color 0.15s ease;
+}
+.btn:hover {
+	text-decoration: none;
+}
+.btn:focus-visible {
+	outline: 2px solid var(--focus);
+	outline-offset: 3px;
+}
+
+.btn-primary {
+	background: var(--accent);
+	color: var(--accent-ink);
+}
+.btn-primary:hover {
+	background: var(--accent-hover);
+	color: var(--accent-ink);
+}
+
+.btn-secondary {
+	background: var(--surface-2);
+	border-color: var(--border-strong);
+	color: var(--text);
+}
+.btn-secondary:hover {
+	border-color: var(--accent);
+	color: var(--text);
+}
+
+.btn-ghost {
+	background: transparent;
+	border-color: var(--border);
+	color: var(--text);
+}
+.btn-ghost:hover {
+	border-color: var(--border-strong);
+	color: var(--text);
+}
+
+.btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.btn-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-3);
+	margin: var(--sp-5) 0 0;
+}
+
+/* ═══ card — replaces .panel. No coloured top border. ════════════════════ */
+.card {
+	display: block;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	padding: var(--sp-5);
+	color: inherit;
+}
+a.card:hover {
+	border-color: var(--border-strong);
+	background: var(--surface-2);
+	text-decoration: none;
+}
+.card h3 {
+	color: var(--text);
+	margin-bottom: var(--sp-2);
+}
+.card p {
+	color: var(--text-muted);
+	font-size: var(--fs-1);
+	margin-bottom: 0;
+}
+.card p + p {
+	margin-top: var(--sp-3);
+}
+.card ul {
+	color: var(--text-muted);
+	font-size: var(--fs-1);
+	margin-bottom: 0;
+}
+
+/* ═══ proof strip ════════════════════════════════════════════════════════ */
+.proof {
+	display: grid;
+	gap: var(--sp-3);
+	grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.proof li {
+	margin: 0;
+}
+.proof a {
+	display: block;
+	padding: var(--sp-3) var(--sp-4);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-sm);
+	background: var(--surface);
+	color: var(--text);
+	font-size: var(--fs-1);
+	font-weight: 600;
+}
+.proof a:hover {
+	border-color: var(--accent);
+	text-decoration: none;
+}
+.proof .verifier {
+	display: block;
+	font-family: var(--font-mono);
+	font-size: var(--fs-0);
+	font-weight: 400;
+	color: var(--text-muted);
+	margin-top: var(--sp-1);
+	overflow-wrap: anywhere;
+}
+
+/* ═══ evidence-tagged elements ═══════════════════════════════════════════ */
+.ev-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	gap: var(--sp-4);
+}
+.ev-list li {
+	margin: 0;
+	color: var(--text-muted);
+	font-size: var(--fs-1);
+}
+.ev-list strong {
+	color: var(--text);
+	display: block;
+	font-size: var(--fs-2);
+	font-weight: 600;
+	margin-bottom: var(--sp-1);
+}
+
+/* ═══ forms ══════════════════════════════════════════════════════════════ */
+input,
+textarea,
+select {
+	background: var(--bg-raised);
+	border: 1px solid var(--border);
+	color: var(--text);
+	padding: var(--sp-3);
+	border-radius: var(--radius-sm);
+	font-family: inherit;
+	font-size: var(--fs-2);
+	width: 100%;
+}
+input:focus-visible,
+textarea:focus-visible {
+	outline: 2px solid var(--focus);
+	outline-offset: 1px;
+	border-color: var(--border-strong);
+}
+
+/* ═══ legal pages — long-form, denser, entity voice ══════════════════════ */
+.legal {
+	max-width: 820px;
+	font-size: var(--fs-1);
+	line-height: 1.75;
+}
+.legal p,
+.legal li {
+	color: var(--text-muted);
+}
+.legal strong {
+	color: var(--text);
+}
+.legal h2 {
+	font-size: var(--fs-4);
+	margin-top: var(--sp-7);
+}
+
+/* ═══ status text ════════════════════════════════════════════════════════ */
+.err {
+	color: var(--danger);
+}

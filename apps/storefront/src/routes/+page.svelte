@@ -1,36 +1,150 @@
 <script lang="ts">
-	let { data } = $props();
-	const internal = (url: string) => url.replace('https://starhold.dev', '');
+	import { home, capabilities, work, principles, operator, site } from '$lib/content/copy';
 </script>
 
-<svelte:head><title>Starhold Software — Hold Your Own Star</title></svelte:head>
+<svelte:head>
+	<title>{home.title}</title>
+	<meta name="description" content={home.description} />
+</svelte:head>
 
+<!-- 2 · Hero — service, person, next action, without scrolling -->
 <section class="hero">
-	<div class="label">Res Gesta Par Excellentiam</div>
-	<h1>{data.tagline.slice(0, -1)}<span style="color:var(--amber)">{data.tagline.slice(-1)}</span></h1>
-	<p style="color:var(--muted)">Sovereign software. Built, held, and flown by its maker.</p>
-	<a class="btn" href="#fleet">Explore the Fleet</a>
+	<div class="hero-inner">
+		<p class="eyebrow">{home.hero.eyebrow}</p>
+		<h1>{home.hero.h1}</h1>
+		<p class="lede">{home.hero.sub}</p>
+		<p class="byline">
+			{home.hero.byline}
+			<a href={home.hero.bylineLink.href}>{home.hero.bylineLink.label} →</a>
+		</p>
+		<div class="btn-row">
+			<a class="btn btn-primary" data-testid="cta-primary" href={home.hero.ctaPrimary.href}>
+				{home.hero.ctaPrimary.label}
+			</a>
+			<a class="btn btn-secondary" data-testid="cta-secondary" href={home.hero.ctaSecondary.href}>
+				{home.hero.ctaSecondary.label}
+			</a>
+		</div>
+	</div>
 </section>
 
-<section id="fleet" style="padding:32px 24px; max-width:1000px; margin:0 auto;">
-	<h2 class="label" style="margin:0;">The Fleet</h2>
-	<div class="grid">
-		{#each data.products as p}
-			<a class="panel" href={p.url.startsWith('https://starhold.dev') ? internal(p.url) : p.url}>
-				<h3 style="margin:0 0 6px; font-size:15px;">{p.name}</h3>
-				<span class="label">{p.status === 'live' ? (p.pricing.model === 'subscription' ? `$${p.pricing.monthly_usd}/mo` : p.pricing.model === 'quote' ? 'Quoted' : 'Live mission') : 'Coming soon'}</span>
+<!-- 3 · Proof strip — checkable before the pitch -->
+<section class="section section-tight" aria-label={home.proofHeading}>
+	<p class="eyebrow">{home.proofHeading}</p>
+	<ul class="proof">
+		{#each home.proof as p (p.href)}
+			<li>
+				<a href={p.href} rel="noopener" data-evidence={p.evidence}>
+					{p.label}
+					<span class="verifier">{p.verifier}</span>
+				</a>
+			</li>
+		{/each}
+	</ul>
+</section>
+
+<!-- 4 · Capabilities — the thing being sold -->
+<section id="capabilities" class="section section-divided">
+	<p class="eyebrow">{home.capabilities.eyebrow}</p>
+	<h2>{home.capabilities.h2}</h2>
+	<p class="lede">{home.capabilities.sub}</p>
+	<div class="grid-2">
+		{#each capabilities.items as c (c.id)}
+			<a class="card" href={c.href}>
+				<h3>{c.name}</h3>
+				<p>{c.summary}</p>
+			</a>
+		{/each}
+	</div>
+	<div class="btn-row">
+		<a class="btn btn-ghost" href="/capabilities">Scope, deliverables, and how to start →</a>
+	</div>
+</section>
+
+<!-- 5 · Selected work — the products appear as proof, not as a shop shelf -->
+<section id="fleet" class="section section-divided">
+	<p class="eyebrow">{home.work.eyebrow}</p>
+	<h2>{home.work.h2}</h2>
+	<p class="lede">{home.work.sub}</p>
+	<div class="grid-2">
+		{#each work.items as w (w.id)}
+			<a class="card" href={w.href} rel="noopener" data-evidence={w.evidence}>
+				<h3>{w.name}</h3>
+				<p class="what">{w.what}</p>
+				<p><span class="tag">{w.status}</span></p>
+				<p>{w.proves}</p>
 			</a>
 		{/each}
 	</div>
 </section>
 
-<section style="padding:24px; text-align:center; border-top:1px solid var(--border);">
-	<p class="label">The operator: a master of automation whose systems already run around the world. Credentials verified. Employer classified.</p>
-	<a class="btn" href="/contact" style="margin-top:12px;">Start a Mission</a>
+<!-- 6 · Operating principles -->
+<section id="principles" class="section section-divided">
+	<p class="eyebrow">{home.principles.eyebrow}</p>
+	<h2>{home.principles.h2}</h2>
+	<p class="lede">{home.principles.sub}</p>
+	<ul class="ev-list principles">
+		{#each principles as p (p.title)}
+			<li data-evidence={p.evidence}>
+				<strong>{p.title}</strong>
+				{p.detail}
+			</li>
+		{/each}
+	</ul>
+</section>
+
+<!-- 7 · Operator teaser -->
+<section id="operator" class="section section-divided">
+	<p class="eyebrow">{home.operator.eyebrow}</p>
+	<h2>{home.operator.h2}</h2>
+	<div class="prose">
+		<p>{operator.lede}</p>
+		<ul class="ev-list">
+			{#each operator.certs as c (c.text)}
+				<li data-evidence={c.evidence}>{c.text}</li>
+			{/each}
+			<li data-evidence={operator.dayJob.evidence}>{operator.dayJob.text}</li>
+		</ul>
+	</div>
+	<div class="btn-row">
+		<a class="btn btn-ghost" href={home.operator.cta.href}>{home.operator.cta.label} →</a>
+	</div>
+</section>
+
+<!-- 8 · Contact band -->
+<section id="start" class="section section-divided">
+	<p class="eyebrow">{home.contact.eyebrow}</p>
+	<h2>{home.contact.h2}</h2>
+	<p class="lede">{home.contact.body}</p>
+	<div class="btn-row">
+		<a class="btn btn-primary" href={home.contact.cta.href}>{home.contact.cta.label}</a>
+		<a class="btn btn-secondary" href={'mailto:' + site.email}>{site.email}</a>
+	</div>
 </section>
 
 <style>
-	.hero { text-align: center; padding: 80px 24px 60px; background: radial-gradient(ellipse at top, #15151f 0%, var(--bg) 70%); }
-	.hero h1 { font-size: 40px; margin: 12px 0 8px; }
-	.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-top: 14px; }
+	.hero {
+		background: radial-gradient(ellipse at 20% -10%, var(--bg-raised) 0%, var(--bg) 65%);
+		border-bottom: 1px solid var(--border);
+	}
+	.hero-inner {
+		max-width: var(--page);
+		margin: 0 auto;
+		padding: var(--sp-7) var(--sp-5) var(--sp-6);
+	}
+	.byline {
+		color: var(--text-muted);
+		font-size: var(--fs-1);
+		max-width: var(--measure);
+		margin-top: var(--sp-4);
+	}
+	.what {
+		color: var(--text);
+	}
+	.card .tag {
+		color: var(--text-muted);
+	}
+	.principles li {
+		max-width: var(--measure);
+	}
 </style>

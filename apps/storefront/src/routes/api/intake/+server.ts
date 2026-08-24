@@ -21,7 +21,7 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
 	// honeypot first — bot hits must not burn rate-limit slots that a real
 	// user behind the same NAT would then be denied
 	if (website) return json({ ok: true }); // pretend success, relay nothing
-	if (!allow(getClientAddress())) throw error(429, 'too many transmissions — try again in a few minutes');
+	if (!allow(getClientAddress())) throw error(429, 'too many requests — try again in a few minutes');
 	if (typeof kind !== 'string' || !KINDS.includes(kind)) throw error(400, 'unknown intake kind');
 	if (typeof email !== 'string' || !EMAIL_RE.test(email)) throw error(400, 'a valid email is required');
 	if (typeof message !== 'string' || message.trim().length < 10 || message.length > 4000)

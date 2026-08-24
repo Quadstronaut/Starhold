@@ -1,104 +1,248 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { cart } from '$lib/cart.svelte';
+	import { primary, utilityLinks, cartLink, cta } from '$lib/nav';
+	import { site } from '$lib/content/copy';
 
-	// badge only after mount: SSR renders bare "Cart" (cart is SSR-empty),
-	// so revealing the count pre-hydration would mismatch the server HTML
+	// Badge only after mount: SSR renders a bare "Cart" (the cart is SSR-empty),
+	// so revealing the count pre-hydration would mismatch the server HTML.
 	let mounted = $state(false);
 	onMount(() => (mounted = true));
 
-	// hamburger open/close state; collapses the link drawer on small screens
+	// Hamburger drawer state — only reachable below the 640px breakpoint.
 	let menuOpen = $state(false);
-	const toggleMenu = () => (menuOpen = !menuOpen);
-	// close drawer when a link is activated (navigating away)
 	const closeMenu = () => (menuOpen = false);
+
+	function onKeydown(e: KeyboardEvent) {
+		if (e.key === 'Escape' && menuOpen) closeMenu();
+	}
 </script>
 
-<nav aria-label="Main navigation">
-	<a href="/" class="brand">⬡ STARHOLD</a>
+<svelte:window onkeydown={onKeydown} />
 
-	<!-- hamburger button: only visible below the CSS breakpoint -->
-	<button
-		class="hamburger"
-		aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-		aria-expanded={menuOpen}
-		aria-controls="nav-links"
-		onclick={toggleMenu}
-	>
-		<!-- three horizontal bars drawn with spans; no icon dependency needed -->
-		<span></span><span></span><span></span>
-	</button>
-
-	<div id="nav-links" class="links" class:open={menuOpen} role="list">
-		<a href="/#fleet"                   onclick={closeMenu}>Store</a>
-		<a href="https://starhold.fyi"      onclick={closeMenu}>Docs</a>
-		<a href="https://status.starhold.fyi" onclick={closeMenu}>Status</a>
-		<a href="https://starhold.app"      onclick={closeMenu}>Hangar</a>
-		<a href="/about"                    onclick={closeMenu}>About</a>
-		<a href="/contact"                  onclick={closeMenu}>Contact</a>
-		<a href="/cart"                     onclick={closeMenu}>
-			Cart{#if mounted && cart.count > 0}&nbsp;({cart.count}){/if}
+<header>
+	<nav aria-label="Main">
+		<a class="brand" href="/">
+			<span class="glyph" aria-hidden="true">⬡</span>{site.name}
 		</a>
-	</div>
-</nav>
+
+		<!-- primary links: inline on desktop, inside the drawer on mobile -->
+		<ul id="nav-primary" class="primary" class:open={menuOpen}>
+			{#each primary as item (item.href)}
+				<li><a href={item.href} onclick={closeMenu}>{item.label}</a></li>
+			{/each}
+			<li class="drawer-only drawer-cta">
+				<a class="btn btn-primary" href={cta.href} onclick={closeMenu}>{cta.label}</a>
+			</li>
+			{#each utilityLinks as item (item.href)}
+				<li class="drawer-only">
+					<a href={item.href} rel="noopener" onclick={closeMenu}>{item.label}</a>
+				</li>
+			{/each}
+		</ul>
+
+		<!-- utility cluster: external proof links, desktop only -->
+		<ul class="utility">
+			{#each utilityLinks as item (item.href)}
+				<li><a href={item.href} rel="noopener">{item.label}</a></li>
+			{/each}
+		</ul>
+
+		<div class="bar-end">
+			<!-- Cart never hides behind the hamburger: AC-4 wants it one click away
+			     at 375px, and a drawer makes that two. -->
+			<a class="cartlink" data-testid="cart-link" href={cartLink.href}>
+				{cartLink.label}{#if mounted && cart.count > 0}&nbsp;({cart.count}){/if}
+			</a>
+
+			<a class="btn btn-primary header-cta" href={cta.href}>{cta.label}</a>
+
+			<button
+				class="hamburger"
+				aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+				aria-expanded={menuOpen}
+				aria-controls="nav-primary"
+				onclick={() => (menuOpen = !menuOpen)}
+			>
+				<span></span><span></span><span></span>
+			</button>
+		</div>
+	</nav>
+</header>
 
 <style>
-	/* ── base nav bar ─────────────────────────────────────────────────── */
+	header {
+		position: sticky;
+		top: 0;
+		z-index: 20;
+		background: var(--bg-raised);
+		border-bottom: 1px solid var(--border);
+	}
+
 	nav {
-		/* allow drawer to stack below the bar row on mobile */
-		display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
-		padding: 14px 24px; border-bottom: 2px solid var(--red); background: #111118;
-		font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
-		/* prevent any nav content from punching outside the viewport */
-		width: 100%; box-sizing: border-box;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--sp-5);
+		max-width: var(--page);
+		margin: 0 auto;
+		padding: var(--sp-3) var(--sp-5);
+		width: 100%;
 	}
-	.brand { font-weight: bold; color: var(--text); flex-shrink: 0; }
 
-	/* ── desktop link row (≥ 640 px) ─────────────────────────────────── */
-	.links { display: flex; gap: 18px; }
-	.links a { color: var(--muted); }
-	.links a:hover { color: var(--amber); }
+	.brand {
+		font-weight: 700;
+		font-size: var(--fs-3);
+		color: var(--text);
+		letter-spacing: -0.01em;
+		flex-shrink: 0;
+	}
+	.brand:hover {
+		color: var(--text);
+		text-decoration: none;
+	}
+	.glyph {
+		color: var(--accent);
+		margin-right: var(--sp-2);
+	}
 
-	/* ── hamburger button (hidden on desktop) ─────────────────────────── */
+	ul {
+		display: flex;
+		align-items: center;
+		gap: var(--sp-5);
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		margin: 0;
+	}
+
+	.primary {
+		/* claims the slack so the utility cluster and CTA sit hard right */
+		margin-right: auto;
+	}
+	.primary a {
+		color: var(--text);
+		font-size: var(--fs-1);
+		font-weight: 600;
+	}
+	.primary a:hover {
+		color: var(--accent);
+		text-decoration: none;
+	}
+
+	.utility {
+		gap: var(--sp-4);
+		padding-right: var(--sp-5);
+		border-right: 1px solid var(--border);
+	}
+	.utility a {
+		color: var(--text-muted);
+		font-size: var(--fs-0);
+	}
+	.utility a:hover {
+		color: var(--text);
+		text-decoration: none;
+	}
+
+	.bar-end {
+		display: flex;
+		align-items: center;
+		gap: var(--sp-4);
+	}
+
+	.cartlink {
+		color: var(--text);
+		font-size: var(--fs-1);
+		font-weight: 600;
+		white-space: nowrap;
+	}
+	.cartlink:hover {
+		color: var(--accent);
+		text-decoration: none;
+	}
+
+	.header-cta {
+		font-size: var(--fs-0);
+		padding: var(--sp-2) var(--sp-4);
+	}
+
+	.drawer-only {
+		display: none;
+	}
+
 	.hamburger {
-		display: none;           /* hidden on wide screens */
-		flex-direction: column; gap: 5px;
-		background: none; border: none; cursor: pointer;
-		padding: 6px; margin: -6px;
+		display: none;
+		flex-direction: column;
+		gap: 5px;
+		background: none;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		cursor: pointer;
+		padding: var(--sp-2);
 	}
-	/* the three bars */
 	.hamburger span {
-		display: block; width: 22px; height: 2px;
-		background: var(--muted); border-radius: 1px;
-		transition: background 0.15s;
+		display: block;
+		width: 20px;
+		height: 2px;
+		background: var(--text);
+		border-radius: 1px;
 	}
-	.hamburger:hover span { background: var(--amber); }
 
-	/* ── small-screen overrides (< 640 px) ───────────────────────────── */
+	/* ── mobile drawer (<640px) ────────────────────────────────────────── */
 	@media (max-width: 639px) {
-		nav { padding: 12px 16px; }
-
-		/* show the hamburger */
-		.hamburger { display: flex; }
-
-		/* collapse the link drawer; hidden until .open is set */
-		.links {
-			/* take full nav width so it sits below the brand/hamburger row */
-			width: 100%;
-			flex-direction: column; gap: 0;
-			/* animate open/close with max-height trick — no JS height calc needed */
-			max-height: 0; overflow: hidden;
-			transition: max-height 0.25s ease;
+		nav {
+			padding: var(--sp-3) var(--sp-4);
+			gap: var(--sp-3);
 		}
-		.links.open {
-			/* 400px is safely larger than 7 items × ~44px; transition clamps to content */
-			max-height: 400px;
+		.utility {
+			/* folds into the drawer below the breakpoint */
+			display: none;
 		}
-		.links a {
+		.hamburger {
+			display: flex;
+		}
+		.bar-end {
+			margin-left: auto;
+		}
+		.header-cta {
+			display: none;
+		}
+		.drawer-only {
 			display: block;
-			padding: 10px 0; border-top: 1px solid var(--border);
-			/* tighten letter-spacing so items fit even at 320 px */
-			letter-spacing: 1px;
+		}
+
+		/* Closed means display:none, not a clipped container. A max-height trick
+		   still leaves the links focusable and still exposes them to a screen
+		   reader — "collapsed" has to mean gone, not merely unpainted. */
+		.primary {
+			display: none;
+			order: 3;
+			width: 100%;
+			margin-right: 0;
+			flex-direction: column;
+			align-items: stretch;
+			gap: 0;
+		}
+		.primary.open {
+			display: flex;
+		}
+		.primary li a {
+			display: block;
+			padding: var(--sp-3) 0;
+			border-top: 1px solid var(--border);
+		}
+		/* The CTA is a button, not a drawer row. `.primary a` outranks
+		   `.btn-primary` on specificity, so restate both padding and ink here or
+		   the label renders as plain white on amber. */
+		.primary .drawer-cta a {
+			display: flex;
+			justify-content: center;
+			padding: var(--sp-3) var(--sp-5);
+			margin: var(--sp-3) 0;
+			border-top: 0;
+			color: var(--accent-ink);
 		}
 	}
 </style>
