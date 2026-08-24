@@ -131,7 +131,7 @@ export type Capability = {
 export const capabilities = {
 	title: 'Capabilities · Starhold Software',
 	description:
-		'Automation, platform and high-availability hosting, custom bots, and integration work — scoped and quoted per job by Kyle Green.',
+		'Automation, platform and high-availability hosting, custom bots, and full stack builds — scoped and quoted per job by Kyle Green.',
 	eyebrow: 'Engagements',
 	h1: 'Four ways to hire me',
 	intro:
@@ -168,26 +168,26 @@ export const capabilities = {
 			name: 'Custom bots',
 			href: '/products/custom-bots',
 			summary:
-				"Discord bots under your server's own name and avatar: moderation, welcome and roles, logging, leveling, giveaways, custom commands.",
+				"Discord run like business software, under your server's own name and avatar: moderation, roles, logging, and automation. An Ops Pack adds server, application, and scheduled-scraping monitoring.",
 			deliverables: [
 				'A bot on your branding, operated by me',
 				'A feature set you pick, and a roadmap you can push to',
-				'Flat monthly billing through Stripe, cancel whenever'
+				'Flat monthly billing through Stripe, hosting included, cancel whenever'
 			],
 			start: 'Pick the features and add it to the cart, or ask for something the list does not cover.'
 		},
 		{
-			id: 'integration',
-			name: 'Integration work',
-			href: '/contact?intent=quote',
+			id: 'fullstack',
+			name: 'Full stack solutions',
+			href: '/services/fullstack',
 			summary:
-				'Two systems that will not talk to each other. Webhooks, APIs, payment plumbing, and the signature checks that keep it honest.',
+				'A whole application, not a script. Proven open-source components, assembled and operated as one system scoped to your business — the job a multi-thousand-dollar platform does, without that invoice.',
 			deliverables: [
-				'A working link between the two systems',
-				'Verified webhooks, retries, and a dead-letter path',
-				'Tests that fail loudly when the other side changes'
+				'An application you own, running on infrastructure you can inspect',
+				'Every path tested end to end by a person, not just by the machine that wrote it',
+				'The integration plumbing between it and whatever you already run'
 			],
-			start: 'Name the two systems and what needs to move between them.'
+			start: 'Describe the business process end to end. I will scope the build and quote it.'
 		}
 	] satisfies Capability[]
 };

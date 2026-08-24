@@ -43,10 +43,10 @@ describe('A4 · information architecture', () => {
 
 	it('A4.3 the published products.json contract is unchanged', () => {
 		const products = parseCatalog(catalog);
-		expect(products.map((p) => p.id)).toEqual(['shushgame', 'custom-bots', 'qnix', 'automation']);
+		expect(products.map((p) => p.id)).toEqual(['shushgame', 'custom-bots', 'qnix', 'automation', 'fullstack']);
 
 		const bots = products.find((p) => p.id === 'custom-bots')!;
-		expect(bots.pricing).toEqual({ model: 'subscription', monthly_usd: 5 });
+		expect(bots.pricing).toEqual({ model: 'subscription', monthly_usd: 5, ops_pack_usd: 9 });
 		expect(bots.url).toBe('https://starhold.dev/products/custom-bots');
 
 		expect(products.find((p) => p.id === 'qnix')!.status).toBe('coming-soon');

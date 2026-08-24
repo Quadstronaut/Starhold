@@ -1,5 +1,6 @@
 // Discord webhook relay + embed builders.
 import { decodeBuildSheet } from '$lib/build-sheet';
+import { OPS_FEATURES } from '$lib/bot-features';
 
 // Brand accent, matching the site's --accent token. Red is reserved for errors.
 const ACCENT = 0xffb347;
@@ -39,7 +40,7 @@ export function orderEmbed(session: {
 			{ name: 'Customer', value: session.customer_details?.email ?? 'unknown', inline: true },
 			{ name: 'Monthly', value: `$${((session.amount_total ?? 0) / 100).toFixed(2)}`, inline: true },
 			...bots.slice(0, MAX_BOT_FIELDS).map((b, i) => ({
-				name: `Bot ${i + 1}${b.server ? ` — ${b.server}` : ''}`,
+				name: `Bot ${i + 1}${b.server ? ` — ${b.server}` : ''}${b.features.some((f) => OPS_FEATURES.has(f)) ? ' · Ops Pack' : ''}`,
 				value: b.features.join(', ') || '(no features decoded)'
 			})),
 			...(bots.length > MAX_BOT_FIELDS
@@ -53,7 +54,8 @@ export function orderEmbed(session: {
 const KIND_LABELS: Record<string, string> = {
 	contact: '📨 Contact message',
 	quote: '🛠️ Quote request',
-	qnix: '🛰️ QNix interest'
+	qnix: '🛰️ QNix interest',
+	fullstack: '🏗️ Full Stack inquiry'
 };
 
 export function intakeEmbed(kind: string, name: string, email: string, message: string): Embed {

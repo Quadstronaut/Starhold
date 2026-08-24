@@ -1,6 +1,7 @@
 {"products":[
- {"id":"shushgame","name":"Shushgame","tagline":"","status":"live","url":"https://shushgame.com","pricing_url":"https://shushgame.com","pricing":{"model":"external"},"order":1},
- {"id":"custom-bots","name":"Custom Discord Bots","tagline":"","status":"live","url":"https://starhold.dev/products/custom-bots","pricing_url":"https://starhold.dev/products/custom-bots","pricing":{"model":"subscription","monthly_usd":5},"order":2},
- {"id":"qnix","name":"QNix","tagline":"","status":"coming-soon","url":"https://starhold.dev/products/qnix","pricing_url":null,"pricing":{"model":"tbd"},"order":3},
- {"id":"automation","name":"Custom Automation","tagline":"","status":"live","url":"https://starhold.dev/services/automation","pricing_url":null,"pricing":{"model":"quote"},"order":4}
+ {"id":"shushgame","name":"Shushgame","tagline":"","status":"live","url":"https://shushgame.com","pricing_url":"https://shushgame.com","pricing":{"model":"external"},"order":1,"card_label":"Discord Chat Game","badge":"Free","discord_widget_id":"1437714782844096556"},
+ {"id":"custom-bots","name":"Discord Bots","tagline":"for small business","status":"live","url":"https://starhold.dev/products/custom-bots","pricing_url":"https://starhold.dev/products/custom-bots","pricing":{"model":"subscription","monthly_usd":5,"ops_pack_usd":9},"order":2,"card_sub":"Hosting included"},
+ {"id":"qnix","name":"QNix","tagline":"","status":"coming-soon","url":"https://starhold.dev/products/qnix","pricing_url":null,"pricing":{"model":"tbd"},"order":3,"card_label":"Durable Hosting","card_sub":"Click for more info →"},
+ {"id":"automation","name":"Server/Task Automation","tagline":"","status":"live","url":"https://starhold.dev/services/automation","pricing_url":null,"pricing":{"model":"quote"},"order":4},
+ {"id":"fullstack","name":"Full Stack Solutions","tagline":"","status":"live","url":"https://starhold.dev/services/fullstack","pricing_url":null,"pricing":{"model":"quote"},"order":5}
 ]}

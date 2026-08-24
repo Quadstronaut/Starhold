@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { kind, cta = 'Send' }: { kind: 'contact' | 'quote' | 'qnix'; cta?: string } = $props();
+	let { kind, cta = 'Send' }: { kind: 'contact' | 'quote' | 'qnix' | 'fullstack'; cta?: string } = $props();
 
 	let name = $state('');
 	let email = $state('');

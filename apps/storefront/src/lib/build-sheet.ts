@@ -1,13 +1,20 @@
 // Codec between cart bot orders and Stripe Checkout metadata.
 // Stripe metadata limits: 50 keys / 40-char key / 500-char value, hence
 // one compact `bot_N` key per bot and MAX_BOTS = 25 (headroom for other keys).
-import { BOT_FEATURES } from './bot-features';
+import { BOT_FEATURES, OPS_FEATURES } from './bot-features';
 
 export type BotOrder = { server: string; features: string[] };
 
 export const MAX_BOTS = 25;
 const MAX_SERVER_CHARS = 80;
 const VALID_FEATURES = new Set(BOT_FEATURES.map((f) => f.id));
+
+// Number of bots carrying at least one Ops Pack feature — drives the +$9
+// second Stripe line item. A bot with several ops features still counts once
+// (the pack is flat per bot, not per feature).
+export function opsPackQty(bots: BotOrder[]): number {
+	return bots.filter((b) => b.features.some((f) => OPS_FEATURES.has(f))).length;
+}
 
 export function encodeBuildSheet(bots: BotOrder[]): Record<string, string> {
 	if (!Array.isArray(bots) || bots.length === 0) throw new Error('cart is empty');

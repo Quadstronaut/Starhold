@@ -1,7 +1,29 @@
 import { describe, it, expect } from 'vitest';
-import { encodeBuildSheet, decodeBuildSheet, MAX_BOTS, type BotOrder } from './build-sheet';
+import { encodeBuildSheet, decodeBuildSheet, opsPackQty, MAX_BOTS, type BotOrder } from './build-sheet';
 
 const bot = (server: string, features: string[]): BotOrder => ({ server, features });
+
+describe('opsPackQty', () => {
+	it('is 0 when no bot carries an ops feature', () => {
+		expect(opsPackQty([bot('A', ['moderation', 'data-sync']), bot('B', ['leveling'])])).toBe(0);
+	});
+
+	it('counts each bot carrying at least one ops feature', () => {
+		expect(opsPackQty([
+			bot('A', ['moderation', 'server-monitoring']),
+			bot('B', ['leveling']),
+			bot('C', ['scheduled-scraping'])
+		])).toBe(2);
+	});
+
+	it('counts a bot with multiple ops features only once', () => {
+		expect(opsPackQty([bot('A', ['server-monitoring', 'app-monitoring', 'scheduled-scraping'])])).toBe(1);
+	});
+
+	it('is 0 for an empty cart', () => {
+		expect(opsPackQty([])).toBe(0);
+	});
+});
 
 describe('encodeBuildSheet', () => {
 	it('encodes one metadata key per bot plus bot_count', () => {

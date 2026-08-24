@@ -27,5 +27,8 @@
 	},
 	"dependencies": {
 		"stripe": "^22.2.0"
+	},
+	"overrides": {
+		"cookie": "^0.7.0"
 	}
 }

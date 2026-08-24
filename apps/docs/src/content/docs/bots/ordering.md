@@ -8,8 +8,8 @@ Custom bots are ordered through the configurator at [starhold.dev/products/custo
 
 1. **Configure** — select the feature modules your server needs (see [Feature Manual](/bots/features/) for the full list).
 2. **Name the target server** — optional, but it helps the build team route the deployment correctly.
-3. **Add to cart** — each bot is a $5/mo flat subscription, no tiers, no variable pricing.
-4. **Stripe Checkout** — standard subscription checkout. The $5/mo charge begins immediately.
+3. **Add to cart** — $5/mo flat per bot, hosting included. An optional **Ops Pack** (server/application monitoring and scheduled scraping) adds $9/mo per bot, $14/mo all-in. Two flat prices, nothing metered.
+4. **Stripe Checkout** — standard subscription checkout. Billing begins immediately.
 5. **Build sheet delivery** — your configuration lands with the Starhold team automatically.
 6. **Deployment** — the bot goes live under your chosen name and avatar, on your server.
 

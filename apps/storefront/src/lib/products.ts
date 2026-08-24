@@ -4,8 +4,13 @@ export type Product = {
 	id: string; name: string; tagline: string;
 	status: 'live' | 'coming-soon';
 	url: string; pricing_url: string | null;
-	pricing: { model: 'external' | 'subscription' | 'quote' | 'tbd'; monthly_usd?: number };
+	pricing: { model: 'external' | 'subscription' | 'quote' | 'tbd'; monthly_usd?: number; ops_pack_usd?: number };
 	order: number;
+	// optional presentational overrides for the fleet card (passed through the parser untouched)
+	card_label?: string; // overrides the derived status label
+	card_sub?: string; // small secondary line under the label
+	badge?: string; // corner-ribbon text (e.g. "Free")
+	discord_widget_id?: string; // if set, the card opens this server's live Discord widget in an overlay
 };
 
 const STATUSES = ['live', 'coming-soon'];
