@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { encodeBuildSheet, decodeBuildSheet, opsPackQty, MAX_BOTS, type BotOrder } from './build-sheet';
+import { BOT_FEATURES, OPS_FEATURES } from './bot-features';
 
 const bot = (server: string, features: string[]): BotOrder => ({ server, features });
 
@@ -82,5 +83,48 @@ describe('decodeBuildSheet', () => {
 		expect(decodeBuildSheet({ bot_count: 'Infinity', bot_1: 'server=A;features=moderation' })).toEqual([
 			{ server: 'A', features: ['moderation'] }
 		]);
+	});
+});
+
+// Regression guard (2026-08-24): a storefront redesign once overwrote the cart
+// page with a version that priced `cart.count * monthlyUsd` and dropped the Ops
+// Pack entirely. The Stripe charge stayed correct because /api/checkout derives
+// the ops line item server-side — so the cart QUOTED $5 and BILLED $14. A quote
+// that disagrees with the charge is the worst version of this bug, because
+// nothing errors. These lock the quantity math the cart total depends on.
+describe('opsPackQty — the number the cart total and the Stripe line item share', () => {
+	it('counts one pack per bot carrying any ops feature, not one per feature', () => {
+		const opsIds = [...OPS_FEATURES];
+		expect(opsIds.length).toBeGreaterThan(1);
+		expect(opsPackQty([{ server: '', features: [opsIds[0], opsIds[1]] }])).toBe(1);
+	});
+
+	it('charges no pack for a bot with only base features', () => {
+		const base = BOT_FEATURES.find((f) => !OPS_FEATURES.has(f.id))!;
+		expect(opsPackQty([{ server: '', features: [base.id] }])).toBe(0);
+	});
+
+	it('counts packs per bot across a mixed cart', () => {
+		const ops = [...OPS_FEATURES][0];
+		const base = BOT_FEATURES.find((f) => !OPS_FEATURES.has(f.id))!.id;
+		expect(
+			opsPackQty([
+				{ server: 'a', features: [ops] },
+				{ server: 'b', features: [base] },
+				{ server: 'c', features: [base, ops] }
+			])
+		).toBe(2);
+	});
+
+	it('the cart total formula agrees with a hand-computed quote', () => {
+		const ops = [...OPS_FEATURES][0];
+		const base = BOT_FEATURES.find((f) => !OPS_FEATURES.has(f.id))!.id;
+		const items = [
+			{ server: 'a', features: [base, ops] },
+			{ server: 'b', features: [base] }
+		];
+		const MONTHLY = 5, OPS_PACK = 9;
+		const total = items.length * MONTHLY + opsPackQty(items) * OPS_PACK;
+		expect(total).toBe(19); // 2 bots @ $5 + 1 Ops Pack @ $9
 	});
 });

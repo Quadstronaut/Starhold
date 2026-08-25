@@ -1,13 +1,19 @@
 <script lang="ts">
 	import { cart } from '$lib/cart.svelte';
-	import { BOT_FEATURES } from '$lib/bot-features';
+	import { BOT_FEATURES, OPS_FEATURES } from '$lib/bot-features';
+	import { opsPackQty } from '$lib/build-sheet';
 
 	let { data } = $props();
 
 	const featureName = new Map(BOT_FEATURES.map((f) => [f.id, f.name]));
 	let busy = $state(false);
 	let errorMsg = $state('');
-	const total = $derived(cart.count * data.monthlyUsd);
+	// A bot carrying any ops feature pays the flat Ops Pack on top of the base.
+	// This mirrors what /api/checkout bills server-side (it pushes a separate
+	// STRIPE_PRICE_OPS_PACK line item), so the quoted total and the charge agree.
+	const botHasOps = (features: string[]) => features.some((f) => OPS_FEATURES.has(f));
+	const opsCount = $derived(opsPackQty(cart.items));
+	const total = $derived(cart.count * data.monthlyUsd + opsCount * data.opsPackUsd);
 
 	async function checkout() {
 		busy = true;
@@ -39,14 +45,22 @@
 		{#each cart.items as bot, i (i)}
 			<div class="card item">
 				<strong>Bot {i + 1}{bot.server ? ` — ${bot.server}` : ''}</strong>
-				<p>{bot.features.map((f) => featureName.get(f) ?? f).join(', ')}</p>
+				<p>
+					{bot.features.map((f) => featureName.get(f) ?? f).join(', ')}
+					{#if botHasOps(bot.features)}<span class="tag">Ops Pack</span>{/if}
+				</p>
 				<button class="btn btn-ghost remove" disabled={busy} onclick={() => cart.remove(i)}>
 					Remove
 				</button>
 			</div>
 		{/each}
 		<p class="total">
-			<strong>${total}/month</strong> — billed monthly via Stripe. Cancel anytime; see
+			<strong>${total}/month</strong>
+			<span class="breakdown">
+				— {cart.count} bot{cart.count === 1 ? '' : 's'} @ ${data.monthlyUsd}{#if opsCount > 0} +
+					{opsCount} Ops Pack{opsCount === 1 ? '' : 's'} @ ${data.opsPackUsd}{/if}
+			</span>
+			— billed monthly via Stripe. Cancel anytime; see
 			<a href="/legal/refunds">refunds &amp; cancellation</a> and <a href="/legal/terms">terms</a>.
 		</p>
 		<!-- literal text, not an expression: the wording is part of the contract
@@ -59,6 +73,8 @@
 </section>
 
 <style>
+	.breakdown { color: var(--text-muted); font-size: var(--fs-0); }
+	.tag { color: var(--accent); font-size: var(--fs-0); margin-left: var(--sp-2); }
 	.item {
 		margin: var(--sp-3) 0;
 		display: grid;
