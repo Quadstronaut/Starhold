@@ -57,8 +57,8 @@
 		<p class="total">
 			<strong>${total}/month</strong>
 			<span class="breakdown">
-				— {cart.count} bot{cart.count === 1 ? '' : 's'} @ ${data.monthlyUsd}{#if opsCount > 0} +
-					{opsCount} Ops Pack{opsCount === 1 ? '' : 's'} @ ${data.opsPackUsd}{/if}
+				{'—'} {cart.count} bot{cart.count === 1 ? '' : 's'} @ ${data.monthlyUsd}{#if opsCount > 0}{' + '}{opsCount}
+					Ops Pack{opsCount === 1 ? '' : 's'} @ ${data.opsPackUsd}{/if}
 			</span>
 			— billed monthly via Stripe. Cancel anytime; see
 			<a href="/legal/refunds">refunds &amp; cancellation</a> and <a href="/legal/terms">terms</a>.
