@@ -159,7 +159,7 @@ The [QuadClicker wiki](https://github.com/Quadstronaut/QuadClicker/wiki) is the 
 
 ## License and attribution
 
-MIT licensed with an attribution clause: redistributions must retain credit to **Quadstronaut** and link back to the repository.
+Plain MIT licensed — no attribution clause required for redistribution.
 
 - [github.com/Quadstronaut/QuadClicker](https://github.com/Quadstronaut/QuadClicker) — source
 - [Releases](https://github.com/Quadstronaut/QuadClicker/releases/latest) — downloads
