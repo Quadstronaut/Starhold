@@ -1,0 +1,70 @@
+import { describe, it, expect } from 'vitest';
+import { buildLadder } from './ladder';
+import { tiers } from './seats';
+
+describe('buildLadder', () => {
+	it('marks tier 1 achieved once the first member has joined', () => {
+		// Nothing is granted — tier 1 went green because someone paid.
+		expect(buildLadder(tiers, 1)[0].state).toBe('achieved');
+	});
+
+	it('does not mark tier 1 achieved at zero paying members', () => {
+		expect(buildLadder(tiers, 0)[0].state).not.toBe('achieved');
+	});
+
+	it('carries a note saying what earned the achieved tier', () => {
+		const rows = buildLadder(tiers, 1);
+		expect(rows[0].reason).toBeTruthy();
+		expect(rows[0].reason!.length).toBeGreaterThan(10);
+	});
+
+	it('marks tier 2 as next at one paying member, exactly one away', () => {
+		const rows = buildLadder(tiers, 1);
+		expect(rows[1].state).toBe('next');
+		expect(rows[1].membersAway).toBe(1);
+	});
+
+	it('leaves only one tier in the next state', () => {
+		const rows = buildLadder(tiers, 1);
+		expect(rows.filter((r) => r.state === 'next')).toHaveLength(1);
+	});
+
+	it('locks tiers beyond the next one', () => {
+		const rows = buildLadder(tiers, 1);
+		expect(rows[2].state).toBe('locked');
+		expect(rows[4].state).toBe('locked');
+	});
+
+	it('achieves everything at five paying members', () => {
+		const rows = buildLadder(tiers, 5);
+		expect(rows.every((r) => r.state === 'achieved')).toBe(true);
+	});
+
+	it('never reports a negative membersAway', () => {
+		const rows = buildLadder(tiers, 9);
+		expect(rows.every((r) => r.membersAway >= 0)).toBe(true);
+	});
+
+	it('preserves tier order', () => {
+		const rows = buildLadder(tiers, 3);
+		expect(rows.map((r) => r.id)).toEqual([1, 2, 3, 4, 5]);
+	});
+
+	// seats.ts is hand-edited; these are the edits that actually get made.
+	it('orders by threshold even when the config array is shuffled', () => {
+		const shuffled = [tiers[0], tiers[2], tiers[1], tiers[4], tiers[3]];
+		const rows = buildLadder(shuffled, 1);
+		expect(rows.map((r) => r.id)).toEqual([1, 2, 3, 4, 5]);
+		expect(rows[1].state).toBe('next');
+	});
+
+	it('rejects a duplicated tier id rather than breaking hydration', () => {
+		expect(() => buildLadder([...tiers, tiers[1]], 1)).toThrow(/duplicate tier id/);
+	});
+
+	it('rejects a nonsense member count', () => {
+		expect(() => buildLadder(tiers, -2)).toThrow();
+		expect(() => buildLadder(tiers, 1.5)).toThrow();
+		expect(() => buildLadder(tiers, NaN)).toThrow();
+	});
+});
