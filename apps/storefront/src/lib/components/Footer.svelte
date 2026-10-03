@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import { primary, utility, community, legal } from '$lib/nav';
 	import { site } from '$lib/content/copy';
+	import Brand from '$lib/components/Brand.svelte';
 
 	// /operator carries Patreon, Discord and GitHub in its own body, and the
 	// acceptance suite wants each of them on that route exactly once — so the
@@ -13,6 +14,8 @@
 <footer>
 	<div class="inner">
 		<div class="col">
+			<!-- Same mark + wordmark as the header, so the brand reads as one object. -->
+			<div class="brandwrap"><Brand label={site.name} /></div>
 			<p class="brandline">{site.fullName} — {site.operator}</p>
 			<p class="strapline">{site.strapline}</p>
 			<p class="meta">Est. {site.foundedYear}</p>
@@ -52,6 +55,10 @@
 				{/each}
 				<li><a href={'mailto:' + site.email}>{site.email}</a></li>
 			</ul>
+			<!-- The privacy claim, on every page. Backed by e2e/privacy.spec.ts. -->
+			<p class="meta privacy" data-evidence={site.privacy.evidence}>
+				{site.privacy.label} · <a href={site.privacy.href}>{site.privacy.linkLabel}</a>
+			</p>
 		</div>
 	</div>
 </footer>
@@ -72,6 +79,9 @@
 	}
 	.col p {
 		margin: 0 0 var(--sp-3);
+	}
+	.brandwrap {
+		margin-bottom: var(--sp-3);
 	}
 	.brandline {
 		color: var(--text);

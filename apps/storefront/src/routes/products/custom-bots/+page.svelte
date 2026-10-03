@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CapabilityIcon from '$lib/components/CapabilityIcon.svelte';
 	import BotConfigurator from '$lib/components/BotConfigurator.svelte';
 
 	let { data } = $props();
@@ -7,6 +8,7 @@
 <svelte:head><title>Discord Bots · Starhold Software</title></svelte:head>
 
 <section class="section">
+	<span class="chip-lg"><CapabilityIcon name="bots" /></span>
 	<p class="eyebrow">${data.monthlyUsd}/mo per bot · +${data.opsPackUsd}/mo Ops Pack · hosting included</p>
 	<h1>Discord Bots</h1>
 	<p class="lede">Discord, run like business software. Your team and community already live there — I make it your moderation desk, monitoring dashboard, automation runner, and event engine. One bot, under <strong>your server's own name and avatar</strong>, personally operated and hosted. Already running a server of <strong>18,000 users</strong>.</p>

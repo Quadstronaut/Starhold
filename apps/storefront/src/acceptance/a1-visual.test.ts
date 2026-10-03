@@ -11,7 +11,7 @@ import {
 	styleBlocks,
 	contrast
 } from './_helpers';
-import { readFileSync } from 'node:fs';
+import { readFileSync, statSync, existsSync } from 'node:fs';
 
 const APP_CSS = read('src/app.css');
 const TOKENS = rootTokens(APP_CSS);
@@ -84,6 +84,8 @@ describe('A1 · design tokens', () => {
 		expect(contrast(TOKENS['--text'], TOKENS['--bg'])).toBeGreaterThanOrEqual(7);
 		expect(contrast(TOKENS['--text-muted'], TOKENS['--bg'])).toBeGreaterThanOrEqual(4.5);
 		expect(contrast(TOKENS['--accent-ink'], TOKENS['--accent'])).toBeGreaterThanOrEqual(4.5);
+		// gradient end of the primary button: ink must stay legible across the whole fill
+		expect(contrast(TOKENS['--accent-ink'], TOKENS['--accent-2'])).toBeGreaterThanOrEqual(4.5);
 		expect(contrast(TOKENS['--focus'], TOKENS['--bg'])).toBeGreaterThanOrEqual(3);
 	});
 
@@ -176,5 +178,37 @@ describe('A1 · design tokens', () => {
 		}
 		// and it must actually be used to bound prose
 		expect(APP_CSS).toMatch(/\.prose\s*\{[^}]*max-width:\s*var\(--measure\)/);
+	});
+});
+
+describe('A1 · identity (self-hosted display face)', () => {
+	it('A1.13 Michroma is self-hosted as a woff2 under 30KB, with its licence', () => {
+		const font = statSync('static/fonts/michroma-latin.woff2');
+		expect(font.size).toBeGreaterThan(1000);
+		expect(font.size).toBeLessThan(30 * 1024);
+		expect(existsSync('static/fonts/OFL-Michroma.txt')).toBe(true);
+		expect(read('src/app.html')).toMatch(/rel="preload"[^>]*michroma-latin\.woff2[^>]*crossorigin/);
+	});
+
+	it('A1.14 --font-display is referenced only by the wordmark', () => {
+		const offenders: string[] = [];
+		for (const file of ['src/app.css', ...srcFiles(['.svelte']).map(relative)]) {
+			const css = file.endsWith('.css') ? read(file) : styleBlocks(read(file));
+			for (const rule of cssRules(stripCssComments(css))) {
+				if (!/var\(--font-display\)/.test(rule.body)) continue;
+				const ok = /wordmark|brand/.test(rule.selector) && file.endsWith('Wordmark.svelte');
+				if (!ok) offenders.push(`${file}: ${rule.selector}`);
+			}
+		}
+		expect(offenders).toEqual([]);
+	});
+
+	it('A1.15 .accent-word is never inside an h1', () => {
+		const offenders = srcFiles(['.svelte'])
+			.filter((f) => /<h1[\s>][\s\S]*?accent-word[\s\S]*?<\/h1>/.test(readFileSync(f, 'utf8')))
+			.map(relative);
+		expect(offenders).toEqual([]);
+		// Heading.svelte is the only emitter, and it only renders h2/h3.
+		expect(read('src/lib/components/Heading.svelte')).not.toMatch(/'h1'|<h1/);
 	});
 });

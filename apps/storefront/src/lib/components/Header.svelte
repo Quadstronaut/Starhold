@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { cart } from '$lib/cart.svelte';
 	import { primary, utilityLinks, cartLink, cta } from '$lib/nav';
-	import { site } from '$lib/content/copy';
+	import Brand from '$lib/components/Brand.svelte';
 
 	// Badge only after mount: SSR renders a bare "Cart" (the cart is SSR-empty),
 	// so revealing the count pre-hydration would mismatch the server HTML.
@@ -22,9 +22,7 @@
 
 <header>
 	<nav aria-label="Main">
-		<a class="brand" href="/">
-			<span class="glyph" aria-hidden="true">⬡</span>{site.name}
-		</a>
+		<Brand />
 
 		<!-- primary links: inline on desktop, inside the drawer on mobile -->
 		<ul id="nav-primary" class="primary" class:open={menuOpen}>
@@ -88,22 +86,6 @@
 		margin: 0 auto;
 		padding: var(--sp-3) var(--sp-5);
 		width: 100%;
-	}
-
-	.brand {
-		font-weight: 700;
-		font-size: var(--fs-3);
-		color: var(--text);
-		letter-spacing: -0.01em;
-		flex-shrink: 0;
-	}
-	.brand:hover {
-		color: var(--text);
-		text-decoration: none;
-	}
-	.glyph {
-		color: var(--accent);
-		margin-right: var(--sp-2);
 	}
 
 	ul {

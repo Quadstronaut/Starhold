@@ -32,7 +32,7 @@
 	{/if}
 </section>
 
-<section class="section section-divided">
+<section class="section section-divided reveal">
 	<h2>{isQuote ? 'Quote request' : 'Send a message'}</h2>
 	<IntakeForm
 		kind={isQuote ? 'quote' : 'contact'}

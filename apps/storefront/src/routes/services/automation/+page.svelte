@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CapabilityIcon from '$lib/components/CapabilityIcon.svelte';
 	import IntakeForm from '$lib/components/IntakeForm.svelte';
 </script>
 
@@ -11,6 +12,7 @@
 </svelte:head>
 
 <section class="section">
+	<span class="chip-lg"><CapabilityIcon name="automation" /></span>
 	<p class="eyebrow">Quoted services</p>
 	<h1>Server and task automation</h1>
 	<div class="prose">

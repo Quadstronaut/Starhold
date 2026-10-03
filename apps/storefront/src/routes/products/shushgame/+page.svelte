@@ -21,7 +21,7 @@
 	</div>
 </section>
 
-<section class="section section-divided">
+<section class="section section-divided reveal">
 	<h2>{shushgame.provesHeading}</h2>
 	<p class="prose proves" data-evidence={shushgame.proves.evidence}>{shushgame.proves.text}</p>
 	<div class="btn-row">

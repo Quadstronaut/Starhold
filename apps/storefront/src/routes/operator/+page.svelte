@@ -22,7 +22,7 @@
 	</div>
 </section>
 
-<section class="section section-divided">
+<section class="section section-divided reveal">
 	<h2>{operator.howHeading}</h2>
 	<ol class="how">
 		{#each operator.how as step (step)}
@@ -31,7 +31,7 @@
 	</ol>
 </section>
 
-<section class="section section-divided">
+<section class="section section-divided reveal">
 	<h2>{operator.linkHeading}</h2>
 	<!-- No data-evidence on these: they are places to find me, not claims a
 	     reader could verify, so the anti-fabrication suite has nothing to check. -->
