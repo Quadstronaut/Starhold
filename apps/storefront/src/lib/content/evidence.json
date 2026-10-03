@@ -71,6 +71,30 @@
 			"verifier": "https://github.com/Quadstronaut/Starhold",
 			"sources": [],
 			"note": "Q1 resolved 2026-08-24: `gh repo view` reports visibility PUBLIC. No .env files are tracked and no live key patterns appear in tracked content. If the repository is ever made private, set this back to pending — ev() will then fail the build wherever it is cited, which is the intended behaviour."
+		},
+		{
+			"id": "single-operator",
+			"claim": "Starhold Software is operated by one person, Quadstronaut, who scopes, builds and runs each project.",
+			"status": "verified",
+			"verifier": "apps/storefront/src/routes/operator/+page.svelte",
+			"sources": ["apps/storefront/src/lib/content/copy.ts"]
+		},
+		{
+			"id": "refund-policy",
+			"claim": "Refund and billing-dispute terms are published on the refund policy page.",
+			"status": "verified",
+			"verifier": "apps/storefront/src/routes/legal/refunds/+page.svelte",
+			"sources": []
+		},
+		{
+			"id": "no-third-party-tracking",
+			"claim": "Every page loads from starhold.dev alone and sets no cookies; the cart lives in browser storage, and checkout hands off to Stripe's own domain.",
+			"status": "verified",
+			"verifier": "apps/storefront/e2e/privacy.spec.ts",
+			"sources": [
+				"apps/storefront/src/routes/legal/privacy/+page.svelte",
+				"apps/storefront/src/lib/cart.svelte.ts"
+			]
 		}
 	]
 }

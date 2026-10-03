@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { capabilities, site } from '$lib/content/copy';
+	import CapabilityIcon from '$lib/components/CapabilityIcon.svelte';
+	import CtaBand from '$lib/components/CtaBand.svelte';
+	import { capabilities } from '$lib/content/copy';
 </script>
 
 <svelte:head>
@@ -14,7 +16,8 @@
 </section>
 
 {#each capabilities.items as c (c.id)}
-	<section class="section section-divided" id={c.id}>
+	<section class="section section-divided reveal" id={c.id}>
+		<span class="chip-lg"><CapabilityIcon name={c.id as 'automation' | 'platform' | 'bots' | 'fullstack'} /></span>
 		<h2>{c.name}</h2>
 		<p class="lede">{c.summary}</p>
 		<div class="cols">
@@ -37,17 +40,7 @@
 	</section>
 {/each}
 
-<section class="section section-divided">
-	<h2>Not sure which one it is?</h2>
-	<p class="lede">
-		Describe the problem in whatever words you already use for it. Sorting it into a category is my
-		job, not yours.
-	</p>
-	<div class="btn-row">
-		<a class="btn btn-primary" href="/contact?intent=quote">Request a quote</a>
-		<a class="btn btn-ghost" href={'mailto:' + site.email}>{site.email}</a>
-	</div>
-</section>
+<CtaBand {...capabilities.cta} />
 
 <style>
 	.cols {

@@ -31,7 +31,7 @@
 
 	<p><strong>Shushgame / Shushbot.</strong> The game runs inside Discord, so the platform layer is governed by Discord's policy. Purchases are handled by Stripe, so payment data is governed by Stripe's policy. From a purchase, we retain only the transaction record (that a purchase occurred) and the entitlement fact (that a purchased role was applied to your account in the server). We do not store payment-card data.</p>
 
-	<p><strong>starhold.dev storefront.</strong> Checkout uses Stripe; card data goes only to Stripe and never to us. Contact, quote, and intake forms relay what you submit to our private Discord channels so we can reply. The site uses no advertising or cross-site tracking; the only cookies/data used are those strictly necessary to operate checkout and prevent abuse (e.g., rate-limiting).</p>
+	<p><strong>starhold.dev storefront.</strong> Checkout uses Stripe; card data goes only to Stripe and never to us. Contact, quote, and intake forms relay what you submit to our private Discord channels so we can reply. The site uses no advertising, analytics, or cross-site tracking. starhold.dev sets no cookies of its own: rate-limiting happens on our server and sets no cookie. Your cart is stored in your own browser (localStorage) only and is never sent to us until you submit an order. Stripe's checkout pages are a separate site, governed by <a href="https://stripe.com/privacy" target="_blank" rel="noopener">Stripe's Privacy Policy</a>.</p>
 
 	<h2>6. How long we keep things</h2>
 	<ul>

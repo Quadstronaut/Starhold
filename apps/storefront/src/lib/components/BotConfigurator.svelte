@@ -85,7 +85,13 @@
 	fieldset.ops { border-color: var(--accent); }
 	.opsbadge { color: var(--accent); margin-left: var(--sp-2); }
 	.opshint { color: var(--accent-ink); font-weight: 400; }
-	.feature { display: flex; gap: var(--sp-3); align-items: baseline; font-size: var(--fs-1); cursor: pointer; }
+	.feature { display: flex; gap: var(--sp-3); align-items: flex-start; font-size: var(--fs-1); cursor: pointer; }
+	/* The global input rule sets width:100% and padding for text fields; undo that
+	   here so every checkbox is the same small box and labels share one left edge. */
+	.feature input[type='checkbox'] {
+		width: 1.1rem; height: 1.1rem; flex: none; padding: 0; margin: 0.15em 0 0;
+		accent-color: var(--accent);
+	}
 	.feature span { color: var(--text-muted); }
 	.feature strong { color: var(--text); }
 	.btn:disabled { opacity: 0.45; cursor: not-allowed; }

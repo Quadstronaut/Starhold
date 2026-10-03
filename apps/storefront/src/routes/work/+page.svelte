@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { work, site } from '$lib/content/copy';
+	import CtaBand from '$lib/components/CtaBand.svelte';
+	import { work } from '$lib/content/copy';
 </script>
 
 <svelte:head>
@@ -17,7 +18,7 @@
 	<h2 class="visually-hidden">Projects</h2>
 	<div class="items">
 		{#each work.items as w (w.id)}
-			<article class="card" data-evidence={w.evidence}>
+			<article class="card reveal" data-evidence={w.evidence}>
 				<h3>{w.name}</h3>
 				<p class="status"><span class="tag">{w.status}</span></p>
 				<p class="what">{w.what}</p>
@@ -28,24 +29,13 @@
 	</div>
 </section>
 
-<section class="section section-divided">
-	<h2>Want the same thing pointed at your problem?</h2>
-	<p class="lede">
-		Tell me what it is. I will scope it, price it, and say so if I think it is the wrong build.
-	</p>
-	<div class="btn-row">
-		<a class="btn btn-primary" href="/contact?intent=quote">Request a quote</a>
-		<a class="btn btn-secondary" href="/capabilities">See what I take on</a>
-		<a class="btn btn-ghost" href={'mailto:' + site.email}>{site.email}</a>
-	</div>
-</section>
+<CtaBand {...work.cta} />
 
 <style>
 	.items {
 		display: grid;
 		gap: var(--sp-4);
 		grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
-		max-width: 900px;
 	}
 	.what {
 		color: var(--text);

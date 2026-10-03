@@ -242,12 +242,13 @@ test('B3.3 the home page carries a proof strip of 3-5 checkable outbound links',
 	expect(count).toBeGreaterThanOrEqual(3);
 	expect(count).toBeLessThanOrEqual(5);
 
-	const ALLOWED = ['starhold.fyi', 'status.starhold.fyi', 'starhold.app', 'github.com'];
+	// starhold.dev: the "No trackers" tile links to our own privacy policy.
+	const ALLOWED = ['starhold.dev', 'starhold.fyi', 'status.starhold.fyi', 'starhold.app', 'github.com'];
 	for (let i = 0; i < count; i++) {
 		const link = strip.nth(i);
 		await expect(link).toBeVisible();
 		const href = (await link.getAttribute('href'))!;
-		expect(ALLOWED, `proof link ${href}`).toContain(new URL(href).host);
+		expect(ALLOWED, `proof link ${href}`).toContain(new URL(href, 'https://starhold.dev').host);
 		expect(await link.getAttribute('data-evidence')).toBeTruthy();
 	}
 });
@@ -354,11 +355,22 @@ test('B5.4 rendered contrast meets the token contract', async ({ page }) => {
 		const muted = getComputedStyle(document.querySelector('main .lede')!).color;
 		const cta = document.querySelector('[data-testid="cta-primary"]')!;
 		const ctaStyle = getComputedStyle(cta);
-		return { bg, body, muted, ctaColor: ctaStyle.color, ctaBg: ctaStyle.backgroundColor };
+		// The primary button is a gradient, so backgroundColor is transparent: resolve both stops
+		// from their tokens (a probe element turns var() into rgb()).
+		const stop = (v: string) => {
+			const probe = document.createElement('i');
+			probe.style.color = 'var(' + v + ')';
+			document.body.appendChild(probe);
+			const c = getComputedStyle(probe).color;
+			probe.remove();
+			return c;
+		};
+		return { bg, body, muted, ctaColor: ctaStyle.color, ctaBg: stop('--accent'), ctaBg2: stop('--accent-2') };
 	});
 	expect(ratio(pair.body, pair.bg)).toBeGreaterThanOrEqual(7);
 	expect(ratio(pair.muted, pair.bg)).toBeGreaterThanOrEqual(4.5);
 	expect(ratio(pair.ctaColor, pair.ctaBg)).toBeGreaterThanOrEqual(4.5);
+	expect(ratio(pair.ctaColor, pair.ctaBg2)).toBeGreaterThanOrEqual(4.5);
 });
 
 test('B5.5 the home page works with JavaScript disabled', async ({ browser }) => {
