@@ -162,7 +162,9 @@ describe('A3 · anti-fabrication', () => {
 		expect(BY_ID.has('linkedin')).toBe(false);
 	});
 
-	it('A3.7 stats.json matches the recomputed test counts', () => {
+	// Spawns `vitest list` and `playwright test --list` (collection only, nothing
+	// runs), so it needs more than the 5s default.
+	it('A3.7 stats.json matches the recomputed runtime test counts', { timeout: 120_000 }, () => {
 		const fresh = computeStats();
 		expect({
 			unitTestFiles: stats.unitTestFiles,
