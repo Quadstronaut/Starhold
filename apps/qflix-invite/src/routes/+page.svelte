@@ -450,11 +450,6 @@
 		color: var(--ink-dim);
 	}
 
-	.price strong {
-		color: var(--ink);
-		font-size: var(--step-1);
-	}
-
 	.glance {
 		margin-top: 1.4rem;
 		color: var(--ink-faint);
