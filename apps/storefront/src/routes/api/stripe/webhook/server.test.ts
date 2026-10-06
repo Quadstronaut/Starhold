@@ -7,10 +7,13 @@ vi.mock('$env/dynamic/private', () => ({
 	env: {
 		STRIPE_SECRET_KEY: 'sk_test_dummy',
 		STRIPE_WEBHOOK_SECRET: 'whsec_test_secret',
-		DISCORD_WEBHOOK_ORDERS: 'https://discord.test/hook'
+		get DISCORD_WEBHOOK_ORDERS() {
+			return mockEnv.DISCORD_WEBHOOK_ORDERS;
+		}
 	}
 }));
 
+const mockEnv = vi.hoisted(() => ({ DISCORD_WEBHOOK_ORDERS: 'https://discord.test/hook' as string | undefined }));
 const postDiscord = vi.fn(async () => {});
 vi.mock('$lib/server/discord', async (importOriginal) => ({
 	...(await importOriginal<typeof import('$lib/server/discord')>()),
@@ -43,7 +46,10 @@ async function status(p: unknown): Promise<number> {
 	}
 }
 
-beforeEach(() => postDiscord.mockClear());
+beforeEach(() => {
+	postDiscord.mockClear();
+	mockEnv.DISCORD_WEBHOOK_ORDERS = 'https://discord.test/hook';
+});
 
 describe('POST /api/stripe/webhook', () => {
 	const session = {
@@ -86,6 +92,73 @@ describe('POST /api/stripe/webhook', () => {
 		const sig = stripe.webhooks.generateTestHeaderString({ payload, secret: SECRET });
 		expect(((await call(payload, sig)) as Response).status).toBe(200);
 		expect(postDiscord).not.toHaveBeenCalled();
+	});
+
+	it('relays customer.subscription.deleted as a distinct embed', async () => {
+		const payload = makeEvent('customer.subscription.deleted', {
+			id: 'sub_1',
+			object: 'subscription',
+			customer: 'cus_1',
+			metadata: { bot_1: 'server=Alpha;features=moderation' }
+		});
+		const sig = stripe.webhooks.generateTestHeaderString({ payload, secret: SECRET });
+		expect(((await call(payload, sig)) as Response).status).toBe(200);
+		expect(postDiscord).toHaveBeenCalledOnce();
+		const [url, embed] = postDiscord.mock.calls[0] as any[];
+		expect(url).toBe('https://discord.test/hook');
+		expect(embed.title).toContain('cancelled');
+		const text = JSON.stringify(embed.fields);
+		expect(text).toContain('cus_1');
+		expect(text).toContain('sub_1');
+		expect(text).toContain('bot_1');
+	});
+
+	it('relays invoice.payment_failed as a distinct embed', async () => {
+		const payload = makeEvent('invoice.payment_failed', {
+			id: 'in_1',
+			object: 'invoice',
+			customer: 'cus_2',
+			customer_email: 'payer@example.com',
+			subscription: 'sub_2',
+			amount_due: 500,
+			attempt_count: 2
+		});
+		const sig = stripe.webhooks.generateTestHeaderString({ payload, secret: SECRET });
+		expect(((await call(payload, sig)) as Response).status).toBe(200);
+		expect(postDiscord).toHaveBeenCalledOnce();
+		const [, embed] = postDiscord.mock.calls[0] as any[];
+		expect(embed.title).toContain('Payment failed');
+		const text = JSON.stringify(embed.fields);
+		expect(text).toContain('payer@example.com');
+		expect(text).toContain('sub_2');
+		expect(text).toContain('$5.00');
+	});
+
+	it('tolerates missing metadata and missing customer on new events', async () => {
+		const payload = makeEvent('customer.subscription.deleted', { id: 'sub_3', object: 'subscription' });
+		const sig = stripe.webhooks.generateTestHeaderString({ payload, secret: SECRET });
+		expect(((await call(payload, sig)) as Response).status).toBe(200);
+		expect(postDiscord).toHaveBeenCalledOnce();
+	});
+
+	it('rejects a bad signature on new events without posting', async () => {
+		const payload = makeEvent('invoice.payment_failed', { id: 'in_1' });
+		expect(await status(call(payload, 't=1,v1=garbage'))).toBe(400);
+		expect(postDiscord).not.toHaveBeenCalled();
+	});
+
+	it.each([
+		['customer.subscription.deleted', { id: 'sub_9', object: 'subscription', customer: 'cus_9' }],
+		['invoice.payment_failed', { id: 'in_9', object: 'invoice', customer: 'cus_9' }]
+	])('acks %s with 200 and no post when the orders webhook is unset', async (type, obj) => {
+		mockEnv.DISCORD_WEBHOOK_ORDERS = undefined;
+		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+		const payload = makeEvent(type, obj);
+		const sig = stripe.webhooks.generateTestHeaderString({ payload, secret: SECRET });
+		expect(((await call(payload, sig)) as Response).status).toBe(200);
+		expect(postDiscord).not.toHaveBeenCalled();
+		expect(warn).toHaveBeenCalled();
+		warn.mockRestore();
 	});
 
 	it('500s when the Discord relay fails so Stripe retries', async () => {

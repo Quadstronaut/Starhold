@@ -1,8 +1,8 @@
 {
 	"_generated": "scripts/gen-stats.mjs — do not hand-edit; run `npm run stats`",
-	"unitTestFiles": 21,
-	"unitTests": 122,
+	"unitTestFiles": 22,
+	"unitTests": 129,
 	"e2eSpecFiles": 6,
 	"e2eTests": 44,
-	"totalTests": 166
+	"totalTests": 173
 }
