@@ -1,0 +1,101 @@
+/* ═════════════════════════════════════════════════════════════════════════
+   starhold.fyi: the Starlight layering and token map (STAR-27 spec §2.2).
+
+   Cascade layers, lowest to highest. Starlight's own styles all live under
+   `starlight.*`, so anything in an sh.* layer wins without !important (which
+   Starlight forbids). The shared fleet primitives and this site's own CSS are
+   pulled into sh.site; the token map below sits in sh.theme.
+
+   The fleet token files themselves (fleet-tokens, fleet-map, accent) load
+   unlayered before this file via astro.config.mjs customCss. They declare only
+   :root custom properties, so being unlayered never overrides a rule.
+   ═════════════════════════════════════════════════════════════════════════ */
+@layer starlight, sh.tokens, sh.theme, sh.site;
+@import './fleet/fleet-base.css' layer(sh.site);
+@import './fyi.css' layer(sh.site);
+
+@layer sh.theme {
+	/* Starlight paints its palette on `:root, ::backdrop` (the search dialog
+	   backdrop is its own tree), and again for the light theme. The site is dark
+	   only (B10), but the light selectors are mapped too, so even a stale
+	   data-theme="light" renders in fleet colours. */
+	:root,
+	::backdrop,
+	:root[data-theme='light'],
+	[data-theme='light'] ::backdrop {
+		color-scheme: dark;
+
+		--sl-color-accent: var(--accent);
+		--sl-color-accent-high: var(--accent-hover);
+		--sl-color-accent-low: var(--accent-quiet);
+
+		--sl-color-bg: var(--bg);
+		--sl-color-bg-nav: var(--bg-raised);
+		--sl-color-bg-sidebar: var(--bg);
+		--sl-color-bg-inline-code: var(--surface-2);
+		--sl-color-bg-accent: var(--accent);
+
+		--sl-color-text: var(--text);
+		--sl-color-text-accent: var(--accent);
+		--sl-color-text-invert: var(--accent-ink);
+
+		--sl-color-white: var(--text);
+		--sl-color-gray-1: var(--text);
+		--sl-color-gray-2: var(--text);
+		--sl-color-gray-3: var(--text-muted);
+		--sl-color-gray-4: var(--border-strong);
+		--sl-color-gray-5: var(--border);
+		--sl-color-gray-6: var(--surface-2);
+		--sl-color-gray-7: var(--surface);
+		--sl-color-black: var(--bg);
+
+		--sl-color-hairline: var(--border);
+		--sl-color-hairline-light: var(--border);
+		--sl-color-hairline-shade: var(--border);
+
+		/* Asides and badges, onto the semantic tokens only (§2.3):
+		   note → focus, tip → accent, caution and danger → danger. The "low"
+		   shades are washes mixed from the same token into the page background. */
+		--sl-color-blue: var(--focus);
+		--sl-color-blue-high: var(--focus);
+		--sl-color-blue-low: color-mix(in srgb, var(--focus) 10%, var(--bg));
+		--sl-color-purple: var(--accent);
+		--sl-color-purple-high: var(--accent-hover);
+		--sl-color-purple-low: var(--accent-quiet);
+		--sl-color-orange: var(--danger);
+		--sl-color-orange-high: var(--danger);
+		--sl-color-orange-low: color-mix(in srgb, var(--danger) 10%, var(--bg));
+		--sl-color-red: var(--danger);
+		--sl-color-red-high: var(--danger);
+		--sl-color-red-low: color-mix(in srgb, var(--danger) 10%, var(--bg));
+		--sl-color-green: var(--ok);
+		--sl-color-green-high: var(--ok);
+		--sl-color-green-low: color-mix(in srgb, var(--ok) 10%, var(--bg));
+
+		--sl-font: var(--font-sans);
+		--sl-font-mono: var(--font-mono);
+
+		/* Deviation from the spec's `var(--header-h)`: the storefront declares
+		   --header-h: 60px but its rendered header is 57 px (12 px padding top and
+		   bottom, a 32 px pill row, a 1 px hairline). R24 compares the rendered
+		   height, so the docs bar is built from the same parts. */
+		--sl-nav-height: calc(var(--sp-3) * 2 + var(--sp-6) + 1px);
+		/* The sidebar toggle matches the fleet menu button: 32 px square. */
+		--sl-menu-button-size: var(--sp-6);
+	}
+
+	/* The splash ends on the full-width fleet footer, so main drops Starlight's
+	   3vh bottom pad there. Set on the variable: Starlight's main padding rule is
+	   component-scoped and outranks a plain padding override. */
+	:root[data-has-hero] {
+		--sl-main-pad: 0;
+	}
+
+	/* Narrow phones: a slimmer header gutter (also the sidebar toggle's inset),
+	   part of keeping the lockup and docs tag whole under 380 px (fyi.css). */
+	@media (max-width: 379px) {
+		:root {
+			--sl-nav-pad-x: var(--sp-3);
+		}
+	}
+}

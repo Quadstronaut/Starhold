@@ -1,0 +1,15 @@
+---
+/**
+ * SiteTitle override: the Starhold lockup (hex mark + Michroma wordmark, always
+ * store amber via the lockup rule in fleet-base.css) plus a `docs` tag in the
+ * site accent. Replaces the old text title that clipped to "STARHOLD ⬡ KNOWLEDG"
+ * at 390 px. Links to this site's own root (Q3).
+ */
+const { siteTitleHref } = Astro.locals.starlightRoute;
+---
+
+<a class="brand fyi-title" href={siteTitleHref} aria-label="Starhold docs">
+	<svg class="mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="12,2 21.5,7.5 21.5,16.5 12,22 2.5,16.5 2.5,7.5"></polygon></svg>
+	<span class="wordmark header" translate="no"><span class="solid">Star</span><span class="outline">hold</span></span>
+</a>
+<span class="tag site-tag" aria-hidden="true">docs</span>

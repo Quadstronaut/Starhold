@@ -1,0 +1,93 @@
+/* GENERATED COPY — source of truth: apps/storefront/src/app.css (:root). Do not edit; run node brand/check-drift.mjs */
+@font-face {
+	font-family: 'Michroma';
+	src: url('/fonts/michroma-latin.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	/* ── surfaces + ink ───────────────────────────────────────────────── */
+	--bg: #0b0d12;
+	--bg-raised: #11141b;
+	--surface: #14171f;
+	--surface-2: #1b1f2a;
+	--border: #2b303d;
+	--border-strong: #3c4354;
+	--text: #e6e9f0;
+	--text-muted: #9aa3b5;
+
+	/* ── brand accent ─────────────────────────────────────────────────────
+	   Warm signal amber. Red is deliberately NOT a brand colour: a saturated
+	   danger hue used decoratively collides with error semantics and reads
+	   "hobby dashboard" on a near-black ground. Red survives below as --danger
+	   and is used for exactly one thing — something went wrong.            */
+	--accent: #ffb347;
+	--accent-hover: #ffc770;
+	--accent-2: #ff9d3d; /* gradient end for primary buttons; ink on it stays >=4.5 */
+	--accent-ink: #14100a;
+	--accent-quiet: #2b2216;
+
+	/* ── semantic status only, never decorative ───────────────────────── */
+	--danger: #ff6b6b;
+	--ok: #6fdf9a;
+
+	/* ── focus ────────────────────────────────────────────────────────── */
+	--focus: #9ecbff;
+
+	/* ── radii ────────────────────────────────────────────────────────── */
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 16px;
+	--radius-pill: 999px;
+
+	/* ── elevation + icons (capability tiles, terminal cards) ─────────── */
+	--shadow-soft: 0 1px 2px rgb(0 0 0 / 0.35), 0 8px 24px rgb(0 0 0 / 0.25);
+	--shadow-lift: 0 2px 4px rgb(0 0 0 / 0.4), 0 16px 40px rgb(0 0 0 / 0.4);
+	--lift: -4px; /* hover rise, applied as translateY */
+	--icon: 24px;
+	--glow: rgb(255 179 71 / 0.16); /* amber halo behind the closing band */
+	--glow-edge: rgb(255 179 71 / 0.35);
+	--chip: 48px; /* square icon chip around a 24px icon */
+
+	/* ── type scale: 8 steps, consecutive ratios 1.12–1.29 ────────────── */
+	--fs-0: 12px;
+	--fs-1: 14px;
+	--fs-2: 16px;
+	--fs-3: 18px;
+	--fs-4: 22px;
+	--fs-5: 28px;
+	--fs-6: 36px;
+	--fs-7: 46px;
+	/* hero wordmark only; fluid, deliberately outside the --fs-N ladder (A1.2) */
+	--fs-display: clamp(56px, 10vw, 112px);
+	/* outline weight for the hollow "hold" in the wordmark */
+	--stroke-w: 1.5px;
+
+	/* ── spacing: 9 steps on a 4px base ───────────────────────────────── */
+	--sp-1: 4px;
+	--sp-2: 8px;
+	--sp-3: 12px;
+	--sp-4: 16px;
+	--sp-5: 24px;
+	--sp-6: 32px;
+	--sp-7: 48px;
+	--sp-8: 64px;
+	--sp-9: 96px;
+
+	/* ── layout ───────────────────────────────────────────────────────── */
+	--measure: 68ch; /* prose line length — about 68 characters */
+	--page: 1080px;
+	--header-h: 60px;
+
+	/* ── type stacks: system only. No third-party font request is made,
+	   because "self-hosted" is part of what is being sold. ───────────── */
+	--font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+		'Helvetica Neue', Arial, sans-serif;
+	--font-mono: ui-monospace, SFMono-Regular, 'Cascadia Mono', Menlo, Consolas,
+		monospace;
+	/* Brand face: wordmark only. Falls back to the system sans if it fails. */
+	--font-display: 'Michroma', var(--font-sans);
+	--font-serif: ui-serif, Georgia, 'Times New Roman', serif;
+}

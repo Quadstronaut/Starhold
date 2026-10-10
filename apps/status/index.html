@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="color-scheme" content="dark">
+	<title>Status | Starhold</title>
+	<meta name="description" content="Live checks on the sites and services Starhold runs, read from Gatus on this host.">
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+	<link rel="preload" href="/fonts/michroma-latin.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="stylesheet" href="/_s/fleet-tokens.css">
+	<link rel="stylesheet" href="/_s/fleet-map.css">
+	<link rel="stylesheet" href="/_s/accent.css">
+	<link rel="stylesheet" href="/_s/fleet-base.css">
+	<link rel="stylesheet" href="/_s/status.css">
+	<script type="module" src="/_s/status.js"></script>
+</head>
+<body class="fleet-page">
+	<a class="skip-link" href="#main">Skip to content</a>
+
+	<header class="fleet-header">
+		<div class="fleet-header-inner">
+			<a class="brand" href="/" aria-label="Starhold status"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="12,2 21.5,7.5 21.5,16.5 12,22 2.5,16.5 2.5,7.5"/></svg><span class="wordmark header"><span class="solid">Star</span><span class="outline">hold</span></span></a>
+			<span class="tag site-tag">status</span>
+			<nav class="fleet-links" aria-label="Starhold sites">
+				<div class="fleet-wide">
+					<ul class="fleet">
+						<li><a href="https://starhold.dev">Store</a></li>
+						<li><a href="https://starhold.fyi">Docs</a></li>
+						<li><a href="https://status.starhold.fyi" aria-current="page">Status</a></li>
+						<li><a href="https://starhold.app">Hangar</a></li>
+					</ul>
+					<a class="btn btn-primary header-cta" href="https://starhold.dev/contact?intent=quote">Request a quote</a>
+				</div>
+				<details class="fleet-menu">
+					<summary aria-label="Menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></summary>
+					<div class="fleet-menu-panel">
+						<ul class="fleet">
+							<li><a href="https://starhold.dev">Store</a></li>
+							<li><a href="https://starhold.fyi">Docs</a></li>
+							<li><a href="https://status.starhold.fyi" aria-current="page">Status</a></li>
+							<li><a href="https://starhold.app">Hangar</a></li>
+						</ul>
+						<a class="btn btn-primary header-cta" href="https://starhold.dev/contact?intent=quote">Request a quote</a>
+					</div>
+				</details>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main">
+		<section class="fleet-hero status-hero">
+			<div class="fleet-hero-art" aria-hidden="true">
+				<svg class="fleet-art mast-art" viewBox="0 0 480 480" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+					<g class="lane"><path d="M40 404 L440 404 M60 418 L420 418" stroke-dasharray="2 8"/><path d="M227.5 81 A26 26 0 0 1 272.5 81 M210.2 71 A46 46 0 0 1 289.8 71 M192.8 61 A66 66 0 0 1 307.2 61" stroke-dasharray="3 7"/></g>
+					<g class="quiet"><path d="M74 404 L89 250 M110 404 L95 250 M74 404 L107.5 378.3 M107.5 378.3 L79 352.7 M79 352.7 L105 352.7 M79 352.7 L102.5 327 M102.5 327 L84 301.3 M84 301.3 L100 301.3 M84 301.3 L97.5 275.7 M97.5 275.7 L89 250 M89 250 L95 250 M92 250 L92 228 M146 404 L165 196 M190 404 L171 196 M146 404 L187.3 374.3 M187.3 374.3 L151.4 344.6 M151.4 344.6 L184.6 344.6 M151.4 344.6 L181.9 314.9 M181.9 314.9 L156.9 285.1 M156.9 285.1 L179.1 285.1 M156.9 285.1 L176.4 255.4 M176.4 255.4 L162.3 225.7 M162.3 225.7 L173.7 225.7 M162.3 225.7 L171 196 M168 196 L168 174 M220 404 L247 120 M280 404 L253 120 M220 404 L277.3 375.6 M277.3 375.6 L225.4 347.2 M225.4 347.2 L274.6 347.2 M225.4 347.2 L271.9 318.8 M271.9 318.8 L230.8 290.4 M230.8 290.4 L269.2 290.4 M230.8 290.4 L266.5 262 M266.5 262 L236.2 233.6 M236.2 233.6 L263.8 233.6 M236.2 233.6 L261.1 205.2 M261.1 205.2 L241.6 176.8 M241.6 176.8 L258.4 176.8 M241.6 176.8 L255.7 148.4 M255.7 148.4 L247 120 M247 120 L253 120 M250 120 L250 98 M308 404 L329 176 M356 404 L335 176 M308 404 L353.4 375.5 M353.4 375.5 L313.3 347 M313.3 347 L350.8 347 M313.3 347 L348.1 318.5 M348.1 318.5 L318.5 290 M318.5 290 L345.5 290 M318.5 290 L342.9 261.5 M342.9 261.5 L323.8 233 M323.8 233 L340.3 233 M323.8 233 L337.6 204.5 M337.6 204.5 L329 176 M329 176 L335 176 M332 176 L332 154 M386 404 L401 236 M422 404 L407 236 M386 404 L419.5 376 M419.5 376 L391 348 M391 348 L417 348 M391 348 L414.5 320 M414.5 320 L396 292 M396 292 L412 292 M396 292 L409.5 264 M409.5 264 L401 236 M401 236 L407 236 M404 236 L404 214 M250 170 L190 404 M250 170 L310 404"/></g>
+					<g class="lit"><path d="M67.8 264 L116.2 264 M67.8 256 L67.8 272 M116.2 256 L116.2 272 M140.2 210 L195.8 210 M140.2 202 L140.2 218 M195.8 202 L195.8 218 M215 134 L285 134 M215 126 L215 142 M285 126 L285 142 M302.4 190 L361.6 190 M302.4 182 L302.4 198 M361.6 182 L361.6 198 M379.8 250 L428.2 250 M379.8 242 L379.8 258 M428.2 242 L428.2 258"/></g>
+					<g class="lights" fill="currentColor" stroke="none"><circle cx="92" cy="224" r="3.2"/><circle cx="67.8" cy="264" r="2"/><circle cx="116.2" cy="264" r="2"/><circle cx="168" cy="170" r="3.2"/><circle cx="140.2" cy="210" r="2"/><circle cx="195.8" cy="210" r="2"/><circle cx="250" cy="94" r="4.5"/><circle cx="215" cy="134" r="2"/><circle cx="285" cy="134" r="2"/><circle cx="332" cy="150" r="3.2"/><circle cx="302.4" cy="190" r="2"/><circle cx="361.6" cy="190" r="2"/><circle cx="404" cy="210" r="3.2"/><circle cx="379.8" cy="250" r="2"/><circle cx="428.2" cy="250" r="2"/></g>
+				</svg>
+			</div>
+			<div class="fleet-hero-inner">
+				<p class="eyebrow">Starhold · status</p>
+				<div class="fleet-hero-mark"><span class="wordmark hero" aria-hidden="true"><span class="solid">Star</span><span class="outline">hold</span></span></div>
+				<div class="fleet-hero-copy">
+					<h1>Live checks on the sites and services Starhold runs.</h1>
+					<p class="state-line" data-overall="nojs"><span class="state-mark" aria-hidden="true"></span><span data-state-line aria-live="polite">Live status needs JavaScript.</span></p>
+					<p class="state-help" data-api-help hidden>The checks themselves keep running. <a href="https://gatus.starhold.fyi">Open the full Gatus dashboard</a></p>
+					<div class="meta-row" data-js-only hidden>
+						<p class="meta-line"><span>Latest check <time data-latest>—</time></span><span class="sep" aria-hidden="true">·</span><span>refreshes every 60 s</span><span class="sep meta-src" aria-hidden="true">·</span><span class="meta-src">data from Gatus</span></p>
+						<button class="btn btn-minimal refresh" type="button" data-refresh hidden>Refresh now</button>
+					</div>
+					<div class="btn-row">
+						<a class="btn btn-primary" href="#checks">See every check</a>
+						<a class="btn btn-secondary" href="https://gatus.starhold.fyi">Gatus dashboard</a>
+					</div>
+					<p class="byline">Starhold Software is one person. You get me on the call, and you get me when it breaks. <a href="https://starhold.dev/operator">How I work →</a></p>
+				</div>
+			</div>
+		</section>
+
+		<section id="checks" class="section checks" aria-labelledby="checks-h">
+			<div class="section-head">
+				<h2 id="checks-h">What I <span class="accent-word">watch</span></h2>
+				<p class="lede">Every check Gatus runs, grouped by what it covers. A name opens that check's own Gatus page.</p>
+			</div>
+			<noscript>
+				<p class="noscript-note">This page needs JavaScript to show live checks. Raw check data:</p>
+			</noscript>
+
+			<section class="group" data-group="web" aria-labelledby="g-web">
+				<div class="group-head"><h3 id="g-web">Sites</h3><p class="group-sum" data-group-sum></p></div>
+				<div class="rows" data-rows></div>
+				<noscript>
+					<ul class="raw-list">
+						<li><a href="/api/v1/endpoints/web_starhold-dev/statuses">web_starhold-dev</a> <span>raw JSON</span></li>
+						<li><a href="/api/v1/endpoints/web_starhold-fyi/statuses">web_starhold-fyi</a> <span>raw JSON</span></li>
+						<li><a href="/api/v1/endpoints/web_starhold-app/statuses">web_starhold-app</a> <span>raw JSON</span></li>
+						<li><a href="/api/v1/endpoints/web_status-starhold-fyi/statuses">web_status-starhold-fyi</a> <span>raw JSON</span></li>
+					</ul>
+				</noscript>
+			</section>
+
+			<section class="group" data-group="products" aria-labelledby="g-products">
+				<div class="group-head"><h3 id="g-products">Products</h3><p class="group-sum" data-group-sum></p></div>
+				<div class="rows" data-rows></div>
+				<noscript>
+					<ul class="raw-list">
+						<li><a href="/api/v1/endpoints/products_shushgame-com/statuses">products_shushgame-com</a> <span>raw JSON</span></li>
+						<li><a href="/api/v1/endpoints/products_umbermark-starhold-app/statuses">products_umbermark-starhold-app</a> <span>raw JSON · Pre-launch · not for sale</span></li>
+					</ul>
+				</noscript>
+			</section>
+
+			<section class="group" data-group="services" aria-labelledby="g-services">
+				<div class="group-head"><h3 id="g-services">Services</h3><p class="group-sum" data-group-sum></p></div>
+				<div class="rows" data-rows></div>
+				<noscript>
+					<ul class="raw-list">
+						<li><a href="/api/v1/endpoints/services_entitlements-api/statuses">services_entitlements-api</a> <span>raw JSON</span></li>
+						<li><a href="/api/v1/endpoints/services_entitlements-auth-enforced/statuses">services_entitlements-auth-enforced</a> <span>raw JSON</span></li>
+						<li><a href="/api/v1/endpoints/services_patreon-webhook-api/statuses">services_patreon-webhook-api</a> <span>raw JSON</span></li>
+					</ul>
+				</noscript>
+			</section>
+
+			<div data-extra-groups></div>
+
+			<template id="row-tpl">
+				<article class="fleet-card check" data-state="pending">
+					<div class="check-id">
+						<h4><a data-name href="/"></a></h4>
+						<p class="check-host" data-host>—</p>
+						<p class="check-note" data-note hidden></p>
+					</div>
+					<div class="check-chip"><span class="state-chip" data-chip data-state="pending">Checking…</span></div>
+					<dl class="check-figs">
+						<div><dt>24h</dt><dd data-up="24h">—</dd></div>
+						<div><dt>7d</dt><dd data-up="7d">—</dd></div>
+						<div><dt>30d</dt><dd data-up="30d">—</dd></div>
+						<div><dt>Avg 24h</dt><dd data-rt>—</dd></div>
+					</dl>
+					<div class="beat">
+						<div class="beat-bar" role="img" data-bar></div>
+						<p class="beat-cap"><span data-beat-sum></span><span class="beat-axis" aria-hidden="true">older ← → now</span></p>
+					</div>
+					<details class="recent">
+						<summary>Recent checks</summary>
+						<div class="recent-wrap">
+							<table>
+								<caption class="visually-hidden">Last 10 results, newest first</caption>
+								<thead><tr><th scope="col">Time (UTC)</th><th scope="col">Result</th><th scope="col">HTTP</th><th scope="col">Duration</th></tr></thead>
+								<tbody data-recent></tbody>
+							</table>
+						</div>
+					</details>
+				</article>
+			</template>
+		</section>
+
+		<section class="section section-divided works" aria-labelledby="works-h">
+			<div class="works-grid">
+				<div class="works-copy">
+					<h2 id="works-h">How this <span class="accent-word">works</span></h2>
+					<p class="lede">Gatus checks each endpoint every 1 to 5 minutes from my VPS. This page reads its public JSON API on this host. The full Gatus dashboard is at <a href="https://gatus.starhold.fyi">gatus.starhold.fyi</a>.</p>
+					<p class="works-note">Nothing on this page is typed in by hand. When the API stops answering, every check reads Stale until it comes back, and nothing claims to be up.</p>
+				</div>
+				<figure class="term">
+					<div class="bar" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="name">status.starhold.fyi</span></div>
+					<div class="body" tabindex="0" role="region" aria-label="Latest API response, first three rows">
+						<p class="ln cmd"><span class="t">curl /api/v1/endpoints/statuses</span></p>
+						<div data-term><p class="ln dim"><span class="t">no data yet</span></p></div>
+						<span class="caret" aria-hidden="true"></span>
+					</div>
+					<figcaption data-js-only hidden>The first three rows of the last fetch, rendered live.</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<section class="section section-divided">
+			<div class="band raw-band">
+				<h2>Prefer the <span class="accent-word">raw</span> view?</h2>
+				<p class="lede">The same checks, without this page in the way.</p>
+				<div class="raw-tiles">
+					<article class="tile">
+						<h3><a class="stretched" href="https://gatus.starhold.fyi">Gatus dashboard</a></h3>
+						<p>Every check in the stock Gatus interface, with its own charts.</p>
+						<span class="go" aria-hidden="true">→</span>
+					</article>
+					<article class="tile">
+						<h3><a class="stretched" href="/api/v1/endpoints/statuses">Raw JSON</a></h3>
+						<p>The exact response this page reads, unformatted.</p>
+						<span class="go" aria-hidden="true">→</span>
+					</article>
+					<article class="tile">
+						<h3><a class="stretched" href="https://starhold.dev">Store</a></h3>
+						<p>What Starhold sells, and how to order it.</p>
+						<span class="go" aria-hidden="true">→</span>
+					</article>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="fleet-footer">
+		<div class="fleet-footer-inner">
+			<div class="col">
+				<div class="brandwrap"><a class="brand" href="/" aria-label="Starhold status"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="12,2 21.5,7.5 21.5,16.5 12,22 2.5,16.5 2.5,7.5"/></svg><span class="wordmark header"><span class="solid">Star</span><span class="outline">hold</span></span></a></div>
+				<p class="brandline">Starhold Software — Quadstronaut</p>
+				<p class="strapline">Sovereign systems, built and operated.</p>
+				<p class="meta">Est. 2026</p>
+			</div>
+			<nav class="col" aria-label="Sites">
+				<p class="eyebrow">Sites</p>
+				<ul>
+					<li><a href="https://starhold.dev">Store</a></li>
+					<li><a href="https://starhold.fyi">Docs</a></li>
+					<li><a href="https://status.starhold.fyi" aria-current="page">Status</a></li>
+					<li><a href="https://starhold.app">Hangar</a></li>
+				</ul>
+			</nav>
+			<div class="col">
+				<p class="eyebrow">Elsewhere</p>
+				<ul>
+					<li><a href="https://www.patreon.com/cw/Quadstronaut" rel="noopener">Patreon</a></li>
+					<li><a href="https://discord.gg/Ug8CM86Bxv" rel="noopener">Discord</a></li>
+				</ul>
+				<p class="meta">Back the work, or come and talk about it.</p>
+			</div>
+			<div class="col">
+				<p class="eyebrow">Legal</p>
+				<ul>
+					<li><a href="https://starhold.dev/legal/terms">Terms</a></li>
+					<li><a href="https://starhold.dev/legal/privacy">Privacy</a></li>
+					<li><a href="https://starhold.dev/legal/refunds">Refunds</a></li>
+					<li><a href="mailto:hello@starhold.dev">hello@starhold.dev</a></li>
+				</ul>
+				<p class="meta privacy" data-check="fleet-no-tracking">No trackers</p>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

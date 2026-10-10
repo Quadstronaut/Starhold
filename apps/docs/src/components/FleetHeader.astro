@@ -1,0 +1,64 @@
+---
+/**
+ * The fleet cluster at the right end of the docs header (STAR-27 spec §1.4):
+ * Store, Docs, Status and Hangar, then the one commerce link in the chrome, the
+ * quote CTA. Every href is read from ../fleet-nav.json (written by Track 0 from
+ * brand/fleet-nav.json), never typed here; check-drift check 6 enforces that.
+ *
+ * Below 800 px (Starlight's md breakpoint, via data-break="800") the list and
+ * the CTA collapse into a native <details> menu, so it needs no JavaScript and
+ * collapsed links are display:none, not merely clipped.
+ */
+import nav from '../fleet-nav.json';
+
+const CURRENT = 'docs';
+const links = nav.fleet.map((l) => ({ ...l, current: l.id === CURRENT }));
+---
+
+<div class="fleet-header fleet-header--embedded" data-break="800">
+	<nav class="fleet-links" aria-label="Starhold sites">
+		<div class="fleet-wide">
+			<ul class="fleet">
+				{links.map((l) => <li><a href={l.href} aria-current={l.current ? 'page' : undefined}>{l.label}</a></li>)}
+			</ul>
+			<a class="btn btn-primary header-cta" href={nav.cta.href}>{nav.cta.label}</a>
+		</div>
+		<details class="fleet-menu">
+			<summary aria-label="Menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="menu-label" aria-hidden="true">Menu</span></summary>
+			<div class="fleet-menu-panel">
+				<ul class="fleet">
+					{links.map((l) => <li><a href={l.href} aria-current={l.current ? 'page' : undefined}>{l.label}</a></li>)}
+				</ul>
+				<a class="btn btn-primary header-cta" href={nav.cta.href}>{nav.cta.label}</a>
+			</div>
+		</details>
+	</nav>
+</div>
+
+<script>
+	// Progressive enhancement: <details> works without this, but on its own it
+	// never closes. Close the fleet menu on Escape, on a click outside it, and
+	// when Starlight's sidebar toggle opens the sidebar, so the two panels never
+	// stack on top of each other.
+	const menu = document.querySelector<HTMLDetailsElement>('.header details.fleet-menu');
+	if (menu) {
+		const close = () => menu.removeAttribute('open');
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && menu.open) {
+				close();
+				menu.querySelector('summary')?.focus();
+			}
+		});
+		document.addEventListener('click', (e) => {
+			if (menu.open && !menu.contains(e.target as Node)) close();
+		});
+		// Starlight's <starlight-menu-button> exposes setExpanded(); it also clears
+		// the inert it put on the page.
+		const sidebarToggle = document.querySelector('starlight-menu-button') as (HTMLElement & { setExpanded?: (v: boolean) => void }) | null;
+		sidebarToggle?.querySelector('button')?.addEventListener('click', close);
+		// And the other way round: opening the fleet menu closes an open sidebar.
+		menu.addEventListener('toggle', () => {
+			if (menu.open && sidebarToggle?.getAttribute('aria-expanded') === 'true') sidebarToggle.setExpanded?.(false);
+		});
+	}
+</script>

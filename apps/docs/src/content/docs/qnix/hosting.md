@@ -9,7 +9,7 @@ QNix is being built as a hosted platform. Here's what it's being built to do.
 
 ## Your own private encrypted environment
 
-The offering is planned to take you from "never heard of us" to a working private environment in under five minutes — no infrastructure knowledge required. A vCluster (your own Kubernetes control plane) is provisioned automatically at signup. Your data lands in it, encrypted with keys the platform cannot read.
+The offering is planned to take you from a first visit to a working private environment in under five minutes — no infrastructure knowledge required. A vCluster (your own Kubernetes control plane) is provisioned automatically at signup. Your data lands in it, encrypted with keys the platform cannot read.
 
 ## A curated app catalog
 
@@ -29,4 +29,4 @@ Cross-tenant invitations are on the roadmap. Planned to let you grant another us
 
 ## Join the waitlist
 
-QNix hosting has no launch date and no pricing published yet. If this sounds like what you've been looking for, [get in touch](https://starhold.dev/contact) and we'll add you to the list.
+QNix hosting has no launch date and no pricing published yet. If this sounds like what you've been looking for, [get in touch](https://starhold.dev/contact) and I'll add you to the list.

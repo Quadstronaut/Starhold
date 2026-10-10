@@ -1,15 +1,15 @@
 ---
 title: What is QNix
-description: The encrypted, multi-tenant Kubernetes platform Starhold's own products run on.
+description: Design notes for QNix, the encrypted, multi-tenant Kubernetes platform Starhold has in development.
 sidebar:
   order: 1
 ---
 
 **QNix is a private, encrypted, multi-tenant Kubernetes platform** — built from scratch by Quadstronaut over sixteen weeks and ~1,080 commits. It exists because Starhold needed infrastructure that takes privacy seriously at every layer, not as an afterthought.
 
-## Starhold runs on it
+## In development
 
-Every Starhold product — Shushgame, the custom Discord bots, this documentation site — runs on QNix. That's not marketing copy; it's the credibility test. The platform handles real traffic, real tenants, and real failure modes every day.
+QNix is the platform I am building, and these pages are its design notes. It is not yet open to customers. The architecture, tenancy and security pages describe how it is meant to work; the build chronicle covers how it got this far.
 
 ## What it's built to do
 

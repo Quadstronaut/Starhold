@@ -1,0 +1,36 @@
+---
+/**
+ * Footer override (STAR-27 spec §2.2). Starlight's default footer first (edit
+ * link, last updated, previous/next), then the closing band every Starhold page
+ * ends on, then the fleet footer.
+ *
+ * The band is the fleet's closing `.band` (spec §0) and gives inner pages the
+ * one accent-word h2 every fleet page carries (R29); Starlight's table of
+ * contents is built from the Markdown only, so it never lists it. Both the band
+ * and the fleet footer sit inside main[data-pagefind-body], hence
+ * data-pagefind-ignore: search results stay about the docs.
+ */
+import Default from '@astrojs/starlight/components/Footer.astro';
+import FleetFooter from './FleetFooter.astro';
+import nav from '../fleet-nav.json';
+
+const isSplash = Astro.locals.starlightRoute.entry.data.template === 'splash';
+const discord = nav.community.find((l) => l.label === 'Discord');
+---
+
+<Default />
+<section class:list={['fleet-scope', 'fyi-close', { 'fyi-close--splash': isSplash }]} data-pagefind-ignore aria-labelledby="fyi-close-title">
+	<div class="band reveal">
+		<h2 id="fyi-close-title">Not finding the <span class="accent-word">answer?</span></h2>
+		<p class="lede">Email me or ask on Discord. One person writes these pages, and the same person answers.</p>
+		<div class="btn-row">
+			<a class="btn btn-secondary" href={`mailto:${nav.contact}`}>{nav.contact}</a>
+			{discord && (
+				<a class="btn btn-minimal" href={discord.href} rel="noopener">
+					Ask on Discord
+				</a>
+			)}
+		</div>
+	</div>
+</section>
+<FleetFooter embedded={!isSplash} />
