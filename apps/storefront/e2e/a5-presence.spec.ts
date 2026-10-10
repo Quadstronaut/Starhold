@@ -126,3 +126,22 @@ test('FAQ JSON-LD parses and its question count equals the rendered details coun
 });
 
 
+
+
+// STAR-28: the hero wordmark sits in an overflow-clipped hero, so a too-big
+// --fs-display cuts letters off without any horizontal scroll. Check the glyph
+// run against its box at 280-390 px.
+for (const width of [280, 320, 340, 360, 390]) {
+	test(`hero wordmark fits at ${width} px`, async ({ page }) => {
+		await page.setViewportSize({ width, height: 800 });
+		await page.goto('/');
+		const m = await page.evaluate(() => {
+			const el = document.querySelector('.wordmark.hero') as HTMLElement | null;
+			if (!el) return null;
+			return { sw: el.scrollWidth, cw: el.clientWidth, right: el.getBoundingClientRect().right, vw: document.documentElement.clientWidth };
+		});
+		expect(m).not.toBeNull();
+		expect(m!.sw).toBeLessThanOrEqual(m!.cw);
+		expect(m!.right).toBeLessThanOrEqual(m!.vw);
+	});
+}
