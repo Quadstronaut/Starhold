@@ -46,7 +46,7 @@ Tenant storage volumes use LUKS encryption via a dedicated StorageClass. The LUK
 
 ### At rest: secrets in git
 
-Cluster secrets are encrypted in the git repository using SOPS with Age keys. A pre-commit hook treats unencrypted `stringData` in any manifest as a build error — plaintext secrets cannot be committed by accident.
+Cluster secrets are encrypted in the git repository using SOPS with Age keys. A pre-commit hook treats unencrypted `stringData` in any Kubernetes YAML file as a build error — plaintext secrets cannot be committed by accident.
 
 ### At rest: cluster datastore
 
@@ -58,7 +58,7 @@ The cluster datastore uses embedded etcd with peer TLS enforced between nodes.
 
 The zero-knowledge property is an architectural guarantee, not a policy promise.
 
-At signup, a per-tenant master key is derived from the user's credentials and stored encrypted in OpenBao at a per-tenant key path. The OpenBao admin policy prevents the operator from reading tenant key material — admin credentials cannot retrieve it. The key is released only during an authenticated user session; the platform has no standing access to it.
+At signup, a per-tenant root key is derived from the user's credentials and stored encrypted in OpenBao at a per-tenant key path. The OpenBao admin policy prevents the operator from reading tenant key material — admin credentials cannot retrieve it. The key is released only during an authenticated user session; the platform has no standing access to it.
 
 The architectural guarantee: **the operator cannot read tenant data at rest.** This is enforced at the policy level in OpenBao — the technical mechanism, not an operational agreement.
 

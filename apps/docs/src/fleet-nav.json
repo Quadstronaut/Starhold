@@ -1,0 +1,19 @@
+{
+  "fleet": [
+    { "id": "store",  "label": "Store",  "href": "https://starhold.dev" },
+    { "id": "docs",   "label": "Docs",   "href": "https://starhold.fyi" },
+    { "id": "status", "label": "Status", "href": "https://status.starhold.fyi" },
+    { "id": "hangar", "label": "Hangar", "href": "https://starhold.app" }
+  ],
+  "legal": [
+    { "label": "Terms",   "href": "https://starhold.dev/legal/terms" },
+    { "label": "Privacy", "href": "https://starhold.dev/legal/privacy" },
+    { "label": "Refunds", "href": "https://starhold.dev/legal/refunds" }
+  ],
+  "community": [
+    { "label": "Patreon", "href": "https://www.patreon.com/cw/Quadstronaut" },
+    { "label": "Discord", "href": "https://discord.gg/Ug8CM86Bxv" }
+  ],
+  "cta": { "label": "Request a quote", "href": "https://starhold.dev/contact?intent=quote" },
+  "contact": "hello@starhold.dev"
+}

@@ -115,7 +115,7 @@ Then **KEDA auto-sleep** — twelve PRs in one push. KEDA itself, a per-tenant S
 
 The test-feasibility audit closed the era. Four parallel agents swept platform API tests, both UIs, manifests, and policy coherence. The synthesized punchlist closed in five PRs. The two most critical findings: two undefined variable references in the tenant provisioning code that would have crashed on the first real payment webhook — after the tenant row was committed, before the vCluster was ready — producing half-provisioned tenants. The free-promo path took a different code branch, so testing had been hiding both bugs. Pytest got wired into CI in the same PR. The test suite had been growing for months; nothing had ever run it automatically.
 
-Stage Kyverno coverage, manifest validation CI, pvc-autoresizer cluster-wide, a CronJob to defeat a k3s addon manager that kept reverting a storage class setting — all closed the same week.
+Stage Kyverno coverage, Kubernetes YAML validation in CI, pvc-autoresizer cluster-wide, a CronJob to defeat a k3s addon manager that kept reverting a storage class setting — all closed the same week.
 
 ---
 

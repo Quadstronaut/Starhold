@@ -1,0 +1,56 @@
+---
+/**
+ * Hero override (STAR-27 spec §2.3). On the splash template it renders the
+ * storefront hero order: eyebrow → wordmark → promise h1 → lede → pills →
+ * byline, with the Blueprint motif on the right. Every other page that sets a
+ * `hero` gets Starlight's default Hero untouched.
+ *
+ * The h1 keeps id="_top" and data-page-title, which Starlight's skip link and
+ * table of contents rely on. Copy comes from the page frontmatter (hero.title,
+ * hero.tagline, hero.actions); the byline is the storefront's, verbatim.
+ */
+import Default from '@astrojs/starlight/components/Hero.astro';
+import BlueprintArt from './BlueprintArt.astro';
+
+const { data } = Astro.locals.starlightRoute.entry;
+const isSplash = data.template === 'splash';
+const { title = data.title, tagline, actions = [] } = data.hero || {};
+
+/** Starlight's action variants onto the fleet pill classes. */
+const pill = { primary: 'btn-primary', secondary: 'btn-secondary', minimal: 'btn-minimal' } as const;
+---
+
+{
+	isSplash ? (
+		<section class="fleet-hero fleet-scope fyi-hero">
+			<div class="fleet-hero-art" aria-hidden="true">
+				<BlueprintArt />
+			</div>
+			<div class="fleet-hero-inner">
+				<p class="eyebrow">Starhold Software · documentation</p>
+				<div class="fleet-hero-mark">
+					<span class="wordmark hero" aria-hidden="true"><span class="solid">Star</span><span class="outline">hold</span></span>
+				</div>
+				<div class="fleet-hero-copy">
+					<h1 id="_top" data-page-title>{title}</h1>
+					{tagline && <p class="lede">{tagline}</p>}
+					{actions.length > 0 && (
+						<div class="btn-row">
+							{actions.map(({ link, text, variant = 'primary' }) => (
+								<a class:list={['btn', pill[variant] ?? 'btn-secondary']} href={link}>
+									{text}
+								</a>
+							))}
+						</div>
+					)}
+					<p class="byline">
+						Starhold Software is one person. You get me on the call, and you get me when it breaks.{' '}
+						<a href="https://starhold.dev/operator">How I work →</a>
+					</p>
+				</div>
+			</div>
+		</section>
+	) : (
+		<Default />
+	)
+}

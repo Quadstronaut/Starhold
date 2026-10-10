@@ -1,0 +1,11 @@
+/* starhold.app accent: Hangar-bay lime. Sits well clear of --danger, because the launcher
+   shows red "Down" chips. Exactly the seven accent variables (check 3). */
+:root {
+	--accent: #c6e86b;
+	--accent-hover: #d6f08f;
+	--accent-2: #b0d94a;
+	--accent-ink: #121708;
+	--accent-quiet: #222a12;
+	--glow: rgb(198 232 107 / 0.16);
+	--glow-edge: rgb(198 232 107 / 0.35);
+}

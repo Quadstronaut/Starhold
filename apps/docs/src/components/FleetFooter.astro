@@ -1,0 +1,54 @@
+---
+/**
+ * The four-column fleet footer (STAR-27 spec §1.4), the storefront Footer with
+ * a "Sites" column. Every href comes from ../fleet-nav.json; check 6 forbids
+ * literal URLs here. Starlight renders the footer inside the content column and
+ * inside main[data-pagefind-body], so it is not a contentinfo landmark, and
+ * data-pagefind-ignore keeps its text out of search results.
+ *
+ * `embedded` (inner pages) draws it as a rounded panel at column width; the
+ * splash page has no column, so there it runs full width like the storefront's.
+ */
+import nav from '../fleet-nav.json';
+
+interface Props {
+	embedded?: boolean;
+}
+const { embedded = false } = Astro.props;
+const CURRENT = 'docs';
+const home = Astro.locals.starlightRoute.siteTitleHref;
+---
+
+<footer class:list={['fleet-footer', { 'fleet-footer--embedded': embedded }]} data-pagefind-ignore>
+	<div class="fleet-footer-inner">
+		<div class="col">
+			<div class="brandwrap">
+				<a class="brand" href={home} aria-label="Starhold docs home"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="12,2 21.5,7.5 21.5,16.5 12,22 2.5,16.5 2.5,7.5"></polygon></svg><span class="wordmark header" translate="no"><span class="solid">Star</span><span class="outline">hold</span></span></a>
+			</div>
+			<p class="brandline">Starhold Software — Quadstronaut</p>
+			<p class="strapline">Sovereign systems, built and operated.</p>
+			<p class="meta">Est. 2026</p>
+		</div>
+		<nav class="col" aria-label="Sites">
+			<p class="eyebrow">Sites</p>
+			<ul>
+				{nav.fleet.map((l) => <li><a href={l.href} aria-current={l.id === CURRENT ? 'page' : undefined}>{l.label}</a></li>)}
+			</ul>
+		</nav>
+		<div class="col">
+			<p class="eyebrow">Elsewhere</p>
+			<ul>
+				{nav.community.map((l) => <li><a href={l.href} rel="noopener">{l.label}</a></li>)}
+			</ul>
+			<p class="meta">Back the work, or come and talk about it.</p>
+		</div>
+		<div class="col">
+			<p class="eyebrow">Legal</p>
+			<ul>
+				{nav.legal.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+				<li><a href={`mailto:${nav.contact}`}>{nav.contact}</a></li>
+			</ul>
+			<p class="meta privacy" data-check="fleet-no-tracking">No trackers</p>
+		</div>
+	</div>
+</footer>

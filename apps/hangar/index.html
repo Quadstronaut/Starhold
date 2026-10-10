@@ -1,20 +1,264 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><title>STARHOLD ⬡ HANGAR</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-	body { margin:0; background:#0a0a0f; color:#d8dce6; font-family:'Segoe UI',system-ui,sans-serif; text-align:center; }
-	nav { padding:14px 24px; border-bottom:2px solid #b22222; background:#111118; font-size:13px; letter-spacing:2px; text-transform:uppercase; display:flex; justify-content:space-between; }
-	nav a { color:#8a93a6; text-decoration:none; margin-left:18px; } nav a:hover { color:#ffb347; }
-	h1 { letter-spacing:4px; margin-top:70px; }
-	.bay { display:inline-block; background:#14141c; border:1px solid #2a2a38; border-top:3px solid #b22222; border-radius:4px; padding:18px 28px; margin:10px; color:#d8dce6; text-decoration:none; }
-	.label { font-size:11px; letter-spacing:4px; color:#8a93a6; text-transform:uppercase; }
-</style></head>
-<body>
-<nav><span style="font-weight:bold">⬡ STARHOLD</span><span>
-	<a href="https://starhold.dev">Store</a><a href="https://starhold.fyi">Docs</a><a href="https://status.starhold.fyi">Status</a></span></nav>
-<h1>The Hangar</h1>
-<p class="label">Everything Starhold flies, live</p>
-<a class="bay" href="https://shushgame.com"><strong>Shushgame</strong><br><span class="label">live mission</span></a>
-<a class="bay" href="https://umbermark.starhold.app" style="border-top-color:#ffb347"><strong>Umbermark</strong><br><span class="label">beta &middot; marked share links</span></a>
-<p class="label" style="margin-top:50px">More bays under construction</p>
-</body></html>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="color-scheme" content="dark">
+	<title>Starhold apps</title>
+	<meta name="description" content="The apps Starhold runs, with live status from my monitoring, plus links to the store, the docs and the status page.">
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+	<link rel="preload" href="/fonts/michroma-latin.woff2" as="font" type="font/woff2" crossorigin>
+	<!-- Load order (spec §1.1): tokens, fleet map, site accent, shared base, then this site. -->
+	<link rel="stylesheet" href="/_s/fleet-tokens.css">
+	<link rel="stylesheet" href="/_s/fleet-map.css">
+	<link rel="stylesheet" href="/_s/accent.css">
+	<link rel="stylesheet" href="/_s/fleet-base.css">
+	<link rel="stylesheet" href="/_s/hangar.css">
+	<script type="module" src="/_s/hangar.js"></script>
+</head>
+<body class="fleet-page">
+	<a class="skip-link" href="#main">Skip to content</a>
+
+	<header class="fleet-header">
+		<div class="fleet-header-inner">
+			<a class="brand" href="/" aria-label="Starhold apps"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="12,2 21.5,7.5 21.5,16.5 12,22 2.5,16.5 2.5,7.5"/></svg><span class="wordmark header"><span class="solid">Star</span><span class="outline">hold</span></span></a>
+			<span class="tag site-tag">hangar</span>
+			<nav class="fleet-links" aria-label="Starhold sites">
+				<div class="fleet-wide">
+					<ul class="fleet">
+						<li><a href="https://starhold.dev">Store</a></li>
+						<li><a href="https://starhold.fyi">Docs</a></li>
+						<li><a href="https://status.starhold.fyi">Status</a></li>
+						<li><a href="https://starhold.app" aria-current="page">Hangar</a></li>
+					</ul>
+					<a class="btn btn-primary header-cta" href="https://starhold.dev/contact?intent=quote">Request a quote</a>
+				</div>
+				<details class="fleet-menu">
+					<summary aria-label="Menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></summary>
+					<div class="fleet-menu-panel">
+						<ul class="fleet">
+							<li><a href="https://starhold.dev">Store</a></li>
+							<li><a href="https://starhold.fyi">Docs</a></li>
+							<li><a href="https://status.starhold.fyi">Status</a></li>
+							<li><a href="https://starhold.app" aria-current="page">Hangar</a></li>
+						</ul>
+						<a class="btn btn-primary header-cta" href="https://starhold.dev/contact?intent=quote">Request a quote</a>
+					</div>
+				</details>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main">
+		<section class="fleet-hero" aria-labelledby="hero-title">
+			<div class="fleet-hero-art" aria-hidden="true">
+				<!-- Hangar bays: a cutaway bay wall with three open berths, one craft resting in the
+				     middle berth, and guide-light strips on the apron. currentColor only; the art never
+				     reflects live state. The only fleet page with stars (coordinates differ from the
+				     storefront's). Motion comes from fleet-base.css and is finite (B5). -->
+				<svg class="fleet-art hangar-art" viewBox="0 0 480 480" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+					<g class="stars" fill="currentColor" stroke="none">
+						<circle cx="30" cy="40" r="1.1"/><circle cx="88" cy="22" r="0.8"/><circle cx="150" cy="58" r="1.3"/><circle cx="205" cy="18" r="0.9"/>
+						<circle cx="268" cy="46" r="1.2"/><circle cx="322" cy="20" r="0.8"/><circle cx="384" cy="52" r="1.1"/><circle cx="446" cy="28" r="1.3"/>
+						<circle cx="470" cy="96" r="0.9"/><circle cx="12" cy="104" r="1"/><circle cx="58" cy="70" r="0.8"/><circle cx="236" cy="66" r="0.7"/>
+						<circle cx="412" cy="78" r="0.8"/><circle cx="176" cy="36" r="0.7"/><circle cx="350" cy="74" r="0.9"/><circle cx="20" cy="440" r="1.2"/>
+						<circle cx="110" cy="462" r="0.8"/><circle cx="250" cy="456" r="1"/><circle cx="380" cy="466" r="0.9"/><circle cx="462" cy="430" r="1.1"/>
+					</g>
+
+					<!-- roof, wall and gantry -->
+					<path class="quiet" d="M40 150 L96 104 L384 104 L440 150 Z"/>
+					<path class="lane" d="M150 104 L136 150 M240 104 L240 150 M330 104 L344 150 M68 127 L412 127"/>
+					<path class="quiet" d="M40 150 L40 336 M440 150 L440 336"/>
+					<path class="lane" d="M54 164 L426 164"/>
+					<path class="quiet" d="M226 158 L254 158 L254 170 L226 170 Z M240 170 L240 180"/>
+
+					<!-- three open berths with their back openings -->
+					<path class="quiet" d="M58 336 L58 196 L76 178 L154 178 L172 196 L172 336 M183 336 L183 196 L201 178 L279 178 L297 196 L297 336 M308 336 L308 196 L326 178 L404 178 L422 196 L422 336"/>
+					<path class="lane" d="M72 322 L72 205 L85 192 L145 192 L158 205 L158 322 M197 322 L197 205 L210 192 L270 192 L283 205 L283 322 M322 322 L322 205 L335 192 L395 192 L408 205 L408 322"/>
+					<path class="lane" d="M58 336 L72 322 M172 336 L158 322 M183 336 L197 322 M297 336 L283 322 M308 336 L322 322 M422 336 L408 322"/>
+
+					<!-- docking clamps in the two empty berths -->
+					<path class="quiet" d="M72 236 L92 236 L92 250 M158 236 L138 236 L138 250 M322 236 L342 236 L342 250 M408 236 L388 236 L388 250"/>
+
+					<!-- floor targets, deck and apron -->
+					<g class="lane" stroke-dasharray="3 6">
+						<ellipse cx="115" cy="328" rx="34" ry="5"/>
+						<ellipse cx="240" cy="328" rx="34" ry="5"/>
+						<ellipse cx="365" cy="328" rx="34" ry="5"/>
+					</g>
+					<path class="quiet" d="M20 336 L460 336"/>
+					<path class="lane" d="M58 336 L36 404 M172 336 L164 404 M183 336 L178 404 M297 336 L302 404 M308 336 L316 404 M422 336 L444 404 M14 404 L466 404"/>
+					<path class="lane" d="M70 356 L160 356 M196 356 L284 356 M320 356 L410 356"/>
+
+					<!-- the one craft at rest, middle berth: hex hull echoing the storefront core -->
+					<g class="drift">
+						<path class="lit" d="M270 280 L255 306 L225 306 L210 280 L225 254 L255 254 Z"/>
+						<path class="quiet" d="M258 280 L249 295.6 L231 295.6 L222 280 L231 264.4 L249 264.4 Z"/>
+						<path class="quiet" d="M210 280 L190 300 L190 312 L216 302 M270 280 L290 300 L290 312 L264 302"/>
+						<path class="quiet" d="M231 306 L225 324 M249 306 L255 324 M217 324 L231 324 M249 324 L263 324"/>
+						<g class="lights" fill="currentColor" stroke="none"><circle cx="240" cy="280" r="4"/></g>
+					</g>
+
+					<!-- guide-light strips and berth lamps -->
+					<g class="lights" fill="currentColor" stroke="none">
+						<circle cx="115" cy="178" r="3"/><circle cx="240" cy="178" r="3"/><circle cx="365" cy="178" r="3"/>
+						<circle cx="82" cy="356" r="2"/><circle cx="104" cy="356" r="2"/><circle cx="126" cy="356" r="2"/><circle cx="148" cy="356" r="2"/>
+						<circle cx="207" cy="356" r="2"/><circle cx="229" cy="356" r="2"/><circle cx="251" cy="356" r="2"/><circle cx="273" cy="356" r="2"/>
+						<circle cx="332" cy="356" r="2"/><circle cx="354" cy="356" r="2"/><circle cx="376" cy="356" r="2"/><circle cx="398" cy="356" r="2"/>
+					</g>
+				</svg>
+			</div>
+			<div class="fleet-hero-inner">
+				<p class="eyebrow">Starhold · apps</p>
+				<div class="fleet-hero-mark"><span class="wordmark hero" aria-hidden="true"><span class="solid">Star</span><span class="outline">hold</span></span></div>
+				<div class="fleet-hero-copy">
+					<h1 id="hero-title">The apps I run, in one place.</h1>
+					<p class="lede">Running apps from Starhold, with live status from my monitoring. Pick one and go.</p>
+					<div class="btn-row">
+						<a class="btn btn-primary" href="https://starhold.dev">Open the store</a>
+						<a class="btn btn-secondary" href="https://status.starhold.fyi">Live status</a>
+					</div>
+					<p class="byline">Starhold Software is one person. You get me on the call, and you get me when it breaks. <a href="https://starhold.dev/operator">How I work →</a></p>
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="bays" aria-labelledby="bays-title">
+			<p class="eyebrow">Running now</p>
+			<h2 id="bays-title">In the <span class="accent-word">bays</span></h2>
+			<p class="lede section-lede">Each chip reads the latest check from my monitoring. Without a recent check it says Unknown, never Up.</p>
+
+			<div class="bays">
+				<article class="tile bay bay--wide reveal">
+					<svg class="bay-art" viewBox="0 0 240 160" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+						<path class="bay-art-frame" d="M20 150 L20 34 L40 14 L200 14 L220 34 L220 150"/>
+						<path class="bay-art-frame" d="M6 150 L234 150"/>
+						<path class="bay-art-hull" d="M150 92 L135 118 L105 118 L90 92 L105 66 L135 66 Z"/>
+						<path class="bay-art-frame" d="M90 92 L70 112 L70 124 L96 114 M150 92 L170 112 L170 124 L144 114 M111 118 L105 136 M129 118 L135 136 M97 136 L111 136 M129 136 L143 136"/>
+					</svg>
+					<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h16v10H9l-5 4z"/><path d="M8.5 10h.01M12 10h.01M15.5 10h.01"/></svg></span>
+					<h3><a class="stretched" href="https://shushgame.com">Shushgame</a></h3>
+					<p class="purpose">Discord Chat Game</p>
+					<p class="host">shushgame.com</p>
+					<p class="tile-meta"><span class="tag tag-accent">Live</span> <span class="state-chip" data-chip="shushgame" data-state="nojs">Live status: status.starhold.fyi</span> <span class="checked" data-checked="shushgame"></span></p>
+					<span class="go" aria-hidden="true">→</span>
+				</article>
+
+				<article class="tile bay reveal">
+					<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2 21.5 7.5v9L12 22l-9.5-5.5v-9z"/><path d="M12 7v10M7.5 9.6 16.5 14.4M16.5 9.6 7.5 14.4"/></svg></span>
+					<h3><a class="stretched" href="https://starhold.dev/products/qnix">QNix</a></h3>
+					<p class="purpose">Durable Hosting</p>
+					<p class="host">starhold.dev/<wbr>products/<wbr>qnix</p>
+					<p class="tile-meta"><span class="tag">Coming soon</span></p>
+					<span class="go" aria-hidden="true">→</span>
+				</article>
+
+				<article class="tile bay bay--prelaunch reveal">
+					<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5 19.5 5.5v6c0 4.6-3.2 8.4-7.5 10-4.3-1.6-7.5-5.4-7.5-10v-6z"/><path d="M8.5 12.2 11 14.6l4.6-5"/></svg></span>
+					<!-- Pre-launch (owner ruling Q1, B9 carve-out): no price, no purchase path. The live site
+					     carries pricing and a checkout, so this bay names it without linking to it. -->
+					<h3>Umbermark</h3>
+					<p class="purpose">A 0–100 Linux server hardening score.</p>
+					<p class="host">umbermark.<wbr>starhold.<wbr>app</p>
+					<p class="tile-meta"><span class="tag">Pre-launch · not for sale</span> <span class="state-chip" data-chip="umbermark" data-state="nojs">Live status: status.starhold.fyi</span> <span class="checked" data-checked="umbermark"></span></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="section section-divided" id="sites" aria-labelledby="sites-title">
+			<p class="eyebrow">Sites</p>
+			<h2 id="sites-title">The rest of <span class="accent-word">Starhold</span></h2>
+
+			<div class="fleet-tiles">
+				<article class="tile fleet-tile fleet-tile--store reveal">
+					<svg class="fleet-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="12,2 21.5,7.5 21.5,16.5 12,22 2.5,16.5 2.5,7.5"/></svg>
+					<h3><a class="stretched" href="https://starhold.dev">Store</a></h3>
+					<p class="purpose">Order bots and automation services.</p>
+					<p class="host">starhold.dev</p>
+					<p class="tile-meta"><span class="state-chip" data-chip="store" data-state="nojs">Live status: status.starhold.fyi</span> <span class="checked" data-checked="store"></span></p>
+					<span class="go" aria-hidden="true">→</span>
+				</article>
+				<article class="tile fleet-tile fleet-tile--docs reveal">
+					<svg class="fleet-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="12,2 21.5,7.5 21.5,16.5 12,22 2.5,16.5 2.5,7.5"/></svg>
+					<h3><a class="stretched" href="https://starhold.fyi">Docs</a></h3>
+					<p class="purpose">Setup guides and notes for the things Starhold ships.</p>
+					<p class="host">starhold.fyi</p>
+					<p class="tile-meta"><span class="state-chip" data-chip="docs" data-state="nojs">Live status: status.starhold.fyi</span> <span class="checked" data-checked="docs"></span></p>
+					<span class="go" aria-hidden="true">→</span>
+				</article>
+				<article class="tile fleet-tile fleet-tile--status reveal">
+					<svg class="fleet-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="12,2 21.5,7.5 21.5,16.5 12,22 2.5,16.5 2.5,7.5"/></svg>
+					<h3><a class="stretched" href="https://status.starhold.fyi">Status</a></h3>
+					<p class="purpose">Live checks on the sites and services Starhold runs.</p>
+					<p class="host">status.<wbr>starhold.<wbr>fyi</p>
+					<p class="tile-meta"><span class="state-chip" data-chip="status" data-state="nojs">Live status: status.starhold.fyi</span> <span class="checked" data-checked="status"></span></p>
+					<span class="go" aria-hidden="true">→</span>
+				</article>
+			</div>
+		</section>
+
+		<section class="section section-divided" id="runs" aria-labelledby="runs-title">
+			<p class="eyebrow">Self-hosted</p>
+			<h2 id="runs-title">How this <span class="accent-word">runs</span></h2>
+			<p class="lede section-lede">Starhold runs on machines I administer: a dedicated server and a VPS joined by a private Tailscale mesh, in rootless Podman containers.</p>
+			<ul class="proof">
+				<li><span class="proof-item">Dedicated server + VPS<span class="verifier">machines I administer</span></span></li>
+				<li><span class="proof-item">Tailscale mesh<span class="verifier">a private Tailscale mesh</span></span></li>
+				<li><span class="proof-item">Rootless Podman<span class="verifier">unprivileged containers</span></span></li>
+				<li><a href="https://status.starhold.fyi">Status<span class="verifier">status.starhold.fyi</span></a></li>
+			</ul>
+		</section>
+
+		<section class="section" id="hire" aria-labelledby="hire-title">
+			<div class="band reveal">
+				<p class="eyebrow">Hire me for</p>
+				<h2 id="hire-title">Want the same thing pointed at <span class="accent-word">your problem?</span></h2>
+				<p class="lede">Tell me what it is. I will scope it, price it, and say so if I think it is the wrong build.</p>
+				<div class="btn-row">
+					<a class="btn btn-primary" href="https://starhold.dev/products/custom-bots">Discord Bots</a>
+					<a class="btn btn-secondary" href="https://starhold.dev/services/automation">Server/Task Automation</a>
+					<a class="btn btn-secondary" href="https://starhold.dev/services/fullstack">Full Stack Solutions</a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="fleet-footer">
+		<div class="fleet-footer-inner">
+			<div class="col">
+				<div class="brandwrap"><a class="brand" href="/" aria-label="Starhold apps"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="12,2 21.5,7.5 21.5,16.5 12,22 2.5,16.5 2.5,7.5"/></svg><span class="wordmark header"><span class="solid">Star</span><span class="outline">hold</span></span></a></div>
+				<p class="brandline">Starhold Software — Quadstronaut</p>
+				<p class="strapline">Sovereign systems, built and operated.</p>
+				<p class="meta">Est. 2026</p>
+			</div>
+			<nav class="col" aria-label="Sites">
+				<p class="eyebrow">Sites</p>
+				<ul>
+					<li><a href="https://starhold.dev">Store</a></li>
+					<li><a href="https://starhold.fyi">Docs</a></li>
+					<li><a href="https://status.starhold.fyi">Status</a></li>
+					<li><a href="https://starhold.app" aria-current="page">Hangar</a></li>
+				</ul>
+			</nav>
+			<div class="col">
+				<p class="eyebrow">Elsewhere</p>
+				<ul>
+					<li><a href="https://www.patreon.com/cw/Quadstronaut" rel="noopener">Patreon</a></li>
+					<li><a href="https://discord.gg/Ug8CM86Bxv" rel="noopener">Discord</a></li>
+				</ul>
+				<p class="meta">Back the work, or come and talk about it.</p>
+			</div>
+			<div class="col">
+				<p class="eyebrow">Legal</p>
+				<ul>
+					<li><a href="https://starhold.dev/legal/terms">Terms</a></li>
+					<li><a href="https://starhold.dev/legal/privacy">Privacy</a></li>
+					<li><a href="https://starhold.dev/legal/refunds">Refunds</a></li>
+					<li><a href="mailto:hello@starhold.dev">hello@starhold.dev</a></li>
+				</ul>
+				<p class="meta privacy" data-check="fleet-no-tracking">No trackers</p>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

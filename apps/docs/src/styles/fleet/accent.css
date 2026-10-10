@@ -1,0 +1,11 @@
+/* starhold.fyi accent: Blueprint teal. Exactly the seven accent variables (check 3).
+   Contrast and hue distance are recomputed by check 4 on every run. */
+:root {
+	--accent: #5edcd3;
+	--accent-hover: #84e6df;
+	--accent-2: #3fc8bf;
+	--accent-ink: #061513;
+	--accent-quiet: #0f2826;
+	--glow: rgb(94 220 211 / 0.16);
+	--glow-edge: rgb(94 220 211 / 0.35);
+}

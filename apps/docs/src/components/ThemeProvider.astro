@@ -1,0 +1,14 @@
+---
+/**
+ * ThemeProvider override (B10: dark only). Starlight's default reads
+ * localStorage and prefers-color-scheme to pick light or dark; starhold.fyi has
+ * one theme, so this pins it and never touches storage. Other Starlight code
+ * calls `StarlightThemeProvider.updatePickers()`, so a no-op stays defined.
+ * Inline so the attribute is set before first paint.
+ */
+---
+
+<script is:inline>
+	document.documentElement.dataset.theme = 'dark';
+	window.StarlightThemeProvider = { updatePickers() {} };
+</script>

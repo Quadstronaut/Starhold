@@ -1,0 +1,212 @@
+/* ═════════════════════════════════════════════════════════════════════════
+   starhold.app: the launcher's own layer, on top of fleet-base.css.
+   Tokens only (B1). The one custom-property exception is the sanctioned
+   .fleet-tile--{store,docs,status} { --tile-accent } rule (spec §1.1, §4.2):
+   a foreign accent tints only that tile's hex glyph and its 2 px top rule.
+   Everything else stays in hangar lime, so the page keeps one accent.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* ═══ section rhythm ══════════════════════════════════════════════════════ */
+.section-lede {
+	margin-bottom: var(--sp-6);
+}
+
+/* Tile copy: purpose line, then the destination host in mono. */
+.tile .purpose {
+	color: var(--text-muted);
+}
+.tile .host {
+	margin-top: var(--sp-1);
+	font-family: var(--font-mono);
+	font-size: var(--fs-0);
+	color: var(--text-muted);
+	/* Hosts break only at the <wbr> after a dot or slash in the markup; break-word
+	   is the last resort for a segment that cannot fit a line on its own. */
+	overflow-wrap: break-word;
+}
+.tile .checked {
+	font-family: var(--font-mono);
+	font-size: var(--fs-0);
+	color: var(--text-muted);
+	font-variant-numeric: tabular-nums;
+}
+.tile .checked:empty {
+	display: none;
+}
+/* Room for the arrow, which sits bottom right. A long tag keeps one line and
+   pushes the chip to the next row instead of breaking inside its pill. */
+.tile .tile-meta {
+	padding-right: var(--sp-6);
+}
+.tile .tile-meta .tag {
+	white-space: nowrap;
+}
+
+/* A grid straight under its h2 (no lede between) still needs air, or the
+   site tiles' coloured top rules crowd the heading. */
+h2 + .fleet-tiles,
+h2 + .bays {
+	margin-top: var(--sp-6);
+}
+
+/* Keyboard users get the whole tile lit, not just the link text. */
+.tile:has(.stretched:focus-visible) {
+	border-color: var(--accent);
+}
+
+/* ═══ bays: bento grid ════════════════════════════════════════════════════
+   One column on phones; from 700 px two columns, Shushgame 2×1 across the top
+   row and QNix and Umbermark 1×1 under it (spec §4.2). Deliberately never three
+   tracks: inside the 1080 px page a third-width bay leaves ~220 px of content,
+   which clips the one-line "Pre-launch · not for sale" pill (216 px) and splits
+   the mono hostnames mid-word. Two tracks give each 1×1 bay 250 px or more. */
+.bays {
+	display: grid;
+	gap: var(--sp-4);
+	grid-template-columns: 1fr;
+}
+@media (min-width: 700px) {
+	.bays {
+		grid-template-columns: 1fr 1fr;
+		gap: var(--sp-5);
+	}
+	.bay--wide {
+		grid-column: span 2;
+	}
+}
+/* Bays keep the arrow on its own line under the meta row, so the meta row
+   can use the full width. */
+.bay {
+	padding-bottom: var(--sp-8);
+}
+.bay .tile-meta {
+	padding-right: 0;
+}
+
+/* Each bay gets a faint corner glow in the site accent. It is painted by a
+   pseudo-element inside the tile's own stacking context, so the tile keeps
+   the storefront's exact background (R24 parity reads it). */
+.bay {
+	isolation: isolate;
+	overflow: hidden;
+}
+.bay::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	border-radius: inherit;
+	background: radial-gradient(circle at 100% 0%, var(--glow) 0%, transparent 55%);
+	pointer-events: none;
+}
+
+/* Pre-launch reads as unfinished at a glance: a dashed edge, never a price.
+   It has no link (B9 carve-out: no purchase path), so it must not answer the
+   pointer like a clickable tile: no lift, no accent border, no arrow room. */
+.bay--prelaunch,
+.bay--prelaunch:hover {
+	border-style: dashed;
+	border-color: var(--border-strong);
+	transform: none;
+	box-shadow: var(--shadow-soft);
+}
+.bay--prelaunch {
+	padding-bottom: var(--sp-5);
+}
+
+/* The wide bay carries a small line drawing of a berth with the craft from
+   the hero at rest in it. Decoration only, hidden on phones. */
+.bay-art {
+	display: none;
+}
+@media (min-width: 700px) {
+	.bay--wide {
+		min-height: 240px;
+	}
+	.bay--wide :is(h3, .purpose, .host, .tile-meta) {
+		max-width: 55%;
+	}
+	.bay-art {
+		display: block;
+		position: absolute;
+		right: var(--sp-6);
+		bottom: var(--sp-7);
+		width: min(42%, 240px);
+		height: auto;
+		z-index: -1;
+		color: var(--border-strong);
+		pointer-events: none;
+	}
+	.bay-art .bay-art-hull {
+		color: var(--accent);
+		opacity: 0.7;
+	}
+}
+
+/* ═══ the rest of Starhold: three site tiles ══════════════════════════════ */
+.fleet-tiles {
+	display: grid;
+	gap: var(--sp-4);
+	grid-template-columns: 1fr;
+}
+@media (min-width: 800px) {
+	.fleet-tiles {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: var(--sp-5);
+	}
+}
+
+.fleet-tile--store {
+	--tile-accent: var(--fleet-store-accent);
+}
+.fleet-tile--docs {
+	--tile-accent: var(--fleet-docs-accent);
+}
+.fleet-tile--status {
+	--tile-accent: var(--fleet-status-accent);
+}
+
+/* Column flex so the meta row (chip + arrow) pins to the bottom edge: the tiles
+   stretch to the row height, so chips line up even when one purpose line is
+   shorter than its neighbours. */
+.fleet-tile {
+	display: flex;
+	flex-direction: column;
+}
+.fleet-tile .tile-meta {
+	margin-top: auto;
+	padding-top: var(--sp-3);
+}
+
+/* The foreign accent's two uses: a 2 px top rule and the hex glyph. The rule
+   sits over the card's own top border and follows its rounded corners (a
+   top-only border on a radius tapers into the curve), so it reads as the
+   card's edge, like the storefront step cards, not a floating line. */
+.fleet-tile::before {
+	content: '';
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	right: -1px;
+	height: var(--radius-lg);
+	border-top: 2px solid var(--tile-accent);
+	border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+	pointer-events: none;
+}
+.fleet-glyph {
+	display: block;
+	width: var(--sp-6);
+	height: var(--sp-6);
+	margin-bottom: var(--sp-4);
+	fill: none;
+	stroke: var(--tile-accent);
+	stroke-width: var(--stroke-w);
+	stroke-linejoin: round;
+}
+
+/* ═══ hero art: the bays drawing sits a touch lower than the station ══════ */
+@media (min-width: 900px) {
+	.hangar-art {
+		margin-top: var(--sp-5);
+	}
+}

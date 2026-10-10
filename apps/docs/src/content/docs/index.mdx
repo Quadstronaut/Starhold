@@ -1,52 +1,44 @@
 ---
-title: Starhold Knowledge
-description: Every product ships with its schematic.
-tableOfContents: false
+title: Start here
+description: Setup guides, product notes and the build log.
+template: splash
+prev: false
+next: false
+hero:
+  title: Setup guides and notes for the things Starhold ships.
+  tagline: How to order and run the bots, how Shushgame plays, where QNix is heading, and what changed lately.
+  actions:
+    - { text: Start with the bots, link: /bots/ordering/, variant: primary }
+    - { text: Store, link: 'https://starhold.dev', variant: secondary }
+    - { text: Status, link: 'https://status.starhold.fyi', variant: minimal }
 ---
 
-import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+import ShelfTile from '../../components/ShelfTile.astro';
 
-This is the schematic library for everything Starhold flies — operational manuals, player guides, and the running mission log. Pick a section below.
+<div class="not-content fleet-scope fyi-splash">
 
-<CardGrid>
-  <LinkCard
-    title="Custom Discord Bots"
-    description="Ordering flow, feature modules, and the shared roadmap policy."
-    href="/bots/ordering/"
-  />
-  <LinkCard
-    title="Shushgame"
-    description="Rules, mechanics, point economy, and how the zombie apocalypse works."
-    href="/shushgame/about/"
-  />
-  <LinkCard
-    title="QNix Platform"
-    description="The encrypted multi-tenant platform Starhold flies on — architecture, security, and the build chronicle."
-    href="/qnix/"
-  />
-  <LinkCard
-    title="Open Source"
-    description="Quadstronaut utilities Starhold proudly offers — starting with QuadClicker."
-    href="/open-source/"
-  />
-  <LinkCard
-    title="Mission Log"
-    description="Dated entries tracking what ships and what changes."
-    href="/log/2026-06-06-liftoff/"
-  />
-  <LinkCard
-    title="Storefront"
-    description="Order bots and automation services at starhold.dev."
-    href="https://starhold.dev"
-  />
-  <LinkCard
-    title="The Hangar"
-    description="Hosted apps at starhold.app."
-    href="https://starhold.app"
-  />
-  <LinkCard
-    title="Live Status"
-    description="System health and incident history at status.starhold.fyi."
-    href="https://status.starhold.fyi"
-  />
-</CardGrid>
+<section class="section" aria-labelledby="shelf-title">
+	<h2 id="shelf-title">Pick a <span class="accent-word">shelf</span></h2>
+	<div class="tiles fyi-shelves">
+		<ShelfTile title="Custom Discord Bots" href="/bots/ordering/" icon="bots">Ordering flow, feature modules, and the shared roadmap policy.</ShelfTile>
+		<ShelfTile title="Shushgame" href="/shushgame/about/" icon="shush">Rules, mechanics, point economy, and how the zombie apocalypse works.</ShelfTile>
+		<ShelfTile title="QNix (in development)" href="/qnix/" icon="qnix">Design notes for QNix: architecture, hosting, tenancy and security.</ShelfTile>
+		<ShelfTile title="Open source" href="/open-source/" icon="code">Small utilities I publish, starting with QuadClicker.</ShelfTile>
+		<ShelfTile title="Build log" href="/log/2026-06-06-liftoff/" icon="log">Dated entries on what shipped and what changed.</ShelfTile>
+		<ShelfTile title="Storefront" href="https://starhold.dev" icon="store">Order bots and automation services at starhold.dev.</ShelfTile>
+		<ShelfTile title="Hosted apps" href="https://starhold.app" icon="apps">Running apps at starhold.app.</ShelfTile>
+		<ShelfTile title="Live status" href="https://status.starhold.fyi" icon="status">Live checks and uptime at status.starhold.fyi.</ShelfTile>
+	</div>
+</section>
+
+<section class="section section-divided" aria-labelledby="check-title">
+	<h2 id="check-title">What you can <span class="accent-word">check</span></h2>
+	<ul class="proof">
+		<li><span class="proof-item">Search runs on this site<span class="verifier">devtools → Network: one host</span></span></li>
+		<li><a href="https://status.starhold.fyi">Status<span class="verifier">status.starhold.fyi</span></a></li>
+		<li><a href="https://starhold.dev">Store<span class="verifier">starhold.dev</span></a></li>
+		<li><a href="https://starhold.app">Hosted apps<span class="verifier">starhold.app</span></a></li>
+	</ul>
+</section>
+
+</div>

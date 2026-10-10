@@ -1,0 +1,390 @@
+/* ═════════════════════════════════════════════════════════════════════════
+   starhold.fyi site CSS (STAR-27 spec §2.2). Imported into the sh.site layer
+   by starlight-map.css, after fleet-base.css, so it beats every Starlight
+   layer without !important. Tokens only: no colour literal in this file, and
+   no custom property is declared here.
+
+   Sections: splash frame · hero · splash body · closing band · Starlight
+   chrome (header, search, sidebar) · inner-page content.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* ═══ splash frame ════════════════════════════════════════════════════════
+   On the splash template Starlight puts the hero, the Markdown and the footer
+   in one content panel capped at --sl-content-width. The fyi hero is full
+   bleed like the storefront's, so on that page the panel lets go of its width
+   and padding and each section centres itself on --page instead. */
+[data-has-hero] .content-panel {
+	padding: 0;
+}
+[data-has-hero] .content-panel > .sl-container {
+	max-width: none;
+	margin-inline: 0;
+}
+/* The fleet footer keeps its own --sp-8 top margin, so band and footer sit as
+   far apart as on starhold.dev. Main's 3vh bottom pad is zeroed through
+   --sl-main-pad in starlight-map.css (a plain padding rule here loses to
+   Starlight's scoped one), so the footer is the last thing on the page. */
+[data-has-hero] .content-panel > .sl-container > * + *:not(.fleet-footer) {
+	margin-top: 0;
+}
+
+/* ═══ hero ════════════════════════════════════════════════════════════════
+   fleet-base draws the storefront bloom (in docs teal). The Blueprint site adds
+   the one thing the old blueprint.css was right about, the grid paper, but
+   only here: a 24 px grid at 0.35, faded out from the art side by a mask, so it
+   never reaches body pages. */
+.fyi-hero {
+	isolation: isolate;
+}
+.fyi-hero::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	opacity: 0.35;
+	background-image:
+		linear-gradient(var(--border) 1px, transparent 1px),
+		linear-gradient(90deg, var(--border) 1px, transparent 1px);
+	background-size: var(--sp-5) var(--sp-5);
+	background-position: center top;
+	/* Any opaque colour works as a mask; a token keeps the file literal-free. */
+	-webkit-mask-image: radial-gradient(ellipse 60% 85% at 78% 40%, var(--text) 0%, transparent 72%);
+	mask-image: radial-gradient(ellipse 60% 85% at 78% 40%, var(--text) 0%, transparent 72%);
+}
+.fyi-hero .fleet-hero-inner {
+	padding-top: var(--sp-7);
+	padding-bottom: var(--sp-7);
+}
+@media (min-width: 900px) {
+	.fyi-hero .fleet-hero-inner {
+		padding-bottom: var(--sp-8);
+	}
+	/* The drawing sheet is square and framed, so it reads larger than the
+	   storefront's open station; capped so it never runs into the hero wordmark. */
+	.fyi-hero .fleet-hero-art {
+		top: 50%;
+		bottom: auto;
+		translate: 0 -50%;
+		max-width: 440px;
+	}
+}
+/* Drawing annotation inside the motif (balloon numbers, title block). */
+.fyi-art-text {
+	font-family: var(--font-mono);
+	font-size: var(--fs-0);
+	letter-spacing: 0.06em;
+}
+
+/* ═══ splash body ═════════════════════════════════════════════════════════ */
+.fyi-splash .section > h2 {
+	margin-bottom: var(--sp-5);
+}
+/* The shelf: two up on tablets like the storefront tiles, four up once each
+   tile still gets ~230 px, so all eight sit in two even rows. */
+@media (min-width: 1000px) {
+	.fyi-shelves {
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--sp-4);
+	}
+}
+.fyi-shelf {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: var(--sp-7);
+}
+.fyi-shelf h3 {
+	font-size: var(--fs-3);
+}
+/* Phones: eight full tiles would be four screens of scrolling, so each one
+   becomes a compact row, icon beside text, arrow on the right. */
+@media (max-width: 699px) {
+	.fyi-shelves {
+		gap: var(--sp-3);
+	}
+	.fyi-shelf {
+		display: grid;
+		grid-template-columns: var(--chip) 1fr;
+		column-gap: var(--sp-4);
+		align-items: start;
+		padding: var(--sp-4);
+		border-radius: var(--radius-md);
+	}
+	.fyi-shelf .chip-lg {
+		grid-row: span 2;
+		margin: 0;
+	}
+	.fyi-shelf h3 {
+		margin: 0 0 var(--sp-1);
+		padding-right: var(--sp-5);
+	}
+	.fyi-shelf p {
+		padding-right: 0;
+	}
+	.fyi-shelf .go {
+		top: var(--sp-4);
+		bottom: auto;
+		right: var(--sp-4);
+	}
+}
+
+/* ═══ closing band ════════════════════════════════════════════════════════ */
+.fyi-close {
+	margin-top: var(--sp-7);
+}
+.fyi-close--splash {
+	max-width: var(--page);
+	margin: 0 auto;
+	padding: var(--sp-7) var(--sp-5);
+	border-top: 1px solid var(--border);
+}
+.fyi-close .band > :last-child {
+	margin-bottom: 0;
+}
+.fyi-close h2 {
+	margin-bottom: var(--sp-3);
+}
+/* Starlight's default footer on the splash has no pagination; drop its empty
+   meta row so the band sits straight under the body sections. */
+[data-has-hero] .content-panel footer.sl-flex:not(.fleet-footer):not(:has(a)) {
+	display: none;
+}
+
+/* The fleet footer at column width (inner pages): two by two rather than three
+   and an orphan. */
+@media (min-width: 520px) {
+	.fleet-footer--embedded .fleet-footer-inner {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		padding: var(--sp-6) 0;
+	}
+}
+
+/* The splash hero keeps two pills on a phone, like every other fleet hero:
+   the third action (Status) is already in the header menu, the "Live status"
+   shelf tile and the "What you can check" strip. */
+@media (max-width: 479px) {
+	.fyi-hero .btn-row > :nth-child(n + 3) {
+		display: none;
+	}
+}
+
+/* ═══ Starlight chrome ════════════════════════════════════════════════════ */
+/* Header: the lockup stays amber (fleet-base lockup rule); only the tag and
+   the current fleet link take docs teal. */
+.header .fyi-title {
+	font-size: var(--fs-3);
+}
+.header .site-tag {
+	flex-shrink: 0;
+}
+.header .fleet-header--embedded {
+	gap: var(--sp-4);
+}
+/* The fleet menu panel opens from the fixed header; keep it above Starlight's
+   own layers (sidebar pane, mobile TOC). FleetHeader's script closes it when
+   the sidebar opens, so the two never stack. */
+.header .fleet-menu-panel {
+	z-index: var(--sl-z-index-menu);
+}
+
+/* Splash: the header content lines up with the hero column (--page minus its
+   gutters) like the storefront's, instead of running edge to edge. Inner pages
+   keep Starlight's grid so search sits over the content column. */
+:root[data-has-hero] div.header {
+	max-width: calc(var(--page) - 2 * var(--sp-5));
+	margin-inline: auto;
+}
+
+/* With a sidebar, the title column, search pill, four links and the quote pill
+   need ~860 px; between 800 and 896 px they would push the pill off the edge.
+   Collapse into the menu there too (the CTA lives in the menu panel). */
+@media (min-width: 50rem) and (max-width: 55.99rem) {
+	:root[data-has-sidebar] .header .fleet-wide {
+		display: none;
+	}
+	:root[data-has-sidebar] .header .fleet-menu {
+		display: block;
+	}
+}
+
+/* Narrow phones (under 380 px): the sidebar toggle, the fleet menu pill and the
+   search icon leave too little room, so the lockup tightens until the docs tag
+   fits whole (spec §2.1: the title is never clipped). */
+@media (max-width: 379px) {
+	.header .fyi-title {
+		font-size: var(--fs-1);
+		gap: var(--sp-1);
+	}
+	.header .wordmark.header {
+		font-size: var(--fs-1);
+		letter-spacing: 0;
+	}
+	.header .title-wrapper {
+		gap: var(--sp-1);
+	}
+	div.header {
+		gap: var(--sp-2);
+	}
+	.header .fleet-header--embedded {
+		gap: var(--sp-2);
+	}
+	/* The Menu pill and the header's side padding give back 16 px between them. */
+	:root {
+		--sl-nav-pad-x: var(--sp-2);
+	}
+	:root[data-has-sidebar] .header details.fleet-menu > summary {
+		padding: 0 var(--sp-1);
+	}
+}
+
+/* Starlight's sidebar toggle, restyled as the fleet's outlined square button
+   (it was a bright filled circle with a drop shadow). Its accessible name is
+   "Docs pages" (src/content/i18n/en.json), so it never shares "Menu" with the
+   fleet switcher next to it. */
+starlight-menu-button button {
+	/* Size comes from --sl-menu-button-size (starlight-map.css), which the
+	   header's reserved right padding also reads. */
+	padding: var(--sp-1);
+	background-color: transparent;
+	color: var(--text);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-sm);
+	box-shadow: none;
+}
+starlight-menu-button button:hover {
+	border-color: var(--border-strong);
+}
+starlight-menu-button[aria-expanded='true'] button {
+	background-color: var(--surface-2);
+	border-color: var(--border-strong);
+}
+
+/* The fleet menu is the family's three-bar square on the splash, same as
+   starhold.dev, status and hangar. On inner pages Starlight's sidebar toggle
+   already wears that hamburger ("Docs pages"), so the fleet menu becomes a
+   labelled text pill reading "Menu" (its accessible name, aria-label on the
+   summary, so visible label and name agree) and the two can't be mistaken for
+   each other. No new glyph that appears nowhere else in the fleet. */
+.header .fleet-menu > summary .menu-label {
+	display: none;
+}
+:root[data-has-sidebar] .header .fleet-menu > summary {
+	flex-direction: row;
+	align-items: center;
+	height: var(--sp-6);
+	padding: 0 var(--sp-2);
+	border-radius: var(--radius-pill);
+	font-size: var(--fs-0);
+	font-weight: 600;
+	color: var(--text);
+}
+:root[data-has-sidebar] .header .fleet-menu > summary:hover {
+	border-color: var(--border-strong);
+}
+:root[data-has-sidebar] .header .fleet-menu > summary .bar {
+	display: none;
+}
+:root[data-has-sidebar] .header .fleet-menu > summary .menu-label {
+	display: inline;
+}
+
+/* Search opens from a pill, like every other control in the family. */
+@media (min-width: 50rem) {
+	site-search button[data-open-modal] {
+		border-radius: var(--radius-pill);
+		background-color: var(--surface);
+		border-color: var(--border);
+		color: var(--text-muted);
+		padding-inline-start: var(--sp-4);
+		padding-inline-end: var(--sp-2);
+		height: var(--sp-6);
+	}
+	site-search button[data-open-modal]:hover {
+		border-color: var(--border-strong);
+		color: var(--text);
+	}
+}
+site-search button[data-open-modal] > kbd {
+	border-radius: var(--radius-pill);
+	background-color: var(--surface-2);
+	color: var(--text-muted);
+}
+
+/* Sidebar: the one accent rule allowed on docs (§2.3) is the active item,
+   accent text plus a 2 px accent left rule, instead of Starlight's filled bar. */
+.sidebar-content a[aria-current='page'],
+.sidebar-content a[aria-current='page']:hover,
+.sidebar-content a[aria-current='page']:focus {
+	background-color: transparent;
+	color: var(--accent);
+	font-weight: 600;
+	border-inline-start: 2px solid var(--accent);
+	border-start-start-radius: 0;
+	border-end-start-radius: 0;
+}
+.sidebar-content a:not([aria-current='page']):hover {
+	color: var(--text);
+}
+/* The mobile menu footer only ever held the theme picker and social icons,
+   both gone; without this it is an empty bordered strip. */
+.mobile-preferences {
+	display: none;
+}
+
+/* ═══ inner-page content ══════════════════════════════════════════════════ */
+/* The fleet heading rule: weight 650, never uppercase, no wide tracking. */
+h1#_top,
+.sl-markdown-content :is(h1, h2, h3) {
+	font-weight: 650;
+	letter-spacing: -0.01em;
+	text-transform: none;
+}
+h1#_top {
+	color: var(--text);
+}
+.sl-markdown-content {
+	font-size: var(--fs-2);
+}
+.sl-markdown-content :is(p, li, blockquote) {
+	max-width: var(--measure);
+}
+/* Links in running text are underlined, never colour alone (B7). */
+.sl-markdown-content a:not(.not-content *) {
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+.sl-markdown-content a:not(.not-content *):hover {
+	color: var(--accent-hover);
+}
+/* The # anchor beside each heading appears on hover and on keyboard focus. */
+.sl-markdown-content .sl-anchor-link {
+	opacity: 0;
+	transition: opacity 0.15s ease;
+}
+.sl-markdown-content .sl-heading-wrapper:hover .sl-anchor-link,
+.sl-markdown-content .sl-anchor-link:focus-visible {
+	opacity: 1;
+}
+@media (hover: none) {
+	.sl-markdown-content .sl-anchor-link {
+		opacity: 1;
+	}
+}
+.sl-markdown-content code:not(pre code) {
+	border-radius: var(--radius-sm);
+}
+/* Asides: square left rule in the semantic colour, soft panel corners. */
+.starlight-aside {
+	border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* Previous / next links read as fleet cards. */
+.pagination-links a {
+	border-color: var(--border);
+	border-radius: var(--radius-md);
+	background: var(--surface);
+	box-shadow: none;
+}
+.pagination-links a:hover {
+	border-color: var(--accent);
+}

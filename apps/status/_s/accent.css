@@ -1,0 +1,11 @@
+/* status.starhold.fyi accent: Mast-array violet. Green and red carry meaning on that page,
+   so the chrome stays clear of both. Exactly the seven accent variables (check 3). */
+:root {
+	--accent: #b89cff;
+	--accent-hover: #cbb6ff;
+	--accent-2: #9f80ff;
+	--accent-ink: #120c1f;
+	--accent-quiet: #1d1830;
+	--glow: rgb(184 156 255 / 0.16);
+	--glow-edge: rgb(184 156 255 / 0.35);
+}
