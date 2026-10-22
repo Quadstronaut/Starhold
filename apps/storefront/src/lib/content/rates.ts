@@ -2,7 +2,8 @@
 export const RATES = {
 	personalHourlyUsd: 49,
 	businessHourlyUsd: 149,
-	managedOpsServerMonthlyUsd: 99
+	managedOpsServerMonthlyUsd: 99,
+	hangarHostingAppMonthlyUsd: 19
 } as const;
 
 /** Whole-dollar display string: usd(149) -> "$149". */

@@ -544,6 +544,9 @@ export const contact = {
 	eyebrow: 'Get in touch',
 	h1Quote: 'Request a quote',
 	h1Contact: 'Contact',
+	h1Hosting: 'Request Hangar hosting',
+	introHosting:
+		'Tell me what the app is and how it runs today: a container image, a compose file, a static site or a bot. I will come back with questions and a start date.',
 	introQuote:
 		'Tell me what the process is today and what it should be instead. Rough is fine — I will come back with questions, a scope, and a price.',
 	introContact: 'Questions, quotes, or something that does not fit a form. Either channel reaches me.',

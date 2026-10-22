@@ -140,7 +140,8 @@ const KIND_LABELS: Record<string, string> = {
 	contact: '📨 Contact message',
 	quote: '🛠️ Quote request',
 	qnix: '🛰️ QNix interest',
-	fullstack: '🏗️ Full Stack inquiry'
+	fullstack: '🏗️ Full Stack inquiry',
+	hosting: '🛰️ Hangar hosting request'
 };
 
 export function intakeEmbed(kind: string, name: string, email: string, message: string): Embed {

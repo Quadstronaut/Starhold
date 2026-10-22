@@ -6,7 +6,8 @@ describe('rates', () => {
 		expect(RATES).toEqual({
 			personalHourlyUsd: 49,
 			businessHourlyUsd: 149,
-			managedOpsServerMonthlyUsd: 99
+			managedOpsServerMonthlyUsd: 99,
+			hangarHostingAppMonthlyUsd: 19
 		});
 	});
 	it('usd formats whole dollars', () => {
