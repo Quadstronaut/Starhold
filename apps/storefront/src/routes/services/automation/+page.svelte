@@ -32,6 +32,7 @@
 			Need a whole application rather than a script? That is
 			<a href="/services/fullstack">Full Stack Solutions</a>.
 		</p>
+		<p>Hourly pricing is on the <a href="/rates">Rates</a> page.</p>
 	</div>
 	<IntakeForm kind="quote" cta="Request a quote" />
 </section>

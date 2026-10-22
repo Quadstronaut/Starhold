@@ -1,6 +1,6 @@
 // Navigation SSOT. The header, the mobile drawer, and the footer all render
 // from these arrays — there is exactly one place to add or rename a link.
-import { DISCORD_INVITE } from './site-links';
+import { DISCORD_INVITE, SERVICES_TERMS_APPROVED } from './site-links';
 
 export type NavItem = {
 	label: string;
@@ -40,7 +40,9 @@ export const cartLink: NavItem = utility.find((i) => i.href === '/cart')!;
 export const legal: NavItem[] = [
 	{ label: 'Terms', href: '/legal/terms' },
 	{ label: 'Privacy', href: '/legal/privacy' },
-	{ label: 'Refunds', href: '/legal/refunds' }
+	{ label: 'Refunds', href: '/legal/refunds' },
+	// Hidden until the operator approves the draft wording (see site-links.ts).
+	...(SERVICES_TERMS_APPROVED ? [{ label: 'Services Terms', href: '/legal/services' }] : [])
 ];
 
 /** Where to back the work and where to talk about it. Rendered by the footer
