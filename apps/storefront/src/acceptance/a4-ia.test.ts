@@ -16,12 +16,15 @@ const PAGES = [
 	'operator',
 	'contact',
 	'services/automation',
+	'services/managed-ops',
+	'rates',
 	'products/custom-bots',
 	'products/qnix',
 	'products/shushgame',
 	'cart',
 	'cart/success',
 	'legal/terms',
+	'legal/services',
 	'legal/privacy',
 	'legal/refunds'
 ];
@@ -44,7 +47,7 @@ describe('A4 · information architecture', () => {
 
 	it('A4.3 the published products.json contract is unchanged', () => {
 		const products = parseCatalog(catalog);
-		expect(products.map((p) => p.id)).toEqual(['shushgame', 'custom-bots', 'qnix', 'automation', 'fullstack']);
+		expect(products.map((p) => p.id)).toEqual(['shushgame', 'custom-bots', 'qnix', 'automation', 'fullstack', 'managed-ops']);
 
 		const bots = products.find((p) => p.id === 'custom-bots')!;
 		expect(bots.pricing).toEqual({ model: 'subscription', monthly_usd: 5, ops_pack_usd: 9 });
@@ -56,6 +59,10 @@ describe('A4 · information architecture', () => {
 			'https://starhold.dev/services/automation'
 		);
 		expect(products.find((p) => p.id === 'shushgame')!.url).toBe('https://shushgame.com');
+
+		const ops = products.find((p) => p.id === 'managed-ops')!;
+		expect(ops.pricing).toEqual({ model: 'subscription', monthly_usd: 99 });
+		expect(ops.url).toBe('https://starhold.dev/services/managed-ops');
 	});
 
 	it('A4.4 the home page still owns the #fleet anchor', () => {

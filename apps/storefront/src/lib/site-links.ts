@@ -12,3 +12,10 @@ export const DISCORD_TICKET_URL =
 	'https://discord.com/channels/914352168058908732/1513054615472705687';
 
 export const CONTACT_EMAIL = 'hello@starhold.dev';
+
+// Services Terms (/legal/services) is draft wording. The operator flips this to
+// true after reviewing the page (ideally with counsel); until then the page is
+// noindex, out of the footer, and not mentioned in the public Terms.
+// When flipping this to true, also set the "Effective" date (and "Last updated")
+// on /legal/services to the approval date; both are hardcoded to 22 October 2026.
+export const SERVICES_TERMS_APPROVED: boolean = true;
