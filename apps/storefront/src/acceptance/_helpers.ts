@@ -344,6 +344,7 @@ export const MARKETING_ROUTES = [
 	'src/routes/contact/+page.svelte',
 	'src/routes/services/automation/+page.svelte',
 	'src/routes/services/managed-ops/+page.svelte',
+	'src/routes/services/hosting/+page.svelte',
 	'src/routes/rates/+page.svelte',
 	'src/routes/products/custom-bots/+page.svelte',
 	'src/routes/products/qnix/+page.svelte',

@@ -4,5 +4,6 @@
  {"id":"qnix","name":"QNix","tagline":"","status":"coming-soon","url":"https://starhold.dev/products/qnix","pricing_url":null,"pricing":{"model":"tbd"},"order":3,"card_label":"Durable Hosting","card_sub":"Click for more info →"},
  {"id":"automation","name":"Server/Task Automation","tagline":"","status":"live","url":"https://starhold.dev/services/automation","pricing_url":null,"pricing":{"model":"quote"},"order":4},
  {"id":"fullstack","name":"Full Stack Solutions","tagline":"","status":"live","url":"https://starhold.dev/services/fullstack","pricing_url":null,"pricing":{"model":"quote"},"order":5},
- {"id":"managed-ops","name":"Managed Ops","tagline":"per server, monthly","status":"live","url":"https://starhold.dev/services/managed-ops","pricing_url":"https://starhold.dev/services/managed-ops","pricing":{"model":"subscription","monthly_usd":99},"order":6}
+ {"id":"managed-ops","name":"Managed Ops","tagline":"per server, monthly","status":"live","url":"https://starhold.dev/services/managed-ops","pricing_url":"https://starhold.dev/services/managed-ops","pricing":{"model":"subscription","monthly_usd":99},"order":6},
+ {"id":"hangar-hosting","name":"Hangar hosting","tagline":"per app, monthly","status":"live","url":"https://starhold.dev/services/hosting","pricing_url":"https://starhold.dev/services/hosting","pricing":{"model":"subscription","monthly_usd":19},"order":7}
 ]}

@@ -5,6 +5,7 @@
 
 	let { data } = $props();
 	const isQuote = $derived(data.intent === 'quote');
+	const isHosting = $derived(data.intent === 'hosting');
 </script>
 
 <svelte:head>
@@ -14,8 +15,8 @@
 
 <section class="section">
 	<p class="eyebrow">{contact.eyebrow}</p>
-	<h1>{isQuote ? contact.h1Quote : contact.h1Contact}</h1>
-	<p class="lede">{isQuote ? contact.introQuote : contact.introContact}</p>
+	<h1>{isHosting ? contact.h1Hosting : isQuote ? contact.h1Quote : contact.h1Contact}</h1>
+	<p class="lede">{isHosting ? contact.introHosting : isQuote ? contact.introQuote : contact.introContact}</p>
 
 	<p class="email">
 		<span class="eyebrow">{contact.emailLabel}</span>
@@ -33,10 +34,10 @@
 </section>
 
 <section class="section section-divided reveal">
-	<h2>{isQuote ? 'Quote request' : 'Send a message'}</h2>
+	<h2>{isHosting ? 'Hosting request' : isQuote ? 'Quote request' : 'Send a message'}</h2>
 	<IntakeForm
-		kind={isQuote ? 'quote' : 'contact'}
-		cta={isQuote ? 'Request a quote' : 'Send'}
+		kind={isHosting ? 'hosting' : isQuote ? 'quote' : 'contact'}
+		cta={isHosting ? 'Request hosting' : isQuote ? 'Request a quote' : 'Send'}
 	/>
 </section>
 

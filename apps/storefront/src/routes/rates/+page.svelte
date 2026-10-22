@@ -28,7 +28,8 @@
 		</ul>
 		<p>
 			Want ongoing upkeep instead of hourly work? See the
-			<a href="/services/managed-ops">Managed Ops</a> monthly product.
+			<a href="/services/managed-ops">Managed Ops</a> monthly product, or
+			<a href="/services/hosting">Hangar hosting</a> to have an app run for you.
 		</p>
 
 		<h2>How I work</h2>

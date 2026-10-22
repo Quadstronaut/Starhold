@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { SERVICES_TERMS_APPROVED } from '../src/lib/site-links';
 
 // Literal copies of INCLUDED (src/lib/content/managed-ops.ts); kept literal so the test pins the shipped copy.
 const INCLUDED = [
@@ -28,8 +29,11 @@ test('/services/managed-ops shows price, inclusions, rules, contact CTA only', a
 	);
 });
 
-test('/legal/services is 200 and noindex', async ({ page }) => {
+// noindex tracks the approval flag: draft terms stay out of search, approved terms are indexable.
+test('/legal/services is 200 and noindex only while unapproved', async ({ page }) => {
 	const res = await page.goto('/legal/services');
 	expect(res?.status()).toBe(200);
-	await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(1);
+	await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(
+		SERVICES_TERMS_APPROVED ? 0 : 1
+	);
 });

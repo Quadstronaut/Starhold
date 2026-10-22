@@ -6,7 +6,7 @@ import { allow } from '$lib/server/rate-limit';
 import { postDiscord, intakeEmbed } from '$lib/server/discord';
 import type { RequestHandler } from './$types';
 
-const KINDS = ['contact', 'quote', 'qnix', 'fullstack'];
+const KINDS = ['contact', 'quote', 'qnix', 'fullstack', 'hosting'];
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 export const POST: RequestHandler = async ({ request, getClientAddress }) => {
