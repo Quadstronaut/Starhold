@@ -78,11 +78,14 @@ describe('A4 · information architecture', () => {
 	it('A4.5 navigation is data-driven with 4-5 primary items and a cart in utility', () => {
 		expect(nav.primary.length).toBeGreaterThanOrEqual(4);
 		expect(nav.primary.length).toBeLessThanOrEqual(5);
-		expect(nav.primary.map((i) => i.href)).toEqual(
-			expect.arrayContaining(['/work', '/capabilities', '/operator', '/contact'])
+		// STAR-134: primary leads with the services; hiring moved to secondary.
+		expect(nav.primary.map((i) => i.href)).toEqual(expect.arrayContaining(['/#fleet', '/contact']));
+		expect(nav.secondary.map((i) => i.href)).toEqual(
+			expect.arrayContaining(['/work', '/capabilities', '/rates', '/operator', '/contact?intent=quote'])
 		);
+		expect(read('src/lib/components/Footer.svelte')).toMatch(/#each secondary/);
 		expect(nav.utility.map((i) => i.href)).toContain('/cart');
-		expect(nav.cta.href.startsWith('/contact')).toBe(true);
+		expect(nav.cta.href).toBe('/contact?intent=invite');
 
 		// the header renders from the module rather than hard-coding links
 		const header = read('src/lib/components/Header.svelte');

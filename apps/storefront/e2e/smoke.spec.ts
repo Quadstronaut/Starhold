@@ -4,10 +4,10 @@ import { test, expect } from '@playwright/test';
 // thing the redesign removed: the headline is now one deterministic positioning
 // line. Determinism and the above-fold contract are covered by B1.1/B1.2 in
 // e2e/redesign.spec.ts; this stays as a cheap structural smoke check.
-test('home renders the positioning hero and the selected-work section', async ({ page }) => {
+test('home renders the positioning hero and the services section', async ({ page }) => {
 	await page.goto('/');
 	await expect(page.locator('h1')).toHaveCount(1);
-	await expect(page.locator('h1')).toContainText(/automation/i);
+	await expect(page.locator('h1')).toContainText(/host and operate/i);
 	await expect(page.locator('#fleet')).toBeVisible();
 });
 

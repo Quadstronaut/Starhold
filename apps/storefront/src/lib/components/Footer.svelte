@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { primary, utility, community, legal } from '$lib/nav';
+	import { primary, secondary, utility, community, legal } from '$lib/nav';
 	import { site } from '$lib/content/copy';
 	import Brand from '$lib/components/Brand.svelte';
 
@@ -25,6 +25,16 @@
 			<p class="eyebrow">Site</p>
 			<ul>
 				{#each primary as item (item.href)}
+					<li><a href={item.href}>{item.label}</a></li>
+				{/each}
+			</ul>
+		</nav>
+
+		<!-- Secondary nav (STAR-134): hiring lives here, one click from every page. -->
+		<nav class="col" aria-label="Hire the operator">
+			<p class="eyebrow">Hire the operator</p>
+			<ul>
+				{#each secondary as item (item.href)}
 					<li><a href={item.href}>{item.label}</a></li>
 				{/each}
 			</ul>

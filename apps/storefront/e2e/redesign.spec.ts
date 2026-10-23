@@ -95,22 +95,33 @@ test('B1.2 hero, both CTAs, and a proof signal sit above the 800px fold', async 
 	}
 });
 
-test('B1.3 the CTA pair points at quote intake and at the work index', async ({ page }) => {
+test('B1.3 the CTA pair points at invite intake and at the services list', async ({ page }) => {
 	await page.goto('/');
 	const primary = page.getByTestId('cta-primary');
 	const secondary = page.getByTestId('cta-secondary');
 	expect(await primary.getAttribute('href')).toMatch(/^\/contact/);
-	expect(await primary.getAttribute('href')).toContain('intent=quote');
-	expect(await secondary.getAttribute('href')).toMatch(/^\/work/);
+	expect(await primary.getAttribute('href')).toContain('intent=invite');
+	expect(await secondary.getAttribute('href')).toBe('/#fleet');
 
-	// and the quote intent actually preselects the quote flow, server-rendered
+	// and the invite intent actually preselects the invite flow, server-rendered
 	await primary.click();
-	await expect(page.getByRole('button', { name: /request a quote/i })).toBeVisible();
+	await expect(page.getByRole('button', { name: /request an invite/i })).toBeVisible();
+	await expect(page.getByRole('combobox', { name: /service/i })).toBeVisible();
+});
+
+test('B1.3b a service card preselects its product on the invite form', async ({ page }) => {
+	await page.goto('/contact?intent=invite&product=render');
+	await expect(page.getByRole('combobox', { name: /service/i })).toHaveValue('render');
+	// an unknown product is ignored, not trusted
+	await page.goto('/contact?intent=invite&product=nope');
+	await expect(page.getByRole('combobox', { name: /service/i })).toHaveValue('umbermark');
 });
 
 test('B1.4 the $5 bot is two clicks from home and still sells', async ({ page }) => {
+	// STAR-134: the services lead the page, so the bot is reached from the
+	// secondary "hire the operator" section instead of #fleet.
 	await page.goto('/');
-	await page.locator('#fleet').getByRole('link', { name: /custom discord bots/i }).click();
+	await page.locator('#capabilities').getByRole('link', { name: /custom bots/i }).click();
 	await expect(page).toHaveURL(/\/products\/custom-bots$/);
 	await expect(page.getByRole('button', { name: /add to cart/i })).toBeVisible();
 });
@@ -332,7 +343,7 @@ test('B5.3 the mobile drawer reports its state and closes on Escape', async ({ p
 	await page.goto('/');
 
 	const toggle = page.locator('button[aria-controls="nav-primary"]');
-	const drawerLink = page.locator('#nav-primary').getByRole('link', { name: 'Capabilities' });
+	const drawerLink = page.locator('#nav-primary').getByRole('link', { name: 'Services' });
 
 	await expect(toggle).toBeVisible();
 	await expect(toggle).toHaveAttribute('aria-expanded', 'false');

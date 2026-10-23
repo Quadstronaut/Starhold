@@ -10,16 +10,29 @@ export type NavItem = {
 };
 
 /** Primary navigation. 4–5 items, no more — a solo operator's site does not
- *  need a mega-menu, and every extra item costs the 10-second evaluator. */
+ *  need a mega-menu, and every extra item costs the 10-second evaluator.
+ *  STAR-134: the site leads with the services I host and operate, so primary
+ *  points at those; the hiring pages moved to `secondary` below. */
 export const primary: NavItem[] = [
-	{ label: 'Work', href: '/work' },
-	{ label: 'Capabilities', href: '/capabilities' },
-	{ label: 'Operator', href: '/operator' },
+	{ label: 'Services', href: '/#fleet' },
+	{ label: 'Principles', href: '/#principles' },
+	{ label: 'Questions', href: '/#faq' },
 	{ label: 'Contact', href: '/contact' }
 ];
 
-/** The one visually distinct call to action that rides in the header. */
-export const cta: NavItem = { label: 'Request a quote', href: '/contact?intent=quote' };
+/** Secondary navigation: hiring the operator. Still one click from every page
+ *  (footer column, and the home page's own hire section), never the headline. */
+export const secondary: NavItem[] = [
+	{ label: 'Work', href: '/work' },
+	{ label: 'Capabilities', href: '/capabilities' },
+	{ label: 'Rates', href: '/rates' },
+	{ label: 'Operator', href: '/operator' },
+	{ label: 'Request a quote', href: '/contact?intent=quote' }
+];
+
+/** The one visually distinct call to action that rides in the header. Every
+ *  service is invitation only while it is under development. */
+export const cta: NavItem = { label: 'Request an invite', href: '/contact?intent=invite' };
 
 /** Utility cluster: the things that prove the site is real, plus the cart.
  *  Commerce lives here — reachable from every route, never the headline. */

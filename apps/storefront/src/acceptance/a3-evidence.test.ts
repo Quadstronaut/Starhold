@@ -67,6 +67,7 @@ const USED = new Set<string>([
 	...collectEvidenceRefs({
 		home: copy.home,
 		work: copy.work,
+		services: copy.services,
 		principles: copy.principles,
 		operator: copy.operator,
 		customBots: copy.customBots,
@@ -186,6 +187,8 @@ describe('A3 · anti-fabrication', () => {
 			principles: copy.principles,
 			operator: copy.operator,
 			contact: copy.contact,
+			services: copy.services,
+			pledges: copy.pledges,
 			automation: copy.automation,
 			customBots: copy.customBots,
 			qnix: copy.qnix,

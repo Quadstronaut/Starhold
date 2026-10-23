@@ -1,5 +1,29 @@
 <script lang="ts">
-	let { kind, cta = 'Send' }: { kind: 'contact' | 'quote' | 'qnix' | 'fullstack' | 'hosting'; cta?: string } = $props();
+	type Choice = { id: string; label: string };
+	let {
+		kind,
+		cta = 'Send',
+		products = [],
+		productLabel = 'Service',
+		product: initialProduct = ''
+	}: {
+		kind: 'contact' | 'quote' | 'qnix' | 'fullstack' | 'hosting' | 'invite';
+		cta?: string;
+		/** Optional service picker (the invite form). Empty list = no picker. */
+		products?: Choice[];
+		productLabel?: string;
+		/** Preselected product id; the page validates it against `products`. */
+		product?: string;
+	} = $props();
+
+	// The intake API takes a single message, so the chosen service rides as its
+	// first line. The textarea cap shrinks by the room that line needs, which
+	// keeps the server's 4000-character limit exact.
+	const PREFIX_ROOM = 100;
+	// svelte-ignore state_referenced_locally
+	let product = $state(initialProduct || products[0]?.id || '');
+	const productName = $derived(products.find((p) => p.id === product)?.label ?? '');
+	const maxMessage = $derived(products.length ? 4000 - PREFIX_ROOM : 4000);
 
 	let name = $state('');
 	let email = $state('');
@@ -16,7 +40,13 @@
 			const res = await fetch('/api/intake', {
 				method: 'POST',
 				headers: { 'content-type': 'application/json' },
-				body: JSON.stringify({ kind, name, email, message, website })
+				body: JSON.stringify({
+					kind,
+					name,
+					email,
+					message: productName ? `${productLabel}: ${productName}\n\n${message}` : message,
+					website
+				})
 			});
 			if (!res.ok) {
 				const body = await res.json().catch(() => null);
@@ -42,9 +72,19 @@
 			<span class="eyebrow">Email</span>
 			<input type="email" bind:value={email} required autocomplete="email" />
 		</label>
+		{#if products.length}
+			<label>
+				<span class="eyebrow">{productLabel}</span>
+				<select name="product" bind:value={product}>
+					{#each products as p (p.id)}
+						<option value={p.id}>{p.label}</option>
+					{/each}
+				</select>
+			</label>
+		{/if}
 		<label>
 			<span class="eyebrow">Message</span>
-			<textarea bind:value={message} required minlength="10" maxlength="4000" rows="6"></textarea>
+			<textarea bind:value={message} required minlength="10" maxlength={maxMessage} rows="6"></textarea>
 		</label>
 		<input
 			class="hp"
