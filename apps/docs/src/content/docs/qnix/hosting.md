@@ -1,11 +1,11 @@
 ---
 title: Hosting on QNix
-description: Private, encrypted app hosting — join the waitlist.
+description: Private, encrypted app hosting. Paused, and not open to sign-ups.
 sidebar:
   order: 5
 ---
 
-QNix is being built as a hosted platform. Here's what it's being built to do.
+QNix was being built as a hosted platform, and work on it is paused. Here's what it was being built to do.
 
 ## Your own private encrypted environment
 
@@ -27,6 +27,6 @@ The zero-knowledge design is a cornerstone, not a feature. Per-tenant keys are s
 
 Cross-tenant invitations are on the roadmap. Planned to let you grant another user access to a specific app in your environment — existing customer or email-only — with full auditability and revocation at any time.
 
-## Join the waitlist
+## Not open yet
 
-QNix hosting has no launch date and no pricing published yet. If this sounds like what you've been looking for, [get in touch](https://starhold.dev/contact) and I'll add you to the list.
+QNix is not taking sign-ups while it is paused, and there is no waitlist. To ask about it, use the contact form at [starhold.dev/contact](https://starhold.dev/contact) or write to [hello@starhold.dev](mailto:hello@starhold.dev).

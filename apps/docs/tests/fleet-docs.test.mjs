@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 const APP = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = join(APP, 'dist');
 const NAV = JSON.parse(readFileSync(join(APP, 'src', 'fleet-nav.json'), 'utf8'));
-const HERO_H1 = 'Setup guides and notes for the things Starhold ships.';
+const HERO_H1 = 'Privacy-first services, hosted and run for you.';
 
 function walk(dir, out = []) {
 	for (const name of readdirSync(dir)) {
