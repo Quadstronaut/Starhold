@@ -11,7 +11,7 @@
 interface Props {
 	title: string;
 	href: string;
-	icon: 'bots' | 'shush' | 'qnix' | 'code' | 'log' | 'store' | 'apps' | 'status';
+	icon: 'bots' | 'shush' | 'qnix' | 'code' | 'log' | 'store' | 'apps' | 'status' | 'shield' | 'mail' | 'frame';
 }
 const { title, href, icon } = Astro.props;
 const external = /^https?:\/\//.test(href);
@@ -32,7 +32,13 @@ const paths: Record<Props['icon'], string> = {
 	// a 2x2 of app squares
 	apps: 'M4 4h7v7H4z M13 4h7v7h-7z M4 13h7v7H4z M13 13h7v7h-7z',
 	// pulse line
-	status: 'M3 12h4l2-5 4 10 2-5h6'
+	status: 'M3 12h4l2-5 4 10 2-5h6',
+	// shield with a check: a hardening score
+	shield: 'M12 2.5l7.5 3v6c0 4.6-3.2 8.4-7.5 10-4.3-1.6-7.5-5.4-7.5-10v-6z M8.5 12.2l2.5 2.4 4.6-5',
+	// envelope: mail and DNS records
+	mail: 'M3 6h18v12H3z M3 6l9 7 9-7',
+	// picture frame with a hill: rendered images
+	frame: 'M4 5h16v14H4z M4 16l5-5 4 4 2-2 5 5 M15 9h.01'
 };
 ---
 

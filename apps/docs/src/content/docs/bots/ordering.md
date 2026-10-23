@@ -4,6 +4,10 @@ sidebar:
   order: 1
 ---
 
+:::note
+Starhold is under development and invitation only. To ask about a bot, use the contact form at [starhold.dev/contact](https://starhold.dev/contact?intent=invite) or write to [hello@starhold.dev](mailto:hello@starhold.dev).
+:::
+
 Custom bots are ordered through the configurator at [starhold.dev/products/custom-bots](https://starhold.dev/products/custom-bots). The process is straightforward:
 
 1. **Configure** — select the feature modules your server needs (see [Feature Manual](/bots/features/) for the full list).

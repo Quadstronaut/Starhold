@@ -1,16 +1,16 @@
 ---
 title: Start here
-description: Setup guides, product notes and the build log.
+description: Starhold hosts and operates privacy-first services. Under development, invitation only. What each service is, the rules they run by, and how to request an invite.
 template: splash
 prev: false
 next: false
 hero:
-  title: Setup guides and notes for the things Starhold ships.
-  tagline: How to order and run the bots, how Shushgame plays, where QNix is heading, and what changed lately.
+  title: Privacy-first services, hosted and run for you.
+  tagline: Starhold is under development and open by invitation only. These pages cover each service, the rules every one of them runs by, and how to ask for an invite.
   actions:
-    - { text: Start with the bots, link: /bots/ordering/, variant: primary }
-    - { text: Store, link: 'https://starhold.dev', variant: secondary }
-    - { text: Status, link: 'https://status.starhold.fyi', variant: minimal }
+    - { text: Request an invite, link: 'https://starhold.dev/contact?intent=invite', variant: primary }
+    - { text: Browse the services, link: /services/, variant: secondary }
+    - { text: Fleet status, link: 'https://status.starhold.fyi', variant: minimal }
 ---
 
 import ShelfTile from '../../components/ShelfTile.astro';
@@ -18,16 +18,39 @@ import ShelfTile from '../../components/ShelfTile.astro';
 <div class="not-content fleet-scope fyi-splash">
 
 <section class="section" aria-labelledby="shelf-title">
-	<h2 id="shelf-title">Pick a <span class="accent-word">shelf</span></h2>
+	<h2 id="shelf-title">The <span class="accent-word">services</span></h2>
 	<div class="tiles fyi-shelves">
-		<ShelfTile title="Custom Discord Bots" href="/bots/ordering/" icon="bots">Ordering flow, feature modules, and the shared roadmap policy.</ShelfTile>
-		<ShelfTile title="Shushgame" href="/shushgame/about/" icon="shush">Rules, mechanics, point economy, and how the zombie apocalypse works.</ShelfTile>
-		<ShelfTile title="QNix (in development)" href="/qnix/" icon="qnix">Design notes for QNix: architecture, hosting, tenancy and security.</ShelfTile>
-		<ShelfTile title="Open source" href="/open-source/" icon="code">Small utilities I publish, starting with QuadClicker.</ShelfTile>
-		<ShelfTile title="Build log" href="/log/2026-06-06-liftoff/" icon="log">Dated entries on what shipped and what changed.</ShelfTile>
-		<ShelfTile title="Storefront" href="https://starhold.dev" icon="store">Order bots and automation services at starhold.dev.</ShelfTile>
-		<ShelfTile title="Hosted apps" href="https://starhold.app" icon="apps">Running apps at starhold.app.</ShelfTile>
-		<ShelfTile title="Live status" href="https://status.starhold.fyi" icon="status">Live checks and uptime at status.starhold.fyi.</ShelfTile>
+		<ShelfTile title="Umbermark" href="/services/umbermark/" icon="shield">Scored server hardening report with a shareable link. Live, early access.</ShelfTile>
+		<ShelfTile title="Zenithmark" href="/services/zenithmark/" icon="mail">Mail and DNS scorecard for a domain. Live, free, in development.</ShelfTile>
+		<ShelfTile title="Starhold Render" href="/services/render/" icon="frame">OG image, PDF and screenshot API. Invitation only, in development.</ShelfTile>
+		<ShelfTile title="Starhold Status" href="/services/status/" icon="status">Private and white-label status pages for MSPs. Invitation only, in development.</ShelfTile>
+		<ShelfTile title="Starbot" href="/services/starbot/" icon="bots">Discord assistant for the Starhold community. In development.</ShelfTile>
+		<ShelfTile title="Shushgame" href="/shushgame/about/" icon="shush">The quiet game on Discord: one forbidden word a day. Live, free.</ShelfTile>
+		<ShelfTile title="QNix (paused)" href="/qnix/" icon="qnix">Design notes for an encrypted, multi-tenant hosting platform. Work is paused.</ShelfTile>
+		<ShelfTile title="Build log" href="/log/2026-10-23-fleet/" icon="log">Dated entries on what shipped and what changed.</ShelfTile>
+	</div>
+</section>
+
+<section class="section section-divided" aria-labelledby="rules-title">
+	<h2 id="rules-title">The <span class="accent-word">rules</span></h2>
+	<p class="lede">These are the rules every Starhold service is being built to. Not every service meets all of them yet: each page in Services lists what is not there yet.</p>
+	<div class="grid">
+		<article class="fleet-card"><h3>Your data stays yours</h3><p>No logs beyond what it takes to run the service. Nothing kept that is not needed. Your data is never sold.</p></article>
+		<article class="fleet-card"><h3>Export and delete</h3><p>Built to give you one click to download everything held on you and one click to delete it, account and all. Where that is not built yet, ask and it is done by hand.</p></article>
+		<article class="fleet-card"><h3>No dark patterns</h3><p>No expiring credits, no surprise charges, no auto-upgrade. Where paid plans open, cancelling is built to be one click with a prorated refund.</p></article>
+		<article class="fleet-card"><h3>One public price table</h3><p>A generous free tier, every plan and limit on one page, and the cost basis published once it is measured.</p></article>
+		<article class="fleet-card"><h3>No trackers</h3><p>No analytics, pixels, tag managers or third-party scripts. Terms in plain English.</p></article>
+		<article class="fleet-card"><h3>Notifications you chose</h3><p>Opt-in by default. Only critical account and service notices are opt-out. Nothing is marketing.</p></article>
+	</div>
+	<p class="lede">Offline tiers that run on your own machine, with nothing for Starhold to hold at all, are the premium privacy option. They are coming soon.</p>
+</section>
+
+<section class="section section-divided" aria-labelledby="invite-title">
+	<h2 id="invite-title">How to get <span class="accent-word">in</span></h2>
+	<p class="lede">Starhold is one person, and most of it is invitation only while it is under development. Sign-in is by invitation: ask, and I send your link. Use the contact form at <a href="https://starhold.dev/contact">starhold.dev/contact</a> or write to <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
+	<div class="btn-row">
+		<a class="btn btn-primary" href="https://starhold.dev/contact?intent=invite">Request an invite</a>
+		<a class="btn btn-secondary" href="/services/">Browse the services</a>
 	</div>
 </section>
 
@@ -35,9 +58,9 @@ import ShelfTile from '../../components/ShelfTile.astro';
 	<h2 id="check-title">What you can <span class="accent-word">check</span></h2>
 	<ul class="proof">
 		<li><span class="proof-item">Search runs on this site<span class="verifier">devtools → Network: one host</span></span></li>
-		<li><a href="https://status.starhold.fyi">Status<span class="verifier">status.starhold.fyi</span></a></li>
+		<li><a href="https://status.starhold.fyi">Fleet status<span class="verifier">status.starhold.fyi</span></a></li>
 		<li><a href="https://starhold.dev">Store<span class="verifier">starhold.dev</span></a></li>
-		<li><a href="https://starhold.app">Hosted apps<span class="verifier">starhold.app</span></a></li>
+		<li><a href="https://starhold.app">All services<span class="verifier">starhold.app</span></a></li>
 	</ul>
 </section>
 
