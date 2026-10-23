@@ -55,10 +55,10 @@ h2 + .bays {
 }
 
 /* ═══ bays: bento grid ════════════════════════════════════════════════════
-   One column on phones; from 700 px two columns, Shushgame 2×1 across the top
-   row and QNix and Umbermark 1×1 under it (spec §4.2). Deliberately never three
+   One column on phones; from 700 px two columns, Umbermark 2×1 across the top
+   row and the other six services 1×1 under it (STAR-134). Deliberately never three
    tracks: inside the 1080 px page a third-width bay leaves ~220 px of content,
-   which clips the one-line "Pre-launch · not for sale" pill (216 px) and splits
+   which clips a long state pill such as "Invitation only" next to a chip and splits
    the mono hostnames mid-word. Two tracks give each 1×1 bay 250 px or more. */
 .bays {
 	display: grid;
@@ -100,18 +100,11 @@ h2 + .bays {
 	pointer-events: none;
 }
 
-/* Pre-launch reads as unfinished at a glance: a dashed edge, never a price.
-   It has no link (B9 carve-out: no purchase path), so it must not answer the
-   pointer like a clickable tile: no lift, no accent border, no arrow room. */
-.bay--prelaunch,
-.bay--prelaunch:hover {
+/* Not open yet (invitation only, in development, paused) reads as unfinished at
+   a glance: a dashed edge. It still links, so hover and focus behave like any
+   other tile; only the edge style changes. */
+.bay--wip {
 	border-style: dashed;
-	border-color: var(--border-strong);
-	transform: none;
-	box-shadow: var(--shadow-soft);
-}
-.bay--prelaunch {
-	padding-bottom: var(--sp-5);
 }
 
 /* The wide bay carries a small line drawing of a berth with the craft from
@@ -202,6 +195,32 @@ h2 + .bays {
 	stroke: var(--tile-accent);
 	stroke-width: var(--stroke-w);
 	stroke-linejoin: round;
+}
+
+/* ═══ principles strip: three plain tiles, no links ═══════════════════════
+   Static copy cards: no stretched link, so no hover lift or arrow. */
+.principles {
+	display: grid;
+	gap: var(--sp-4);
+	grid-template-columns: 1fr;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+@media (min-width: 800px) {
+	.principles {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: var(--sp-5);
+	}
+}
+.principle,
+.principle:hover {
+	transform: none;
+	border-color: var(--border);
+	box-shadow: var(--shadow-soft);
+}
+.principle p {
+	color: var(--text-muted);
 }
 
 /* ═══ hero art: the bays drawing sits a touch lower than the station ══════ */

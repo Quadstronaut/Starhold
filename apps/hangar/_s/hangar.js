@@ -3,13 +3,12 @@
 // Rules: "Up" only when the latest result passed AND is fresh; anything missing,
 // failed to load or stale reads "Unknown", never green. No storage, no cookies.
 
-// Tile → Gatus key. QNix is "Coming soon" and has no chip, so it is not here.
+// Tile → Gatus key. Only services with a Gatus monitor get a chip; the rest
+// (Zenithmark, Render, Status, Starbot, QNix) show their state tag alone until
+// deploy/gatus.yaml watches them. Store/Docs/Fleet status live in the fleet nav.
 const KEYS = {
 	shushgame: 'products_shushgame-com',
-	umbermark: 'products_umbermark-starhold-app',
-	store: 'web_starhold-dev',
-	docs: 'web_starhold-fyi',
-	status: 'web_status-starhold-fyi'
+	umbermark: 'products_umbermark-starhold-app'
 };
 
 const OK_DELAY = 60e3;
