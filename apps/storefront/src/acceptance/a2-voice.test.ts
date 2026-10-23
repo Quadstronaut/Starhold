@@ -25,6 +25,8 @@ const COPY_STRINGS = collectStrings({
 	principles: copy.principles,
 	operator: copy.operator,
 	contact: copy.contact,
+	services: copy.services,
+	pledges: copy.pledges,
 	automation: copy.automation,
 	customBots: copy.customBots,
 	qnix: copy.qnix,
@@ -40,6 +42,8 @@ const HOME_TEXT = collectStrings({
 	home: copy.home,
 	capabilities: copy.capabilities.items,
 	work: copy.work.items,
+	services: copy.services.items,
+	pledges: copy.pledges,
 	principles: copy.principles,
 	operatorTeaser: { lede: copy.operator.lede },
 	chrome: { strapline: copy.site.strapline, hangar: 'Hangar' }

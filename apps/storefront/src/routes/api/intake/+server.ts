@@ -6,7 +6,9 @@ import { allow } from '$lib/server/rate-limit';
 import { postDiscord, intakeEmbed } from '$lib/server/discord';
 import type { RequestHandler } from './$types';
 
-const KINDS = ['contact', 'quote', 'qnix', 'fullstack', 'hosting'];
+// 'invite' is /contact?intent=invite: a request to be let into one of the
+// invitation-only services. Same validation as every other kind.
+const KINDS = ['contact', 'quote', 'qnix', 'fullstack', 'hosting', 'invite'];
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 export const POST: RequestHandler = async ({ request, getClientAddress }) => {

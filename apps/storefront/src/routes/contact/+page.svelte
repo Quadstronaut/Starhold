@@ -6,6 +6,7 @@
 	let { data } = $props();
 	const isQuote = $derived(data.intent === 'quote');
 	const isHosting = $derived(data.intent === 'hosting');
+	const isInvite = $derived(data.intent === 'invite');
 </script>
 
 <svelte:head>
@@ -15,8 +16,12 @@
 
 <section class="section">
 	<p class="eyebrow">{contact.eyebrow}</p>
-	<h1>{isHosting ? contact.h1Hosting : isQuote ? contact.h1Quote : contact.h1Contact}</h1>
-	<p class="lede">{isHosting ? contact.introHosting : isQuote ? contact.introQuote : contact.introContact}</p>
+	<h1>
+		{isInvite ? contact.h1Invite : isHosting ? contact.h1Hosting : isQuote ? contact.h1Quote : contact.h1Contact}
+	</h1>
+	<p class="lede">
+		{isInvite ? contact.introInvite : isHosting ? contact.introHosting : isQuote ? contact.introQuote : contact.introContact}
+	</p>
 
 	<p class="email">
 		<span class="eyebrow">{contact.emailLabel}</span>
@@ -34,11 +39,25 @@
 </section>
 
 <section class="section section-divided reveal">
-	<h2>{isHosting ? 'Hosting request' : isQuote ? 'Quote request' : 'Send a message'}</h2>
-	<IntakeForm
-		kind={isHosting ? 'hosting' : isQuote ? 'quote' : 'contact'}
-		cta={isHosting ? 'Request hosting' : isQuote ? 'Request a quote' : 'Send'}
-	/>
+	<h2>{isInvite ? 'Invite request' : isHosting ? 'Hosting request' : isQuote ? 'Quote request' : 'Send a message'}</h2>
+	{#if isInvite}
+		<!-- Keyed on the preselected product so a client-side hop between two
+		     ?product= links re-seeds the select instead of keeping the old one. -->
+		{#key data.product}
+			<IntakeForm
+				kind="invite"
+				cta="Request an invite"
+				products={contact.products}
+				productLabel={contact.productLabel}
+				product={data.product}
+			/>
+		{/key}
+	{:else}
+		<IntakeForm
+			kind={isHosting ? 'hosting' : isQuote ? 'quote' : 'contact'}
+			cta={isHosting ? 'Request hosting' : isQuote ? 'Request a quote' : 'Send'}
+		/>
+	{/if}
 </section>
 
 <style>

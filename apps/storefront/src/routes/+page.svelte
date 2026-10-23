@@ -8,7 +8,8 @@
 	import DeviceMockup from '$lib/components/DeviceMockup.svelte';
 	import Faq from '$lib/components/Faq.svelte';
 	import { ev } from '$lib/content/evidence';
-	import { home, capabilities, work, principles, operator, site, faq } from '$lib/content/copy';
+	import { DISCORD_INVITE } from '$lib/site-links';
+	import { home, capabilities, services, pledges, principles, operator, site, faq } from '$lib/content/copy';
 
 	// availableFrom is computed per request in +page.server.ts so the quarter
 	// never goes stale; see src/lib/availability.ts.
@@ -26,6 +27,10 @@
 			acceptedAnswer: { '@type': 'Answer', text: i.a }
 		}))
 	}).replace(/</g, '\\u003c');
+
+	// A service with no href is the Discord bot: its door is the community
+	// invite. With no invite minted, the card shows no open link at all.
+	const serviceHref = (href: string | null) => href ?? DISCORD_INVITE;
 </script>
 
 <svelte:head>
@@ -34,7 +39,7 @@
 	{@html `<script type="application/ld+json">${faqLd}<` + `/script>`}
 </svelte:head>
 
-<!-- 2 · Hero — service, person, next action, without scrolling -->
+<!-- 2 · Hero — what this is, that it is invitation only, and the next action -->
 <section class="hero">
 	<!-- Decorative station art sits behind the copy on phones and beside it on
 	     desktop; absolutely positioned, so it can never shift the layout. -->
@@ -81,29 +86,77 @@
 	</ul>
 </section>
 
-<!-- 4 · Capabilities — the thing being sold -->
-<section id="capabilities" class="section section-divided">
-	<p class="eyebrow">{home.capabilities.eyebrow}</p>
-	<Heading {...home.capabilities.h2} />
-	<p class="lede">{home.capabilities.sub}</p>
-	<!-- Fixed 2x2 on desktop, one column on phones. Four static tiles: no
-	     marquee, no duplicated set. The whole tile is the link. -->
-	<div class="tiles">
-		{#each capabilities.items as c (c.id)}
-			<a class="tile reveal" href={c.href}>
-				<span class="chip-lg"><CapabilityIcon name={c.id as 'automation' | 'platform' | 'bots' | 'fullstack'} /></span>
-				<h3>{c.name}</h3>
-				<p>{c.summary}</p>
-				<span class="go" aria-hidden="true">→</span>
-			</a>
+<!-- 4 · The services — the same set as the Hangar, each with its own door.
+     Cards are not whole-card links: a card can carry two (open, invite). -->
+<section id="fleet" class="section section-divided">
+	<p class="eyebrow">{home.work.eyebrow}</p>
+	<Heading {...home.work.h2} />
+	<p class="lede">{home.work.sub}</p>
+	<div class="grid-2">
+		{#each services.items as s (s.id)}
+			<article class="card service reveal" data-evidence={s.evidence}>
+				<h3>{s.name}</h3>
+				{#if s.host}<p class="host">{s.host}</p>{/if}
+				<p><span class="tag">{s.status}</span></p>
+				<p class="what">{s.what}</p>
+				<p class="service-links">
+					{#if serviceHref(s.href)}
+						<a href={serviceHref(s.href)} rel={s.href?.startsWith('/') ? undefined : 'noopener'}>{s.openLabel} →</a>
+					{/if}
+					{#if s.invite}
+						<a href={services.inviteHref(s.id)}>{services.inviteLabel} →</a>
+					{/if}
+				</p>
+			</article>
 		{/each}
 	</div>
 	<div class="btn-row">
-		<a class="btn btn-ghost" href="/capabilities">Scope, deliverables, and how to start →</a>
+		<a class="btn btn-primary" href={home.hero.ctaPrimary.href}>{home.hero.ctaPrimary.label}</a>
+		<a class="btn btn-ghost" href={services.fleetStatus.href} rel="noopener">{services.fleetStatus.label} →</a>
 	</div>
 </section>
 
-<!-- 4b · Three proofs at length. Alternating sides; the cards show real output
+<!-- 4b · How invitations work — three static steps, numbered by CSS counter -->
+<section id="how" class="section section-divided">
+	<p class="eyebrow">{home.how.eyebrow}</p>
+	<Heading {...home.how.h2} />
+	<ol class="steps">
+		{#each home.how.steps as s (s.title)}
+			<li class="reveal">
+				<h3>{s.title}</h3>
+				<p>{s.body}</p>
+			</li>
+		{/each}
+	</ol>
+</section>
+
+<!-- 5 · Privacy principles: the operator's rules, then the checkable ones -->
+<section id="principles" class="section section-divided">
+	<p class="eyebrow">{home.principles.eyebrow}</p>
+	<Heading {...home.principles.h2} />
+	<p class="lede">{home.principles.sub}</p>
+	<ul class="checks pledges">
+		{#each pledges as item (item)}
+			<li>
+				<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+				{item}
+			</li>
+		{/each}
+	</ul>
+	<ul class="ev-list principles">
+		{#each principles as p (p.title)}
+			<li data-evidence={p.evidence}>
+				<strong>{p.title}</strong>
+				{p.detail}
+				{#if p.link}
+					<a href={p.link.href} rel={p.link.href.startsWith('/') ? undefined : 'noopener'}>{p.link.label} →</a>
+				{/if}
+			</li>
+		{/each}
+	</ul>
+</section>
+
+<!-- 5b · Three proofs at length. Alternating sides; the cards show real output
      shapes, never live numbers. -->
 {#each home.features as f, i (f.id)}
 	<FeatureSplit
@@ -120,7 +173,7 @@
 	</FeatureSplit>
 {/each}
 
-<!-- 4c · Featured case — one live product on real device captures -->
+<!-- 5c · Featured case — one live product on real device captures -->
 <section id="featured" class="section section-divided" data-evidence={home.featured.evidence}>
 	<div class="split">
 		<div class="copy">
@@ -139,53 +192,30 @@
 	</div>
 </section>
 
-<!-- 4d · How it works — three static steps, numbered by CSS counter -->
-<section id="how" class="section section-divided">
-	<p class="eyebrow">{home.how.eyebrow}</p>
-	<Heading {...home.how.h2} />
-	<ol class="steps">
-		{#each home.how.steps as s (s.title)}
-			<li class="reveal">
-				<h3>{s.title}</h3>
-				<p>{s.body}</p>
-			</li>
-		{/each}
-	</ol>
-</section>
-
-<!-- 5 · Selected work — the products appear as proof, not as a shop shelf -->
-<section id="fleet" class="section section-divided">
-	<p class="eyebrow">{home.work.eyebrow}</p>
-	<Heading {...home.work.h2} />
-	<p class="lede">{home.work.sub}</p>
-	<div class="grid-2">
-		{#each work.items as w (w.id)}
-			<a class="card reveal" href={w.href} rel="noopener" data-evidence={w.evidence}>
-				<h3>{w.name}</h3>
-				<p class="what">{w.what}</p>
-				<p><span class="tag">{w.status}</span></p>
-				<p>{w.proves}</p>
+<!-- 6 · Hiring the operator — secondary since STAR-134, still one scroll away -->
+<section id="capabilities" class="section section-divided">
+	<p class="eyebrow">{home.capabilities.eyebrow}</p>
+	<Heading {...home.capabilities.h2} />
+	<p class="lede">{home.capabilities.sub}</p>
+	<!-- Fixed 2x2 on desktop, one column on phones. Four static tiles: no
+	     marquee, no duplicated set. The whole tile is the link. -->
+	<div class="tiles">
+		{#each capabilities.items as c (c.id)}
+			<a class="tile reveal" href={c.href}>
+				<span class="chip-lg"><CapabilityIcon name={c.id as 'automation' | 'platform' | 'bots' | 'fullstack'} /></span>
+				<h3>{c.name}</h3>
+				<p>{c.summary}</p>
+				<span class="go" aria-hidden="true">→</span>
 			</a>
 		{/each}
 	</div>
-</section>
-
-<!-- 6 · Operating principles -->
-<section id="principles" class="section section-divided">
-	<p class="eyebrow">{home.principles.eyebrow}</p>
-	<Heading {...home.principles.h2} />
-	<p class="lede">{home.principles.sub}</p>
-	<ul class="ev-list principles">
-		{#each principles as p (p.title)}
-			<li data-evidence={p.evidence}>
-				<strong>{p.title}</strong>
-				{p.detail}
-				{#if p.link}
-					<a href={p.link.href} rel={p.link.href.startsWith('/') ? undefined : 'noopener'}>{p.link.label} →</a>
-				{/if}
-			</li>
+	<p class="availability">{home.capabilities.availability(data.availableFrom)}</p>
+	<div class="btn-row">
+		<a class="btn btn-ghost" href="/capabilities">Scope, deliverables, and how to start →</a>
+		{#each home.capabilities.links as l (l.href)}
+			<a class="btn btn-ghost" href={l.href}>{l.label} →</a>
 		{/each}
-	</ul>
+	</div>
 </section>
 
 <!-- 7 · Operator teaser -->
@@ -221,7 +251,6 @@
 				</li>
 			{/each}
 		</ul>
-		<p class="availability">{home.contact.availability(data.availableFrom)}</p>
 		<div class="btn-row">
 			<a class="btn btn-primary" href={home.contact.cta.href}>{home.contact.cta.label}</a>
 			<a class="btn btn-secondary" href={'mailto:' + site.email}>{site.email}</a>
@@ -437,5 +466,23 @@
 		border-radius: 50%;
 		background: var(--accent);
 		flex-shrink: 0;
+	}
+	/* ── service cards (STAR-134): two doors per card, so no stretched link ── */
+	.service .host {
+		font-family: var(--font-mono);
+		font-size: var(--fs-0);
+		overflow-wrap: anywhere;
+	}
+	.service-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--sp-2) var(--sp-5);
+	}
+	.service-links a {
+		font-weight: 600;
+	}
+	.pledges {
+		max-width: var(--measure);
+		margin-bottom: var(--sp-6);
 	}
 </style>

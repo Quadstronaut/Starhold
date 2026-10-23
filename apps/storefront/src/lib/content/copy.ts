@@ -62,20 +62,23 @@ export type Feature = {
 	card: { title: string; caption: string; lines: TermLine[] };
 };
 
+// STAR-134 positioning: the home page leads with the services I host and
+// operate for the privacy-conscious consumer, all of them under development and
+// invitation only. Hiring the operator is still here, one section further down.
 export const home = {
-	title: 'Starhold Software — automation and platform engineering',
+	title: 'Starhold — privacy-first services, hosted and operated',
 	description:
-		'I build automation, custom bots, and integration work for teams that outgrew their scripts — and I run it on infrastructure I keep online myself.',
+		'Privacy-first services I host and operate for you. Everything is under development. Some tools are open today; the rest are invitation only. Request an invite through the contact form.',
 
 	hero: {
-		eyebrow: 'Starhold Software · automation and platform engineering',
-		h1: 'Automation and platform engineering for teams that outgrew scripts.',
-		sub: 'You wrote a script. Then a folder of them. Now something that matters depends on them — I build the version that holds, and I keep it running.',
-		ctaPrimary: { label: 'Request a quote', href: '/contact?intent=quote' },
-		ctaSecondary: { label: 'See the work', href: '/work' },
+		eyebrow: 'Starhold · under development · some tools open, some by invitation',
+		h1: 'Privacy-first services I host and operate for you.',
+		sub: 'Small, useful tools for the privacy-conscious. I host and operate these myself, keep only what a service needs to work, and never sell what passes through it.',
+		ctaPrimary: { label: 'Request an invite', href: '/contact?intent=invite' },
+		ctaSecondary: { label: 'See the services', href: '/#fleet' },
 		byline:
-			'Starhold Software is one person. You get me on the call, and you get me when it breaks.',
-		bylineLink: { label: 'How I work', href: '/operator' }
+			'Everything here is under development. Some tools are open today; the rest are invitation only. Starhold is one person: whoever answers your message also runs the servers.',
+		bylineLink: { label: 'How I operate', href: '/operator' }
 	},
 
 	/** Section 3. Credibility arrives before the pitch, and it is checkable. */
@@ -108,11 +111,21 @@ export const home = {
 		}
 	] satisfies ProofSignal[],
 
+	/** Secondary on the home page since STAR-134: hiring the operator. */
 	capabilities: {
-		eyebrow: 'What I sell',
-		h2: { pre: 'Four ways to', em: 'hire me' },
+		eyebrow: 'Also on offer',
+		h2: { pre: 'Need something built?', em: 'Hire the operator' },
 		// Owner-stated commercial policy (pre-STAR-9 copy), not an invented claim.
-		sub: 'Scoped and quoted per job. No retainer, no minimum, no discovery-phase invoice.'
+		sub: 'Custom work is scoped and quoted per job. No retainer, no minimum, no discovery-phase invoice.',
+		// The quarter is filled in at request time from src/lib/availability.ts.
+		// Deliberately not stored here: a hardcoded quarter goes stale and a stale
+		// availability line reads worse than no availability line at all.
+		availability: (quarter: string) => `Currently taking custom work for ${quarter}.`,
+		links: [
+			{ label: 'Selected work', href: '/work' },
+			{ label: 'Rates', href: '/rates' },
+			{ label: 'Request a quote', href: '/contact?intent=quote' }
+		]
 	},
 
 	/**
@@ -197,7 +210,7 @@ export const home = {
 	featured: {
 		eyebrow: 'Featured work',
 		h2: { pre: 'A whole game, built and', em: 'run by one person' },
-		body: 'Shushgame is a Discord server that is itself the game. I built the site, the bot and the payments, and I operate all three. It is live, so you can open it and check.',
+		body: 'Shushgame is a Discord server that is itself the game. I built the site and the bot, and I operate both. It is live, so you can open it and check.',
 		evidence: ev('shushgame-live'),
 		links: [
 			{ href: 'https://shushgame.com', label: 'Open shushgame.com' },
@@ -220,51 +233,165 @@ export const home = {
 	/**
 	 * How it works: three static steps. Numbering is done with a CSS counter in
 	 * the page, not with digits here, so no bare number lands in marketing copy.
+	 * Sign-in is by invitation and the operator sends each link by hand: no
+	 * login mail is automated yet, so nothing here says one is on its way.
 	 */
 	how: {
-		eyebrow: 'How it works',
-		h2: { pre: 'From first message to', em: 'running in production' },
+		eyebrow: 'How invitations work',
+		h2: { pre: 'From request to', em: 'signed in' },
 		steps: [
-			{ title: 'A short call', body: 'You tell me what you keep doing by hand. I ask questions until I can say what it takes and what could go wrong.' },
-			{ title: 'A written quote', body: 'I write down the scope and the price before I start, so you know what you are agreeing to.' },
-			{ title: 'I build it and keep it running', body: 'I ship it, host it where it belongs, and stay on the hook for it. If it breaks overnight, it is my problem.' }
+			{ title: 'Ask for an invite', body: 'Use the contact form and pick the service you want to try. A line on what you would use it for is plenty.' },
+			{ title: 'I send your link', body: 'For the invitation-only services (Render and Status), sign-in is by invitation while they are built. I set up your access and send your sign-in link myself.' },
+			{ title: 'You stay in control', body: 'Notifications are opt-in. The only notices you cannot switch off are critical ones about your account or the service.' }
 		]
 	},
 
+	/** The services list (#fleet). Same set as the Hangar on starhold.app. */
 	work: {
-		eyebrow: 'The fleet',
-		h2: { pre: 'Selected', em: 'work' },
-		sub: 'Four things I built and still run. Each one is here because of what it proves, not because it is for sale.'
+		eyebrow: 'The services',
+		h2: { pre: 'Hosted and operated', em: 'for you' },
+		sub: 'The live ones you can open today; the rest are invitation only while I build them.'
 	},
 
 	principles: {
-		eyebrow: 'How I work',
-		h2: { pre: 'Operating', em: 'principles' },
-		sub: 'The three above get their own space. These are the rest, short enough to remember and specific enough to hold me to.'
+		eyebrow: 'How I run them',
+		h2: { pre: 'Privacy', em: 'principles' },
+		sub: 'The standard every Starhold service is held to. Where a service does not meet one yet, it is being built to.'
 	},
 
 	operator: {
-		eyebrow: 'Who you are hiring',
+		eyebrow: 'Who runs it',
 		h2: 'Quadstronaut',
-		cta: { label: 'How I work', href: '/operator' }
+		cta: { label: 'How I operate', href: '/operator' }
 	},
 
 	contact: {
 		eyebrow: 'Next step',
-		body: 'Send me the process, the two systems that refuse to talk to each other, or the thing that keeps breaking overnight. I will tell you what it takes to fix it and what it costs.',
-		h2: { pre: 'Tell me what you keep doing', em: 'by hand', post: '.' },
-		cta: { label: 'Request a quote', href: '/contact?intent=quote' },
-		// The quarter is filled in at request time from src/lib/availability.ts.
-		// Deliberately not stored here: a hardcoded quarter goes stale and a stale
-		// availability line reads worse than no availability line at all.
-		availability: (quarter: string) => `Currently taking work for ${quarter}.`,
+		body: 'Tell me which service you want to try and what you would use it for. Use the contact form at starhold.dev/contact, or write to hello@starhold.dev.',
+		h2: { pre: 'Want in? Ask for an', em: 'invite', post: '.' },
+		cta: { label: 'Request an invite', href: '/contact?intent=invite' },
 		/** Closing-band checklist, rendered as check-marked rows by the CTA band. */
 		checklist: [
 			'No cookie banner — there is nothing to consent to.',
-			'A short call, then a written quote',
-			'No retainer, no minimum'
+			'Under development: some tools open, the rest by invitation',
+			'Your data is never sold'
 		]
 	}
+};
+
+// ── Privacy principles ───────────────────────────────────────────────────────
+// The operator's own rules, stated plainly. These are commitments (voice and
+// intent), not claims about a third party, so they carry no evidence id. The
+// section sub says outright that a service still being built may not meet
+// every one yet.
+export const pledges: string[] = [
+	'No logs beyond what it takes to keep a service running.',
+	'I keep nothing I do not need, and I never sell data.',
+	'Export and delete your data yourself; where a service cannot yet, I do it by hand on request.',
+	'No dark patterns, no expiring credits, no surprise charges.',
+	'Cancel in one click.',
+	'One public price table, a generous free tier, and a published cost basis.',
+	'No trackers, and terms written in plain English.',
+	'Offline, on-your-machine tiers are the premium privacy option.',
+	'Notifications are opt-in. Only critical account and service notices are not.'
+];
+
+// ── The services ─────────────────────────────────────────────────────────────
+// The same set the Hangar on starhold.app lists. `invite` adds a "Request an
+// invite" link preselecting that service on /contact. `href: null` means the
+// Discord invite, passed in by the page from site-links: an invite code may
+// carry digits, and A3.8 rejects any digit in static copy.
+export type Service = {
+	id: string;
+	name: string;
+	/** Hostname shown under the name; null for the Discord-only bot. */
+	host: string | null;
+	href: string | null;
+	openLabel: string;
+	status: string;
+	what: string;
+	invite: boolean;
+	evidence?: string;
+};
+
+export const services = {
+	inviteLabel: 'Request an invite',
+	inviteHref: (id: string) => `/contact?intent=invite&product=${id}`,
+	fleetStatus: { label: 'Fleet status', href: 'https://status.starhold.fyi' },
+	items: [
+		{
+			id: 'umbermark',
+			name: 'Umbermark',
+			host: 'umbermark.starhold.app',
+			href: 'https://umbermark.starhold.app',
+			openLabel: 'Open Umbermark',
+			status: 'Live · early access',
+			what: 'A scored server hardening report with a shareable link. The scan is free; the paid report and plans check out through Polar.',
+			invite: true
+		},
+		{
+			id: 'zenithmark',
+			name: 'Zenithmark',
+			host: 'zenithmark.starhold.app',
+			href: 'https://zenithmark.starhold.app',
+			openLabel: 'Open Zenithmark',
+			status: 'Live · free · in development',
+			what: 'A mail and DNS scorecard for a domain: SPF, DKIM, DMARC, MX, MTA-STS, TLS, DNSSEC, CAA and BIMI.',
+			invite: false
+		},
+		{
+			id: 'render',
+			name: 'Starhold Render',
+			host: 'render.starhold.app',
+			href: 'https://render.starhold.app',
+			openLabel: 'Open Render',
+			status: 'Invitation only · in development',
+			what: 'An API for OG images, PDFs and screenshots.',
+			invite: true
+		},
+		{
+			id: 'status',
+			name: 'Starhold Status',
+			host: 'status.starhold.app',
+			href: 'https://status.starhold.app',
+			openLabel: 'Open Status',
+			status: 'Invitation only · in development',
+			what: 'Private and white-label status pages for MSPs.',
+			invite: true
+		},
+		{
+			id: 'starbot',
+			name: 'Starbot',
+			host: null,
+			href: null,
+			openLabel: 'Join the Discord',
+			status: 'In development',
+			what: 'A Discord assistant for the Starhold community.',
+			invite: false
+		},
+		{
+			id: 'shushgame',
+			name: 'Shushgame',
+			host: 'shushgame.com',
+			href: 'https://shushgame.com',
+			openLabel: 'Open shushgame.com',
+			status: 'Live · free',
+			what: 'A Discord chat game with its own site.',
+			invite: false,
+			evidence: ev('shushgame-live')
+		},
+		{
+			id: 'qnix',
+			name: 'QNix',
+			host: 'starhold.dev/products/qnix',
+			href: '/products/qnix',
+			openLabel: 'Read about QNix',
+			status: 'Paused',
+			what: 'Bring-your-own-device hosting with high availability. Paused for now; the design notes stay published.',
+			invite: false,
+			evidence: ev('qnix-design-docs')
+		}
+	] satisfies Service[]
 };
 
 // ── FAQ ──────────────────────────────────────────────────────────────────────
@@ -284,14 +411,19 @@ export const faq = {
 	h2: { pre: 'Before you', em: 'ask' },
 	items: [
 		{
-			q: 'Who does the work?',
-			a: 'One person. I am Quadstronaut: I scope, build and run every project myself, so the person you talk to is the person writing the code.',
-			evidence: ev('single-operator'),
-			link: { href: '/operator', label: 'How I work' }
+			q: 'Can I sign up?',
+			a: 'Umbermark, Zenithmark and Shush are open now. Render and Status are invitation only while I build them; request an invite and I reply by hand. Use the contact form at starhold.dev/contact or write to hello@starhold.dev.',
+			link: { href: '/contact?intent=invite', label: 'Request an invite' }
 		},
 		{
-			q: 'How does a project start, and how is it priced?',
-			a: 'A short call, then a written quote. Anything bespoke is governed by that quote.'
+			q: 'Who runs this?',
+			a: 'One person. I am Quadstronaut: I build and operate every Starhold service myself, so whoever answers your message is the person running the servers.',
+			evidence: ev('single-operator'),
+			link: { href: '/operator', label: 'How I operate' }
+		},
+		{
+			q: 'Will you send me marketing?',
+			a: 'No. Notifications are opt-in, and the only notices you cannot switch off are critical ones about your account or the service.'
 		},
 		{
 			q: 'What about refunds?',
@@ -429,7 +561,7 @@ export const work = {
 			name: 'Shushgame',
 			href: '/products/shushgame',
 			status: 'Live',
-			what: 'A Discord server that is itself the game, with its own site and its own payments.',
+			what: 'A Discord chat game with its own site.',
 			proves:
 				'A whole product carried end to end: design, bot, billing, hosting. Nothing about it was handed to someone else.',
 			evidence: ev('shushgame-live')
@@ -540,16 +672,29 @@ export const operator = {
 // ── Contact ──────────────────────────────────────────────────────────────────
 export const contact = {
 	title: 'Contact · Starhold Software',
-	description: 'Ask for a quote, or just ask a question. Email or the form below.',
+	description: 'Request an invite, ask for a quote, or just ask a question. Email or the form below.',
 	eyebrow: 'Get in touch',
+	h1Invite: 'Request an invite',
+	introInvite:
+		'Everything here is under development. Some tools are open today; the rest are invitation only. Pick the service you want to try and say a little about what you would use it for. I read every request, and for the invitation-only services I send sign-in links myself. Your message is posted to a private Discord channel only I can read.',
+	productLabel: 'Service',
+	/** Choices for the invite form. "Not sure yet" is always last. */
+	products: [
+		{ id: 'umbermark', label: 'Umbermark' },
+		{ id: 'zenithmark', label: 'Zenithmark' },
+		{ id: 'render', label: 'Starhold Render' },
+		{ id: 'status', label: 'Starhold Status' },
+		{ id: 'starbot', label: 'Starbot' },
+		{ id: 'unsure', label: 'Not sure yet' }
+	],
 	h1Quote: 'Request a quote',
 	h1Contact: 'Contact',
 	h1Hosting: 'Request Hangar hosting',
 	introHosting:
-		'Tell me what the app is and how it runs today: a container image, a compose file, a static site or a bot. I will come back with questions and a start date.',
+		'Tell me what the app is and how it runs today: a container image, a compose file, a static site or a bot. I will come back with questions and a start date. Your message is posted to a private Discord channel only I can read.',
 	introQuote:
-		'Tell me what the process is today and what it should be instead. Rough is fine — I will come back with questions, a scope, and a price.',
-	introContact: 'Questions, quotes, or something that does not fit a form. Either channel reaches me.',
+		'Tell me what the process is today and what it should be instead. Rough is fine — I will come back with questions, a scope, and a price. Your message is posted to a private Discord channel only I can read.',
+	introContact: 'Invites, questions, quotes, or something that does not fit a form. Either channel reaches me. Your message is posted to a private Discord channel only I can read.',
 	emailLabel: 'Email'
 };
 
@@ -613,7 +758,7 @@ export const shushgame = {
 		'Shushgame: a Discord server that is itself the game, built and operated end to end, solo.',
 	eyebrow: 'Case study',
 	h1: 'Shushgame',
-	lede: 'A Discord server that is itself the game, built on a custom bot with payments and its own hosting behind it.',
+	lede: 'A Discord server that is itself the game, built on a custom bot with its own site.',
 	body: [
 		'It is the fullest answer I have to "can you actually finish something": design, bot, billing, infrastructure, and a live site, none of it handed to anyone else.'
 	],
