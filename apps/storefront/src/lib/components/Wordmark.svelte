@@ -39,13 +39,24 @@
 
 	/* Fallback first: where text-stroke is unsupported, "hold" is plain amber
 	   rather than invisible transparent text. */
+	/* STAR-166 R12: the hollow half sits tighter so "Starhold" reads as one
+	   word at 390 px, and its stroke is about 15 % lighter. No glow. */
 	.outline {
 		color: var(--accent);
+		letter-spacing: -0.02em;
+		margin-left: -0.03em;
 	}
 	@supports (-webkit-text-stroke: 1px red) {
 		.outline {
 			color: transparent;
-			-webkit-text-stroke: var(--stroke-w) var(--accent);
+			-webkit-text-stroke: calc(var(--stroke-w) * 0.85) var(--accent);
+		}
+		/* STAR-166 F7: at 1200 px and up the hero word is ~112 px tall, where the
+		   hairline outline thins out; one extra pixel keeps "hold" as solid as "Star". */
+		@media (min-width: 1200px) {
+			.hero .outline {
+				-webkit-text-stroke-width: calc(var(--stroke-w) * 0.85 + 1px);
+			}
 		}
 	}
 </style>

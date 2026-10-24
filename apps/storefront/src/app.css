@@ -18,6 +18,25 @@
 	font-style: normal;
 	font-display: swap;
 }
+/* IBM Plex Sans + Plex Mono (SIL OFL, see static/fonts/OFL-IBMPlex*.txt):
+   self-hosted latin subsets from Fontsource 5.3.0. Sans is the variable
+   wght 100-700 file, so 400/600/650 all come from one request; Mono ships 400
+   only and is used for chips, code, timestamps and durations (STAR-166 R2).
+   Glyphs outside the subset fall back per character to the system stack. */
+@font-face {
+	font-family: 'IBM Plex Sans';
+	src: url('/fonts/ibm-plex-sans-latin.woff2') format('woff2');
+	font-weight: 100 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'IBM Plex Mono';
+	src: url('/fonts/ibm-plex-mono-latin.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
 
 :root {
 	/* ── surfaces + ink ───────────────────────────────────────────────── */
@@ -98,12 +117,24 @@
 	--page: 1080px;
 	--header-h: 60px;
 
-	/* ── type stacks: system only. No third-party font request is made,
-	   because "self-hosted" is part of what is being sold. ───────────── */
-	--font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
-		'Helvetica Neue', Arial, sans-serif;
-	--font-mono: ui-monospace, SFMono-Regular, 'Cascadia Mono', Menlo, Consolas,
-		monospace;
+	/* ── panel geometry (STAR-166 R6/R8): hull-plate chamfer, orbit-rule ticks ── */
+	/* Top-right corner cut on every panel (STAR-166 F7): 14 px from 900 px up, 10 px
+	   below. A step function, not a media query, because :root is copied verbatim
+	   into fleet-tokens.css and only its first block travels: the calc() is huge and
+	   negative under 900 px and huge and positive from 900 px, so clamp() picks an end. */
+	--chamfer: clamp(10px, (100vw - 899.5px) * 1000, 14px);
+	--chamfer-sm: 10px; /* the same cut on phones (<= 520 px) */
+	--chip-cut: 5px; /* the smaller cut on chips and secondary buttons (F4) */
+	--tick: 24px; /* orbit-rule tick pitch */
+	--tick-sm: 16px; /* orbit-rule tick pitch on phones */
+
+	/* ── type stacks: self-hosted Plex first, system after. No third-party
+	   font request is made, because "self-hosted" is part of what is being
+	   sold. ─────────────────────────────────────────────────────────────── */
+	--font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+		Roboto, 'Helvetica Neue', Arial, sans-serif;
+	--font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, 'Cascadia Mono', Menlo,
+		Consolas, monospace;
 	/* Brand face: wordmark only. Falls back to the system sans if it fails. */
 	--font-display: 'Michroma', var(--font-sans);
 	--font-serif: ui-serif, Georgia, 'Times New Roman', serif;
@@ -164,12 +195,13 @@ h4 {
 	font-size: var(--fs-2);
 }
 
-/* One serif-italic accent word per section heading (see Heading.svelte). */
+/* One accent word per section heading (see Heading.svelte). STAR-166 R10: the
+   heading's own face and weight, upright, in the accent colour. The span stays. */
 .accent-word {
-	font-family: var(--font-serif);
-	font-style: italic;
-	font-weight: 500;
-	color: inherit;
+	font-family: inherit;
+	font-style: normal;
+	font-weight: inherit;
+	color: var(--accent);
 }
 
 @media (max-width: 520px) {
@@ -254,8 +286,35 @@ hr {
 	padding-bottom: var(--sp-5);
 }
 
+/* Orbit rule (STAR-166 R8): hairline, a tick every --tick (--tick-sm on
+   phones) and three amber pips at the content gutter (STAR-166 F6, telemetry). Same as fleet-base.css. */
 .section-divided {
-	border-top: 1px solid var(--border);
+	position: relative;
+}
+.section-divided::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 7px;
+	pointer-events: none;
+	background:
+		linear-gradient(var(--accent), var(--accent)) var(--sp-5) 3px / 3px 3px no-repeat,
+		linear-gradient(var(--accent), var(--accent)) calc(var(--sp-5) + 7px) 3px / 3px 3px no-repeat,
+		linear-gradient(var(--accent), var(--accent)) calc(var(--sp-5) + 14px) 3px / 3px 3px no-repeat,
+		repeating-linear-gradient(90deg, var(--border-strong) 0 1px, transparent 1px var(--tick)) 0 0 / 100% 4px no-repeat,
+		linear-gradient(var(--border), var(--border)) 0 0 / 100% 1px no-repeat;
+}
+@media (max-width: 520px) {
+	.section-divided::before {
+		background:
+			linear-gradient(var(--accent), var(--accent)) var(--sp-5) 3px / 3px 3px no-repeat,
+			linear-gradient(var(--accent), var(--accent)) calc(var(--sp-5) + 7px) 3px / 3px 3px no-repeat,
+			linear-gradient(var(--accent), var(--accent)) calc(var(--sp-5) + 14px) 3px / 3px 3px no-repeat,
+			repeating-linear-gradient(90deg, var(--border-strong) 0 1px, transparent 1px var(--tick-sm)) 0 0 / 100% 4px no-repeat,
+			linear-gradient(var(--border), var(--border)) 0 0 / 100% 1px no-repeat;
+	}
 }
 
 /* prose column — the reason --measure exists */
@@ -320,19 +379,58 @@ hr {
 	letter-spacing: normal;
 }
 
+/* Eyebrows (STAR-166 R8): Plex Mono; section eyebrows (p) get a short accent
+   rule before the word. Form labels (span.eyebrow) stay plain. */
+.eyebrow {
+	font-family: var(--font-mono);
+	font-weight: 400;
+}
+p.eyebrow {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--sp-2);
+	/* STAR-166 F6: the eyebrow sits tight on its title, so the two read as one unit. */
+	margin-bottom: var(--sp-1);
+}
+p.eyebrow::before {
+	content: '';
+	flex: none;
+	margin-top: 0.8em; /* mid first line, so a wrapped eyebrow keeps the rule on line one */
+	width: var(--sp-4);
+	height: 1px;
+	background: var(--accent);
+}
+
+/* Chips (STAR-166 R11): hairline frame, tiny leading indicator square, Plex
+   Mono, no pill and no fill. */
 .tag,
 .badge {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
 	border: 1px solid var(--border-strong);
-	border-radius: 999px;
-	padding: 2px var(--sp-3);
+	border-radius: 2px;
+	padding: 1px var(--sp-2);
 	margin: 0;
+	font-family: var(--font-mono);
+	font-weight: 400;
+}
+.tag::before,
+.badge::before {
+	content: '';
+	flex: none;
+	width: 5px;
+	height: 5px;
+	background: currentColor;
 }
 
 .badge-accent {
 	color: var(--accent);
 	border-color: var(--accent-quiet);
-	background: var(--accent-quiet);
+	background: transparent;
+}
+.badge-accent::after {
+	background: linear-gradient(to top right, transparent calc(50% - 1px), var(--accent-quiet) calc(50% - 1px), var(--accent-quiet) calc(50% + 1px), transparent calc(50% + 1px));
 }
 
 /* ═══ buttons ════════════════════════════════════════════════════════════ */
@@ -361,12 +459,13 @@ hr {
 	outline-offset: 3px;
 }
 
+/* STAR-166 R9: flat signal fill; the pill radius stays (R21). */
 .btn-primary {
-	background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+	background: var(--accent);
 	color: var(--accent-ink);
 }
 .btn-primary:hover {
-	background: linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%);
+	background: var(--accent-hover);
 	color: var(--accent-ink);
 }
 
@@ -378,6 +477,38 @@ hr {
 .btn-secondary:hover {
 	border-color: var(--accent);
 	color: var(--text);
+}
+
+/* STAR-166 F4: one chamfer geometry for every chip and every secondary button.
+   Square corners and a --chip-cut taken off the top-right corner, the same cut
+   the panels use at a smaller size. clip-path removes the border along the cut,
+   so ::after draws the cut's hairline back in, sitting on the border box. */
+.tag,
+.badge,
+.btn-secondary {
+	position: relative;
+	border-radius: 0;
+	clip-path: polygon(0 0, calc(100% - var(--chip-cut)) 0, 100% var(--chip-cut), 100% 100%, 0 100%);
+}
+.tag::after,
+.badge::after,
+.btn-secondary::after {
+	content: '';
+	position: absolute;
+	top: -1px;
+	right: -1px;
+	width: var(--chip-cut);
+	height: var(--chip-cut);
+	pointer-events: none;
+	background: linear-gradient(to top right, transparent calc(50% - 1px), var(--border-strong) calc(50% - 1px), var(--border-strong) calc(50% + 1px), transparent calc(50% + 1px));
+}
+.btn-secondary:hover::after {
+	background: linear-gradient(to top right, transparent calc(50% - 1px), var(--accent) calc(50% - 1px), var(--accent) calc(50% + 1px), transparent calc(50% + 1px));
+}
+/* Secondary actions read as instrument labels: Plex Mono, like the chips. */
+.btn-secondary {
+	font-family: var(--font-mono);
+	font-weight: 400;
 }
 
 .btn-ghost {
@@ -402,18 +533,68 @@ hr {
 	margin: var(--sp-5) 0 0;
 }
 
+/* ═══ panels: hull plating (STAR-166 R6) ═════════════════════════════════
+   Cards, proof items and the closing band are hard-edged: --radius-sm, a
+   --chamfer cut off the top-right corner, flat --surface, 1 px border. The cut
+   edge gets its own hairline from ::after (clip-path removes the border along
+   it). Hover = border to accent, nothing else. Mirrors brand/fleet-base.css. */
+.card,
+.proof a,
+.band {
+	position: relative;
+	clip-path: polygon(0 0, calc(100% - var(--chamfer)) 0, 100% var(--chamfer), 100% 100%, 0 100%);
+}
+.card::after,
+.proof a::after,
+.band::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: var(--chamfer);
+	height: var(--chamfer);
+	pointer-events: none;
+	background: linear-gradient(to top right, transparent calc(50% - 1px), var(--border) calc(50% - 1px), var(--border) calc(50% + 1px), transparent calc(50% + 1px));
+}
+a.card:hover::after,
+.proof a:hover::after {
+	background: linear-gradient(to top right, transparent calc(50% - 1px), var(--accent) calc(50% - 1px), var(--accent) calc(50% + 1px), transparent calc(50% + 1px));
+}
+.band::after {
+	background: linear-gradient(to top right, transparent calc(50% - 1px), var(--border-strong) calc(50% - 1px), var(--border-strong) calc(50% + 1px), transparent calc(50% + 1px));
+}
+/* clip-path clips an outline drawn outside the box: panel-links and the
+   chamfered secondary button ring inside. */
+.proof a:focus-visible,
+a.card:focus-visible,
+.btn-secondary:focus-visible {
+	outline-offset: -4px;
+}
+@media (max-width: 520px) {
+	.card,
+	.proof a,
+	.band {
+		clip-path: polygon(0 0, calc(100% - var(--chamfer-sm)) 0, 100% var(--chamfer-sm), 100% 100%, 0 100%);
+	}
+	.card::after,
+	.proof a::after,
+	.band::after {
+		width: var(--chamfer-sm);
+		height: var(--chamfer-sm);
+	}
+}
+
 /* ═══ card — replaces .panel. No coloured top border. ════════════════════ */
 .card {
 	display: block;
 	background: var(--surface);
 	border: 1px solid var(--border);
-	border-radius: var(--radius-md);
+	border-radius: var(--radius-sm);
 	padding: var(--sp-5);
 	color: inherit;
 }
 a.card:hover {
-	border-color: var(--border-strong);
-	background: var(--surface-2);
+	border-color: var(--accent);
 	text-decoration: none;
 }
 .card h3 {
@@ -535,27 +716,92 @@ textarea:focus-visible {
 }
 
 /* ═══ icon chip (shared by home tiles and inner-page heads) ═══════════════ */
+/* STAR-166 F5: the capability icon is a plain glyph, no boxed tile behind it:
+   the panel around it is already the frame. Same --chip slot height. */
 .chip-lg {
 	display: grid;
-	place-items: center;
-	width: var(--chip);
+	place-items: center start;
+	width: auto;
 	height: var(--chip);
-	margin-bottom: var(--sp-4);
-	border-radius: var(--radius-md);
-	background: var(--accent-quiet);
-	border: 1px solid var(--border-strong);
+	margin-bottom: var(--sp-3);
+	background: none;
+	border: 0;
 	color: var(--accent);
 }
 
-/* ═══ closing-band panel (home #start and CtaBand) ════════════════════════ */
+/* ═══ closing-band panel (home #start and CtaBand) ════════════════════════
+   STAR-166 R9: flat surface; the accent is only the 2 px left rule. */
 .band {
 	padding: var(--sp-7) var(--sp-5);
-	border: 1px solid var(--glow-edge);
-	border-radius: var(--radius-lg);
-	background:
-		radial-gradient(ellipse at 50% 0%, var(--glow) 0%, transparent 70%),
-		linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
-	box-shadow: var(--shadow-soft);
+	border: 1px solid var(--border-strong);
+	border-left: 2px solid var(--accent);
+	border-radius: var(--radius-sm);
+	background: var(--surface);
+}
+
+/* ═══ hero art frame + star chart (STAR-166 R4, R5) ═══════════════════════
+   .hero-art gets four corner brackets from 900 px up (one pseudo-element, eight
+   1 px strokes). svg.starchart is the hero's first child: a sparse static
+   constellation behind the copy, shown only under body.has-starchart, one
+   finite fade-in and none under reduced motion. Same rules as fleet-base.css. */
+@media (min-width: 900px) {
+	/* The brackets frame the visible part of the art (inset from the hero edges
+	   and clear of the F1 bleed); the drawing runs through them. */
+	.hero-art::before {
+		content: '';
+		position: absolute;
+		z-index: 1;
+		inset: var(--sp-5) calc(var(--sp-9) + var(--sp-5)) var(--sp-5) 0;
+		pointer-events: none;
+		background:
+			linear-gradient(var(--border-strong), var(--border-strong)) left top / var(--sp-5) 1px no-repeat,
+			linear-gradient(var(--border-strong), var(--border-strong)) left top / 1px var(--sp-5) no-repeat,
+			linear-gradient(var(--border-strong), var(--border-strong)) right top / var(--sp-5) 1px no-repeat,
+			linear-gradient(var(--border-strong), var(--border-strong)) right top / 1px var(--sp-5) no-repeat,
+			linear-gradient(var(--border-strong), var(--border-strong)) left bottom / var(--sp-5) 1px no-repeat,
+			linear-gradient(var(--border-strong), var(--border-strong)) left bottom / 1px var(--sp-5) no-repeat,
+			linear-gradient(var(--border-strong), var(--border-strong)) right bottom / var(--sp-5) 1px no-repeat,
+			linear-gradient(var(--border-strong), var(--border-strong)) right bottom / 1px var(--sp-5) no-repeat;
+	}
+}
+.starchart {
+	display: none;
+}
+.has-starchart .starchart {
+	display: block;
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	color: var(--accent);
+	opacity: 0.5;
+	pointer-events: none;
+}
+.starchart .chart-links {
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 0.75px;
+	stroke-dasharray: 2 4;
+	opacity: 0.45;
+	vector-effect: non-scaling-stroke;
+}
+.starchart .chart-stars {
+	fill: currentColor;
+}
+@media (max-width: 899px) {
+	.has-starchart .starchart {
+		opacity: 0.3;
+	}
+}
+@media (prefers-reduced-motion: no-preference) {
+	.has-starchart .starchart {
+		animation: chart-in 2.4s ease-out 1 both;
+	}
+}
+@keyframes chart-in {
+	from {
+		opacity: 0;
+	}
 }
 
 /* ═══ scroll reveal ═══════════════════════════════════════════════════════

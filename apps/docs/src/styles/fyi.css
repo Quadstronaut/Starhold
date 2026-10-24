@@ -29,9 +29,10 @@
 }
 
 /* ═══ hero ════════════════════════════════════════════════════════════════
-   fleet-base draws the storefront bloom (in docs teal). The Blueprint site adds
+   fleet-base keeps the hero flat (STAR-166 R4: no bloom). The Blueprint site adds
    the one thing the old blueprint.css was right about, the grid paper, but
-   only here: a 24 px grid at 0.35, faded out from the art side by a mask, so it
+   only here (STAR-166 F3: this is the fyi hero's dimension grid, in place of
+   the star chart): a 24 px grid at 0.35, faded out from the art side by a mask, so it
    never reaches body pages. */
 .fyi-hero {
 	isolation: isolate;
@@ -59,14 +60,6 @@
 @media (min-width: 900px) {
 	.fyi-hero .fleet-hero-inner {
 		padding-bottom: var(--sp-8);
-	}
-	/* The drawing sheet is square and framed, so it reads larger than the
-	   storefront's open station; capped so it never runs into the hero wordmark. */
-	.fyi-hero .fleet-hero-art {
-		top: 50%;
-		bottom: auto;
-		translate: 0 -50%;
-		max-width: 440px;
 	}
 }
 /* Drawing annotation inside the motif (balloon numbers, title block). */
@@ -108,7 +101,7 @@
 		column-gap: var(--sp-4);
 		align-items: start;
 		padding: var(--sp-4);
-		border-radius: var(--radius-md);
+		border-radius: var(--radius-sm);
 	}
 	.fyi-shelf .chip-lg {
 		grid-row: span 2;
@@ -381,7 +374,7 @@ h1#_top {
 /* Previous / next links read as fleet cards. */
 .pagination-links a {
 	border-color: var(--border);
-	border-radius: var(--radius-md);
+	border-radius: var(--radius-sm);
 	background: var(--surface);
 	box-shadow: none;
 }

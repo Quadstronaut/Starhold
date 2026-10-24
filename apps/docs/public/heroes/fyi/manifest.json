@@ -1,0 +1,49 @@
+{
+	"site": "fyi",
+	"host": "starhold.fyi",
+	"motif": "blueprint",
+	"note": "First entry = the no-JS / <noscript> fallback. ?hero=<id> forces one entry. Built by brand/heroes/build.mjs; shipped by brand/check-drift.mjs --write.",
+	"entries": [
+		{
+			"id": "chatgpt",
+			"seat": "chatgpt",
+			"model": "ChatGPT image generation (chatgpt.com, operator account)",
+			"kind": "raster",
+			"file": "chatgpt.png",
+			"generated": "2026-10-24",
+			"prompt_ref": "brand/heroes/README.md#prompt-chatgpt-fyi",
+			"width": 1672,
+			"height": 940,
+			"widths": [
+				800,
+				1600
+			]
+		},
+		{
+			"id": "grok",
+			"seat": "grok",
+			"model": "Grok Imagine (grok.com, operator account)",
+			"kind": "raster",
+			"file": "grok.png",
+			"generated": "2026-10-24",
+			"prompt_ref": "brand/heroes/README.md#prompt-grok-fyi",
+			"width": 1168,
+			"height": 784,
+			"widths": [
+				800,
+				1168
+			]
+		},
+		{
+			"id": "opus",
+			"seat": "opus",
+			"model": "Claude Opus (hand-written SVG, STAR-166 round-2 seat)",
+			"kind": "svg",
+			"file": "opus.svg",
+			"generated": "2026-10-24",
+			"prompt_ref": "brand/heroes/README.md#prompt-opus-fyi",
+			"width": 480,
+			"height": 480
+		}
+	]
+}

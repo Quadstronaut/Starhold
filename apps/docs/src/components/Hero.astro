@@ -11,10 +11,24 @@
  */
 import Default from '@astrojs/starlight/components/Hero.astro';
 import BlueprintArt from './BlueprintArt.astro';
+// STAR-166 hero pool (operator decision 2026-10-24): brand/heroes/fyi/manifest.json, copied here by
+// check-drift --write. /heroes/hero-pool.js (same origin, runs straight after the box) picks one entry
+// at random per load; ?hero=<id> forces one; without JS the <noscript> shows the first entry.
+import heroManifest from '../hero-pool.json';
 
 const { data } = Astro.locals.starlightRoute.entry;
 const isSplash = data.template === 'splash';
 const { title = data.title, tagline, actions = [] } = data.hero || {};
+
+/** The hero pool, in the same shape check-drift writes for the hangar (heroPoolJson). */
+const HERO_BASE = '/heroes/fyi/';
+const HERO_SIZES = '(min-width: 900px) 50vw, 100vw';
+type HeroEntry = { id: string; kind: string; width: number; height: number; widths?: number[] };
+const heroEntries = heroManifest.entries as HeroEntry[];
+const heroPool = JSON.stringify(heroEntries.map(({ id, kind, width, height, widths }) => ({ id, kind, width, height, ...(widths ? { widths } : {}) })));
+const heroFirst = heroEntries[0];
+const heroSrcset = (e: HeroEntry, fmt: string) => (e.widths ?? []).map((w) => `${HERO_BASE}${e.id}-${w}.${fmt} ${w}w`).join(', ');
+const heroHasOpus = heroEntries.some((e) => e.id === 'opus' && e.kind === 'svg');
 
 /** Starlight's action variants onto the fleet pill classes. */
 const pill = { primary: 'btn-primary', secondary: 'btn-secondary', minimal: 'btn-minimal' } as const;
@@ -23,9 +37,31 @@ const pill = { primary: 'btn-primary', secondary: 'btn-secondary', minimal: 'btn
 {
 	isSplash ? (
 		<section class="fleet-hero fleet-scope fyi-hero">
-			<div class="fleet-hero-art" aria-hidden="true">
-				<BlueprintArt />
+			{/* STAR-166 R5 star chart, off by default since round 2 (F3: the grid paper is this
+			    hero's technical layer). Starlight owns <body>, so to show it add has-starchart to
+			    this section; the CSS matches it as an ancestor either way. */}
+			<svg class="starchart" viewBox="0 0 1440 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+				<g class="chart-links"><path d="M700 40 L812 96 L930 58 L1046 118 L1150 70 L1262 128 L1398 84 M1046 118 L1110 214 L1240 250 M1262 128 L1330 236 M812 96 L860 186" /></g>
+				<g class="chart-stars">
+					<circle cx="700" cy="40" r="1.1" /><circle cx="812" cy="96" r="1.5" /><circle cx="930" cy="58" r="1.2" /><circle cx="1046" cy="118" r="2" />
+					<circle cx="1150" cy="70" r="1.3" /><circle cx="1262" cy="128" r="1.7" /><circle cx="1398" cy="84" r="1.2" /><circle cx="1110" cy="214" r="1.1" />
+					<circle cx="1240" cy="250" r="1.4" /><circle cx="1330" cy="236" r="1" /><circle cx="860" cy="186" r="1" /><circle cx="1020" cy="24" r="1" />
+					<circle cx="1420" cy="190" r="1.1" />
+				</g>
+			</svg>
+			<div class="fleet-hero-art" aria-hidden="true" data-hero-base={HERO_BASE} data-hero-sizes={HERO_SIZES} data-hero-pool={heroPool}>
+				{heroFirst.kind === 'raster' && (
+					<noscript>
+						<picture>
+							<source type="image/avif" srcset={heroSrcset(heroFirst, 'avif')} sizes={HERO_SIZES} />
+							<source type="image/webp" srcset={heroSrcset(heroFirst, 'webp')} sizes={HERO_SIZES} />
+							<img class="hero-raster" src={`${HERO_BASE}${heroFirst.id}-${heroFirst.widths?.at(-1)}.webp`} width={heroFirst.width} height={heroFirst.height} alt="" decoding="async" />
+						</picture>
+					</noscript>
+				)}
+				{heroHasOpus && <template data-hero-id="opus"><BlueprintArt /></template>}
 			</div>
+			<script is:inline src="/heroes/hero-pool.js"></script>
 			<div class="fleet-hero-inner">
 				<p class="eyebrow">Starhold · documentation</p>
 				<div class="fleet-hero-mark">

@@ -68,9 +68,13 @@ describe('A4 · information architecture', () => {
 
 	it('A4.6 the home H1 is deterministic and at most 70 characters', () => {
 		expect(copy.home.hero.h1.length).toBeLessThanOrEqual(70);
+		// One sanctioned user: the decorative hero art pool (STAR-166, operator decision
+		// 2026-10-24) picks an image, never copy. Nothing else may randomise.
+		const RANDOM_OK = new Set(['src/lib/heroes.ts']);
 		const randomUsers = srcFiles(['.svelte', '.ts'])
 			.filter((f) => /Math\.random/.test(read(relative(f))))
-			.map(relative);
+			.map(relative)
+			.filter((f) => !RANDOM_OK.has(f.split('\\').join('/')));
 		expect(randomUsers).toEqual([]);
 		// the headline is a constant, not a load-time selection
 		expect(typeof copy.home.hero.h1).toBe('string');

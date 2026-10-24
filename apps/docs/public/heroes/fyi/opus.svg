@@ -1,0 +1,43 @@
+<!-- fyi · exploded assembly drawing, round-2 bolder drawing (STAR-166, Opus seat). Two layers: .far construction geometry (assembly axis, projection lines, hidden edges dashed as on a real drawing) and the parts at full weight. currentColor only; finite motion via .drift and .lights. The text is drawing annotation reused verbatim from the v2 sheet. -->
+<svg xmlns="http://www.w3.org/2000/svg" class="fleet-art fyi-art" viewBox="0 0 480 480" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+	<!-- sheet: frame, edge ticks, title block -->
+	<g class="lane">
+		<rect x="8" y="8" width="464" height="464" rx="2"/>
+		<path d="M24 8 L24 13 M8 24 L13 24 M48 8 L48 13 M8 48 L13 48 M72 8 L72 13 M8 72 L13 72 M96 8 L96 18 M8 96 L18 96 M120 8 L120 13 M8 120 L13 120 M144 8 L144 13 M8 144 L13 144 M168 8 L168 13 M8 168 L13 168 M192 8 L192 18 M8 192 L18 192 M216 8 L216 13 M8 216 L13 216 M240 8 L240 13 M8 240 L13 240 M264 8 L264 13 M8 264 L13 264 M288 8 L288 18 M8 288 L18 288 M312 8 L312 13 M8 312 L13 312 M336 8 L336 13 M8 336 L13 336 M360 8 L360 13 M8 360 L13 360 M384 8 L384 18 M8 384 L18 384 M408 8 L408 13 M8 408 L13 408 M432 8 L432 13 M8 432 L13 432 M456 8 L456 13 M8 456 L13 456"/>
+		<path d="M344 436 L472 436 M344 436 L344 472 M344 454 L472 454"/>
+	</g>
+	<g class="quiet fyi-art-text" fill="currentColor" stroke="none"><text x="352" y="449">CORE ASSEMBLY</text><text x="352" y="467">DETAIL A · 1:4</text></g>
+	<!-- far: assembly axis (chain line), projection lines to the elevation, hidden edges -->
+	<g class="far">
+		<path d="M192 24 L192 452" stroke-dasharray="14 4 2 4"/>
+		<path d="M278 84 L372 84 M318 206 L372 206 M318 266 L372 266 M264 370 L372 370 M264 402 L372 402" stroke-dasharray="2 5"/>
+		<path d="M112 100 L152 70.9 L232 70.9 L272 100 M152 54.9 L152 70.9 M232 54.9 L232 70.9 M72 266 L132 222.4 L252 222.4 L312 266 M132 162.4 L132 222.4 M252 162.4 L252 222.4 M126 402 L159 378 L225 378 L258 402 M159 346 L159 378 M225 346 L225 378" stroke-dasharray="4 4"/>
+		<path d="M192 150 L186 140 M192 150 L198 140 M192 336 L186 326 M192 336 L198 326"/>
+	</g>
+	<g class="drift">
+		<!-- part 1: cap plate, mast, dish -->
+		<path class="quiet near" d="M272 84 L232 113.1 L152 113.1 L112 84 L152 54.9 L232 54.9 Z M272 84 L272 100 M232 113.1 L232 129.1 M152 113.1 L152 129.1 M112 84 L112 100 M272 100 L232 129.1 L152 129.1 L112 100"/>
+		<path class="quiet" d="M192 84 L192 30 M168 40 Q192 62 216 40"/>
+		<!-- part 2: hab ring, heaviest outline, the well in accent -->
+		<path class="quiet" stroke-width="3" d="M312 206 L312 266 L252 309.6 L132 309.6 L72 266 L72 206 L132 162.4 L252 162.4 Z"/>
+		<path class="quiet near" d="M312 206 L252 249.6 L132 249.6 L72 206 L132 162.4 L252 162.4 Z M312 206 L312 266 M252 249.6 L252 309.6 M132 249.6 L132 309.6 M72 206 L72 266 M312 266 L252 309.6 L132 309.6 L72 266"/>
+		<path class="lit near" d="M262 206 L227 231.5 L157 231.5 L122 206 L157 180.5 L227 180.5 Z"/>
+		<path class="quiet fine" d="M262 206 L312 206 M227 231.5 L252 249.6 M157 231.5 L132 249.6 M122 206 L72 206 M157 180.5 L132 162.4 M227 180.5 L252 162.4"/>
+		<path class="quiet fine" d="M312 225.8 L252 269.4 L132 269.4 L72 225.8 M312 245.6 L252 289.2 L132 289.2 L72 245.6"/>
+		<path class="lit fine" d="M262 206 L262 228 M227 231.5 L227 253.5 M157 231.5 L157 253.5 M122 206 L122 228" stroke-dasharray="3 3"/>
+		<!-- part 3: docking collar and port ring -->
+		<path class="quiet near" d="M258 370 L225 394 L159 394 L126 370 L159 346 L225 346 Z M258 370 L258 402 M225 394 L225 426 M159 394 L159 426 M126 370 L126 402 M258 402 L225 426 L159 426 L126 402"/>
+		<ellipse class="quiet" cx="192" cy="412" rx="30" ry="11"/>
+		<!-- near: projected side elevation, matching the exploded spacing -->
+		<path class="quiet near" d="M386 76 L414 76 L414 100 L386 100 Z M376 206 L424 206 L424 266 L376 266 Z M384 370 L416 370 L416 402 L384 402 Z"/>
+		<path class="lit" d="M388 222 L412 222 L412 250 L388 250 Z"/>
+		<path class="quiet" d="M400 76 L400 40 M392 46 L408 46 M400 402 L400 418"/>
+		<path class="lane" d="M444 206 L444 266 M438 206 L450 206 M438 266 L450 266"/>
+		<text class="quiet fyi-art-text" x="440" y="240" text-anchor="end" fill="currentColor" stroke="none">92</text>
+		<!-- callouts: leader, balloon, part number -->
+		<g class="lane fine"><path d="M70 60 L118 84 M60 178 L132 166.4 M300 300 L246 303.6 M60 400 L126 378"/></g>
+		<g class="lane"><circle cx="62" cy="52" r="9"/><circle cx="52" cy="170" r="9"/><circle cx="308" cy="308" r="9"/><circle cx="52" cy="408" r="9"/></g>
+		<g class="quiet fyi-art-text" fill="currentColor" stroke="none" text-anchor="middle"><text x="62" y="56">1</text><text x="52" y="174">2</text><text x="308" y="312">3</text><text x="52" y="412">4</text></g>
+		<g class="lights" fill="currentColor" stroke="none"><circle cx="192" cy="206" r="5"/><circle cx="192" cy="28" r="2.5"/><circle cx="192" cy="412" r="3"/><circle cx="312" cy="206" r="3"/><circle cx="72" cy="206" r="3"/><circle cx="400" cy="38" r="2"/></g>
+	</g>
+</svg>

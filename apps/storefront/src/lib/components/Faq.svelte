@@ -26,13 +26,35 @@
 </div>
 
 <style>
+	/* STAR-166 R6: each row is a hull panel (radius-sm, chamfered top-right
+	   corner, flat surface, border to accent when open or hovered). */
 	.faq {
 		max-width: var(--measure);
 		margin-top: var(--sp-5);
-		border-top: 1px solid var(--border);
+		display: grid;
+		gap: var(--sp-2);
 	}
 	details {
-		border-bottom: 1px solid var(--border);
+		position: relative;
+		padding: 0 var(--sp-4);
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		clip-path: polygon(0 0, calc(100% - var(--chamfer)) 0, 100% var(--chamfer), 100% 100%, 0 100%);
+	}
+	details::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: var(--chamfer);
+		height: var(--chamfer);
+		pointer-events: none;
+		background: linear-gradient(to top right, transparent calc(50% - 1px), var(--border) calc(50% - 1px), var(--border) calc(50% + 1px), transparent calc(50% + 1px));
+	}
+	details:hover,
+	details[open] {
+		border-color: var(--border-strong);
 	}
 	summary {
 		display: flex;
@@ -53,7 +75,7 @@
 	}
 	summary:focus-visible {
 		outline: 2px solid var(--focus);
-		outline-offset: 2px;
+		outline-offset: -2px;
 		border-radius: var(--radius-sm);
 	}
 	.chev {
