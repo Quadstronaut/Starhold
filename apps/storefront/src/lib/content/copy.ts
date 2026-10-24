@@ -339,9 +339,9 @@ export const services = {
 		{
 			id: 'qnix',
 			name: 'QNix',
-			host: 'starhold.dev/products/qnix',
-			href: '/products/qnix',
-			openLabel: 'Read about QNix',
+			host: 'starhold.dev/qnix',
+			href: '/qnix',
+			openLabel: 'Get notified about QNix',
 			status: labelFor('qnix'),
 			what: 'Bring-your-own-device hosting with high availability. In development; register interest on its page.',
 			invite: false,
@@ -443,7 +443,7 @@ export const contact = {
 	eyebrow: 'Get in touch',
 	h1Invite: 'Request an invite',
 	introInvite:
-		'Everything here is under development. Some tools are open today; the rest are invitation only. Pick the service you want to try and say a little about what you would use it for. I read every request, and for the invitation-only services I send sign-in links myself. Your message is posted to a private Discord channel only I can read.',
+		'Everything here is under development. Some tools are open today; the rest are invitation only. Pick the service you want to try and say a little about what you would use it for. I read every request, and for the invitation-only services I send sign-in links myself.',
 	productLabel: 'Service',
 	/** Choices for the invite form. "Not sure yet" is always last. */
 	products: [
@@ -455,8 +455,29 @@ export const contact = {
 		{ id: 'unsure', label: 'Not sure yet' }
 	],
 	h1Contact: 'Contact',
-	introContact: 'Invites, questions, or something that does not fit a form. Either channel reaches me. Your message is posted to a private Discord channel only I can read.',
+	introContact: 'Invites, questions, or something that does not fit a form. Either channel reaches me.',
 	emailLabel: 'Email'
+};
+
+// ── Form notices (STAR-145, ledger Q23/Q47/Q48/Q65/Q66) ──────────────────────
+// Shown directly under each form, where the data is collected.
+export const formNotices = {
+	contact: {
+		// from data-flow-inventory: storefront.contact (sf-contact-form notice_text)
+		notice:
+			'Your message is stored encrypted on our server and deleted 90 days after we close the conversation (12 months at most); Discord only gets a ticket notice and keeps its own copies.',
+		secrets: "Don't send passwords or secrets.",
+		deletion:
+			'We delete your message 90 days after we close it, and never keep it longer than 12 months. Discord keeps its own copy of the notice line only.'
+	},
+	// from data-flow-inventory: storefront.qnix (sf-qnix-interest), wording per ledger Q66
+	qnix: {
+		line: 'QNix: personal hosting, built to be hard to break.',
+		heading: 'Notify me when QNix opens. One email, then we delete your address.',
+		notice:
+			'We store your address encrypted, email you once when QNix opens, then delete it. If QNix never opens we delete it after 24 months.',
+		cta: 'Notify me'
+	}
 };
 
 // ── Product and service pages ────────────────────────────────────────────────

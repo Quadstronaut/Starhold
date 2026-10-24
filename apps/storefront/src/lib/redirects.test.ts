@@ -13,8 +13,13 @@ describe('removed-path redirects', () => {
 			'/services/automation', '/services/fullstack', '/capabilities', '/work', '/rates', '/operator', '/legal/services'])
 			expect(REMOVED_PATHS).toContain(p);
 	});
+	it('moves the old QNix URLs to /qnix', () => {
+		expect(redirectFor('/services/qnix')).toBe('/qnix');
+		expect(redirectFor('/services/qnix/')).toBe('/qnix');
+		expect(redirectFor('/products/qnix')).toBe('/qnix');
+	});
 	it('leaves live pages alone', () => {
-		for (const p of ['/', '/contact', '/legal/terms', '/legal/privacy', '/legal/refunds', '/products/qnix', '/products/shushgame', '/api/intake'])
+		for (const p of ['/', '/contact', '/legal/terms', '/legal/privacy', '/legal/refunds', '/products/shushgame', '/api/intake'])
 			expect(redirectFor(p)).toBeNull();
 	});
 });

@@ -10,6 +10,9 @@ WORKDIR /app
 COPY --from=build /app/build build
 COPY --from=build /app/node_modules node_modules
 COPY --from=build /app/package.json .
+# retention + export scripts (npm run contact:purge) run from source via tsx
+COPY --from=build /app/scripts scripts
+COPY --from=build /app/src/lib/server src/lib/server
 ENV NODE_ENV=production
 EXPOSE 3000
 CMD ["node", "build"]

@@ -12,7 +12,7 @@ import { read, exists, templateText, collectStrings, srcFiles, relative } from '
 const PAGES = [
 	'',
 	'contact',
-	'products/qnix',
+	'qnix',
 	'products/shushgame',
 	'legal/terms',
 	'legal/privacy',
