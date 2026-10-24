@@ -1,62 +1,83 @@
 import { test, expect } from '@playwright/test';
 
-// Task D: terminal-card feature sections on the home page.
+// Home structure after the STAR-145 redesign (brief section 3).
 
-test('feature sections: two terminal cards, each carrying evidence, visible without JS', async ({ browser }) => {
-	const ctx = await browser.newContext({ javaScriptEnabled: false });
-	const page = await ctx.newPage();
+test('home sections follow the brief order and carry the anchors', async ({ page }) => {
 	await page.goto('/');
-	const cards = page.locator('figure.term[data-evidence]');
-	await expect(cards).toHaveCount(2);
-	for (let i = 0; i < 2; i++) await expect(cards.nth(i)).toBeVisible();
-	await ctx.close();
+	const ids = await page.locator('main > section[id]').evaluateAll((els) => els.map((e) => e.id));
+	expect(ids).toEqual(['services', 'access', 'principles', 'fleet', 'operator', 'faq', 'start']);
 });
 
-// Task E: featured case (device mockup) + how-it-works steps.
-
-test('featured case: real screenshots with dimensions, evidence, links; no JS needed', async ({ browser }) => {
-	const ctx = await browser.newContext({ javaScriptEnabled: false });
-	const page = await ctx.newPage();
+test('services: four groups in Hangar order, a label chip on every card', async ({ page }) => {
 	await page.goto('/');
-	const sec = page.locator('#featured[data-evidence="shushgame-live"]');
-	await expect(sec).toBeVisible();
-	for (const img of await sec.locator('img').all()) {
-		await expect(img).toHaveAttribute('width', /\d+/);
-		await expect(img).toHaveAttribute('height', /\d+/);
-		await expect(img).toHaveAttribute('alt', /.{20,}/);
-	}
-	await expect(sec.locator('a[href="https://shushgame.com"]')).toBeVisible();
-	await expect(page.locator('#fleet')).toBeVisible(); // anchor kept
-	await ctx.close();
+	const groups = await page.locator('#services .group h3').allInnerTexts();
+	expect(groups).toEqual(['For teams and MSPs', 'For builders and sysadmins', 'Discord apps', 'Personal hosting']);
+	const cards = page.locator('#services article.service');
+	await expect(cards).toHaveCount(7);
+	const tags = await cards.locator('.tag').allTextContents();
+	for (const t of tags)
+		expect(['Open · free', 'Open · early access, paid plans', 'Invitation only', 'In development', 'Retired']).toContain(t);
+	// QNix sits under Personal hosting as In development, linking to its interest form
+	const qnix = cards.filter({ hasText: 'QNix' });
+	await expect(qnix.locator('.tag')).toHaveText('In development');
+	await expect(qnix.locator('a')).toHaveAttribute('href', '/qnix');
 });
 
-test('how it works: three static steps', async ({ page }) => {
+test('access: three static steps', async ({ page }) => {
 	await page.goto('/');
-	await expect(page.locator('#how ol.steps > li')).toHaveCount(3);
+	await expect(page.locator('#access ol.steps > li')).toHaveCount(3);
 });
 
-// Task F: FAQ accordion, JSON-LD, closing band.
-
-test('faq: native details work without JS and JSON-LD mirrors them', async ({ browser }) => {
+test('faq: six native details work without JS and JSON-LD mirrors them', async ({ browser }) => {
 	const ctx = await browser.newContext({ javaScriptEnabled: false });
 	const page = await ctx.newPage();
 	await page.goto('/');
 	const items = page.locator('#faq details');
-	const n = await items.count();
-	expect(n).toBeGreaterThanOrEqual(5);
-	expect(n).toBeLessThanOrEqual(7);
+	await expect(items).toHaveCount(6);
 	await items.first().locator('summary').click(); // browser toggles it, no script
 	await expect(items.first()).toHaveAttribute('open', '');
 	const ld = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent()) ?? '{}');
 	expect(ld['@type']).toBe('FAQPage');
-	expect(ld.mainEntity).toHaveLength(n);
+	expect(ld.mainEntity).toHaveLength(6);
 	await ctx.close();
 });
 
-test('closing band: checklist rows with check icons, CTA and email', async ({ page }) => {
+test('closing band: heading, Request an invite and Read the docs, nothing else', async ({ page }) => {
 	await page.goto('/');
 	const band = page.locator('#start');
-	await expect(band.locator('ul.checks li svg')).toHaveCount(3);
-	await expect(band.locator('a.btn-primary')).toBeVisible();
-	await expect(band.locator('a[href^="mailto:"]')).toBeVisible();
+	await expect(band.getByRole('link')).toHaveText(['Request an invite', 'Read the docs']);
+});
+
+test('header and footer follow the brief; no Sign in anywhere', async ({ page }) => {
+	await page.goto('/');
+	const header = page.locator('header nav');
+	await expect(header.locator('ul.primary > li:not(.drawer-only) a')).toHaveText(['Services', 'Principles', 'Questions', 'Hangar', 'Docs']);
+	await expect(page.locator('header .header-cta')).toHaveText('Request an invite');
+	await expect(page.getByRole('link', { name: /sign in/i })).toHaveCount(0);
+	const footer = page.locator('footer');
+	await expect(footer.getByRole('link', { name: 'Back the work' })).toBeVisible();
+	await expect(footer.getByRole('link', { name: /discord/i })).toHaveCount(0);
+	await expect(footer).toContainText('Starhold · Sovereign systems, built and operated. · Est. 2026');
+});
+
+test('404 shows the brief copy and three exits', async ({ page }) => {
+	const res = await page.goto('/no-such-page');
+	expect(res?.status()).toBe(404);
+	await expect(page.locator('h1')).toHaveText('No signal at this address.');
+	await expect(page.getByText('404 · Page not found')).toBeVisible();
+	await expect(page.locator('main').getByRole('link')).toHaveText(['Home', 'Hangar', 'Contact']);
+});
+
+test('/shush says what the game really does and does not cross-promote', async ({ page }) => {
+	await page.goto('/shush');
+	await expect(page.locator('h1')).toHaveText('Shush');
+	await expect(page.getByText('nothing to buy')).toBeVisible();
+	await expect(page.locator('main a[href*="starhold"]')).toHaveCount(0);
+});
+
+test('/account is a stub with the In development chip and no form', async ({ page }) => {
+	await page.goto('/account');
+	await expect(page.getByText('Starhold Account is in development.')).toBeVisible();
+	await expect(page.locator('main .tag')).toHaveText('In development');
+	await expect(page.locator('main form')).toHaveCount(0);
 });

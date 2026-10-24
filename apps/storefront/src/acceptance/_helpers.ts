@@ -340,14 +340,18 @@ export const MARKETING_ROUTES = [
 	'src/routes/+page.svelte',
 	'src/routes/contact/+page.svelte',
 	'src/routes/qnix/+page.svelte',
-	'src/routes/products/shushgame/+page.svelte'
+	'src/routes/shush/+page.svelte',
+	'src/routes/invite/+page.svelte',
+	'src/routes/account/+page.svelte',
+	'src/routes/+error.svelte'
 ];
 
 /** Chrome that renders on every page, marketing included. */
 export const CHROME = [
 	'src/lib/components/Header.svelte',
 	'src/lib/components/Footer.svelte',
-	'src/lib/components/IntakeForm.svelte'
+	'src/lib/components/IntakeForm.svelte',
+	'src/lib/components/InviteForm.svelte'
 ];
 
 export function marketingText(): string {

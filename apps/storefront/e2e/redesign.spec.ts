@@ -14,12 +14,14 @@ const EVIDENCE = json('src/lib/content/evidence.json') as {
 };
 const STATS = json('src/lib/content/stats.json') as Record<string, number>;
 
-const MARKETING = ['/', '/contact'];
+const MARKETING = ['/', '/contact', '/invite', '/shush'];
 const ALL_ROUTES = [
 	'/',
 	'/contact',
 	'/qnix',
-	'/products/shushgame'
+	'/shush',
+	'/invite',
+	'/account'
 ];
 
 const METAPHORS = [
@@ -88,41 +90,42 @@ test('B1.2 hero, both CTAs, and a proof signal sit above the 800px fold', async 
 	}
 });
 
-test('B1.3 the CTA pair points at invite intake and at the services list', async ({ page }) => {
+test('B1.3 the CTA pair points at the invite form and at the services list', async ({ page }) => {
 	await page.goto('/');
 	const primary = page.getByTestId('cta-primary');
 	const secondary = page.getByTestId('cta-secondary');
-	expect(await primary.getAttribute('href')).toMatch(/^\/contact/);
-	expect(await primary.getAttribute('href')).toContain('intent=invite');
-	expect(await secondary.getAttribute('href')).toBe('/#fleet');
+	expect(await primary.getAttribute('href')).toBe('/invite');
+	expect(await secondary.getAttribute('href')).toBe('/#services');
 
-	// and the invite intent actually preselects the invite flow, server-rendered
 	await primary.click();
 	await expect(page.getByRole('button', { name: /request an invite/i })).toBeVisible();
 	await expect(page.getByRole('combobox', { name: /service/i })).toBeVisible();
 });
 
-test('B1.3b a service card preselects its product on the invite form', async ({ page }) => {
-	await page.goto('/contact?intent=invite&product=render');
+test('B1.3b a service card preselects its service on the invite form', async ({ page }) => {
+	await page.goto('/invite?service=render');
 	await expect(page.getByRole('combobox', { name: /service/i })).toHaveValue('render');
-	// an unknown product is ignored, not trusted
-	await page.goto('/contact?intent=invite&product=nope');
-	await expect(page.getByRole('combobox', { name: /service/i })).toHaveValue('umbermark');
+	// an unknown service is ignored, not trusted: the placeholder stays selected
+	await page.goto('/invite?service=nope');
+	await expect(page.getByRole('combobox', { name: /service/i })).toHaveValue('');
 });
-
 // ═══ B2 · voice ═════════════════════════════════════════════════════════════
 
-test('B2.1 no corporate we/our/ours renders on any marketing route', async ({ page }) => {
+test('B2.1 we voice: no first person singular renders on any marketing route', async ({ page }) => {
 	for (const route of MARKETING) {
 		await page.goto(route);
 		const text = await bodyText(page);
-		const hits = ['we', 'our', 'ours'].filter((t) =>
-			new RegExp(`(?<![\\w-])${t}(?![\\w-])`, 'i').test(text)
+		// FAQ questions are the visitor's words, so they are removed before the scan
+		const faq = await page.locator('#faq summary').allInnerTexts();
+		const scanned = faq.reduce((s, q) => s.replace(q, ''), text);
+		const hits = ['I', 'me', 'my', 'mine', 'myself'].filter((t) =>
+			new RegExp('(?<![\\w-])' + t + '(?![\\w-])', t === 'I' ? '' : 'i').test(scanned)
 		);
-		expect(hits, `${route} uses corporate plural`).toEqual([]);
+		expect(hits, route + ' uses first person singular').toEqual([]);
 	}
+	await page.goto('/');
+	await expect(page.locator('#operator')).toContainText('one person in Arizona');
 });
-
 // Regression guard: no LinkedIn anchor on any route, chrome included.
 test('B2.2b no LinkedIn anchor renders anywhere on the site', async ({ page }) => {
 	for (const route of ALL_ROUTES) {
@@ -172,17 +175,11 @@ test('B3.1 no pending evidence renders and no employer entity is named', async (
 });
 
 test('B3.2 every number on a marketing page is derived, except the founding year', async ({ page }) => {
-	// The availability quarter is derived from the clock on the server, so its
-	// digits are legitimate — but they are computed here independently rather
-	// than scraped from the page, so a hardcoded quarter would still fail.
-	const now = new Date();
-	const q = Math.floor(now.getUTCMonth() / 3) + 1;
-	const rollsOver = q === 4;
-	const availability = [String(rollsOver ? 1 : q + 1), String(rollsOver ? now.getUTCFullYear() + 1 : now.getUTCFullYear())];
-
+	// 90 and 12 are the stated retention periods in the form notice under the contact and invite forms.
 	const allowed = new Set([
 		'2026',
-		...availability,
+		'90',
+		'12',
 		...Object.values(STATS)
 			.filter((v) => typeof v === 'number')
 			.map(String)
@@ -190,26 +187,9 @@ test('B3.2 every number on a marketing page is derived, except the founding year
 	for (const route of MARKETING) {
 		await page.goto(route);
 		const numbers = ((await bodyText(page)).match(/\d+/g) ?? []).filter((n) => !allowed.has(n));
-		expect(numbers, `${route} renders an undocumented number`).toEqual([]);
+		expect(numbers, route + ' renders an undocumented number').toEqual([]);
 	}
 });
-
-// Regression guard for the availability line: it must state the quarter AFTER
-// the current one, and it must come from the server rather than a copy string.
-// If someone ever hardcodes a quarter, this fails the moment the clock moves on.
-test('B3.4 the availability line names the next quarter, derived at request time', async ({ page }) => {
-	const now = new Date();
-	const q = Math.floor(now.getUTCMonth() / 3) + 1;
-	const expected = q === 4 ? `Q1 ${now.getUTCFullYear() + 1}` : `Q${q + 1} ${now.getUTCFullYear()}`;
-
-	await page.goto('/');
-	const line = page.locator('.availability');
-	await expect(line).toBeVisible();
-	await expect(line).toContainText(expected);
-	// The current quarter must not be what is advertised.
-	await expect(line).not.toContainText(`Q${q} ${now.getUTCFullYear()}`);
-});
-
 test('B3.3 the home page carries a proof strip of 3-5 checkable outbound links', async ({ page }) => {
 	await page.goto('/');
 	const strip = page.locator('.proof a');

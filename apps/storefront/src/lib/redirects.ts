@@ -20,10 +20,12 @@ export const REMOVED_PATHS: readonly string[] = [
 	'/api/stripe/webhook'
 ];
 
-// Moved pages that have a real new home (ledger Q34/Q50): old QNix URLs -> /qnix.
+// Moved pages that have a real new home (ledger Q34/Q50): old QNix URLs -> /qnix, the old Shush page -> /shush.
 export const MOVED_PATHS: Readonly<Record<string, string>> = {
 	'/services/qnix': '/qnix',
-	'/products/qnix': '/qnix'
+	'/products/qnix': '/qnix',
+	// Shush moved from /products/shushgame to /shush (STAR-145).
+	'/products/shushgame': '/shush'
 };
 
 const REMOVED = new Set(REMOVED_PATHS);

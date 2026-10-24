@@ -1,58 +1,44 @@
 <script lang="ts">
-	import { primary, utility, community, legal } from '$lib/nav';
+	import { footerSite, legal, backTheWork, closingLine } from '$lib/nav';
 	import { site } from '$lib/content/copy';
 	import Brand from '$lib/components/Brand.svelte';
-
 </script>
 
 <footer>
 	<div class="inner">
-		<div class="col">
+		<div class="col brandcol">
 			<!-- Same mark + wordmark as the header, so the brand reads as one object. -->
 			<div class="brandwrap"><Brand label={site.name} /></div>
-			<p class="brandline">{site.fullName} — {site.operator}</p>
-			<p class="strapline">{site.strapline}</p>
-			<p class="meta">Est. {site.foundedYear}</p>
-		</div>
-
-		<nav class="col" aria-label="Footer">
-			<p class="eyebrow">Site</p>
-			<ul>
-				{#each primary as item (item.href)}
-					<li><a href={item.href}>{item.label}</a></li>
-				{/each}
-			</ul>
-		</nav>
-
-		<div class="col">
-			<p class="eyebrow">Elsewhere</p>
-			<ul>
-				{#each utility as item (item.href)}
-					<li><a href={item.href} rel="noopener">{item.label}</a></li>
-				{/each}
-				{#each community as item (item.href)}
-					<li><a href={item.href} rel="noopener">{item.label}</a></li>
-				{/each}
-			</ul>
-			<p class="meta">Back the work, or come and talk about it.</p>
-		</div>
-
-		<div class="col">
-			<p class="eyebrow">Legal</p>
-			<ul>
-				{#each legal as item (item.href)}
-					<li><a href={item.href}>{item.label}</a></li>
-				{/each}
-				<li><a href={'mailto:' + site.email}>{site.email}</a></li>
-			</ul>
+			<p class="meta">
+				<a href={'mailto:' + site.email}>{site.email}</a>
+			</p>
+			<p class="meta"><a href={backTheWork.href} rel="noopener">{backTheWork.label}</a></p>
 			<!-- The privacy claim, on every page. Backed by e2e/privacy.spec.ts. -->
 			<p class="meta privacy" data-evidence={site.privacy.evidence}>
 				{site.privacy.label} · <a href={site.privacy.href}>{site.privacy.linkLabel}</a>
 			</p>
 		</div>
-	</div>
-</footer>
 
+		<nav class="col" aria-label="Footer">
+			<p class="eyebrow">Site</p>
+			<ul>
+				{#each footerSite as item (item.href)}
+					<li><a href={item.href} rel={item.external ? 'noopener' : undefined}>{item.label}</a></li>
+				{/each}
+			</ul>
+		</nav>
+
+		<nav class="col" aria-label="Legal">
+			<p class="eyebrow">Legal</p>
+			<ul>
+				{#each legal as item (item.href)}
+					<li><a href={item.href}>{item.label}</a></li>
+				{/each}
+			</ul>
+		</nav>
+	</div>
+	<p class="closing">{closingLine}</p>
+</footer>
 <style>
 	footer {
 		border-top: 1px solid var(--border);
@@ -73,12 +59,14 @@
 	.brandwrap {
 		margin-bottom: var(--sp-3);
 	}
-	.brandline {
-		color: var(--text);
-		font-weight: 600;
-	}
-	.strapline,
 	.meta {
+		color: var(--text-muted);
+		font-size: var(--fs-1);
+	}
+	.closing {
+		max-width: var(--page);
+		margin: 0 auto;
+		padding: 0 var(--sp-5) var(--sp-6);
 		color: var(--text-muted);
 		font-size: var(--fs-1);
 	}

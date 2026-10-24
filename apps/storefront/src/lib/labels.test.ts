@@ -22,6 +22,25 @@ describe('shared product labels', () => {
 		for (const l of Object.values(PRODUCT_LABELS)) expect(LABELS as readonly string[]).toContain(l);
 	});
 
+	it('pins the arbiter-ruled label for every product (STAR-145 ruling 1)', () => {
+		expect(PRODUCT_LABELS).toEqual({
+			umbermark: 'Open · early access, paid plans',
+			zenithmark: 'Open · free',
+			shushgame: 'Open · free',
+			render: 'Invitation only',
+			status: 'Invitation only',
+			starbot: 'In development',
+			account: 'In development',
+			qnix: 'In development',
+			'hangar-hosting': 'Retired',
+			'custom-bots': 'Retired'
+		});
+	});
+
+	it('every products.json card carries the label from the labels file', () => {
+		for (const p of catalog.products) expect((p as { label?: string }).label, p.id).toBe(labelFor(p.id));
+	});
+
 	it('matches docs/shared/labels.json', () => {
 		expect(json.labels).toEqual([...LABELS]);
 		expect(json.products).toEqual(PRODUCT_LABELS);

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { primary, utility as utilityLinks, cta } from '$lib/nav';
+	import { primary, cta } from '$lib/nav';
 	import Brand from '$lib/components/Brand.svelte';
 
 	// Hamburger drawer state — only reachable below the 640px breakpoint.
@@ -17,26 +17,17 @@
 	<nav aria-label="Main">
 		<Brand />
 
-		<!-- primary links: inline on desktop, inside the drawer on mobile -->
+		<!-- Services · Principles · Questions · Hangar · Docs: inline on desktop,
+		     inside the drawer on mobile. No sign-in link until it works. -->
 		<ul id="nav-primary" class="primary" class:open={menuOpen}>
 			{#each primary as item (item.href)}
-				<li><a href={item.href} onclick={closeMenu}>{item.label}</a></li>
+				<li>
+					<a href={item.href} rel={item.external ? 'noopener' : undefined} onclick={closeMenu}>{item.label}</a>
+				</li>
 			{/each}
 			<li class="drawer-only drawer-cta">
 				<a class="btn btn-primary" href={cta.href} onclick={closeMenu}>{cta.label}</a>
 			</li>
-			{#each utilityLinks as item (item.href)}
-				<li class="drawer-only">
-					<a href={item.href} rel="noopener" onclick={closeMenu}>{item.label}</a>
-				</li>
-			{/each}
-		</ul>
-
-		<!-- utility cluster: external proof links, desktop only -->
-		<ul class="utility">
-			{#each utilityLinks as item (item.href)}
-				<li><a href={item.href} rel="noopener">{item.label}</a></li>
-			{/each}
 		</ul>
 
 		<div class="bar-end">
@@ -54,7 +45,6 @@
 		</div>
 	</nav>
 </header>
-
 <style>
 	header {
 		position: sticky;
@@ -88,7 +78,7 @@
 	}
 
 	.primary {
-		/* claims the slack so the utility cluster and CTA sit hard right */
+		/* claims the slack so the CTA sits hard right */
 		margin-right: auto;
 	}
 	.primary a {
@@ -98,20 +88,6 @@
 	}
 	.primary a:hover {
 		color: var(--accent);
-		text-decoration: none;
-	}
-
-	.utility {
-		gap: var(--sp-4);
-		padding-right: var(--sp-5);
-		border-right: 1px solid var(--border);
-	}
-	.utility a {
-		color: var(--text-muted);
-		font-size: var(--fs-0);
-	}
-	.utility a:hover {
-		color: var(--text);
 		text-decoration: none;
 	}
 
@@ -153,10 +129,6 @@
 		nav {
 			padding: var(--sp-3) var(--sp-4);
 			gap: var(--sp-3);
-		}
-		.utility {
-			/* folds into the drawer below the breakpoint */
-			display: none;
 		}
 		.hamburger {
 			display: flex;

@@ -2,13 +2,8 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import Wordmark from '$lib/components/Wordmark.svelte';
 	import HeroArt from '$lib/components/HeroArt.svelte';
-	import FeatureSplit from '$lib/components/FeatureSplit.svelte';
-	import TerminalCard from '$lib/components/TerminalCard.svelte';
-	import DeviceMockup from '$lib/components/DeviceMockup.svelte';
 	import Faq from '$lib/components/Faq.svelte';
-	import { ev } from '$lib/content/evidence';
-	import { DISCORD_INVITE } from '$lib/site-links';
-	import { home, services, pledges, principles, site, faq } from '$lib/content/copy';
+	import { home, services, principles, comingSoon, faq } from '$lib/content/copy';
 
 	// FAQPage structured data, built from the same copy array the accordion
 	// renders. JSON.stringify handles quoting; escaping "<" stops any string
@@ -23,9 +18,8 @@
 		}))
 	}).replace(/</g, '\\u003c');
 
-	// A service with no href is the Discord bot: its door is the community
-	// invite. With no invite minted, the card shows no open link at all.
-	const serviceHref = (href: string | null) => href ?? DISCORD_INVITE;
+	const byId = new Map(services.items.map((s) => [s.id, s]));
+	const external = (href: string) => !href.startsWith('/');
 </script>
 
 <svelte:head>
@@ -34,7 +28,7 @@
 	{@html `<script type="application/ld+json">${faqLd}<` + `/script>`}
 </svelte:head>
 
-<!-- 2 · Hero — what this is, that it is invitation only, and the next action -->
+<!-- 1 · Hero — what this is, how available it is, and the next action -->
 <section class="hero">
 	<!-- Decorative station art sits behind the copy on phones and beside it on
 	     desktop; absolutely positioned, so it can never shift the layout. -->
@@ -45,9 +39,6 @@
 		<div class="hero-copy">
 			<h1>{home.hero.h1}</h1>
 			<p class="lede">{home.hero.sub}</p>
-			<p class="byline">
-				{home.hero.byline}
-			</p>
 			<div class="btn-row">
 				<a class="btn btn-primary" data-testid="cta-primary" href={home.hero.ctaPrimary.href}>
 					{home.hero.ctaPrimary.label}
@@ -60,7 +51,7 @@
 	</div>
 </section>
 
-<!-- 3 · Proof strip — checkable before the pitch -->
+<!-- 2 · Proof strip — three checkable items, then the one line on tests -->
 <section class="section section-tight" aria-label={home.proofHeading}>
 	<p class="eyebrow">{home.proofHeading}</p>
 	<ul class="proof">
@@ -78,40 +69,50 @@
 			</li>
 		{/each}
 	</ul>
+	<p class="testline" data-evidence={home.testLine.evidence}>
+		{home.testLine.text}
+		<a href={home.testLine.link.href} rel="noopener">{home.testLine.link.label} →</a>
+	</p>
 </section>
 
-<!-- 4 · The services — the same set as the Hangar, each with its own door.
-     Cards are not whole-card links: a card can carry two (open, invite). -->
-<section id="fleet" class="section section-divided">
+<!-- 3 · Services — four groups, in the Hangar's order. One action per card. -->
+<section id="services" class="section section-divided">
 	<p class="eyebrow">{home.work.eyebrow}</p>
 	<Heading {...home.work.h2} />
 	<p class="lede">{home.work.sub}</p>
-	<div class="grid-2">
-		{#each services.items as s (s.id)}
-			<article class="card service reveal" data-evidence={s.evidence}>
-				<h3>{s.name}</h3>
-				{#if s.host}<p class="host">{s.host}</p>{/if}
-				<p><span class="tag">{s.status}</span></p>
-				<p class="what">{s.what}</p>
-				<p class="service-links">
-					{#if serviceHref(s.href)}
-						<a href={serviceHref(s.href)} rel={s.href?.startsWith('/') ? undefined : 'noopener'}>{s.openLabel} →</a>
-					{/if}
-					{#if s.invite}
-						<a href={services.inviteHref(s.id)}>{services.inviteLabel} →</a>
-					{/if}
-				</p>
-			</article>
-		{/each}
-	</div>
+	{#each services.groups as g (g.id)}
+		<div class="group">
+			<h3>{g.title}</h3>
+			<div class="grid-2">
+				{#each g.ids as id (id)}
+					{@const s = byId.get(id)!}
+					<article class="card service reveal" data-evidence={s.evidence}>
+						<div class="namerow">
+							<h4>{s.name}</h4>
+							<span class="tag">{s.status}</span>
+						</div>
+						<p class="what">{s.what}</p>
+						{#if s.host}<p class="host">{s.host}</p>{/if}
+						{#if s.note}<p class="note">{s.note}</p>{/if}
+						{#if s.invite}
+							<p class="service-links"><a href={services.inviteHref(s.id)}>{s.action} →</a></p>
+						{:else if s.href}
+							<p class="service-links">
+								<a href={s.href} rel={external(s.href) ? 'noopener' : undefined}>{s.action} →</a>
+							</p>
+						{/if}
+					</article>
+				{/each}
+			</div>
+		</div>
+	{/each}
 	<div class="btn-row">
-		<a class="btn btn-primary" href={home.hero.ctaPrimary.href}>{home.hero.ctaPrimary.label}</a>
-		<a class="btn btn-ghost" href={services.fleetStatus.href} rel="noopener">{services.fleetStatus.label} →</a>
+		<a class="btn btn-secondary" href={home.work.hangar.href} rel="noopener">{home.work.hangar.label} →</a>
 	</div>
 </section>
 
-<!-- 4b · How invitations work — three static steps, numbered by CSS counter -->
-<section id="how" class="section section-divided">
+<!-- 4 · Access — three static steps, numbered by CSS counter -->
+<section id="access" class="section section-divided">
 	<p class="eyebrow">{home.how.eyebrow}</p>
 	<Heading {...home.how.h2} />
 	<ol class="steps">
@@ -124,74 +125,49 @@
 	</ol>
 </section>
 
-<!-- 5 · Privacy principles: the operator's rules, then the checkable ones -->
+<!-- 5 · Principles — delivered pledges only; the rest is marked coming soon -->
 <section id="principles" class="section section-divided">
 	<p class="eyebrow">{home.principles.eyebrow}</p>
 	<Heading {...home.principles.h2} />
 	<p class="lede">{home.principles.sub}</p>
 	<ul class="checks pledges">
-		{#each pledges as item (item)}
-			<li>
+		{#each principles as p (p.title)}
+			<li data-evidence={p.evidence}>
 				<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
-				{item}
+				<span>
+					<strong>{p.title}</strong>
+					{p.detail}
+					{#if p.link}
+						<a href={p.link.href}>{p.link.label} →</a>
+					{/if}
+				</span>
 			</li>
 		{/each}
 	</ul>
-	<ul class="ev-list principles">
-		{#each principles as p (p.title)}
-			<li data-evidence={p.evidence}>
-				<strong>{p.title}</strong>
-				{p.detail}
-				{#if p.link}
-					<a href={p.link.href} rel={p.link.href.startsWith('/') ? undefined : 'noopener'}>{p.link.label} →</a>
-				{/if}
-			</li>
+	<h3 class="soon-h">{home.principles.soonHeading}</h3>
+	<ul class="soon">
+		{#each comingSoon as item (item)}
+			<li>{item}</li>
 		{/each}
 	</ul>
 </section>
 
-<!-- 5b · Three proofs at length. Alternating sides; the cards show real output
-     shapes, never live numbers. -->
-{#each home.features as f, i (f.id)}
-	<FeatureSplit
-		eyebrow={f.eyebrow}
-		heading={f.h2}
-		body={f.body}
-		link={f.link}
-		evidence={f.evidence}
-		flip={i % 2 === 1}
-	>
-		{#snippet media()}
-			<TerminalCard title={f.card.title} lines={f.card.lines} caption={f.card.caption} evidence={f.evidence} />
-		{/snippet}
-	</FeatureSplit>
-{/each}
-
-<!-- 5c · Featured case — one live product on real device captures -->
-<section id="featured" class="section section-divided" data-evidence={home.featured.evidence}>
-	<div class="split">
-		<div class="copy">
-			<p class="eyebrow">{home.featured.eyebrow}</p>
-			<Heading {...home.featured.h2} />
-			<p class="lede">{home.featured.body}</p>
-			<p class="btn-row">
-				{#each home.featured.links as l (l.href)}
-					<a class="btn btn-secondary" href={l.href} rel="noopener">{l.label} →</a>
-				{/each}
-			</p>
-		</div>
-		<div class="media">
-			<DeviceMockup desktop={home.featured.desktop} mobile={home.featured.mobile} />
-		</div>
+<!-- 6 · Fleet status — what the design does and does not promise -->
+<section id="fleet" class="section section-divided" data-evidence={home.fleet.evidence}>
+	<p class="eyebrow">{home.fleet.eyebrow}</p>
+	<h2>{home.fleet.h2}</h2>
+	<div class="prose">
+		<p>{home.fleet.body}</p>
+		<p><a href={home.fleet.link.href} rel="noopener">{home.fleet.link.label} →</a></p>
 	</div>
 </section>
 
-<!-- 7 · Operator teaser -->
+<!-- 7 · Who runs it — the one place that names the person behind the "we" -->
 <section id="operator" class="section section-divided">
 	<p class="eyebrow">{home.operator.eyebrow}</p>
 	<h2>{home.operator.h2}</h2>
 	<div class="prose">
-		<p>{home.operator.lede}</p>
+		<p data-evidence="single-operator">{home.operator.lede}</p>
 	</div>
 </section>
 
@@ -202,23 +178,13 @@
 	<Faq items={faq.items} />
 </section>
 
-<!-- 9 · Closing CTA band — raised panel with an amber halo -->
+<!-- 9 · Closing CTA — no countdowns, no scarcity -->
 <section id="start" class="section section-divided">
 	<div class="band reveal">
-		<p class="eyebrow">{home.contact.eyebrow}</p>
 		<Heading {...home.contact.h2} />
-		<p class="lede">{home.contact.body}</p>
-		<ul class="checks">
-			{#each home.contact.checklist as item, i (item)}
-				<li data-evidence={i === 0 ? ev('no-third-party-tracking') : undefined}>
-					<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
-					{item}
-				</li>
-			{/each}
-		</ul>
 		<div class="btn-row">
 			<a class="btn btn-primary" href={home.contact.cta.href}>{home.contact.cta.label}</a>
-			<a class="btn btn-secondary" href={'mailto:' + site.email}>{site.email}</a>
+			<a class="btn btn-secondary" href={home.contact.docs.href} rel="noopener">{home.contact.docs.label}</a>
 		</div>
 	</div>
 </section>
@@ -265,18 +231,11 @@
 			opacity: 1;
 		}
 	}
-	/* ── featured case ──────────────────────────────────────────────────── */
-	.split {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr);
-		gap: var(--sp-6);
-		align-items: center;
-	}
-	@media (min-width: 900px) {
-		.split {
-			grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-			gap: var(--sp-8);
-		}
+	.testline {
+		margin-top: var(--sp-4);
+		color: var(--text-muted);
+		font-size: var(--fs-1);
+		max-width: var(--measure);
 	}
 	/* ── closing band: .band panel lives in app.css, shared with CtaBand ── */
 	.checks {
@@ -302,7 +261,18 @@
 		stroke-linecap: round;
 		stroke-linejoin: round;
 	}
-	/* ── how it works: CSS counter, so no digits live in the copy ───────── */
+	.pledges {
+		max-width: var(--measure);
+	}
+	.soon-h {
+		margin-top: var(--sp-5);
+	}
+	.soon {
+		max-width: var(--measure);
+		color: var(--text-muted);
+		padding-left: var(--sp-5);
+	}
+	/* ── access steps: CSS counter, so no digits live in the copy ───────── */
 	.steps {
 		list-style: none;
 		margin: var(--sp-5) 0 0;
@@ -342,37 +312,36 @@
 		color: var(--text-muted);
 		font-size: var(--fs-1);
 	}
-	.byline {
+	/* ── service groups and cards: one action per card, so no stretched link ── */
+	.group {
+		margin-top: var(--sp-6);
+	}
+	.group h3 {
+		margin-bottom: var(--sp-3);
+	}
+	.namerow {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--sp-2) var(--sp-3);
+		margin-bottom: var(--sp-2);
+	}
+	.namerow h4 {
+		margin: 0;
+	}
+	.namerow .tag {
+		margin: 0;
 		color: var(--text-muted);
-		font-size: var(--fs-1);
-		max-width: var(--measure);
-		margin-top: var(--sp-4);
 	}
 	.what {
 		color: var(--text);
 	}
-	.card .tag {
-		color: var(--text-muted);
-	}
-	.principles li {
-		max-width: var(--measure);
-	}
-	/* ── service cards (STAR-134): two doors per card, so no stretched link ── */
 	.service .host {
 		font-family: var(--font-mono);
 		font-size: var(--fs-0);
 		overflow-wrap: anywhere;
 	}
-	.service-links {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--sp-2) var(--sp-5);
-	}
 	.service-links a {
 		font-weight: 600;
-	}
-	.pledges {
-		max-width: var(--measure);
-		margin-bottom: var(--sp-6);
 	}
 </style>

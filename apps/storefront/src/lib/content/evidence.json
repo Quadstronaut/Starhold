@@ -3,7 +3,7 @@
 	"items": [
 		{
 			"id": "self-hosted-fleet",
-			"claim": "Starhold runs on machines I administer: a dedicated server and a VPS joined by a private Tailscale mesh, in rootless Podman containers.",
+			"claim": "Starhold runs on machines we administer: a dedicated server and a VPS.",
 			"status": "verified",
 			"verifier": "https://starhold.app",
 			"sources": ["https://status.starhold.fyi"]
@@ -33,15 +33,8 @@
 			"sources": ["apps/docs"]
 		},
 		{
-			"id": "qnix-design-docs",
-			"claim": "QNix architecture, hosting, and tenancy/security design notes are written down and published before the product exists.",
-			"status": "verified",
-			"verifier": "apps/docs/src/content/docs/qnix",
-			"sources": ["https://starhold.fyi"]
-		},
-		{
 			"id": "shushgame-live",
-			"claim": "Shushgame is live: a Discord-native game with its own site, its own bot, and its own payments.",
+			"claim": "Shush is live: a free Discord-native game with its own site and bot.",
 			"status": "verified",
 			"verifier": "https://shushgame.com",
 			"sources": ["apps/docs/src/content/docs/shushgame"]

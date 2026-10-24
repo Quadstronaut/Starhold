@@ -26,3 +26,10 @@ test('removed pages answer 301 to the home page', async ({ request }) => {
 		expect(res.headers()['location'], path).toBe('/');
 	}
 });
+
+
+test('the old Shush page answers 301 to /shush', async ({ request }) => {
+	const res = await request.get('/products/shushgame', { maxRedirects: 0 });
+	expect(res.status()).toBe(301);
+	expect(res.headers()['location']).toBe('/shush');
+});

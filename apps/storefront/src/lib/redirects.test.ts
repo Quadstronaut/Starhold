@@ -18,8 +18,12 @@ describe('removed-path redirects', () => {
 		expect(redirectFor('/services/qnix/')).toBe('/qnix');
 		expect(redirectFor('/products/qnix')).toBe('/qnix');
 	});
+	it('moves the old Shush page to /shush', () => {
+		expect(redirectFor('/products/shushgame')).toBe('/shush');
+		expect(redirectFor('/products/shushgame/')).toBe('/shush');
+	});
 	it('leaves live pages alone', () => {
-		for (const p of ['/', '/contact', '/legal/terms', '/legal/privacy', '/legal/refunds', '/products/shushgame', '/api/intake'])
+		for (const p of ['/', '/contact', '/legal/terms', '/legal/privacy', '/legal/refunds', '/shush', '/invite', '/account', '/api/intake'])
 			expect(redirectFor(p)).toBeNull();
 	});
 });
