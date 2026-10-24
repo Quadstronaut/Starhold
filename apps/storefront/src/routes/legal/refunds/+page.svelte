@@ -1,23 +1,37 @@
 <svelte:head><title>Refund Policy · Starhold</title></svelte:head>
 
 <section class="section legal">
-	<div class="label">Effective 13 June 2026</div>
+	<div class="label">Last updated 2026-10-24</div>
 	<h1>Refund Policy</h1>
 
-	<p><strong>Subscriptions.</strong> You can cancel any time and your service continues to the end of the period you have already paid for. Fees already paid are non-refundable, and we do not issue partial or pro-rated refunds for the current period. There are no cancellation fees.</p>
+	<p>Paid plans and the one-off report checkout are not open yet. These are the rules that apply whenever a checkout is open. Nothing here limits rights you have under the consumer law where you live.</p>
 
-	<p><strong>Quoted custom work.</strong> Refund terms for bespoke development or automation are set out in each written quote, which controls for that engagement.</p>
+	<h2>One-off reports</h2>
+	<p>If the report fails or isn't what we described, ask within 14 days and we refund it in full. EU/UK buyers keep their legal withdrawal rights.</p>
 
-	<!-- OPERATOR REVIEW: the two paragraphs below are live as soon as this merges (not gated by SERVICES_TERMS_APPROVED). Confirm: a missed report refunds that whole month's fee (not pro-rated); the 14 days run from the invoice date. -->
-	<p><strong>Managed Ops subscriptions.</strong> Managed Ops is billed monthly, per server. You can cancel any time; service continues to the end of the month you have already paid for. The current month is not refunded, unless we fail to deliver that month's one-page report, in which case we refund that month's fee.</p>
+	<h2>Subscriptions</h2>
+	<p>Subscription rules apply once plans open. You choose how to end a plan, and there are no cancellation fees. Cancelling and deleting your account are two separate actions.</p>
 
-	<p><strong>Hangar hosting.</strong> Hangar hosting is billed monthly, per app. You can cancel any time; nothing is prorated, and your data is exported on request within 14 days.</p>
+	<h3>Cancel</h3>
+	<p>Cancel stops renewal. Your account and your data stay. You choose:</p>
+	<ul>
+		<li><strong>Run out the period.</strong> You keep access until the end of the time you paid for.</li>
+		<li><strong>Prorated refund now.</strong> We refund the unused part of the period, and access ends.</li>
+	</ul>
 
-	<p><strong>Hourly work.</strong> Hourly hands-on work is billed after it is delivered, by invoice, at the published rates. If you disagree with an invoice, email us at <a href="mailto:hello@starhold.dev">hello@starhold.dev</a> within 14 days of the invoice date and we will review it.</p>
+	<h3>Delete your account</h3>
+	<p>You choose when it happens:</p>
+	<ul>
+		<li><strong>Delete now.</strong> After a short grace period, your account and data are removed, and we refund the unused time, pro rata.</li>
+		<li><strong>Delete at the end of the period.</strong> Access continues and the account shows "deleting on" the date. You can undo it until then. When the period ends, your data is deleted. No refund is needed.</li>
+	</ul>
+	<p>Every delete asks you to confirm first. Deletion works in three layers: live data is gone at once, backups drop it within 30 days, and only the bare purchase record (amount, date, provider reference, no content) is kept, as tax law requires, for up to 7 years.</p>
 
-	<p><strong>Billing disputes.</strong> If a charge looks wrong, email us first at <a href="mailto:hello@starhold.dev">hello@starhold.dev</a> — we review billing disputes and respond within 5 business days, usually faster than a card dispute. You always retain your card network's chargeback rights.</p>
+	<h2>How refunds are paid</h2>
+	<p>Our payment providers are the merchants of record, so refunds go back to your original payment method through them. Some providers review a refund before they pay it out. We issue the refund on our side right away. While the provider works through it, the status reads "refund issued, provider processing", and it can take several business days to reach you.</p>
 
-	<p><strong>Cancellation.</strong> Cancel from your account or by emailing <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>; service runs to the end of the paid period, then stops.</p>
+	<h2>Billing problems</h2>
+	<p>If a charge looks wrong, write to <a href="mailto:hello@starhold.dev">hello@starhold.dev</a> first. We answer billing questions within 5 business days. You always keep your card network's chargeback rights.</p>
 
-	<p class="label">Last updated 13 June 2026.</p>
+	<p class="label">Last updated 2026-10-24.</p>
 </section>
