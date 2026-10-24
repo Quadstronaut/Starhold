@@ -23,8 +23,8 @@ export type Label = (typeof LABELS)[number];
 export const PRODUCT_LABELS: Record<string, Label> = {
 	umbermark: LABEL_OPEN_PAID,
 	zenithmark: LABEL_OPEN_FREE,
-	render: LABEL_OPEN_PAID,
-	status: LABEL_OPEN_PAID,
+	render: LABEL_INVITE_ONLY,
+	status: LABEL_INVITE_ONLY,
 	account: LABEL_IN_DEVELOPMENT, // Starhold Account
 	starbot: LABEL_IN_DEVELOPMENT,
 	shushgame: LABEL_OPEN_FREE,

@@ -229,3 +229,34 @@ h2 + .bays {
 		margin-top: var(--sp-5);
 	}
 }
+
+/* ═══ testing banner (Q4 wording, one toggle: remove the <aside> to retire it) ═ */
+.testing-banner {
+	background: var(--surface-2);
+	border-bottom: 1px solid var(--border-strong);
+	color: var(--text-muted);
+	font-size: var(--fs-0);
+	padding: var(--sp-2) var(--sp-4);
+}
+.testing-banner p {
+	max-width: var(--page);
+	margin: 0 auto;
+}
+
+/* ═══ categories: four groups, always shown, in a fixed order ═════════════ */
+.category + .category {
+	margin-top: var(--sp-8);
+}
+.category-title {
+	font-size: var(--fs-3);
+	margin-bottom: var(--sp-4);
+}
+.tile .note {
+	margin-top: var(--sp-2);
+	font-size: var(--fs-0);
+	color: var(--text-muted);
+}
+.tile .action {
+	margin-top: var(--sp-3);
+	font-size: var(--fs-1);
+}
