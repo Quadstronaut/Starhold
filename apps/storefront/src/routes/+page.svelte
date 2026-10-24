@@ -2,18 +2,13 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import Wordmark from '$lib/components/Wordmark.svelte';
 	import HeroArt from '$lib/components/HeroArt.svelte';
-	import CapabilityIcon from '$lib/components/CapabilityIcon.svelte';
 	import FeatureSplit from '$lib/components/FeatureSplit.svelte';
 	import TerminalCard from '$lib/components/TerminalCard.svelte';
 	import DeviceMockup from '$lib/components/DeviceMockup.svelte';
 	import Faq from '$lib/components/Faq.svelte';
 	import { ev } from '$lib/content/evidence';
 	import { DISCORD_INVITE } from '$lib/site-links';
-	import { home, capabilities, services, pledges, principles, operator, site, faq } from '$lib/content/copy';
-
-	// availableFrom is computed per request in +page.server.ts so the quarter
-	// never goes stale; see src/lib/availability.ts.
-	let { data } = $props();
+	import { home, services, pledges, principles, site, faq } from '$lib/content/copy';
 
 	// FAQPage structured data, built from the same copy array the accordion
 	// renders. JSON.stringify handles quoting; escaping "<" stops any string
@@ -52,7 +47,6 @@
 			<p class="lede">{home.hero.sub}</p>
 			<p class="byline">
 				{home.hero.byline}
-				<a href={home.hero.bylineLink.href}>{home.hero.bylineLink.label} →</a>
 			</p>
 			<div class="btn-row">
 				<a class="btn btn-primary" data-testid="cta-primary" href={home.hero.ctaPrimary.href}>
@@ -192,41 +186,12 @@
 	</div>
 </section>
 
-<!-- 6 · Hiring the operator — secondary since STAR-134, still one scroll away -->
-<section id="capabilities" class="section section-divided">
-	<p class="eyebrow">{home.capabilities.eyebrow}</p>
-	<Heading {...home.capabilities.h2} />
-	<p class="lede">{home.capabilities.sub}</p>
-	<!-- Fixed 2x2 on desktop, one column on phones. Four static tiles: no
-	     marquee, no duplicated set. The whole tile is the link. -->
-	<div class="tiles">
-		{#each capabilities.items as c (c.id)}
-			<a class="tile reveal" href={c.href}>
-				<span class="chip-lg"><CapabilityIcon name={c.id as 'automation' | 'platform' | 'bots' | 'fullstack'} /></span>
-				<h3>{c.name}</h3>
-				<p>{c.summary}</p>
-				<span class="go" aria-hidden="true">→</span>
-			</a>
-		{/each}
-	</div>
-	<p class="availability">{home.capabilities.availability(data.availableFrom)}</p>
-	<div class="btn-row">
-		<a class="btn btn-ghost" href="/capabilities">Scope, deliverables, and how to start →</a>
-		{#each home.capabilities.links as l (l.href)}
-			<a class="btn btn-ghost" href={l.href}>{l.label} →</a>
-		{/each}
-	</div>
-</section>
-
 <!-- 7 · Operator teaser -->
 <section id="operator" class="section section-divided">
 	<p class="eyebrow">{home.operator.eyebrow}</p>
 	<h2>{home.operator.h2}</h2>
 	<div class="prose">
-		<p>{operator.lede}</p>
-	</div>
-	<div class="btn-row">
-		<a class="btn btn-ghost" href={home.operator.cta.href}>{home.operator.cta.label} →</a>
+		<p>{home.operator.lede}</p>
 	</div>
 </section>
 
@@ -298,63 +263,6 @@
 			width: 40%;
 			max-width: 520px;
 			opacity: 1;
-		}
-	}
-	/* ── capability tiles ───────────────────────────────────────────────── */
-	.tiles {
-		display: grid;
-		gap: var(--sp-4);
-		grid-template-columns: 1fr;
-	}
-	@media (min-width: 700px) {
-		.tiles {
-			grid-template-columns: 1fr 1fr;
-			gap: var(--sp-5);
-		}
-	}
-	.tile {
-		position: relative;
-		display: block;
-		padding: var(--sp-5);
-		background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
-		border: 1px solid var(--border);
-		border-radius: var(--radius-lg);
-		box-shadow: var(--shadow-soft);
-		color: inherit;
-		transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-	}
-	.tile:hover {
-		transform: translateY(var(--lift));
-		box-shadow: var(--shadow-lift);
-		border-color: var(--accent);
-		text-decoration: none;
-		color: inherit;
-	}
-	.tile h3 {
-		color: var(--text);
-		margin-bottom: var(--sp-2);
-	}
-	.tile p {
-		color: var(--text-muted);
-		font-size: var(--fs-1);
-		margin: 0;
-		padding-right: var(--sp-6); /* keeps copy clear of the arrow */
-	}
-	.go {
-		position: absolute;
-		right: var(--sp-5);
-		bottom: var(--sp-5);
-		color: var(--accent);
-		transition: transform 0.2s ease;
-	}
-	.tile:hover .go {
-		transform: translateX(var(--sp-1));
-	}
-	/* No lift for people who asked for less motion; border still signals hover. */
-	@media (prefers-reduced-motion: reduce) {
-		.tile:hover,
-		.tile:hover .go {
-			transform: none;
 		}
 	}
 	/* ── featured case ──────────────────────────────────────────────────── */
@@ -448,24 +356,6 @@
 	}
 	.principles li {
 		max-width: var(--measure);
-	}
-	/* Availability reads as a live status, not as marketing copy — hence the
-	   accent dot and the quieter weight. */
-	.availability {
-		color: var(--text);
-		font-size: var(--fs-1);
-		margin-top: var(--sp-3);
-		display: flex;
-		align-items: center;
-		gap: var(--sp-2);
-	}
-	.availability::before {
-		content: '';
-		width: 8px;
-		height: 8px;
-		border-radius: 50%;
-		background: var(--accent);
-		flex-shrink: 0;
 	}
 	/* ── service cards (STAR-134): two doors per card, so no stretched link ── */
 	.service .host {

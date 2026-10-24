@@ -24,10 +24,6 @@
 <section class="section section-divided reveal">
 	<h2>{shushgame.provesHeading}</h2>
 	<p class="prose proves" data-evidence={shushgame.proves.evidence}>{shushgame.proves.text}</p>
-	<div class="btn-row">
-		<a class="btn btn-ghost" href="/work">The rest of the work →</a>
-		<a class="btn btn-ghost" href="/contact?intent=quote">Request a quote</a>
-	</div>
 </section>
 
 <style>

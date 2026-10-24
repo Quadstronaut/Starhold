@@ -1,28 +1,14 @@
 import { test, expect } from '@playwright/test';
 
-// Task D: capability tiles + terminal-card feature sections on the home page.
+// Task D: terminal-card feature sections on the home page.
 
-test('capability tiles: four whole-card links, no horizontal overflow on a phone', async ({ page }) => {
-	await page.setViewportSize({ width: 375, height: 812 });
-	await page.goto('/');
-	const tiles = page.locator('#capabilities a.tile');
-	await expect(tiles).toHaveCount(4);
-	for (const href of ['/services/automation', '/products/qnix', '/products/custom-bots', '/services/fullstack']) {
-		await expect(page.locator(`#capabilities a.tile[href="${href}"]`)).toBeVisible();
-	}
-	const overflow = await page.evaluate(
-		() => document.documentElement.scrollWidth - document.documentElement.clientWidth
-	);
-	expect(overflow).toBe(0);
-});
-
-test('feature sections: three terminal cards, each carrying evidence, visible without JS', async ({ browser }) => {
+test('feature sections: two terminal cards, each carrying evidence, visible without JS', async ({ browser }) => {
 	const ctx = await browser.newContext({ javaScriptEnabled: false });
 	const page = await ctx.newPage();
 	await page.goto('/');
 	const cards = page.locator('figure.term[data-evidence]');
-	await expect(cards).toHaveCount(3);
-	for (let i = 0; i < 3; i++) await expect(cards.nth(i)).toBeVisible();
+	await expect(cards).toHaveCount(2);
+	for (let i = 0; i < 2; i++) await expect(cards.nth(i)).toBeVisible();
 	await ctx.close();
 });
 

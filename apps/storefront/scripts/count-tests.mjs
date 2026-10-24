@@ -71,9 +71,8 @@ export function vitestListCount(appRoot = APP_ROOT) {
 
 /**
  * Playwright tests via `--list` (does not start the web server or run a browser). Known, accepted limit: --list cannot see
- * env-conditional skips such as `test.skip(!process.env.STRIPE_SECRET_KEY)` in
- * e2e/smoke.spec.ts. Those tests are counted (they run when credentials are set),
- * so a CI run without Stripe credentials reports 1 skipped of the published total.
+ * env-conditional skips (`test.skip(!process.env.X)`). Those tests are counted
+ * (they run when the variable is set), so a run without it reports them as skipped.
  */
 export function playwrightCount(appRoot = APP_ROOT) {
 	const res = runNode(appRoot, join('@playwright', 'test', 'cli.js'), ['test', '--list', '--reporter=json']);

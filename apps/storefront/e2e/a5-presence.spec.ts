@@ -5,9 +5,7 @@ import { test, expect } from '@playwright/test';
 // light (weight budget) and that structured data matches what is on screen.
 
 const ROUTES = [
-	'/', '/capabilities', '/work', '/operator', '/contact',
-	'/services/automation', '/services/fullstack',
-	'/products/custom-bots', '/products/shushgame', '/products/qnix'
+	'/', '/contact', '/products/shushgame', '/products/qnix'
 ];
 
 // ── 1. No JavaScript ────────────────────────────────────────────────────────

@@ -1,4 +1,4 @@
-// Contact / quote / QNix-interest relay → private Discord intake channel.
+// Contact / invite / QNix-interest relay → private Discord intake channel.
 // Spam defenses: hidden honeypot field (silently swallowed) + per-IP rate limit.
 import { json, error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
@@ -8,7 +8,7 @@ import type { RequestHandler } from './$types';
 
 // 'invite' is /contact?intent=invite: a request to be let into one of the
 // invitation-only services. Same validation as every other kind.
-const KINDS = ['contact', 'quote', 'qnix', 'fullstack', 'hosting', 'invite'];
+const KINDS = ['contact', 'qnix', 'invite'];
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 export const POST: RequestHandler = async ({ request, getClientAddress }) => {

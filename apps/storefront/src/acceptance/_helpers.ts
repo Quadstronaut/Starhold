@@ -338,15 +338,7 @@ export function collectEvidenceRefs(value: unknown, out: Set<string> = new Set()
  *  purpose: there a legal entity is speaking, and "we" is correct there. */
 export const MARKETING_ROUTES = [
 	'src/routes/+page.svelte',
-	'src/routes/work/+page.svelte',
-	'src/routes/capabilities/+page.svelte',
-	'src/routes/operator/+page.svelte',
 	'src/routes/contact/+page.svelte',
-	'src/routes/services/automation/+page.svelte',
-	'src/routes/services/managed-ops/+page.svelte',
-	'src/routes/services/hosting/+page.svelte',
-	'src/routes/rates/+page.svelte',
-	'src/routes/products/custom-bots/+page.svelte',
 	'src/routes/products/qnix/+page.svelte',
 	'src/routes/products/shushgame/+page.svelte'
 ];
@@ -355,8 +347,7 @@ export const MARKETING_ROUTES = [
 export const CHROME = [
 	'src/lib/components/Header.svelte',
 	'src/lib/components/Footer.svelte',
-	'src/lib/components/IntakeForm.svelte',
-	'src/lib/components/BotConfigurator.svelte'
+	'src/lib/components/IntakeForm.svelte'
 ];
 
 export function marketingText(): string {

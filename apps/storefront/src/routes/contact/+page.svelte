@@ -4,8 +4,6 @@
 	import { contact } from '$lib/content/copy';
 
 	let { data } = $props();
-	const isQuote = $derived(data.intent === 'quote');
-	const isHosting = $derived(data.intent === 'hosting');
 	const isInvite = $derived(data.intent === 'invite');
 </script>
 
@@ -17,10 +15,10 @@
 <section class="section">
 	<p class="eyebrow">{contact.eyebrow}</p>
 	<h1>
-		{isInvite ? contact.h1Invite : isHosting ? contact.h1Hosting : isQuote ? contact.h1Quote : contact.h1Contact}
+		{isInvite ? contact.h1Invite : contact.h1Contact}
 	</h1>
 	<p class="lede">
-		{isInvite ? contact.introInvite : isHosting ? contact.introHosting : isQuote ? contact.introQuote : contact.introContact}
+		{isInvite ? contact.introInvite : contact.introContact}
 	</p>
 
 	<p class="email">
@@ -39,7 +37,7 @@
 </section>
 
 <section class="section section-divided reveal">
-	<h2>{isInvite ? 'Invite request' : isHosting ? 'Hosting request' : isQuote ? 'Quote request' : 'Send a message'}</h2>
+	<h2>{isInvite ? 'Invite request' : 'Send a message'}</h2>
 	{#if isInvite}
 		<!-- Keyed on the preselected product so a client-side hop between two
 		     ?product= links re-seeds the select instead of keeping the old one. -->
@@ -53,10 +51,7 @@
 			/>
 		{/key}
 	{:else}
-		<IntakeForm
-			kind={isHosting ? 'hosting' : isQuote ? 'quote' : 'contact'}
-			cta={isHosting ? 'Request hosting' : isQuote ? 'Request a quote' : 'Send'}
-		/>
+		<IntakeForm kind="contact" cta="Send" />
 	{/if}
 </section>
 

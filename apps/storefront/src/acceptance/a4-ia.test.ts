@@ -11,26 +11,15 @@ import { read, exists, templateText, collectStrings, srcFiles, relative } from '
 /** Every route that must resolve. Paths are pinned by the spec. */
 const PAGES = [
 	'',
-	'work',
-	'capabilities',
-	'operator',
 	'contact',
-	'services/automation',
-	'services/managed-ops',
-	'services/hosting',
-	'rates',
-	'products/custom-bots',
 	'products/qnix',
 	'products/shushgame',
-	'cart',
-	'cart/success',
 	'legal/terms',
-	'legal/services',
 	'legal/privacy',
 	'legal/refunds'
 ];
 
-const ENDPOINTS = ['api/checkout', 'api/intake', 'api/stripe/webhook', 'about'];
+const ENDPOINTS = ['api/intake'];
 
 describe('A4 · information architecture', () => {
 	it('A4.1 every pinned route has a page component', () => {
@@ -38,60 +27,37 @@ describe('A4 · information architecture', () => {
 		expect(missing).toEqual([]);
 	});
 
-	it('A4.2 /about is a real 308 endpoint with no page component', () => {
-		expect(exists('src/routes/about/+page.svelte')).toBe(false);
-		expect(exists('src/routes/about/+server.ts')).toBe(true);
-		const src = read('src/routes/about/+server.ts');
-		expect(src).toMatch(/redirect\(\s*308\s*,\s*['"]\/operator['"]\s*\)/);
-		expect(src).toMatch(/export const GET/);
+	it('A4.2 removed pages have no route left and redirect through the one map', () => {
+		for (const p of ['about', 'cart', 'work', 'rates', 'operator', 'capabilities', 'services', 'api/checkout', 'api/stripe'])
+			expect(exists(`src/routes/${p}`), p).toBe(false);
+		expect(read('src/hooks.server.ts')).toMatch(/redirect\(\s*301/);
+		expect(read('src/hooks.server.ts')).toMatch(/\$lib\/redirects/);
 	});
 
-	it('A4.3 the published products.json contract is unchanged', () => {
+	it('A4.3 the published products.json contract lists only live products', () => {
 		const products = parseCatalog(catalog);
-		expect(products.map((p) => p.id)).toEqual(['shushgame', 'custom-bots', 'qnix', 'automation', 'fullstack', 'managed-ops', 'hangar-hosting']);
-
-		const bots = products.find((p) => p.id === 'custom-bots')!;
-		expect(bots.pricing).toEqual({ model: 'subscription', monthly_usd: 5, ops_pack_usd: 9 });
-		expect(bots.url).toBe('https://starhold.dev/products/custom-bots');
-
+		expect(products.map((p) => p.id)).toEqual(['shushgame', 'qnix']);
 		expect(products.find((p) => p.id === 'qnix')!.status).toBe('coming-soon');
-		expect(products.find((p) => p.id === 'automation')!.pricing.model).toBe('quote');
-		expect(products.find((p) => p.id === 'automation')!.url).toBe(
-			'https://starhold.dev/services/automation'
-		);
 		expect(products.find((p) => p.id === 'shushgame')!.url).toBe('https://shushgame.com');
-
-		const ops = products.find((p) => p.id === 'managed-ops')!;
-		expect(ops.pricing).toEqual({ model: 'subscription', monthly_usd: 99 });
-		expect(ops.url).toBe('https://starhold.dev/services/managed-ops');
-
-		const hosting = products.find((p) => p.id === 'hangar-hosting')!;
-		expect(hosting.pricing).toEqual({ model: 'subscription', monthly_usd: 19 });
-		expect(hosting.status).toBe(ops.status);
-		expect(hosting.url).toBe('https://starhold.dev/services/hosting');
 	});
 
 	it('A4.4 the home page still owns the #fleet anchor', () => {
 		expect(read('src/routes/+page.svelte')).toMatch(/id="fleet"/);
 	});
 
-	it('A4.5 navigation is data-driven with 4-5 primary items and a cart in utility', () => {
+	it('A4.5 navigation is data-driven with 4-5 primary items and no cart', () => {
 		expect(nav.primary.length).toBeGreaterThanOrEqual(4);
 		expect(nav.primary.length).toBeLessThanOrEqual(5);
-		// STAR-134: primary leads with the services; hiring moved to secondary.
 		expect(nav.primary.map((i) => i.href)).toEqual(expect.arrayContaining(['/#fleet', '/contact']));
-		expect(nav.secondary.map((i) => i.href)).toEqual(
-			expect.arrayContaining(['/work', '/capabilities', '/rates', '/operator', '/contact?intent=quote'])
-		);
-		expect(read('src/lib/components/Footer.svelte')).toMatch(/#each secondary/);
-		expect(nav.utility.map((i) => i.href)).toContain('/cart');
+		expect(nav).not.toHaveProperty('secondary');
+		expect(nav.utility.map((i) => i.href)).not.toContain('/cart');
 		expect(nav.cta.href).toBe('/contact?intent=invite');
 
 		// the header renders from the module rather than hard-coding links
 		const header = read('src/lib/components/Header.svelte');
 		expect(header).toMatch(/from '\$lib\/nav'/);
 		expect(header).toMatch(/#each primary/);
-		expect(header).toMatch(/data-testid="cart-link"/);
+		expect(header).not.toMatch(/cart/i);
 
 		// and the drawer exposes its state to assistive tech
 		expect(header).toMatch(/aria-expanded=\{menuOpen\}/);
@@ -117,44 +83,16 @@ describe('A4 · information architecture', () => {
 		// belt and braces: nothing anywhere on the home page quotes a price
 		const homeCopy = collectStrings({
 			home: copy.home,
-			capabilities: copy.capabilities.items,
-			work: copy.work.items,
 			principles: copy.principles
 		}).join(' ');
 		expect(homeCopy).not.toMatch(PRICE);
 		expect(templateText(read('src/routes/+page.svelte'))).not.toMatch(PRICE);
 	});
 
-	it('A4.8 the commerce path is still reachable and still sells', () => {
-		// home -> /products/custom-bots is one hop through selected work
-		expect(copy.work.items.map((w) => w.href)).toContain('/products/custom-bots');
-		expect(templateText(read('src/lib/components/BotConfigurator.svelte'))).toContain('Add to cart');
-		expect(nav.utility.some((i) => i.href === '/cart')).toBe(true);
-	});
-
-	it('A4.9 the operator Elsewhere list is Patreon, Discord once minted, GitHub — no LinkedIn, no evidence id', () => {
-		// Static entries only, in fixed order. Hosts are pinned; the hrefs carry no
-		// digits, because A3.8 walks every static copy string and rejects any
-		// number other than the founding year.
-		const withoutInvite = copy.operator.links('');
-		expect(withoutInvite.map((l) => [l.label, new URL(l.href).host])).toEqual([
-			['Patreon', 'www.patreon.com'],
-			['GitHub', 'github.com']
-		]);
-
-		// The invite is spliced between the two, and only when it is non-empty.
-		// A digit-bearing sample proves the function shape is what keeps A3.8 green.
-		const withInvite = copy.operator.links('https://discord.gg/x1y2z3');
-		expect(withInvite.map((l) => l.label)).toEqual(['Patreon', 'Discord', 'GitHub']);
-		expect(withInvite[1].href).toBe('https://discord.gg/x1y2z3');
-
-		// No entry carries an evidence id: a profile is a place, not a claim.
-		for (const l of withInvite) expect(l).not.toHaveProperty('evidence');
-
-		// LinkedIn is not on /operator or on the home proof strip.
-		expect(copy.operator).not.toHaveProperty('profileLink');
-		expect(collectStrings(copy.operator).join('\n')).not.toMatch(/linkedin/i);
-		expect(copy.home.proof.some((p) => p.href.includes('linkedin.com'))).toBe(false);
+	it('A4.8 no commerce path is left on the storefront', () => {
+		expect(exists('src/routes/cart')).toBe(false);
+		expect(exists('src/lib/server/stripe.ts')).toBe(false);
+		expect(nav.utility.some((i) => i.href === '/cart')).toBe(false);
 	});
 
 	// Regression guard: no LinkedIn anchor, evidence id, or href anywhere in source.

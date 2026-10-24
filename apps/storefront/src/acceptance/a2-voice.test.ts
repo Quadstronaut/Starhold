@@ -20,15 +20,10 @@ import {
 /** Every marketing string in copy.ts, minus the stats import re-export. */
 const COPY_STRINGS = collectStrings({
 	home: copy.home,
-	capabilities: copy.capabilities,
-	work: copy.work,
 	principles: copy.principles,
-	operator: copy.operator,
 	contact: copy.contact,
 	services: copy.services,
 	pledges: copy.pledges,
-	automation: copy.automation,
-	customBots: copy.customBots,
 	qnix: copy.qnix,
 	shushgame: copy.shushgame,
 	site: copy.site
@@ -40,12 +35,10 @@ const SURFACE = [COPY_STRINGS, marketingText(), EVIDENCE_CLAIMS].join('\n');
 /** The home page as a reader meets it: hero + the seven sections below it. */
 const HOME_TEXT = collectStrings({
 	home: copy.home,
-	capabilities: copy.capabilities.items,
-	work: copy.work.items,
 	services: copy.services.items,
 	pledges: copy.pledges,
 	principles: copy.principles,
-	operatorTeaser: { lede: copy.operator.lede },
+	operatorTeaser: { lede: copy.home.operator.lede },
 	chrome: { strapline: copy.site.strapline, hangar: 'Hangar' }
 }).join('\n');
 
@@ -72,7 +65,7 @@ describe('A2 · voice', () => {
 
 	it('A2.5 the operator goes by Quadstronaut', () => {
 		expect(HOME_TEXT).toContain('Quadstronaut');
-		expect(collectStrings(copy.operator).join('\n')).toContain('Quadstronaut');
+		expect(collectStrings(copy.home.operator).join('\n')).toContain('Quadstronaut');
 		expect(copy.site.operator).toBe('Quadstronaut');
 	});
 
@@ -87,16 +80,12 @@ describe('A2 · voice', () => {
 	});
 
 	it('A2.7 commerce wording stays plain', () => {
-		const cart = templateText(read('src/routes/cart/+page.svelte'));
-		expect(cart).toMatch(/checkout|continue to payment/i);
-		expect(findTerms(cart, BANNED_COSPLAY)).toEqual([]);
 		// the intake button is a verb a human uses, not a radio operator
 		expect(findTerms(templateText(read('src/lib/components/IntakeForm.svelte')), BANNED_COSPLAY)).toEqual([]);
 	});
 
-	it('A2.8 copy.ts is the SSOT and "Add to cart" survives verbatim', () => {
+	it('A2.8 copy.ts is the SSOT', () => {
 		expect(read('src/lib/content/copy.ts').length).toBeGreaterThan(500);
 		expect(copy.home.hero.h1.length).toBeGreaterThan(0);
-		expect(templateText(read('src/lib/components/BotConfigurator.svelte'))).toContain('Add to cart');
 	});
 });

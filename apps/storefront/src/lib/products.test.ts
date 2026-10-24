@@ -20,6 +20,6 @@ describe('parseCatalog', () => {
 		expect(() => parseCatalog(bad)).toThrow(/pricing/i);
 	});
 	it('accepts the real shipped catalog', () => {
-		expect(parseCatalog(catalog).length).toBeGreaterThanOrEqual(4);
+		expect(parseCatalog(catalog).length).toBeGreaterThanOrEqual(2);
 	});
 });

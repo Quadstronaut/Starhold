@@ -1,19 +1,15 @@
-<script lang="ts">
-	import { SERVICES_TERMS_APPROVED } from '$lib/site-links';
-</script>
-
-<svelte:head><title>Terms of Service · Starhold Software</title></svelte:head>
+<svelte:head><title>Terms of Service · Starhold</title></svelte:head>
 
 <section class="section legal">
 	<!-- OPERATOR REVIEW: the Services definition only widens to Managed Ops + hourly work once SERVICES_TERMS_APPROVED is true (the flag-false test requires these Terms to render unchanged). Sections 3, 6, 7 and 10 still describe bots, auto-renewal and cancel-from-account; the Services Terms override them where they conflict, but confirm that is enough for invoiced hourly work. Bump the Effective / Last updated dates on approval. -->
 	<div class="label">Effective 13 June 2026</div>
 	<h1>Terms of Service</h1>
 
-	<p>These Terms govern your use of the <strong>JoJo bot</strong> (and other Custom Discord Bots we operate) and the <strong>QuadstroNot</strong> storefront bot{#if SERVICES_TERMS_APPROVED}, as well as <strong>Managed Ops</strong> subscriptions and <strong>hourly hands-on work</strong>{/if} (together, the "Services").{#if SERVICES_TERMS_APPROVED} Managed Ops and hourly work are also subject to the <a href="/legal/services">Services Terms</a>, which set their specific rules; sections 11 and 12 of these Terms, including the liability cap, apply to them as to every other Service.{/if} By adding, using, or paying for the Services, you agree to these Terms. If you are accepting on behalf of a Discord server or organization, you confirm you are authorized to do so.</p>
+	<p>These Terms govern your use of the <strong>JoJo bot</strong> (and other Custom Discord Bots we operate) and the <strong>QuadstroNot</strong> storefront bot (together, the "Services"). By adding, using, or paying for the Services, you agree to these Terms. If you are accepting on behalf of a Discord server or organization, you confirm you are authorized to do so.</p>
 	<p>Other Starhold products (such as Shushgame) are governed by their own terms. Our <a href="/legal/privacy">Privacy Policy</a> applies to all of them.</p>
 
 	<h2>1. Who you are agreeing with</h2>
-	<p>The Services are provided by <strong>Copper Jerky LLC</strong>, an Arizona limited liability company doing business as Starhold Software ("Starhold", "we", "us"). Contact: <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
+	<p>The Services are provided by <strong>Copper Jerky LLC</strong>, an Arizona limited liability company doing business as Starhold ("Starhold", "we", "us"). Contact: <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
 
 	<h2>2. Eligibility</h2>
 	<p>You must be at least <strong>13</strong> years old to use the Services (matching Discord's minimum age). To purchase a subscription or other paid service, you must be <strong>18</strong> or older, or otherwise old enough to enter a binding purchase under the laws that apply to you — some jurisdictions permit minors to make certain purchases (for example, with their own payment card), and where your local law allows it, that is acceptable. If you are a minor and your local law requires it, a parent or guardian must consent to or make the purchase. You must also comply with <a href="https://discord.com/terms" target="_blank" rel="noopener">Discord's Terms of Service</a> at all times.</p>
@@ -38,7 +34,7 @@
 	<p>You may cancel at any time from your account or by emailing <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>. Cancellation takes effect at the end of your current paid period, and the Service continues until then. <strong>Fees already paid are non-refundable, and we do not provide partial or pro-rated refunds for the current period.</strong> See our <a href="/legal/refunds">Refund Policy</a> for billing-dispute handling; you always retain your card network's chargeback rights.</p>
 
 	<h2>8. Custom and quoted work</h2>
-	<p>Any bespoke development or automation we quote is governed by the written quote for that engagement, which controls over these Terms where they conflict for that work.{#if SERVICES_TERMS_APPROVED} Managed services and hourly work are governed by the <a href="/legal/services">Services Terms</a>.{/if}</p>
+	<p>Any bespoke development or automation we quote is governed by the written quote for that engagement, which controls over these Terms where they conflict for that work.</p>
 
 	<h2>9. Intellectual property</h2>
 	<p>The Services, including all software, designs, and content we provide, are owned by Starhold and protected by law — <strong>all rights reserved</strong>. We grant you a limited, non-exclusive, non-transferable, revocable license to use the Services while your account is in good standing. You retain ownership of your own content. If you send us feedback or suggestions, you grant us a perpetual, royalty-free license to use them to improve the Services (feature requests may benefit all customers).</p>
@@ -71,7 +67,7 @@
 	<p>If any provision is found unenforceable, the rest remain in effect. These Terms, together with the Privacy Policy, Refund Policy, and any written quote, are the entire agreement between us. Our failure to enforce a provision is not a waiver. You may not assign these Terms; we may assign them to a successor (for example, on the entity's rename or sale). Neither party is liable for delays caused by events beyond its reasonable control.</p>
 
 	<h2>19. Contact</h2>
-	<p>Copper Jerky LLC, doing business as Starhold Software — <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
+	<p>Copper Jerky LLC, doing business as Starhold — <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
 
 	<p class="label">Last updated 13 June 2026.</p>
 </section>

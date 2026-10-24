@@ -1,13 +1,13 @@
-<svelte:head><title>Privacy Policy · Starhold Software</title></svelte:head>
+<svelte:head><title>Privacy Policy · Starhold</title></svelte:head>
 
 <section class="section legal">
 	<div class="label">Effective 10 October 2026</div>
 	<h1>Privacy Policy</h1>
 
-	<p>This Privacy Policy explains what information Starhold Software collects, why, how long we keep it, and the limited circumstances in which anyone else ever sees it. It is the single, umbrella policy for everything we operate.</p>
+	<p>This Privacy Policy explains what information Starhold collects, why, how long we keep it, and the limited circumstances in which anyone else ever sees it. It is the single, umbrella policy for everything we operate.</p>
 
 	<h2>1. Who we are</h2>
-	<p>Starhold Software is the trade name of <strong>Copper Jerky LLC</strong>, an Arizona limited liability company ("Starhold", "we", "us"). You can reach us at <a href="mailto:hello@starhold.dev">hello@starhold.dev</a> for any privacy question, data-access request, or deletion request.</p>
+	<p>Starhold is the trade name of <strong>Copper Jerky LLC</strong>, an Arizona limited liability company ("Starhold", "we", "us"). You can reach us at <a href="mailto:hello@starhold.dev">hello@starhold.dev</a> for any privacy question, data-access request, or deletion request.</p>
 
 	<h2>2. What this policy covers</h2>
 	<p>This policy applies to all Starhold products and services, including: the <strong>JoJo bot</strong> and other Custom Discord Bots we build and operate; the <strong>QuadstroNot</strong> storefront bot; <strong>Shushgame / Shushbot</strong>; the <strong>starhold.dev</strong> storefront; the <strong>starhold.fyi</strong> documentation site; the <strong>status.starhold.fyi</strong> status page and the <strong>gatus.starhold.fyi</strong> monitoring dashboard; the <strong>starhold.app</strong> launcher; <strong>Umbermark</strong> (umbermark.starhold.app), which is pre-launch and not yet for sale; and <strong>Managed Ops</strong> and hourly hands-on server work. Some products connect to Discord and Stripe; where they do, those companies' own privacy policies also apply to the parts they handle (see section 4).</p>
@@ -69,7 +69,7 @@
 	<p>We may update this policy as our products evolve. We will revise the effective date above and, for material changes, give reasonable notice. Continued use after a change means you accept the updated policy.</p>
 
 	<h2>13. Contact</h2>
-	<p>Copper Jerky LLC, doing business as Starhold Software — <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
+	<p>Copper Jerky LLC, doing business as Starhold — <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
 
 	<p class="label">Last updated 10 October 2026.</p>
 </section>

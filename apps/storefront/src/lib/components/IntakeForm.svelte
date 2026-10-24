@@ -7,7 +7,7 @@
 		productLabel = 'Service',
 		product: initialProduct = ''
 	}: {
-		kind: 'contact' | 'quote' | 'qnix' | 'fullstack' | 'hosting' | 'invite';
+		kind: 'contact' | 'qnix' | 'invite';
 		cta?: string;
 		/** Optional service picker (the invite form). Empty list = no picker. */
 		products?: Choice[];

@@ -5,7 +5,6 @@ import { test, expect, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { join, dirname } from 'node:path';
-import { DISCORD_INVITE } from '../src/lib/site-links';
 
 const APP_ROOT = join(dirname(fileURLToPath(new URL(import.meta.url))), '..');
 const json = (rel: string) => JSON.parse(readFileSync(join(APP_ROOT, rel), 'utf8'));
@@ -15,18 +14,12 @@ const EVIDENCE = json('src/lib/content/evidence.json') as {
 };
 const STATS = json('src/lib/content/stats.json') as Record<string, number>;
 
-const MARKETING = ['/', '/work', '/capabilities', '/operator', '/contact'];
+const MARKETING = ['/', '/contact'];
 const ALL_ROUTES = [
 	'/',
-	'/work',
-	'/capabilities',
-	'/operator',
 	'/contact',
-	'/services/automation',
-	'/products/custom-bots',
 	'/products/qnix',
-	'/products/shushgame',
-	'/cart'
+	'/products/shushgame'
 ];
 
 const METAPHORS = [
@@ -117,15 +110,6 @@ test('B1.3b a service card preselects its product on the invite form', async ({ 
 	await expect(page.getByRole('combobox', { name: /service/i })).toHaveValue('umbermark');
 });
 
-test('B1.4 the $5 bot is two clicks from home and still sells', async ({ page }) => {
-	// STAR-134: the services lead the page, so the bot is reached from the
-	// secondary "hire the operator" section instead of #fleet.
-	await page.goto('/');
-	await page.locator('#capabilities').getByRole('link', { name: /custom bots/i }).click();
-	await expect(page).toHaveURL(/\/products\/custom-bots$/);
-	await expect(page.getByRole('button', { name: /add to cart/i })).toBeVisible();
-});
-
 // ═══ B2 · voice ═════════════════════════════════════════════════════════════
 
 test('B2.1 no corporate we/our/ours renders on any marketing route', async ({ page }) => {
@@ -136,21 +120,6 @@ test('B2.1 no corporate we/our/ours renders on any marketing route', async ({ pa
 			new RegExp(`(?<![\\w-])${t}(?![\\w-])`, 'i').test(text)
 		);
 		expect(hits, `${route} uses corporate plural`).toEqual([]);
-	}
-});
-
-test('B2.2 /operator has no LinkedIn anchor and links Patreon, GitHub, and Discord once minted, exactly once each', async ({ page }) => {
-	await page.goto('/operator');
-	// LinkedIn is not linked anywhere on the site.
-	await expect(page.locator('a[href*="linkedin.com"]')).toHaveCount(0);
-	// Body list plus footer would make two of each. The footer suppresses its
-	// community links on this route, so every profile is reachable exactly once.
-	await expect(page.locator('a[href*="patreon.com"]')).toHaveCount(1);
-	await expect(page.locator('a[href*="github.com"]')).toHaveCount(1);
-	if (DISCORD_INVITE) {
-		await expect(page.locator(`a[href="${DISCORD_INVITE}"]`)).toHaveCount(1);
-	} else {
-		await expect(page.locator('a[href*="discord.gg"]')).toHaveCount(0);
 	}
 });
 
@@ -169,15 +138,10 @@ test('B2.3 metaphor density: <=8 on the home page, <=2 in the hero', async ({ pa
 	expect(countTerms(hero, METAPHORS)).toBeLessThanOrEqual(2);
 });
 
-test('B2.6 Quadstronaut is named on the home page and on /operator', async ({ page }) => {
+test('B2.6 Quadstronaut is named on the home page', async ({ page }) => {
 	await page.goto('/');
 	const home = await bodyText(page);
 	expect(home).toContain('Quadstronaut');
-
-	await page.goto('/operator');
-	const operatorPage = await bodyText(page);
-	expect(operatorPage).toContain('Quadstronaut');
-	await expect(page.locator('h1')).toContainText('Quadstronaut');
 });
 
 // ═══ B3 · evidence ══════════════════════════════════════════════════════════
@@ -266,22 +230,6 @@ test('B3.3 the home page carries a proof strip of 3-5 checkable outbound links',
 
 // ═══ B4 · information architecture ══════════════════════════════════════════
 
-test('B4.1 the cart is one click away from every route, desktop and mobile', async ({ page }) => {
-	for (const width of [1280, 375]) {
-		await page.setViewportSize({ width, height: 800 });
-		for (const route of ALL_ROUTES) {
-			await page.goto(route);
-			const cart = page.getByTestId('cart-link');
-			await expect(cart, `${route} @${width}`).toBeVisible();
-			expect(await cart.getAttribute('href')).toBe('/cart');
-		}
-		// and it genuinely navigates, without opening a drawer first
-		await page.goto('/products/qnix');
-		await page.getByTestId('cart-link').click();
-		await expect(page).toHaveURL(/\/cart$/);
-	}
-});
-
 test('B4.2 no price string renders anywhere on the home page', async ({ page }) => {
 	await page.goto('/');
 	const text = await bodyText(page);
@@ -289,13 +237,10 @@ test('B4.2 no price string renders anywhere on the home page', async ({ page }) 
 	expect(text).not.toMatch(/\b\d+\s*\/\s*(mo|month)\b/i);
 });
 
-test('B4.3 /about is a real 308 to /operator and #fleet still lands', async ({ page, request }) => {
+test('B4.3 /about is a permanent 301 to the home page and #fleet still lands', async ({ page, request }) => {
 	const res = await request.get('/about', { maxRedirects: 0 });
-	expect(res.status()).toBe(308);
-	expect(res.headers()['location']).toBe('/operator');
-
-	await page.goto('/about');
-	await expect(page).toHaveURL(/\/operator$/);
+	expect(res.status()).toBe(301);
+	expect(res.headers()['location']).toBe('/');
 
 	await page.goto('/#fleet');
 	await expect(page.locator('#fleet')).toBeVisible();
@@ -305,7 +250,7 @@ test('B4.3 /about is a real 308 to /operator and #fleet still lands', async ({ p
 // ═══ B5 · craft and accessibility ═══════════════════════════════════════════
 
 test('B5.1 one h1 per page and no skipped heading levels', async ({ page }) => {
-	for (const route of [...ALL_ROUTES, '/cart/success', '/legal/terms']) {
+	for (const route of [...ALL_ROUTES, '/legal/terms']) {
 		await page.goto(route);
 		const levels = await page.evaluate(() =>
 			[...document.querySelectorAll('h1,h2,h3,h4,h5,h6')].map((h) => Number(h.tagName[1]))
@@ -393,7 +338,6 @@ test('B5.5 the home page works with JavaScript disabled', async ({ browser }) =>
 	await expect(page.getByTestId('cta-primary')).toBeVisible();
 	await expect(page.getByTestId('cta-secondary')).toBeVisible();
 	await expect(page.locator('#fleet')).toBeVisible();
-	await expect(page.getByTestId('cart-link')).toBeVisible();
 	await context.close();
 });
 
