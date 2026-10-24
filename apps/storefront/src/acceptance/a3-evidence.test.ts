@@ -33,7 +33,6 @@ const BY_ID = new Map(ITEMS.map((i) => [i.id, i]));
 const REQUIRED_IDS = [
 	'self-hosted-fleet',
 	'public-status-page',
-	'stripe-live-checkout',
 	'automated-tests',
 	'docs-site',
 	'qnix-design-docs'
@@ -49,7 +48,6 @@ const ALLOWED_HOSTS = [
 	'starhold.app',
 	'shushgame.com',
 	'github.com',
-	'stripe.com',
 	'discord.com'
 ];
 
@@ -66,11 +64,8 @@ function verifierOk(v: string): string | null {
 const USED = new Set<string>([
 	...collectEvidenceRefs({
 		home: copy.home,
-		work: copy.work,
 		services: copy.services,
 		principles: copy.principles,
-		operator: copy.operator,
-		customBots: copy.customBots,
 		qnix: copy.qnix,
 		shushgame: copy.shushgame
 	}),
@@ -144,13 +139,8 @@ describe('A3 · anti-fabrication', () => {
 		const surface = [
 			collectStrings({
 				home: copy.home,
-				capabilities: copy.capabilities,
-				work: copy.work,
-				principles: copy.principles,
-				operator: copy.operator,
+						principles: copy.principles,
 				contact: copy.contact,
-				automation: copy.automation,
-				customBots: copy.customBots,
 				qnix: copy.qnix,
 				shushgame: copy.shushgame,
 				site: copy.site
@@ -182,15 +172,10 @@ describe('A3 · anti-fabrication', () => {
 		);
 		const strings = collectStrings({
 			home: copy.home,
-			capabilities: copy.capabilities,
-			work: copy.work,
-			principles: copy.principles,
-			operator: copy.operator,
+				principles: copy.principles,
 			contact: copy.contact,
 			services: copy.services,
 			pledges: copy.pledges,
-			automation: copy.automation,
-			customBots: copy.customBots,
 			qnix: copy.qnix,
 			shushgame: copy.shushgame
 		}).join('\n');

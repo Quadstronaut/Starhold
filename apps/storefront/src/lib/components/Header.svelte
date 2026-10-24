@@ -1,13 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { cart } from '$lib/cart.svelte';
-	import { primary, utilityLinks, cartLink, cta } from '$lib/nav';
+	import { primary, utility as utilityLinks, cta } from '$lib/nav';
 	import Brand from '$lib/components/Brand.svelte';
-
-	// Badge only after mount: SSR renders a bare "Cart" (the cart is SSR-empty),
-	// so revealing the count pre-hydration would mismatch the server HTML.
-	let mounted = $state(false);
-	onMount(() => (mounted = true));
 
 	// Hamburger drawer state — only reachable below the 640px breakpoint.
 	let menuOpen = $state(false);
@@ -47,12 +40,6 @@
 		</ul>
 
 		<div class="bar-end">
-			<!-- Cart never hides behind the hamburger: AC-4 wants it one click away
-			     at 375px, and a drawer makes that two. -->
-			<a class="cartlink" data-testid="cart-link" href={cartLink.href}>
-				{cartLink.label}{#if mounted && cart.count > 0}&nbsp;({cart.count}){/if}
-			</a>
-
 			<a class="btn btn-primary header-cta" href={cta.href}>{cta.label}</a>
 
 			<button
@@ -132,17 +119,6 @@
 		display: flex;
 		align-items: center;
 		gap: var(--sp-4);
-	}
-
-	.cartlink {
-		color: var(--text);
-		font-size: var(--fs-1);
-		font-weight: 600;
-		white-space: nowrap;
-	}
-	.cartlink:hover {
-		color: var(--accent);
-		text-decoration: none;
 	}
 
 	.header-cta {

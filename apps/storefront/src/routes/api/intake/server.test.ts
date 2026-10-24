@@ -62,11 +62,6 @@ describe('POST /api/intake', () => {
 		expect(await status(call({ ...good, message: 'hi' }))).toBe(400);
 	});
 
-	it('accepts the hosting kind (/contact?intent=hosting)', async () => {
-		expect(((await call({ ...good, kind: 'hosting' })) as Response).status).toBe(200);
-		expect(JSON.stringify((postDiscord.mock.calls[0] as any[])[1])).toContain('Hangar hosting');
-	});
-
 	it('accepts the invite kind (/contact?intent=invite)', async () => {
 		expect(((await call({ ...good, kind: 'invite' })) as Response).status).toBe(200);
 		expect(JSON.stringify((postDiscord.mock.calls[0] as any[])[1])).toContain('Invite request');

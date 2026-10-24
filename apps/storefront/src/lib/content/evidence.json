@@ -16,23 +16,12 @@
 			"sources": []
 		},
 		{
-			"id": "stripe-live-checkout",
-			"claim": "Payments run through live Stripe Checkout, and every incoming webhook signature is verified before anything acts on it.",
-			"status": "verified",
-			"verifier": "apps/storefront/src/routes/api/stripe/webhook/+server.ts",
-			"sources": [
-				"apps/storefront/src/lib/server/stripe.ts",
-				"https://starhold.dev/products/custom-bots"
-			]
-		},
-		{
 			"id": "automated-tests",
 			"claim": "This storefront ships with unit tests and browser tests; the counts on this site are generated from the repository, not typed in.",
 			"status": "verified",
 			"verifier": "apps/storefront/e2e/smoke.spec.ts",
 			"sources": [
 				"apps/storefront/vite.config.ts",
-				"apps/storefront/src/lib/build-sheet.test.ts",
 				"apps/storefront/scripts/gen-stats.mjs"
 			]
 		},
@@ -74,9 +63,9 @@
 		},
 		{
 			"id": "single-operator",
-			"claim": "Starhold Software is operated by one person, Quadstronaut, who scopes, builds and runs each project.",
+			"claim": "Starhold is operated by one person, Quadstronaut, who scopes, builds and runs each project.",
 			"status": "verified",
-			"verifier": "apps/storefront/src/routes/operator/+page.svelte",
+			"verifier": "apps/storefront/src/lib/content/copy.ts",
 			"sources": ["apps/storefront/src/lib/content/copy.ts"]
 		},
 		{
@@ -88,12 +77,11 @@
 		},
 		{
 			"id": "no-third-party-tracking",
-			"claim": "Every page loads from starhold.dev alone and sets no cookies; the cart lives in browser storage, and checkout hands off to Stripe's own domain.",
+			"claim": "Every page loads from starhold.dev alone and sets no cookies; nothing leaves for a third party.",
 			"status": "verified",
 			"verifier": "apps/storefront/e2e/privacy.spec.ts",
 			"sources": [
-				"apps/storefront/src/routes/legal/privacy/+page.svelte",
-				"apps/storefront/src/lib/cart.svelte.ts"
+				"apps/storefront/src/routes/legal/privacy/+page.svelte"
 			]
 		}
 	]

@@ -16,11 +16,12 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { ev } from './evidence';
 import stats from './stats.json';
+import { labelFor } from '../labels';
 
 export const site = {
 	/** Accessible name of the brand. Title case, not caps. */
 	name: 'Starhold',
-	fullName: 'Starhold Software',
+	fullName: 'Starhold',
 	operator: 'Quadstronaut',
 	handle: 'Quadstronaut',
 	foundedYear: 2026,
@@ -77,8 +78,7 @@ export const home = {
 		ctaPrimary: { label: 'Request an invite', href: '/contact?intent=invite' },
 		ctaSecondary: { label: 'See the services', href: '/#fleet' },
 		byline:
-			'Everything here is under development. Some tools are open today; the rest are invitation only. Starhold is one person: whoever answers your message also runs the servers.',
-		bylineLink: { label: 'How I operate', href: '/operator' }
+			'Everything here is under development. Some tools are open today; the rest are invitation only. Starhold is one person: whoever answers your message also runs the servers.'
 	},
 
 	/** Section 3. Credibility arrives before the pitch, and it is checkable. */
@@ -111,23 +111,6 @@ export const home = {
 		}
 	] satisfies ProofSignal[],
 
-	/** Secondary on the home page since STAR-134: hiring the operator. */
-	capabilities: {
-		eyebrow: 'Also on offer',
-		h2: { pre: 'Need something built?', em: 'Hire the operator' },
-		// Owner-stated commercial policy (pre-STAR-9 copy), not an invented claim.
-		sub: 'Custom work is scoped and quoted per job. No retainer, no minimum, no discovery-phase invoice.',
-		// The quarter is filled in at request time from src/lib/availability.ts.
-		// Deliberately not stored here: a hardcoded quarter goes stale and a stale
-		// availability line reads worse than no availability line at all.
-		availability: (quarter: string) => `Currently taking custom work for ${quarter}.`,
-		links: [
-			{ label: 'Selected work', href: '/work' },
-			{ label: 'Rates', href: '/rates' },
-			{ label: 'Request a quote', href: '/contact?intent=quote' }
-		]
-	},
-
 	/**
 	 * Three proofs told at length, each beside a terminal card. The cards show the
 	 * SHAPE of real output (hostnames, header names, commands) and never a live
@@ -151,33 +134,6 @@ export const home = {
 					{ kind: 'out', t: 'starhold.fyi', v: 'docs' },
 					{ kind: 'out', t: 'starhold.app', v: 'platform' },
 					{ kind: 'cmd', t: 'open https://status.starhold.fyi' }
-				]
-			}
-		},
-		{
-			id: 'money',
-			eyebrow: 'Verified payments',
-			h2: { pre: 'Money is', em: 'verified' },
-			body: "Payments go through Stripe Checkout. The webhook checks Stripe's signature on the raw request before it touches an order, and a request that fails the check is rejected and does nothing.",
-			// Repo root, not a deep link: a path would carry a branch name and an encoded
-			// character that the voice and digit checks rightly reject, and go stale.
-			link: { href: 'https://github.com/Quadstronaut/Starhold', label: 'Read the source' },
-			evidence: ev('stripe-live-checkout'),
-			card: {
-				title: 'POST /api/stripe/webhook',
-				caption: 'The order of operations in the handler. Field names only, no payloads.',
-				lines: [
-					{ kind: 'out', t: 'stripe-signature', v: 'read from header' },
-					{ kind: 'out', t: 'constructEvent', v: 'raw body, signing secret' },
-					{ kind: 'ok', t: 'signature valid', v: 'verified' },
-					{ kind: 'out', t: 'checkout.session.completed', v: 'order posted to Discord' },
-					{ kind: 'err', t: 'signature invalid', v: 'rejected, nothing runs' },
-					{
-						kind: 'out',
-						t: 'tests in this repository',
-						v: `${stats.unitTests} unit, ${stats.e2eTests} browser`,
-						evidence: ev('automated-tests')
-					}
 				]
 			}
 		},
@@ -262,7 +218,7 @@ export const home = {
 	operator: {
 		eyebrow: 'Who runs it',
 		h2: 'Quadstronaut',
-		cta: { label: 'How I operate', href: '/operator' }
+		lede: 'I run Starhold. It is one person, and that person is me.'
 	},
 
 	contact: {
@@ -325,7 +281,7 @@ export const services = {
 			host: 'umbermark.starhold.app',
 			href: 'https://umbermark.starhold.app',
 			openLabel: 'Open Umbermark',
-			status: 'Live · early access',
+			status: labelFor('umbermark'),
 			what: 'A scored server hardening report with a shareable link. The scan is free; the paid report and plans check out through Polar.',
 			invite: true
 		},
@@ -335,7 +291,7 @@ export const services = {
 			host: 'zenithmark.starhold.app',
 			href: 'https://zenithmark.starhold.app',
 			openLabel: 'Open Zenithmark',
-			status: 'Live · free · in development',
+			status: labelFor('zenithmark'),
 			what: 'A mail and DNS scorecard for a domain: SPF, DKIM, DMARC, MX, MTA-STS, TLS, DNSSEC, CAA and BIMI.',
 			invite: false
 		},
@@ -345,7 +301,7 @@ export const services = {
 			host: 'render.starhold.app',
 			href: 'https://render.starhold.app',
 			openLabel: 'Open Render',
-			status: 'Invitation only · in development',
+			status: labelFor('render'),
 			what: 'An API for OG images, PDFs and screenshots.',
 			invite: true
 		},
@@ -355,7 +311,7 @@ export const services = {
 			host: 'status.starhold.app',
 			href: 'https://status.starhold.app',
 			openLabel: 'Open Status',
-			status: 'Invitation only · in development',
+			status: labelFor('status'),
 			what: 'Private and white-label status pages for MSPs.',
 			invite: true
 		},
@@ -365,7 +321,7 @@ export const services = {
 			host: null,
 			href: null,
 			openLabel: 'Join the Discord',
-			status: 'In development',
+			status: labelFor('starbot'),
 			what: 'A Discord assistant for the Starhold community.',
 			invite: false
 		},
@@ -375,7 +331,7 @@ export const services = {
 			host: 'shushgame.com',
 			href: 'https://shushgame.com',
 			openLabel: 'Open shushgame.com',
-			status: 'Live · free',
+			status: labelFor('shushgame'),
 			what: 'A Discord chat game with its own site.',
 			invite: false,
 			evidence: ev('shushgame-live')
@@ -386,8 +342,8 @@ export const services = {
 			host: 'starhold.dev/products/qnix',
 			href: '/products/qnix',
 			openLabel: 'Read about QNix',
-			status: 'Paused',
-			what: 'Bring-your-own-device hosting with high availability. Paused for now; the design notes stay published.',
+			status: labelFor('qnix'),
+			what: 'Bring-your-own-device hosting with high availability. In development; register interest on its page.',
 			invite: false,
 			evidence: ev('qnix-design-docs')
 		}
@@ -418,8 +374,7 @@ export const faq = {
 		{
 			q: 'Who runs this?',
 			a: 'One person. I am Quadstronaut: I build and operate every Starhold service myself, so whoever answers your message is the person running the servers.',
-			evidence: ev('single-operator'),
-			link: { href: '/operator', label: 'How I operate' }
+			evidence: ev('single-operator')
 		},
 		{
 			q: 'Will you send me marketing?',
@@ -427,7 +382,7 @@ export const faq = {
 		},
 		{
 			q: 'What about refunds?',
-			a: 'Subscriptions can be cancelled at any time and run to the end of the period already paid; fees already paid are not refunded or pro-rated. Refund terms for custom work are set out in each written quote. A charge that looks wrong: email me first and I respond within five business days, and you keep your card network chargeback rights either way.',
+			a: 'Subscriptions can be cancelled at any time and run to the end of the period already paid; fees already paid are not refunded or pro-rated. A charge that looks wrong: email me first and I respond within five business days, and you keep your card network chargeback rights either way.',
 			evidence: ev('refund-policy'),
 			link: { href: '/legal/refunds', label: 'Refund policy' }
 		},
@@ -439,8 +394,7 @@ export const faq = {
 		},
 		{
 			q: 'How do payments work?',
-			a: 'Checkout is Stripe. Card details are entered on Stripe, not on this site, and the cart stays in your browser until you check out.',
-			evidence: ev('stripe-live-checkout')
+			a: 'Each paid product checks out through Polar, which handles payment and sales tax as merchant of record. Card details are entered there, not on this site, and there is no cart.'
 		},
 		{
 			q: 'Does this site track me?',
@@ -449,153 +403,6 @@ export const faq = {
 			link: { href: '/legal/privacy', label: 'Read the policy' }
 		}
 	] as FaqItem[]
-};
-
-// ── Capabilities ─────────────────────────────────────────────────────────────
-export type Capability = {
-	id: string;
-	name: string;
-	href: string;
-	summary: string;
-	deliverables: string[];
-	start: string;
-};
-
-export const capabilities = {
-	title: 'Capabilities · Starhold Software',
-	description:
-		'Automation, platform and high-availability hosting, custom bots, and full stack builds — scoped and quoted per job.',
-	eyebrow: 'Engagements',
-	h1: 'Four ways to hire me',
-	intro:
-		'Every job is scoped and quoted before it starts. You get the code, the runbook, and a person who will still answer the email in six months.',
-	cta: {
-		heading: { pre: 'Not sure which', em: 'it is?' },
-		body: 'Describe the problem in whatever words you already use for it. Sorting it into a category is my job, not yours.',
-		cta: { href: '/contact?intent=quote', label: 'Request a quote' }
-	},
-	items: [
-		{
-			id: 'automation',
-			name: 'Automation',
-			href: '/services/automation',
-			summary:
-				'The manual step, removed. Python, PowerShell, and Bash that runs on a schedule, records what it did, and says so when it fails.',
-			deliverables: [
-				'Working code, in a repository you control',
-				'A runbook a colleague can follow without me',
-				'Logging, and an alert on the failure path'
-			],
-			start: 'Send me the process as you do it today. I will scope it and quote it.'
-		},
-		{
-			id: 'platform',
-			name: 'Platform and HA hosting',
-			href: '/products/qnix',
-			summary:
-				'Somewhere for it to live. Rootless containers, private mesh networking, backups, and a status page anyone can open.',
-			deliverables: [
-				'Provisioned hosts and container images',
-				'Private networking, no service exposed that does not need to be',
-				'A public status page and a restore you have watched me perform'
-			],
-			start: 'Tell me what it has to survive. I will design to that and quote it.'
-		},
-		{
-			id: 'bots',
-			name: 'Custom bots',
-			href: '/products/custom-bots',
-			summary:
-				"Discord run like business software, under your server's own name and avatar: moderation, roles, logging, and automation. An Ops Pack adds server, application, and scheduled-scraping monitoring.",
-			deliverables: [
-				'A bot on your branding, operated by me',
-				'A feature set you pick, and a roadmap you can push to',
-				'Flat monthly billing through Stripe, hosting included, cancel whenever'
-			],
-			start: 'Pick the features and add it to the cart, or ask for something the list does not cover.'
-		},
-		{
-			id: 'fullstack',
-			name: 'Full stack solutions',
-			href: '/services/fullstack',
-			summary:
-				'A whole application, not a script. Proven open-source components, assembled and operated as one system scoped to your business — the job a multi-thousand-dollar platform does, without that invoice.',
-			deliverables: [
-				'An application you own, running on infrastructure you can inspect',
-				'Every path tested end to end by a person, not just by the machine that wrote it',
-				'The integration plumbing between it and whatever you already run'
-			],
-			start: 'Describe the business process end to end. I will scope the build and quote it.'
-		}
-	] satisfies Capability[]
-};
-
-// ── Selected work ────────────────────────────────────────────────────────────
-export type WorkItem = {
-	id: string;
-	name: string;
-	href: string;
-	status: string;
-	what: string;
-	proves: string;
-	evidence: string;
-};
-
-export const work = {
-	title: 'Selected work · Starhold Software',
-	description:
-		'Four things I built and still operate, and what each one demonstrates about the work.',
-	eyebrow: 'The fleet',
-	h1: 'Selected work',
-	intro:
-		'I am one person, so the portfolio is small on purpose. Everything here is live or documented, and everything here I still run.',
-	cta: {
-		heading: { pre: 'Want the same thing pointed at', em: 'your problem?' },
-		body: 'Tell me what it is. I will scope it, price it, and say so if I think it is the wrong build.',
-		cta: { href: '/contact?intent=quote', label: 'Request a quote' },
-		secondary: { href: '/capabilities', label: 'See what I take on' }
-	},
-	items: [
-		{
-			id: 'shushgame',
-			name: 'Shushgame',
-			href: '/products/shushgame',
-			status: 'Live',
-			what: 'A Discord chat game with its own site.',
-			proves:
-				'A whole product carried end to end: design, bot, billing, hosting. Nothing about it was handed to someone else.',
-			evidence: ev('shushgame-live')
-		},
-		{
-			id: 'custom-bots',
-			name: 'Custom Discord Bots',
-			href: '/products/custom-bots',
-			status: 'Live',
-			what: 'A configurable bot sold as a flat monthly subscription, under your server name.',
-			proves:
-				'Live Stripe Checkout, webhook signatures verified before anything acts on them, and a catalog published as machine-readable JSON that my own Discord bot consumes as a contract.',
-			evidence: ev('stripe-live-checkout')
-		},
-		{
-			id: 'qnix',
-			name: 'QNix',
-			href: '/products/qnix',
-			status: 'In development',
-			what: 'Bring-your-own-device hosting with high availability.',
-			proves:
-				'Architecture, hosting, and tenancy and security notes were written down and published before the product existed.',
-			evidence: ev('qnix-design-docs')
-		},
-		{
-			id: 'starhold',
-			name: 'Starhold itself',
-			href: 'https://status.starhold.fyi',
-			status: 'Live',
-			what: 'This site, the docs, the status page, and the machines underneath them.',
-			proves: `A dedicated server and a VPS on a private Tailscale mesh, running rootless Podman containers, with ${stats.unitTests} unit tests and ${stats.e2eTests} browser tests in this repository.`,
-			evidence: ev('self-hosted-fleet')
-		}
-	] satisfies WorkItem[]
 };
 
 // ── Operating principles ─────────────────────────────────────────────────────
@@ -618,7 +425,7 @@ export const principles: Principle[] = [
 	{
 		title: 'Your visit is not the product.',
 		detail:
-			'No analytics, no ad trackers, no cookie banner. Nothing on this site phones home — the cart lives in your browser until you check out, and payment goes to Stripe.',
+			'No analytics, no ad trackers, no cookie banner. Nothing on this site phones home.',
 		evidence: ev('no-third-party-tracking'),
 		link: { href: '/legal/privacy', label: 'Read the policy' }
 	},
@@ -629,50 +436,10 @@ export const principles: Principle[] = [
 	}
 ];
 
-// ── The operator ─────────────────────────────────────────────────────────────
-/** A profile link on /operator. No evidence id: a profile is a place, not a claim. */
-export type OperatorLink = { label: string; href: string };
-
-export const operator = {
-	title: 'Quadstronaut · Starhold Software',
-	description: 'How Starhold Software runs, and how an engagement actually works.',
-	eyebrow: 'The operator',
-	h1: 'Quadstronaut',
-	lede: 'I run Starhold Software. It is one person, and that person is me.',
-	bio: [
-		'I build automation and the platforms it runs on. Most of what I do starts the same way: somebody has a process that works right up until the person who knows it is on holiday, and they want it to stop depending on that.',
-		'I take the whole thing — the code, the host it runs on, the alert that fires when it stops — because handing back a script and wishing you luck is how the problem comes back in six months.'
-	],
-	howHeading: 'How an engagement works',
-	how: [
-		'You describe the problem. Email is fine; a screen recording of the manual process is better.',
-		'I come back with a scope, a price, and the parts I think are a bad idea.',
-		'I build it, you watch it run, and I hand over the code and the runbook.',
-		'If I am hosting it, it goes on the status page like everything else I operate.'
-	],
-	linkHeading: 'Elsewhere',
-	/**
-	 * Outbound profiles for the "Elsewhere" list. A function of the Discord
-	 * invite rather than a static array, for the same reason contact.availability
-	 * is a function: the acceptance suite walks every static string in this
-	 * module and rejects any digit that is not the founding year, and an invite
-	 * code is free to carry digits. The component passes DISCORD_INVITE from
-	 * site-links; an empty invite yields no Discord entry, so the list never
-	 * advertises a door that is not open yet. Order is fixed: Patreon, Discord,
-	 * GitHub.
-	 */
-	links: (discordInvite: string): OperatorLink[] => [
-		{ label: 'Patreon', href: 'https://www.patreon.com/cw/Quadstronaut' },
-		...(discordInvite ? [{ label: 'Discord', href: discordInvite }] : []),
-		{ label: 'GitHub', href: 'https://github.com/Quadstronaut' }
-	],
-	cta: { label: 'Request a quote', href: '/contact?intent=quote' }
-};
-
 // ── Contact ──────────────────────────────────────────────────────────────────
 export const contact = {
-	title: 'Contact · Starhold Software',
-	description: 'Request an invite, ask for a quote, or just ask a question. Email or the form below.',
+	title: 'Contact · Starhold',
+	description: 'Request an invite, or just ask a question. Email or the form below.',
 	eyebrow: 'Get in touch',
 	h1Invite: 'Request an invite',
 	introInvite:
@@ -687,53 +454,14 @@ export const contact = {
 		{ id: 'starbot', label: 'Starbot' },
 		{ id: 'unsure', label: 'Not sure yet' }
 	],
-	h1Quote: 'Request a quote',
 	h1Contact: 'Contact',
-	h1Hosting: 'Request Hangar hosting',
-	introHosting:
-		'Tell me what the app is and how it runs today: a container image, a compose file, a static site or a bot. I will come back with questions and a start date. Your message is posted to a private Discord channel only I can read.',
-	introQuote:
-		'Tell me what the process is today and what it should be instead. Rough is fine — I will come back with questions, a scope, and a price. Your message is posted to a private Discord channel only I can read.',
-	introContact: 'Invites, questions, quotes, or something that does not fit a form. Either channel reaches me. Your message is posted to a private Discord channel only I can read.',
+	introContact: 'Invites, questions, or something that does not fit a form. Either channel reaches me. Your message is posted to a private Discord channel only I can read.',
 	emailLabel: 'Email'
 };
 
 // ── Product and service pages ────────────────────────────────────────────────
-export const automation = {
-	title: 'Automation · Starhold Software',
-	description:
-		'Python, PowerShell, and Bash automation, plus purpose-built applications — scoped and quoted per job.',
-	eyebrow: 'Quoted work',
-	h1: 'Automation',
-	lede: 'Python, PowerShell, and Bash automation, plus purpose-built applications that replace software you are renting by the seat.',
-	body: [
-		'The pattern is almost always the same. A task is done by hand, then by a script somebody wrote in an afternoon, then by six scripts nobody wants to touch. I replace that with something that runs on a schedule, records what it did, and tells you when it did not.',
-		'You get the code in a repository you control and a runbook a colleague can follow. If you want me to keep operating it afterwards, that is a separate line on the quote, not a hostage situation.'
-	],
-	provesHeading: 'What backs this up',
-	formHeading: 'Ask for a quote'
-};
-
-export const customBots = {
-	title: 'Custom Discord Bots · Starhold Software',
-	description:
-		'A Discord bot under your own server name and avatar, operated by me, billed flat and monthly through Stripe.',
-	eyebrow: 'Supporting evidence',
-	h1: 'Custom Discord Bots',
-	lede: "The big-bot feature set — moderation, welcome and roles, logging, leveling, giveaways, custom commands — under your server's own name and avatar, operated by me.",
-	body: [
-		'Feature requests go on a shared public roadmap: built once, and every bot gets them. Your request becomes everyone else\'s feature.'
-	],
-	provesHeading: 'What this proves',
-	proves: {
-		text: 'This page is the commerce path that carries live Stripe Checkout and verified webhooks. It is here as proof that the payment and provisioning plumbing works, not as the headline product.',
-		evidence: ev('stripe-live-checkout')
-	},
-	configureHeading: 'Build one'
-};
-
 export const qnix = {
-	title: 'QNix · Starhold Software',
+	title: 'QNix · Starhold',
 	description:
 		'QNix: bring-your-own-device hosting with high availability. In development, with the design notes published first.',
 	eyebrow: 'In development',
@@ -753,7 +481,7 @@ export const qnix = {
 };
 
 export const shushgame = {
-	title: 'Shushgame · Starhold Software',
+	title: 'Shushgame · Starhold',
 	description:
 		'Shushgame: a Discord server that is itself the game, built and operated end to end, solo.',
 	eyebrow: 'Case study',

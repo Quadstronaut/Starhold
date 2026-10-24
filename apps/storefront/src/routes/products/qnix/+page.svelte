@@ -3,7 +3,7 @@
 	import IntakeForm from '$lib/components/IntakeForm.svelte';
 </script>
 
-<svelte:head><title>QNix · Starhold Software</title></svelte:head>
+<svelte:head><title>QNix · Starhold</title></svelte:head>
 
 <section class="section">
 	<span class="chip-lg"><CapabilityIcon name="platform" /></span>

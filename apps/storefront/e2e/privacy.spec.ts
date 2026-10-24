@@ -8,20 +8,12 @@ import { test, expect } from '@playwright/test';
 
 const ROUTES = [
 	'/',
-	'/capabilities',
-	'/work',
-	'/operator',
 	'/contact',
-	'/services/automation',
-	'/services/fullstack',
-	'/products/custom-bots',
 	'/products/shushgame',
 	'/products/qnix',
 	'/legal/terms',
 	'/legal/privacy',
-	'/legal/refunds',
-	'/cart',
-	'/cart/success'
+	'/legal/refunds'
 ];
 
 for (const route of ROUTES) {
@@ -43,26 +35,6 @@ for (const route of ROUTES) {
 		expect(await context.cookies(), `cookies set by ${route}`).toEqual([]);
 	});
 }
-
-// The cart flow: adding an item writes localStorage only. Load the cart page
-// afterwards and the same two invariants must still hold.
-test('privacy: the cart flow talks to one host and sets no cookies', async ({ page, context, baseURL }) => {
-	const ownHost = new URL(baseURL!).host;
-	const hosts = new Set<string>();
-	page.on('request', (req) => {
-		const url = new URL(req.url());
-		if (url.protocol === 'http:' || url.protocol === 'https:') hosts.add(url.host);
-	});
-
-	await page.goto('/products/custom-bots', { waitUntil: 'networkidle' });
-	// Tick the first feature so "Add to cart" enables, then add and open the cart.
-	await page.getByRole('checkbox').first().check();
-	await page.getByRole('button', { name: /add to cart/i }).click();
-	await page.goto('/cart', { waitUntil: 'networkidle' });
-
-	expect([...hosts], 'hosts contacted by the cart flow').toEqual([ownHost]);
-	expect(await context.cookies(), 'cookies set by the cart flow').toEqual([]);
-});
 
 // The rate-limit path (privacy policy section 5: "sets no cookie"). Both calls
 // are rejected or swallowed before anything is relayed: the first fails

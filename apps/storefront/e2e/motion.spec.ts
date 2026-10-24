@@ -3,8 +3,7 @@ import { test, expect } from '@playwright/test';
 // Task G: motion layer, pill buttons, inner-page components.
 
 const INNER = [
-	'/capabilities', '/services/automation', '/services/fullstack', '/products/custom-bots',
-	'/products/shushgame', '/products/qnix', '/work', '/operator', '/contact'
+	'/products/shushgame', '/products/qnix', '/contact'
 ];
 
 test('inner pages: .reveal content is visible under reduced motion; phone has no overflow; no console errors', async ({ page }) => {
@@ -25,7 +24,7 @@ test('inner pages: .reveal content is visible under reduced motion; phone has no
 });
 
 test('buttons are pills', async ({ page }) => {
-	await page.goto('/capabilities');
+	await page.goto('/contact');
 	const r = await page.locator('.btn-primary').first().evaluate((n) => getComputedStyle(n).borderTopLeftRadius);
 	expect(parseFloat(r)).toBeGreaterThan(100);
 });

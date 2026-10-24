@@ -1,14 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import { primary, secondary, utility, community, legal } from '$lib/nav';
+	import { primary, utility, community, legal } from '$lib/nav';
 	import { site } from '$lib/content/copy';
 	import Brand from '$lib/components/Brand.svelte';
 
-	// /operator carries Patreon, Discord and GitHub in its own body, and the
-	// acceptance suite wants each of them on that route exactly once — so the
-	// footer's copy of the community list stays off that page.
-	const onOperator = $derived(page.url.pathname === '/operator');
-	const showCommunity = $derived(!onOperator);
 </script>
 
 <footer>
@@ -30,31 +24,17 @@
 			</ul>
 		</nav>
 
-		<!-- Secondary nav (STAR-134): hiring lives here, one click from every page. -->
-		<nav class="col" aria-label="Hire the operator">
-			<p class="eyebrow">Hire the operator</p>
-			<ul>
-				{#each secondary as item (item.href)}
-					<li><a href={item.href}>{item.label}</a></li>
-				{/each}
-			</ul>
-		</nav>
-
 		<div class="col">
 			<p class="eyebrow">Elsewhere</p>
 			<ul>
 				{#each utility as item (item.href)}
 					<li><a href={item.href} rel="noopener">{item.label}</a></li>
 				{/each}
-				{#if showCommunity}
-					{#each community as item (item.href)}
-						<li><a href={item.href} rel="noopener">{item.label}</a></li>
-					{/each}
-				{/if}
+				{#each community as item (item.href)}
+					<li><a href={item.href} rel="noopener">{item.label}</a></li>
+				{/each}
 			</ul>
-			{#if showCommunity}
-				<p class="meta">Back the work, or come and talk about it.</p>
-			{/if}
+			<p class="meta">Back the work, or come and talk about it.</p>
 		</div>
 
 		<div class="col">
