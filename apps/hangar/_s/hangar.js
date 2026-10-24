@@ -48,6 +48,9 @@ function paint(tile, state, text, checked) {
 		chip.dataset.state = state;
 		chip.textContent = text;
 	}
+	// Tooltip for every Unknown state (STAR-142 m7); other states carry none.
+	if (state === 'unknown' || state === 'stale') chip.title = 'Unknown: no recent check';
+	else chip.removeAttribute('title');
 	if (when) when.textContent = checked ? `checked ${checked}` : '';
 }
 

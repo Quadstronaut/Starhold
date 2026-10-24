@@ -154,3 +154,78 @@ test('every checked page has an accent-word h2 (R29) and no accent word in an h1
 		for (const h1 of html.matchAll(/<h1\b[\s\S]*?<\/h1>/g)) assert.doesNotMatch(h1[0], /accent-word/);
 	}
 });
+
+// STAR-142 pass 1 -----------------------------------------------------------
+// One availability line per service, read from docs/shared/availability.json
+// (the storefront mirrors it; hangar and docs carry it as text, and this test
+// is the drift check on the docs side).
+const AVAIL = JSON.parse(read(join(APP, '..', '..', 'docs', 'shared', 'availability.json')));
+const SERVICE_PAGES = {
+	umbermark: 'services/umbermark',
+	zenithmark: 'services/zenithmark',
+	render: 'services/render',
+	status: 'services/status',
+	starbot: 'services/starbot',
+	shushgame: 'services/shushgame',
+	qnix: 'services/qnix'
+};
+
+test('every service page shows its availability line from availability.json', () => {
+	assert.deepEqual(Object.keys(SERVICE_PAGES).sort(), Object.keys(AVAIL.products).sort());
+	for (const [id, route] of Object.entries(SERVICE_PAGES)) {
+		const text = proseText(page(route));
+		assert.ok(text.includes(`Availability: ${AVAIL.products[id]}.`), `${route}: availability line for ${id}`);
+	}
+});
+
+test('the services table and the splash shelf show every product availability line', () => {
+	const table = proseText(page('services'));
+	for (const line of Object.values(AVAIL.products)) assert.ok(table.includes(line), `services table: ${line}`);
+	const shelf = [...page('').matchAll(/<p class="availability">([^<]+)<\/p>/g)].map((m) => m[1]);
+	const expected = Object.entries(AVAIL.products).filter(([id]) => id !== 'qnix').map(([, v]) => v);
+	assert.deepEqual(shelf.sort(), expected.sort(), 'one availability line per shelf tile (QNix is not on the shelf)');
+});
+
+test('purchase and plan sentences carry the checkout state (B1)', () => {
+	for (const route of ['', 'services', 'services/umbermark', 'services/render', 'services/status']) {
+		assert.ok(proseText(page(route)).includes(AVAIL.checkoutNotice), `${route || 'splash'}: checkout state`);
+	}
+	assert.ok(proseText(page('')).includes(AVAIL.openMeans), 'splash says what Open means');
+	assert.ok(proseText(page('services')).includes(AVAIL.openMeans), 'services index says what Open means');
+});
+
+test('export, delete and sign-in are described as they are today (B2)', () => {
+	for (const f of pages()) {
+		const text = proseText(read(f));
+		assert.doesNotMatch(text, /from the dashboard|we send your sign-in link|and we send your link/i, f.slice(DIST.length));
+	}
+	for (const route of ['services/render', 'services/status', 'services/umbermark']) {
+		assert.ok(proseText(page(route)).replace(/ ([,.;])/g, '$1').includes('by request to privacy@starhold.dev, done by hand within 30 days'), route);
+	}
+});
+
+test('Shush retention states today\'s rule on every page that mentions it (B4)', () => {
+	for (const route of ['services/shushgame', 'shushgame/points-roles-shop']) {
+		const text = proseText(page(route));
+		assert.ok(text.includes('Names stay on the public list until you ask us to remove them'), route);
+		assert.ok(text.includes('A 30-day automatic expiry is in development.'), route);
+	}
+});
+
+test('no Patreon, no who-runs-it, no "Starhold Software" outside dated history (M9, m2, m4)', () => {
+	for (const f of pages().filter((f) => !/2026-0[67]-/.test(f))) {
+		const raw = read(f);
+		const text = proseText(raw);
+		assert.ok(!raw.includes('patreon.com'), `${f.slice(DIST.length)}: Patreon link`);
+		assert.doesNotMatch(text, /Back the work/, f.slice(DIST.length));
+		assert.doesNotMatch(text, /one person in Arizona/, f.slice(DIST.length));
+		assert.doesNotMatch(text, /Starhold Software/, f.slice(DIST.length));
+		assert.doesNotMatch(text, /\bShushgame\b/, `${f.slice(DIST.length)}: say Shush`);
+	}
+});
+
+test('Starbot is described as built today, not as keeping nothing (M11)', () => {
+	const text = proseText(page('services/starbot'));
+	assert.doesNotMatch(text, /keeps nothing/i);
+	assert.match(text, /As built today, Starbot keeps/);
+});

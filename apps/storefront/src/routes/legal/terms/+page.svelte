@@ -17,7 +17,7 @@
 	<p>You must be at least 13 to use our services. To buy anything you must be 18 or older, or old enough to make a binding purchase where you live. If your local law requires a parent or guardian to consent, they must. Our Discord apps also require you to follow <a href="https://discord.com/terms" target="_blank" rel="noopener">Discord's Terms of Service</a>.</p>
 
 	<h2>4. Your account</h2>
-	<p>The Starhold Account is how you will sign in to Starhold services and manage plans, exports and deletion. Keep your sign-in details to yourself. You are responsible for what happens under your account. If you act for a server or organization, you confirm you are allowed to.</p>
+	<p>The Starhold Account is how you will sign in to Starhold services and manage plans, exports and deletion. No sign-in is open today; until it exists, export and delete are by request to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a>, done by hand within 30 days. Keep your sign-in details to yourself. You are responsible for what happens under your account. If you act for a server or organization, you confirm you are allowed to.</p>
 
 	<h2>5. What we ask of you</h2>
 	<ul>
@@ -28,10 +28,11 @@
 	</ul>
 
 	<h2>6. Payments and providers</h2>
-	<p>Payments are handled by payment providers who act as the merchant of record. Today that is Polar. If we add another provider, we will list it here and in the <a href="/legal/privacy">Privacy Policy</a> before it goes live. When you buy, your contract of sale is with the provider. The provider takes your payment, collects and pays sales tax and VAT where it must, and keeps its own records. We do not see your card details. Prices are shown at checkout.</p>
+	<p>Checkout is paused; nothing is for sale today. These rules apply when it reopens.</p>
+	<p>Payments are handled by payment providers who act as the merchant of record. Today that is Polar. If we add another provider, we will list it here and in the <a href="/legal/privacy">Privacy Policy</a> before it goes live. The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side. When you buy, your contract of sale is with the provider. The provider takes your payment, collects and pays sales tax and VAT where it must, and keeps its own records. We do not see your card details. Prices are shown at checkout.</p>
 
 	<h2>7. Cancel, delete and refunds</h2>
-	<p>Cancelling and deleting your account are two different actions, and you choose. The <a href="/legal/refunds">Refund Policy</a> explains both, and how refunds work.</p>
+	<p>Checkout is paused; nothing is for sale today. These rules apply when it reopens. Cancelling and deleting your account are two different actions, and you choose. The <a href="/legal/refunds">Refund Policy</a> explains both, and how refunds work.</p>
 
 	<h2>8. Discord apps</h2>
 	<p>Discord apps from Starhold are software. Buying or using one gives you the software, not membership in or access to any community, server or channel. We never sell access to a community.</p>
@@ -40,7 +41,7 @@
 	<p>If you back our work through Patreon or a similar platform, it is a donation to support the work. It buys no perks, no product access and no special support. Backing is optional and does not change what any product costs or does.</p>
 
 	<h2>10. Ownership</h2>
-	<p>We own the services, including the software, designs and content we provide. All rights are reserved. We give you a limited, non-exclusive, non-transferable, revocable license to use the services while you follow these terms. You keep ownership of your own content, and you give us only the permission we need to run the service for you. If you send us feedback, we may use it to improve the services without owing you anything for it.</p>
+	<p>We own the services, including the software, designs and content we provide. All rights are reserved. Our open-source code is covered by its own licence (for example MIT); these terms cover the hosted services. We give you a limited, non-exclusive, non-transferable, revocable license to use the services while you follow these terms. You keep ownership of your own content, and you give us only the permission we need to run the service for you. If you send us feedback, we may use it to improve the services without owing you anything for it.</p>
 
 	<h2>11. Suspension and ending</h2>
 	<p>You can stop using the services at any time. We may suspend or end your access if you break these terms or the law, abuse the services, or if a payment provider reverses a payment. Where we can, we will tell you first and say why. For serious abuse we may act at once. Sections that should outlive ending (ownership, disclaimers, liability, indemnity, governing law) do.</p>

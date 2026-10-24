@@ -46,8 +46,9 @@ bought — the machine does not negotiate.
 
 ## Public kill list
 
-The kill list on [shushgame.com](https://shushgame.com) shows each entry for 30
-days, with the date only and no time. To take yourself off it, type `/hide-me`
-in the Discord server.
+The kill list on [shushgame.com](https://shushgame.com) shows each entry with the
+date only and no time. Names stay on the public list until you ask us to remove
+them (hello@starhold.dev or `/hide-me` when it ships). A 30-day automatic expiry
+is in development.
 
 The game is free. The dying is free. The dying is always free.

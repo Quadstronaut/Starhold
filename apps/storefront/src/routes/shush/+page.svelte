@@ -9,7 +9,7 @@
 
 <!-- No cross-links to other Starhold products on this page (brief unasked item 9). -->
 <section class="section" data-evidence={shush.evidence}>
-	<p class="eyebrow">{shush.eyebrow}</p>
+	<p class="eyebrow verbatim">{shush.eyebrow}</p>
 	<h1>{shush.h1}</h1>
 	<p class="lede">{shush.lede}</p>
 	<div class="prose">

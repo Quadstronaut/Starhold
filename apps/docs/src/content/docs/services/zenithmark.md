@@ -8,6 +8,7 @@ sidebar:
 **A mail and DNS scorecard for any domain.** Enter a domain and get a report on SPF, DKIM, DMARC, MX, MTA-STS, TLS, DNSSEC, CAA and BIMI.
 
 - **State:** Open · free.
+- **Availability:** Open.
 - **Where:** [zenithmark.starhold.app](https://zenithmark.starhold.app)
 
 ## How to get in

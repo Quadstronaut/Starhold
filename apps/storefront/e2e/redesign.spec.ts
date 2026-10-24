@@ -337,3 +337,12 @@ test('B5.6 first paint makes no third-party request and stays inside budget', as
 	const bytes = (await Promise.all(responses.map((r) => r.body))).reduce((n, b) => n + b.byteLength, 0);
 	expect(bytes / 1024, 'transfer budget exceeded (KB)').toBeLessThanOrEqual(250);
 });
+
+test('STAR-142 every service card shows its availability line from docs/shared/availability.json', async ({ page }) => {
+	const shared = JSON.parse(readFileSync(join(APP_ROOT, '..', '..', 'docs', 'shared', 'availability.json'), 'utf8')) as {
+		products: Record<string, string>;
+	};
+	await page.goto('/');
+	const lines = await page.getByTestId('availability').allInnerTexts();
+	expect(lines.map((l) => l.trim()).sort()).toEqual(Object.values(shared.products).sort());
+});

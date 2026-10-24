@@ -104,6 +104,20 @@ describe('A2 · voice', () => {
 		expect(findTerms(templateText(read('src/lib/components/IntakeForm.svelte')), BANNED_COSPLAY)).toEqual([]);
 	});
 
+	it('A2.10 pass-1 wording: honest state, will-cost, DevTools scope, Open means, one availability line each (STAR-142)', () => {
+		expect(HOME_TEXT).toContain('Checkout is paused; nothing is for sale today. These rules apply when it reopens.');
+		expect(HOME_TEXT).toContain('what it will cost');
+		expect(HOME_TEXT).not.toContain('what it costs');
+		expect(HOME_TEXT).toContain('Open DevTools: every request goes to our own hosts.');
+		expect(HOME_TEXT).toContain('Open means you can use it now, during testing; it is still under development.');
+		expect(HOME_TEXT).not.toMatch(/Coming soon/);
+		expect(collectStrings(copy.shush).join('\n')).toContain('Names stay on the public list until you ask us to remove them');
+		const lines = copy.serviceItems.map((s) => s.availability);
+		expect(lines.every((l) => l.length > 0)).toBe(true);
+		expect(copy.serviceItems.find((s) => s.id === 'umbermark')!.availability).toBe('Free scans open; purchases paused');
+		expect(copy.serviceItems.find((s) => s.id === 'umbermark')!.note).toBeUndefined();
+	});
+
 	it('A2.8 copy.ts is the SSOT', () => {
 		expect(read('src/lib/content/copy.ts').length).toBeGreaterThan(500);
 		expect(copy.home.hero.h1.length).toBeGreaterThan(0);

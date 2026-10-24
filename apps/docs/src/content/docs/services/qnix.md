@@ -8,6 +8,7 @@ sidebar:
 **Personal hosting, built to be hard to break.**
 
 - **State:** In development. Not open to anyone yet.
+- **Availability:** Interest form only.
 - **Where:** [starhold.dev/qnix](https://starhold.dev/qnix)
 
 ## How to get in

@@ -11,7 +11,6 @@
     { "label": "Refunds", "href": "https://starhold.dev/legal/refunds" }
   ],
   "community": [
-    { "label": "Patreon", "href": "https://www.patreon.com/cw/Quadstronaut" },
     { "label": "Discord", "href": "https://discord.gg/Ug8CM86Bxv" }
   ],
   "cta": { "label": "Request an invite", "href": "https://starhold.dev/contact?intent=invite" },

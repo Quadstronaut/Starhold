@@ -11,9 +11,10 @@
 interface Props {
 	title: string;
 	href: string;
+	availability?: string;
 	icon: 'bots' | 'shush' | 'qnix' | 'code' | 'log' | 'store' | 'apps' | 'status' | 'shield' | 'mail' | 'frame';
 }
-const { title, href, icon } = Astro.props;
+const { title, href, icon, availability } = Astro.props;
 const external = /^https?:\/\//.test(href);
 
 const paths: Record<Props['icon'], string> = {
@@ -46,5 +47,6 @@ const paths: Record<Props['icon'], string> = {
 	<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d={paths[icon]}></path></svg></span>
 	<h3><a class="stretched" href={href} rel={external ? 'noopener' : undefined}>{title}</a></h3>
 	<p><slot /></p>
+	{availability && <p class="availability">{availability}</p>}
 	<span class="go" aria-hidden="true">{external ? '↗' : '→'}</span>
 </article>
