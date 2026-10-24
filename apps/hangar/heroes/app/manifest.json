@@ -1,0 +1,53 @@
+{
+	"site": "app",
+	"host": "starhold.app",
+	"motif": "hangar bays",
+	"note": "First entry = the no-JS / <noscript> fallback. ?hero=<id> forces one entry. Built by brand/heroes/build.mjs; shipped by brand/check-drift.mjs --write.",
+	"entries": [
+		{
+			"id": "chatgpt",
+			"seat": "chatgpt",
+			"model": "ChatGPT image generation (chatgpt.com, operator account)",
+			"kind": "raster",
+			"file": "chatgpt.png",
+			"generated": "2026-10-24",
+			"prompt_ref": "brand/heroes/README.md#prompt-chatgpt-app",
+			"width": 1672,
+			"height": 940,
+			"widths": [
+				800,
+				1600
+			]
+		},
+		{
+			"id": "grok",
+			"seat": "grok",
+			"model": "Grok Imagine (grok.com, operator account)",
+			"kind": "raster",
+			"file": "grok.png",
+			"generated": "2026-10-24",
+			"prompt_ref": "brand/heroes/README.md#prompt-grok-app",
+			"width": 1168,
+			"height": 784,
+			"widths": [
+				800,
+				1168
+			]
+		},
+		{
+			"id": "gemini",
+			"seat": "gemini",
+			"model": "Gemini image generation (gemini.google.com, operator account)",
+			"kind": "raster",
+			"file": "gemini.png",
+			"generated": "2026-10-24",
+			"prompt_ref": "brand/heroes/README.md#prompt-gemini-app",
+			"width": 1376,
+			"height": 768,
+			"widths": [
+				800,
+				1376
+			]
+		}
+	]
+}

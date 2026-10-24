@@ -121,12 +121,15 @@ body.fleet-page {
 	margin-bottom: var(--sp-2);
 }
 
-/* One serif-italic accent word per section heading; never inside the h1. */
+/* One accent word per section heading; never inside the h1. STAR-166 R10: the
+   span stays (R29 needs it), but it is set in the heading's own face and weight,
+   upright, in the accent colour. The serif italic was the loudest generated-page
+   tell in v1. */
 .accent-word {
-	font-family: var(--font-serif);
-	font-style: italic;
-	font-weight: 500;
-	color: inherit;
+	font-family: inherit;
+	font-style: normal;
+	font-weight: inherit;
+	color: var(--accent);
 }
 
 /* One visible focus treatment, everywhere (R10). */
@@ -194,8 +197,36 @@ body.fleet-page {
 	padding-top: var(--sp-5);
 	padding-bottom: var(--sp-5);
 }
+/* Orbit rule (STAR-166 R8): the section divider is a hairline with a tick every
+   --tick (16 px on phones) and three amber pips at the content gutter (STAR-166 F6, telemetry), drawn as
+   background layers on a pseudo-element so the section box itself is untouched. */
 .section-divided {
-	border-top: 1px solid var(--border);
+	position: relative;
+}
+.section-divided::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 7px;
+	pointer-events: none;
+	background:
+		linear-gradient(var(--accent), var(--accent)) var(--sp-5) 3px / 3px 3px no-repeat,
+		linear-gradient(var(--accent), var(--accent)) calc(var(--sp-5) + 7px) 3px / 3px 3px no-repeat,
+		linear-gradient(var(--accent), var(--accent)) calc(var(--sp-5) + 14px) 3px / 3px 3px no-repeat,
+		repeating-linear-gradient(90deg, var(--border-strong) 0 1px, transparent 1px var(--tick)) 0 0 / 100% 4px no-repeat,
+		linear-gradient(var(--border), var(--border)) 0 0 / 100% 1px no-repeat;
+}
+@media (max-width: 520px) {
+	.section-divided::before {
+		background:
+			linear-gradient(var(--accent), var(--accent)) var(--sp-5) 3px / 3px 3px no-repeat,
+			linear-gradient(var(--accent), var(--accent)) calc(var(--sp-5) + 7px) 3px / 3px 3px no-repeat,
+			linear-gradient(var(--accent), var(--accent)) calc(var(--sp-5) + 14px) 3px / 3px 3px no-repeat,
+			repeating-linear-gradient(90deg, var(--border-strong) 0 1px, transparent 1px var(--tick-sm)) 0 0 / 100% 4px no-repeat,
+			linear-gradient(var(--border), var(--border)) 0 0 / 100% 1px no-repeat;
+	}
 }
 
 .page-section {
@@ -255,14 +286,50 @@ body.fleet-page {
 	margin: 0 0 var(--sp-2);
 	display: block;
 }
+/* Eyebrows (STAR-166 R8): Plex Mono, with a short accent rule before the word on
+   the section eyebrows (p.eyebrow). Form-field labels (span.eyebrow) stay plain. */
+.eyebrow {
+	font-family: var(--font-mono);
+	font-weight: 400;
+}
+p.eyebrow {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--sp-2);
+	/* STAR-166 F6: the eyebrow sits tight on its title, so the two read as one unit. */
+	margin-bottom: var(--sp-1);
+}
+p.eyebrow::before {
+	content: '';
+	flex: none;
+	margin-top: 0.8em; /* mid first line, so a wrapped eyebrow keeps the rule on line one */
+	width: var(--sp-4);
+	height: 1px;
+	background: var(--accent);
+}
+
+/* Chips (STAR-166 R11): a 1 px hairline frame, a tiny leading indicator square,
+   Plex Mono. No pill, no fill, no gradient. The text is verbatim either way. */
 .tag,
 .badge {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
 	border: 1px solid var(--border-strong);
-	border-radius: var(--radius-pill);
-	padding: 2px var(--sp-3);
+	border-radius: 2px;
+	padding: 1px var(--sp-2);
 	margin: 0;
 	line-height: 1.5;
+	font-family: var(--font-mono);
+	font-weight: 400;
+}
+.tag::before,
+.badge::before {
+	content: '';
+	flex: none;
+	width: 5px;
+	height: 5px;
+	background: currentColor;
 }
 /* Status labels render verbatim: no uppercase, no tracking (STAR-142 m1). */
 .tag[data-label] {
@@ -273,7 +340,11 @@ body.fleet-page {
 .tag-accent {
 	color: var(--accent);
 	border-color: var(--accent-quiet);
-	background: var(--accent-quiet);
+	background: transparent;
+}
+.badge-accent::after,
+.tag-accent::after {
+	background: linear-gradient(to top right, transparent calc(50% - 1px), var(--accent-quiet) calc(50% - 1px), var(--accent-quiet) calc(50% + 1px), transparent calc(50% + 1px));
 }
 
 /* ═══ buttons: pills, always (R21) ════════════════════════════════════════ */
@@ -303,12 +374,13 @@ body.fleet-page {
 	outline: 2px solid var(--focus);
 	outline-offset: 3px;
 }
+/* STAR-166 R9: a flat signal fill, not a gradient. The pill radius stays (R21). */
 .btn-primary {
-	background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+	background: var(--accent);
 	color: var(--accent-ink);
 }
 .btn-primary:hover {
-	background: linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%);
+	background: var(--accent-hover);
 	color: var(--accent-ink);
 }
 .btn-secondary {
@@ -319,6 +391,38 @@ body.fleet-page {
 .btn-secondary:hover {
 	border-color: var(--accent);
 	color: var(--text);
+}
+
+/* STAR-166 F4: one chamfer geometry for every chip and every secondary button.
+   Square corners and a --chip-cut taken off the top-right corner, the same cut
+   the panels use at a smaller size. clip-path removes the border along the cut,
+   so ::after draws the cut's hairline back in, sitting on the border box. */
+.tag,
+.badge,
+.btn-secondary {
+	position: relative;
+	border-radius: 0;
+	clip-path: polygon(0 0, calc(100% - var(--chip-cut)) 0, 100% var(--chip-cut), 100% 100%, 0 100%);
+}
+.tag::after,
+.badge::after,
+.btn-secondary::after {
+	content: '';
+	position: absolute;
+	top: -1px;
+	right: -1px;
+	width: var(--chip-cut);
+	height: var(--chip-cut);
+	pointer-events: none;
+	background: linear-gradient(to top right, transparent calc(50% - 1px), var(--border-strong) calc(50% - 1px), var(--border-strong) calc(50% + 1px), transparent calc(50% + 1px));
+}
+.btn-secondary:hover::after {
+	background: linear-gradient(to top right, transparent calc(50% - 1px), var(--accent) calc(50% - 1px), var(--accent) calc(50% + 1px), transparent calc(50% + 1px));
+}
+/* Secondary actions read as instrument labels: Plex Mono, like the chips. */
+.btn-secondary {
+	font-family: var(--font-mono);
+	font-weight: 400;
 }
 .btn-ghost,
 .btn-minimal {
@@ -342,18 +446,83 @@ body.fleet-page {
 	margin: var(--sp-5) 0 0;
 }
 
+/* ═══ panels: hull plating (STAR-166 R6) ═══════════════════════════════════
+   Every panel (cards, tiles, proof items, the closing band, the terminal card)
+   is hard-edged: radius --radius-sm, a --chamfer cut off the top-right corner
+   (clip-path), a flat --surface and a 1 px border. The cut edge gets its own
+   hairline from ::after, because clip-path removes the border along the cut.
+   Hover changes the border to the accent and nothing else: no lift, no shadow. */
+.fleet-card,
+.tile,
+.proof a,
+.proof .proof-item,
+.band,
+.term {
+	position: relative;
+	clip-path: polygon(0 0, calc(100% - var(--chamfer)) 0, 100% var(--chamfer), 100% 100%, 0 100%);
+}
+.fleet-card::after,
+.tile::after,
+.proof a::after,
+.proof .proof-item::after,
+.band::after,
+.term::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: var(--chamfer);
+	height: var(--chamfer);
+	pointer-events: none;
+	background: linear-gradient(to top right, transparent calc(50% - 1px), var(--border) calc(50% - 1px), var(--border) calc(50% + 1px), transparent calc(50% + 1px));
+}
+a.fleet-card:hover::after,
+.tile:hover::after,
+.tile:has(.stretched:focus-visible)::after,
+.proof a:hover::after {
+	background: linear-gradient(to top right, transparent calc(50% - 1px), var(--accent) calc(50% - 1px), var(--accent) calc(50% + 1px), transparent calc(50% + 1px));
+}
+/* clip-path also clips an outline drawn outside the box, so a panel that is
+   itself the link, and the chamfered secondary button, draws its ring inside. */
+.proof a:focus-visible,
+a.fleet-card:focus-visible,
+.btn-secondary:focus-visible {
+	outline-offset: -4px;
+}
+.band::after {
+	background: linear-gradient(to top right, transparent calc(50% - 1px), var(--border-strong) calc(50% - 1px), var(--border-strong) calc(50% + 1px), transparent calc(50% + 1px));
+}
+@media (max-width: 520px) {
+	.fleet-card,
+	.tile,
+	.proof a,
+	.proof .proof-item,
+	.band,
+	.term {
+		clip-path: polygon(0 0, calc(100% - var(--chamfer-sm)) 0, 100% var(--chamfer-sm), 100% 100%, 0 100%);
+	}
+	.fleet-card::after,
+	.tile::after,
+	.proof a::after,
+	.proof .proof-item::after,
+	.band::after,
+	.term::after {
+		width: var(--chamfer-sm);
+		height: var(--chamfer-sm);
+	}
+}
+
 /* ═══ fleet-card: the storefront .card, renamed so Starlight's .card is safe ═ */
 .fleet-card {
 	display: block;
 	background: var(--surface);
 	border: 1px solid var(--border);
-	border-radius: var(--radius-md);
+	border-radius: var(--radius-sm);
 	padding: var(--sp-5);
 	color: inherit;
 }
 a.fleet-card:hover {
-	border-color: var(--border-strong);
-	background: var(--surface-2);
+	border-color: var(--accent);
 	text-decoration: none;
 }
 .fleet-card :is(h3, h4) {
@@ -410,15 +579,16 @@ a.fleet-card:hover {
 }
 
 /* ═══ icon chip ═══════════════════════════════════════════════════════════ */
+/* STAR-166 F5: the capability icon is a plain glyph, no boxed tile behind it:
+   the panel around it is already the frame. Same --chip slot height. */
 .chip-lg {
 	display: grid;
-	place-items: center;
-	width: var(--chip);
+	place-items: center start;
+	width: auto;
 	height: var(--chip);
-	margin-bottom: var(--sp-4);
-	border-radius: var(--radius-md);
-	background: var(--accent-quiet);
-	border: 1px solid var(--border-strong);
+	margin-bottom: var(--sp-3);
+	background: none;
+	border: 0;
 	color: var(--accent);
 }
 .chip-lg svg {
@@ -447,19 +617,13 @@ a.fleet-card:hover {
 	position: relative;
 	display: block;
 	padding: var(--sp-5);
-	background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
+	background: var(--surface);
 	border: 1px solid var(--border);
-	border-radius: var(--radius-lg);
-	box-shadow: var(--shadow-soft);
+	border-radius: var(--radius-sm);
 	color: inherit;
-	transition:
-		transform 0.2s ease,
-		box-shadow 0.2s ease,
-		border-color 0.2s ease;
+	transition: border-color 0.2s ease;
 }
 .tile:hover {
-	transform: translateY(var(--lift));
-	box-shadow: var(--shadow-lift);
 	border-color: var(--accent);
 	text-decoration: none;
 	color: inherit;
@@ -489,7 +653,6 @@ a.fleet-card:hover {
 	transform: translateX(var(--sp-1));
 }
 @media (prefers-reduced-motion: reduce) {
-	.tile:hover,
 	.tile:hover .go {
 		transform: none;
 	}
@@ -517,24 +680,29 @@ a.fleet-card:hover {
 }
 
 /* ═══ live state chip: text always, dot as a second cue, never colour alone ═ */
+/* STAR-166 R11: same hairline frame and indicator square as .tag; the semantic
+   colours and the words are unchanged. */
+/* STAR-166 F4: the live chip carries no frame (only the status labels do), just
+   its indicator square and the state word, so a label and a live chip never read
+   as one run-together pill. */
 .state-chip {
 	display: inline-flex;
 	align-items: center;
-	gap: var(--sp-2);
-	padding: 2px var(--sp-3);
-	border: 1px solid var(--border-strong);
-	border-radius: var(--radius-pill);
+	gap: 6px;
+	padding: 1px 0;
+	border: 0;
+	font-family: var(--font-mono);
 	font-size: var(--fs-0);
-	font-weight: 600;
+	font-weight: 400;
+	font-variant-numeric: tabular-nums;
 	line-height: 1.5;
 	color: var(--text-muted);
 	white-space: nowrap;
 }
 .state-chip::before {
 	content: '';
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
+	width: 6px;
+	height: 6px;
 	background: currentColor;
 	flex-shrink: 0;
 }
@@ -543,15 +711,11 @@ a.fleet-card:hover {
 }
 .state-chip[data-state='down'] {
 	color: var(--danger);
-	border-color: var(--danger);
 }
 .state-chip:is([data-state='unknown'], [data-state='stale'], [data-state='pending'], [data-state='none']) {
 	color: var(--text-muted);
 }
 /* No-JS fallback text sits in the same slot without pretending to be a chip. */
-.state-chip[data-state='nojs'] {
-	border-style: dashed;
-}
 .state-chip[data-state='nojs']::before {
 	display: none;
 }
@@ -561,8 +725,7 @@ a.fleet-card:hover {
 	margin: 0;
 	background: var(--bg-raised);
 	border: 1px solid var(--border-strong);
-	border-radius: var(--radius-md);
-	box-shadow: var(--shadow-lift);
+	border-radius: var(--radius-sm);
 	overflow: hidden;
 	min-width: 0;
 }
@@ -634,14 +797,14 @@ a.fleet-card:hover {
 }
 
 /* ═══ closing band ════════════════════════════════════════════════════════ */
+/* STAR-166 R9: a flat surface panel; the accent appears only as the 2 px rule
+   along its left edge. No glow, no gradient, no shadow. */
 .band {
 	padding: var(--sp-7) var(--sp-5);
-	border: 1px solid var(--glow-edge);
-	border-radius: var(--radius-lg);
-	background:
-		radial-gradient(ellipse at 50% 0%, var(--glow) 0%, transparent 70%),
-		linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
-	box-shadow: var(--shadow-soft);
+	border: 1px solid var(--border-strong);
+	border-left: 2px solid var(--accent);
+	border-radius: var(--radius-sm);
+	background: var(--surface);
 }
 
 /* ═══ wordmark: solid "Star", hollow "hold", always store amber ═══════════ */
@@ -664,6 +827,12 @@ a.fleet-card:hover {
 .wordmark .solid {
 	color: var(--text);
 }
+/* STAR-166 R12: the hollow half sits tighter, so "Starhold" reads as one word
+   at 390 px rather than "Star hold". */
+.wordmark .outline {
+	letter-spacing: -0.02em;
+	margin-left: -0.03em;
+}
 /* Fallback first: without text-stroke, "hold" is plain amber, never invisible. */
 .wordmark .outline {
 	color: var(--accent);
@@ -671,11 +840,18 @@ a.fleet-card:hover {
 @supports (-webkit-text-stroke: 1px currentColor) {
 	.wordmark .outline {
 		color: transparent;
-		-webkit-text-stroke: var(--stroke-w) var(--accent);
+		/* STAR-166 R12: about 15 % lighter than --stroke-w, no glow. */
+		-webkit-text-stroke: calc(var(--stroke-w) * 0.85) var(--accent);
+	}
+	/* STAR-166 F7: one extra pixel on the big hero word from 1200 px up. */
+	@media (min-width: 1200px) {
+		.wordmark.hero .outline {
+			-webkit-text-stroke-width: calc(var(--stroke-w) * 0.85 + 1px);
+		}
 	}
 }
 
-/* ═══ brand lockup: hex mark + header wordmark ════════════════════════════ */
+/* ═══ brand lockup: PNG mark + header wordmark ════════════════════════════ */
 .brand {
 	display: inline-flex;
 	align-items: center;
@@ -691,24 +867,27 @@ a.fleet-card:hover {
 	color: var(--text);
 	text-decoration: none;
 }
+/* The mark: <img> of the operator's PNG (brand/mark/, served at /mark/), STAR-166. The square has
+   transparent padding beside the narrow gauntlet; the negative inline margins take it back so the
+   gap to the wordmark stays the lockup gap. */
 .brand .mark {
-	width: 1.5em;
-	height: 1.5em;
-	fill: var(--accent);
+	display: block;
+	width: 2em;
+	height: 2em;
+	margin-inline: -0.3em -0.35em;
 	flex-shrink: 0;
 }
 
 /* ═══ hero (storefront .hero, renamed so Starlight's .hero is untouched) ══
    Markup: section.fleet-hero > div.fleet-hero-art[aria-hidden] + div.fleet-hero-inner
    > p.eyebrow, div.fleet-hero-mark > span.wordmark.hero, div.fleet-hero-copy
-   > h1, p.lede, div.btn-row, p.byline. The bloom on the art side is the site
-   accent's --glow: the one place each site's colour is felt at full size. */
+   > h1, p.lede, div.btn-row, p.byline. STAR-166 R4: no glow bloom and no
+   radial wash; the hero is flat --bg and the art carries the site colour.
+   Optional first child: svg.starchart (R5), shown only under .has-starchart. */
 .fleet-hero {
 	position: relative;
 	overflow: hidden;
-	background:
-		radial-gradient(ellipse 55% 70% at 82% 38%, var(--glow) 0%, transparent 70%),
-		radial-gradient(ellipse at 20% -10%, var(--bg-raised) 0%, var(--bg) 65%);
+	background: var(--bg);
 	border-bottom: 1px solid var(--border);
 }
 .fleet-hero-inner {
@@ -721,24 +900,126 @@ a.fleet-card:hover {
 	margin: var(--sp-2) 0 var(--sp-4);
 }
 .fleet-hero-art {
+	/* STAR-166 F1, phones: a shallow band behind the wordmark and headline at 0.2,
+	   so the muted copy keeps its contrast. The SVG is xMinYMid slice, so it fills
+	   the band's width and crops top and bottom. */
 	position: absolute;
-	right: -30%;
-	bottom: 8%;
-	width: 110%;
-	max-width: 560px;
-	opacity: 0.22;
+	top: var(--sp-8);
+	left: 0;
+	right: 0;
+	height: 240px;
+	opacity: 0.2;
 	pointer-events: none;
+}
+.fleet-hero-art > .fleet-art {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+/* STAR-166 hero pools: a raster pick (brand/heroes, via /heroes/hero-pool.js or
+   the <noscript> fallback) fills the same box the drawing does, cropped like
+   the drawing's slice fit. The generated images sit on their own near-black,
+   a few steps off --bg (Gemini and Grok lighter, Grok's hangar pure black), so
+   every edge is feathered into the page: no visible rectangle at any width. */
+.fleet-hero-art picture {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.fleet-hero-art .hero-raster {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: 60% 50%;
+	mask-image: linear-gradient(to right, transparent, black 22%, black 86%, transparent), linear-gradient(to bottom, transparent, black 16%, black 84%, transparent);
+	mask-composite: intersect;
 }
 @media (min-width: 900px) {
 	.fleet-hero-copy {
 		max-width: 54%;
 	}
+	/* STAR-166 F1, desktop: the art is a place, not an icon. It starts one gutter
+	   right of the copy column (54% of the content box) or of the hero wordmark
+	   ("Starhold" in Michroma is ~5.46em wide), whichever ends later; spans the full hero height
+	   and runs a --sp-9 past the right viewport edge, where the hero's overflow
+	   crops it. The slice fit fills whichever side is longer, so the drawing is
+	   always at least hero-tall. */
 	.fleet-hero-art {
-		right: max(0px, calc((100% - var(--page)) / 2 - var(--sp-7)));
-		bottom: var(--sp-5);
-		width: 40%;
-		max-width: 520px;
+		top: 0;
+		bottom: 0;
+		height: auto;
+		left: calc(max(0px, (100% - var(--page)) / 2) + var(--sp-5) + max((min(100%, var(--page)) - 2 * var(--sp-5)) * 0.54, var(--fs-display) * 5.5) + var(--sp-5));
+		right: calc(-1 * var(--sp-9));
 		opacity: 1;
+	}
+	/* Corner brackets (STAR-166 R4): the art reads as a view through one
+	   instrument viewport on every site. Eight 1 px strokes, one pseudo-element;
+	   hidden below 900 px, where the art is only a faint backdrop. */
+	/* The brackets frame the visible part of the viewport (inset from the hero
+	   edges and clear of the bleed), and the drawing runs through them. */
+	.fleet-hero-art::before {
+		content: '';
+		position: absolute;
+		z-index: 1;
+		inset: var(--sp-5) calc(var(--sp-9) + var(--sp-5)) var(--sp-5) 0;
+		pointer-events: none;
+		background:
+			linear-gradient(var(--border-strong), var(--border-strong)) left top / var(--sp-5) 1px no-repeat,
+			linear-gradient(var(--border-strong), var(--border-strong)) left top / 1px var(--sp-5) no-repeat,
+			linear-gradient(var(--border-strong), var(--border-strong)) right top / var(--sp-5) 1px no-repeat,
+			linear-gradient(var(--border-strong), var(--border-strong)) right top / 1px var(--sp-5) no-repeat,
+			linear-gradient(var(--border-strong), var(--border-strong)) left bottom / var(--sp-5) 1px no-repeat,
+			linear-gradient(var(--border-strong), var(--border-strong)) left bottom / 1px var(--sp-5) no-repeat,
+			linear-gradient(var(--border-strong), var(--border-strong)) right bottom / var(--sp-5) 1px no-repeat,
+			linear-gradient(var(--border-strong), var(--border-strong)) right bottom / 1px var(--sp-5) no-repeat;
+	}
+}
+
+/* ═══ star chart (STAR-166 R5) ════════════════════════════════════════════
+   <svg class="starchart" viewBox="0 0 1440 560" preserveAspectRatio="xMidYMid slice"
+   aria-hidden="true" focusable="false"> as the hero's first child, holding
+   g.chart-links (hairline paths) and g.chart-stars (circles). Sparse, static,
+   accent-tinted, behind the copy. Opt-out: drop `has-starchart` from <body>
+   (the preview strips it for ?starchart=0) and the layer is display:none.
+   Motion: one finite fade-in, none under reduced motion. */
+.starchart {
+	display: none;
+}
+.has-starchart .starchart {
+	display: block;
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	color: var(--accent);
+	opacity: 0.5;
+	pointer-events: none;
+}
+.starchart .chart-links {
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 0.75px;
+	stroke-dasharray: 2 4;
+	opacity: 0.45;
+	vector-effect: non-scaling-stroke;
+}
+.starchart .chart-stars {
+	fill: currentColor;
+}
+@media (max-width: 899px) {
+	.has-starchart .starchart {
+		opacity: 0.3;
+	}
+}
+@media (prefers-reduced-motion: no-preference) {
+	.has-starchart .starchart {
+		animation: fleet-chart-in 2.4s ease-out 1 both;
+	}
+}
+@keyframes fleet-chart-in {
+	from {
+		opacity: 0;
 	}
 }
 
@@ -766,6 +1047,30 @@ a.fleet-card:hover {
 .fleet-art .lit,
 .fleet-art .lights {
 	color: var(--accent);
+}
+/* STAR-166 F3: the faint site-specific technical grid drawn behind each motif
+   (orbital arcs, bay-floor grid, dimension grid). Hairline, never animated. */
+.fleet-art .tech-grid {
+	color: var(--border);
+	stroke-width: 0.75px;
+}
+/* Round 2: the nearest silhouette carries a 3-unit stroke as an attribute; the
+   far layer stays dim so the two read as depth. */
+.fleet-art .far {
+	opacity: 0.8;
+}
+/* Two layers, three weights (STAR-166 R4): .far is the distant structure
+   (dim, thin), .near the foreground at full weight, .fine the hatching and
+   annotation lines. Weights in CSS so every motif shares one scale. */
+.fleet-art .far {
+	color: var(--border-strong);
+	stroke-width: 1px;
+}
+.fleet-art .near {
+	stroke-width: 2px;
+}
+.fleet-art .fine {
+	stroke-width: 0.75px;
 }
 .fleet-art .drift {
 	transform-box: fill-box;

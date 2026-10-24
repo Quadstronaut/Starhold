@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Wordmark from '$lib/components/Wordmark.svelte';
 
-	// The brand lockup: amber hexagon mark + wordmark, as one home link.
+	// The brand lockup: the mark (the operator's PNG, brand/mark/, STAR-166) + wordmark, as one home link.
 	// Header and Footer both render this, so the logo can only ever change in
 	// one place. aria-label is passed only where the visible text alone would
 	// not name the link well (the footer).
@@ -9,7 +9,7 @@
 </script>
 
 <a class="brand" href="/" aria-label={label ?? undefined}>
-	<svg class="mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="12,2 21.5,7.5 21.5,16.5 12,22 2.5,16.5 2.5,7.5" /></svg><Wordmark size="header" />
+	<img class="mark" src="/mark/mark-64.png" srcset="/mark/mark-64.webp 1x, /mark/mark-128.webp 2x" width="36" height="36" alt="" aria-hidden="true" /><Wordmark size="header" />
 </a>
 
 <style>
@@ -27,11 +27,14 @@
 		color: var(--text);
 		text-decoration: none;
 	}
-	/* Amber hexagon mark: solid fill, sized in ems so it tracks the wordmark. */
+	/* The mark (raster, transparent; brand/mark/ copies in static/mark/), sized in ems so it
+	   tracks the wordmark. The negative inline margins take back the square's transparent
+	   padding beside the narrow gauntlet (same rule as brand/fleet-base.css). */
 	.mark {
-		width: 1.5em;
-		height: 1.5em;
-		fill: var(--accent);
+		display: block;
+		width: 2em;
+		height: 2em;
+		margin-inline: -0.3em -0.35em;
 		flex-shrink: 0;
 	}
 </style>

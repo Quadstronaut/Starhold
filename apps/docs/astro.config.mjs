@@ -45,7 +45,16 @@ export default defineConfig({
 					tag: 'link',
 					attrs: { rel: 'preload', href: '/fonts/michroma-latin.woff2', as: 'font', type: 'font/woff2', crossorigin: '' }
 				},
-				{ tag: 'meta', attrs: { name: 'color-scheme', content: 'dark' } }
+				// STAR-166 R2: the body face. Plex Mono is not preloaded (chips and code only).
+				{
+					tag: 'link',
+					attrs: { rel: 'preload', href: '/fonts/ibm-plex-sans-latin.woff2', as: 'font', type: 'font/woff2', crossorigin: '' }
+				},
+				{ tag: 'meta', attrs: { name: 'color-scheme', content: 'dark' } },
+				// STAR-166 mark set (brand/mark/): favicon.svg above is the 16 px M2; these are the operator's PNG.
+				{ tag: 'link', attrs: { rel: 'icon', href: '/favicon-32.png', type: 'image/png', sizes: '32x32' } },
+				{ tag: 'link', attrs: { rel: 'icon', href: '/favicon-48.png', type: 'image/png', sizes: '48x48' } },
+				{ tag: 'link', attrs: { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' } }
 			],
 			expressiveCode: {
 				themes: ['github-dark'],

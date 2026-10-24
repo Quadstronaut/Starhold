@@ -1,151 +1,126 @@
 <script lang="ts">
-	// Original line-art of "the hold": a small orbital station seen from a
-	// slight angle, drawn with sketch-like single strokes. Pure decoration, so
-	// it is hidden from assistive tech and carries no text.
+	// Original line-art of "the hold": an orbital station over a planet limb.
+	// Pure decoration, so it is hidden from assistive tech and carries no text.
 	//
-	// Colour never appears as a literal here: every stroke/fill is
-	// `currentColor`, and the CSS classes below point currentColor at a token.
-	// Motion is CSS-only (no JS), so the art is identical with scripts off.
-
-	// Fixed starfield [x, y, r] in viewBox units. Hand-placed rather than
-	// generated at render time, so server and client render the same markup (no hydration
-	// mismatch) and the sky never reshuffles between visits.
-	const stars: [number, number, number][] = [
-		[40, 60, 1.2], [120, 30, 0.9], [200, 80, 1.4], [330, 40, 1], [420, 90, 1.3],
-		[455, 170, 0.9], [60, 190, 1], [25, 300, 1.3], [95, 410, 1], [170, 450, 1.2],
-		[300, 460, 0.9], [405, 420, 1.4], [450, 330, 1], [360, 130, 0.8], [150, 140, 0.8],
-		[260, 30, 1.1], [75, 120, 0.8], [440, 250, 0.8], [210, 430, 0.9], [350, 380, 0.8]
-	];
+	// STAR-166 round 2 (Opus drawing, wired by F1): two layers and scale contrast.
+	//   .tech-grid  faint orbital arcs behind everything (F3, replaces the star chart)
+	//   .far        the planet limb, a distant ring station and the long orbit lane
+	//   .quiet      structure; the hab prism and the near solar array carry a
+	//               3-unit stroke attribute, so the nearest silhouette is heaviest
+	//   .near/.fine full weight and hairline hatching
+	//   .lit        the one accent structure (the hab's top deck)
+	//   .lane       guides, dashed ring halves, approach line
+	//   .lights     amber signal points
+	// The near array crosses the frame corner to corner and runs out of the box;
+	// preserveAspectRatio="xMinYMid slice" lets the hero crop it at the viewport edge.
+	//
+	// Colour never appears as a literal here: every stroke/fill is `currentColor`,
+	// and the classes below point currentColor at a token (the storefront does not
+	// load fleet-base.css, so the fleet-art roles are repeated here). Motion is
+	// CSS-only and finite: two slow drifts, a few blinks, then rest (R15).
 </script>
 
-<svg
-	class="art"
-	viewBox="0 0 480 480"
-	fill="none"
-	stroke="currentColor"
-	stroke-width="1.5"
-	stroke-linecap="round"
-	stroke-linejoin="round"
-	aria-hidden="true"
-	focusable="false"
->
-	<!-- faint starfield: each star twinkles on its own offset (nth-child delay) -->
-	<g class="stars" fill="currentColor" stroke="none">
-		{#each stars as [x, y, r]}
-			<circle cx={x} cy={y} {r} />
-		{/each}
+<svg class="art" viewBox="0 0 480 480" preserveAspectRatio="xMinYMid slice" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+	<!-- STAR-166 F3: orbital arcs, the faint technical grid behind the station -->
+	<g class="tech-grid"><ellipse cx="240" cy="250" rx="130" ry="41.6" transform="rotate(-28 240 250)"/><ellipse cx="240" cy="250" rx="210" ry="67.2" transform="rotate(-28 240 250)"/><ellipse cx="240" cy="250" rx="290" ry="92.8" transform="rotate(-28 240 250)"/><ellipse cx="240" cy="250" rx="370" ry="118.4" transform="rotate(-28 240 250)"/><path d="M620.0 250.0 L640.0 250.0 M569.1 310.8 L586.4 314.0 M430.0 355.3 L440.0 360.9 M240.0 371.6 L240.0 378.0 M50.0 355.3 L40.0 360.9 M-89.1 310.8 L-106.4 314.0 M-140.0 250.0 L-160.0 250.0 M-89.1 189.2 L-106.4 186.0 M50.0 144.7 L40.0 139.1 M240.0 128.4 L240.0 122.0 M430.0 144.7 L440.0 139.1 M569.1 189.2 L586.4 186.0" transform="rotate(-28 240 250)"/></g>
+	<!-- far: planet limb with its atmosphere line, a distant ring station, the long orbit lane -->
+	<g class="far">
+		<path d="M-40 396 A760 760 0 0 1 520 396"/>
+		<path d="M-40 383 A772 772 0 0 1 520 383" stroke-dasharray="2 6"/>
+		<path class="fine" d="M30 452 Q240 404 450 452 M100 478 Q240 446 380 478" stroke-dasharray="1 5"/>
+		<ellipse cx="74" cy="78" rx="26" ry="8" transform="rotate(-20 74 78)"/>
+		<path d="M74 60 L74 96 M56 84 L92 72"/>
+		<ellipse cx="240" cy="250" rx="300" ry="96" transform="rotate(-28 240 250)" stroke-dasharray="3 9"/>
 	</g>
-
-	<!-- the whole station drifts as one body -->
-	<g class="station">
-		<!-- orbit lanes, drawn dashed so they read as pencil -->
-		<ellipse class="lane" cx="240" cy="250" rx="215" ry="70" stroke-dasharray="3 9" transform="rotate(-18 240 250)" />
-		<ellipse class="lane" cx="240" cy="250" rx="165" ry="52" stroke-dasharray="2 7" transform="rotate(-18 240 250)" />
-
-		<!-- solar wings: two frames with cell ribs, left and right of the hub -->
-		<g class="wing">
-			<path d="M40 214 L168 196 L168 270 L40 288 Z" />
-			<path d="M72 210 L72 284 M104 205 L104 279 M136 200 L136 274" />
-			<path d="M44 251 L168 233" />
-			<path d="M312 196 L440 214 L440 288 L312 270 Z" />
-			<path d="M344 200 L344 274 M376 205 L376 279 M408 210 L408 284" />
-			<path d="M312 233 L436 251" />
-		</g>
-
-		<!-- spars joining wings to the hub -->
-		<path d="M168 233 L194 240 M312 233 L286 240" />
-
-		<!-- the hold itself: hexagonal core (echoes the header mark) -->
-		<path class="core" d="M286 240 L263 279.8 L217 279.8 L194 240 L217 200.2 L263 200.2 Z" />
-		<path d="M274 240 L257 269.4 L223 269.4 L206 240 L223 210.6 L257 210.6 Z" />
-		<!-- hatching on the inner face: the sketchy shading -->
-		<path d="M214 232 L232 214 M222 246 L248 220 M232 262 L262 232 M248 266 L268 246" opacity="0.55" />
-
-		<!-- docking ring around the core, tilted -->
-		<ellipse cx="240" cy="240" rx="82" ry="24" transform="rotate(-18 240 240)" />
-
-		<!-- mast + dish up top, mast down below -->
-		<path d="M240 200 L240 150 M240 150 L224 138 M240 150 L256 138 M224 138 Q240 124 256 138" />
-		<path d="M240 280 L240 326 M228 326 L252 326" />
-
-		<!-- a small visiting craft on the outer lane -->
-		<g class="craft">
-			<path d="M388 332 L408 322 L418 336 L398 346 Z" />
-			<path d="M418 336 L436 340" />
-		</g>
+	<g class="drift">
+		<!-- far array: smaller, because it is further away -->
+		<path class="quiet" d="M390.4 151.2 L441.2 220.6 L476.7 194.6 L425.9 125.2 Z M370.3 123.8 L319.5 54.4 L355 28.4 L405.8 97.8 Z"/>
+		<path class="lane fine" d="M400.5 165.1 L436.1 139.1 M410.7 179 L446.2 153 M420.9 192.8 L456.4 166.8 M431 206.7 L466.5 180.7 M408.1 138.2 L458.9 207.6 M360.1 109.9 L395.7 83.9 M350 96 L385.5 70 M339.8 82.1 L375.3 56.1 M329.7 68.2 L365.2 42.3 M388.1 110.8 L337.3 41.4"/>
+		<path class="quiet" d="M388.1 110.8 L408.1 138.2"/>
+		<!-- ring, back half: behind the hab, so clipped by its silhouette -->
+		<path class="lane" d="M128.5 272.5 L128.3 270.6 M128.3 270.6 L128.5 268.5 M128.5 268.5 L129.3 266.3 M129.3 266.3 L130.5 264 M130.5 264 L132.2 261.7 M132.2 261.7 L134.4 259.2 M134.4 259.2 L137.1 256.7 M137.1 256.7 L140.2 254.2 M140.2 254.2 L143.8 251.6 M143.8 251.6 L147.7 248.9 M147.7 248.9 L152.1 246.3 M152.1 246.3 L156.9 243.6 M156.9 243.6 L162.1 240.9 M162.1 240.9 L167.5 238.3 M167.5 238.3 L173.4 235.7 M173.4 235.7 L177 234.1 M308.3 203.5 L313 203.3 M313 203.3 L318.8 203.2 M318.8 203.2 L324.3 203.3 M324.3 203.3 L329.4 203.6 M329.4 203.6 L334.2 204.1 M334.2 204.1 L338.5 204.7 M338.5 204.7 L342.5 205.5 M342.5 205.5 L346 206.5 M346 206.5 L349.1 207.6 M349.1 207.6 L351.7 208.9 M351.7 208.9 L353.9 210.3 M353.9 210.3 L355.6 211.9 M355.6 211.9 L356.8 213.6 M356.8 213.6 L357.5 215.5" stroke-dasharray="3 5"/>
+		<!-- truss spine, clipped where the hab hides it -->
+		<path class="quiet near" d="M2.7 402.7 L177 275.2 M292.2 190.8 L472.7 58.7 M13.3 417.3 L189.8 288.1 M306.9 202.4 L483.3 73.3"/>
+		<path class="quiet fine" d="M13.3 417.3 L18.8 390.9 M18.8 390.9 L45.6 393.6 M45.6 393.6 L51.1 367.3 M51.1 367.3 L77.9 370 M77.9 370 L83.4 343.7 M83.4 343.7 L110.1 346.4 M110.1 346.4 L115.7 320.1 M115.7 320.1 L142.4 322.8 M142.4 322.8 L147.9 296.4 M147.9 296.4 L174.7 299.1 M174.7 299.1 L178.8 279.4 M304.7 200.6 L309.3 178.3 M309.3 178.3 L336.1 181 M336.1 181 L341.6 154.7 M341.6 154.7 L368.4 157.4 M368.4 157.4 L373.9 131.1 M373.9 131.1 L400.7 133.8 M400.7 133.8 L406.2 107.4 M406.2 107.4 L432.9 110.1 M432.9 110.1 L438.4 83.8 M438.4 83.8 L465.2 86.5 M465.2 86.5 L470.7 60.2 M0.9 400.3 L15.1 419.7 M65.5 353.1 L79.6 372.4 M130 305.8 L144.2 325.2 M323.7 164.1 L337.9 183.4 M388.2 116.8 L402.4 136.2 M452.8 69.6 L467 88.9"/>
+		<!-- hab prism: silhouette heavy, top deck in accent, side ribs fine -->
+		<path class="quiet" stroke-width="3" d="M309 204 L309 278 L276 304 L210 304 L177 278 L177 204 L210 178 L276 178 Z"/>
+		<path class="lit near" d="M309 204 L276 230 L210 230 L177 204 L210 178 L276 178 Z"/>
+		<path class="lit fine" d="M279.3 204 L261.2 218.3 L224.9 218.3 L206.7 204 L224.9 189.7 L261.2 189.7 Z"/>
+		<path class="quiet" d="M276 230 L276 304 M210 230 L210 304"/>
+		<path class="quiet fine" d="M309 228 L276 254 L210 254 L177 228 M309 252 L276 278 L210 278 L177 252"/>
+		<path class="quiet fine" d="M218 242 L268 242" stroke-dasharray="5 6"/>
+		<!-- mast and dish above the deck, keel mast below -->
+		<path class="quiet" d="M243 204 L243 134 M225 150 L261 150 M223 118 Q243 142 263 118 M243 304 L243 350 M231 350 L255 350"/>
+		<!-- ring, front half: in front of the hab -->
+		<path class="quiet near" d="M357.5 215.5 L357.7 217.4 L357.5 219.5 L356.7 221.7 L355.5 224 L353.8 226.3 L351.6 228.8 L348.9 231.3 L345.8 233.8 L342.2 236.4 L338.3 239.1 L333.9 241.7 L329.1 244.4 L323.9 247.1 L318.5 249.7 L312.6 252.3 L306.5 254.9 L300.1 257.5 L293.5 260 L286.7 262.4 L279.6 264.7 L272.5 267 L265.1 269.1 L257.7 271.2 L250.3 273.1 L242.8 274.9 L235.3 276.6 L227.8 278.1 L220.4 279.5 L213.1 280.7 L205.9 281.8 L198.9 282.7 L192 283.5 L185.4 284.1 L179.1 284.5 L173 284.7 L167.2 284.8 L161.7 284.7 L156.6 284.4 L151.8 283.9 L147.5 283.3 L143.5 282.5 L140 281.5 L136.9 280.4 L134.3 279.1 L132.1 277.7 L130.4 276.1 L129.2 274.4 L128.5 272.5"/>
+		<!-- near array: the biggest thing in the frame, heavy frames, fine cells -->
+		<path class="quiet" stroke-width="3" d="M84.6 375 L162.6 481.5 L217.4 441.4 L139.5 334.8 Z M64.5 347.6 L-13.4 241 L41.4 200.9 L119.4 307.4 Z"/>
+		<path class="quiet fine" d="M100.2 396.3 L155.1 356.1 M115.8 417.6 L170.7 377.4 M131.4 438.9 L186.3 398.7 M147 460.2 L201.8 420.1 M112 354.9 L190 461.4 M48.9 326.3 L103.8 286.1 M33.3 305 L88.2 264.8 M17.7 283.7 L72.6 243.5 M2.2 262.3 L57 222.2 M92 327.5 L14 221"/>
+		<path class="quiet near" d="M92 327.5 L112 354.9"/>
 	</g>
-
-	<!-- amber signal lights: hub beacon, wing tips, mast top, craft -->
-	<g class="lights" fill="currentColor" stroke="none">
-		<circle cx="240" cy="240" r="5" />
-		<circle cx="40" cy="214" r="3" />
-		<circle cx="440" cy="288" r="3" />
-		<circle cx="240" cy="138" r="2.5" />
-		<circle cx="436" cy="340" r="2.5" />
+	<!-- a visiting craft on the lane, and its approach line -->
+	<g class="drift">
+		<path class="lane fine" d="M392 352 Q330 330 303 278" stroke-dasharray="2 5"/>
+		<path class="quiet near" d="M378 360 L392 342 L408 358 L392 354 Z"/>
 	</g>
+	<g class="lights" fill="currentColor" stroke="none"><circle cx="243" cy="204" r="5"/><circle cx="243" cy="132" r="2.5"/><circle cx="190" cy="461.4" r="3"/><circle cx="14" cy="221" r="3"/><circle cx="458.9" cy="207.6" r="2"/><circle cx="337.3" cy="41.4" r="2"/><circle cx="392" cy="342" r="2.5"/><circle cx="74" cy="60" r="1.6"/></g>
 </svg>
 
 <style>
 	.art {
 		display: block;
 		width: 100%;
-		height: auto;
+		height: 100%;
 		/* base line colour: quiet, so it never competes with the copy */
 		color: var(--text-muted);
-		overflow: visible;
+		overflow: hidden;
 	}
 
+	.tech-grid {
+		color: var(--border);
+		stroke-width: 0.75px;
+	}
 	.lane {
 		color: var(--border-strong);
 	}
-	.stars {
+	.quiet {
 		color: var(--text-muted);
 	}
+	.lit,
 	.lights {
 		color: var(--accent);
 	}
-	/* a hint of amber in one structural line, not just the lights */
-	.core {
-		color: var(--accent);
+	.far {
+		color: var(--border-strong);
+		stroke-width: 1px;
+		opacity: 0.8;
 	}
-	.wing {
-		color: var(--text-muted);
+	.near {
+		stroke-width: 2px;
+	}
+	.fine {
+		stroke-width: 0.75px;
 	}
 
-	/* Motion. Slow enough to feel like drift, small enough to cost nothing:
-	   transform/opacity only, so the compositor handles it and layout is
-	   never touched. */
-	/* SVG groups default to the viewBox origin; pivot on the element's own box so
-	   the small rotation is a gentle tilt, not a sweep around the top-left. */
-	.station,
-	.craft {
+	/* Motion (R15): finite. Two slow drifts (2 x 14 s), the lights a few blinks,
+	   then everything rests on its last frame. Transform/opacity only. */
+	.drift {
 		transform-box: fill-box;
 		transform-origin: center;
 	}
-	.station {
-		animation: drift 14s ease-in-out infinite alternate;
-	}
-	.craft {
-		animation: pass 22s ease-in-out infinite alternate;
-	}
-	.stars circle {
-		animation: twinkle 5s ease-in-out infinite;
-	}
-	.stars circle:nth-child(3n) {
-		animation-delay: -1.7s;
-		animation-duration: 7s;
-	}
-	.stars circle:nth-child(3n + 1) {
-		animation-delay: -3.2s;
-	}
-	.stars circle:nth-child(5n) {
-		animation-duration: 9s;
-	}
 	.lights circle {
-		animation: blink 3.6s ease-in-out infinite;
+		opacity: 0.8;
 	}
-	.lights circle:nth-child(2n) {
-		animation-delay: -1.8s;
+	@media (prefers-reduced-motion: no-preference) {
+		.drift {
+			animation: drift 14s ease-in-out 2 alternate both;
+		}
+		.lights circle {
+			animation: blink 3.6s ease-in-out 6 both;
+		}
+		.lights circle:nth-child(2n) {
+			animation-delay: -1.8s;
+		}
 	}
 
 	@keyframes drift {
@@ -156,45 +131,13 @@
 			transform: translateY(8px) rotate(0.8deg);
 		}
 	}
-	@keyframes pass {
-		from {
-			transform: translate(-14px, 4px);
-		}
-		to {
-			transform: translate(10px, -6px);
-		}
-	}
-	@keyframes twinkle {
-		0%,
-		100% {
-			opacity: 0.25;
-		}
-		50% {
-			opacity: 1;
-		}
-	}
 	@keyframes blink {
 		0%,
 		100% {
-			opacity: 0.45;
+			opacity: 0.8;
 		}
 		50% {
-			opacity: 1;
-		}
-	}
-
-	/* app.css already collapses all animation under this query, but a stopped,
-	   fully-visible frame is the intended result, so say so explicitly. */
-	@media (prefers-reduced-motion: reduce) {
-		.station,
-		.craft,
-		.stars circle,
-		.lights circle {
-			animation: none;
-		}
-		.stars circle,
-		.lights circle {
-			opacity: 0.8;
+			opacity: 0.45;
 		}
 	}
 </style>
