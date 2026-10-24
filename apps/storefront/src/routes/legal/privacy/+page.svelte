@@ -48,7 +48,7 @@
 			<tr><th>Service</th><th>What it holds today</th><th>Kept for</th></tr>
 		</thead>
 		<tbody>
-			<tr><td>Shush</td><td>Your Discord id, banned words you triggered, death times, word counts and points. Message ids are kept for reference, never message content. Your Discord display name and dates appear on the public list.</td><td>Game data rolls per round. Names stay on the public list until you ask us to remove them (hello@starhold.dev or /hide-me when it ships). A 30-day automatic expiry is in development.</td></tr>
+			<tr><td>Shush</td><td>Your Discord id, banned words you triggered, death times, word counts and points. Message ids are kept for reference, never message content. The public list shows a display name, the word and the date, for thirty days, then it drops off.</td><td>Game data rolls per round. Use /hide-me in Discord to leave every list we keep; we also edit the bot's own recent messages. Copies kept by Discord or other players, and older bot messages, can't be changed.</td></tr>
 			<tr><td>Shush</td><td>Help-desk tickets: your Discord id, subject and open and close times. The messages live in a private Discord thread.</td><td>No fixed period yet. Ask and we delete it by hand.</td></tr>
 			<tr><td>Starbot</td><td>Server settings and Discord ids the bot features need to work. Contact notices in intake channels.</td><td>No fixed period yet. A 12-month automatic purge of contact notices is not built. Ask and we delete it by hand.</td></tr>
 		</tbody>

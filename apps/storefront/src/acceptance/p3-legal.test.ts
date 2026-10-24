@@ -138,8 +138,9 @@ describe('privacy', () => {
 		expect(raw('privacy')).toMatch(/<tr><td>Shush<\/td>/);
 	});
 	it('Shush retention states the current rule, not the future one (B4)', () => {
-		expect(t()).toContain('Names stay on the public list until you ask us to remove them');
-		expect(t()).toContain('A 30-day automatic expiry is in development.');
+		expect(t()).toContain('for thirty days, then it drops off');
+		expect(t()).toContain('Use /hide-me in Discord to leave every list we keep');
+		expect(t()).not.toContain('in development');
 	});
 });
 

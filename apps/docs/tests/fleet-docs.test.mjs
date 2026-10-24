@@ -207,8 +207,9 @@ test('export, delete and sign-in are described as they are today (B2)', () => {
 test('Shush retention states today\'s rule on every page that mentions it (B4)', () => {
 	for (const route of ['services/shushgame', 'shushgame/points-roles-shop']) {
 		const text = proseText(page(route));
-		assert.ok(text.includes('Names stay on the public list until you ask us to remove them'), route);
-		assert.ok(text.includes('A 30-day automatic expiry is in development.'), route);
+		assert.ok(text.includes('for thirty days, then it drops off'), route);
+		assert.ok(text.includes('in Discord to leave every list we keep'), route);
+		assert.ok(!text.includes('in development'), route);
 	}
 });
 
