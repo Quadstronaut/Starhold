@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="color-scheme" content="dark">
 	<title>Starhold services</title>
-	<meta name="description" content="Privacy-first services Starhold hosts and operates, under development; some tools are open today, the rest invitation only. Request an invite through the contact form.">
+	<meta name="description" content="Privacy-first services we host and operate. Some are open today; the rest are invitation only or in development. Request an invite through the contact form.">
 	<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 	<link rel="preload" href="/fonts/michroma-latin.woff2" as="font" type="font/woff2" crossorigin>
 	<!-- Load order (spec §1.1): tokens, fleet map, site accent, shared base, then this site. -->
@@ -18,6 +18,10 @@
 </head>
 <body class="fleet-page">
 	<a class="skip-link" href="#main">Skip to content</a>
+
+	<aside class="testing-banner" role="note" aria-label="Testing notice">
+		<p>Starhold is under construction. Everything here is online for development and testing only, may change or break without notice, and is provided as-is with no warranty. Don't rely on it for anything important. Your privacy rights still apply.</p>
+	</aside>
 
 	<header class="fleet-header">
 		<div class="fleet-header-inner">
@@ -112,8 +116,8 @@
 				<p class="eyebrow">Starhold · services</p>
 				<div class="fleet-hero-mark"><span class="wordmark hero" aria-hidden="true"><span class="solid">Star</span><span class="outline">hold</span></span></div>
 				<div class="fleet-hero-copy">
-					<h1 id="hero-title">Private services, hosted and run for you.</h1>
-					<p class="lede">Privacy-first tools I build, host and operate myself. Everything here is under development. Some tools are open today; the rest are invitation only. Ask for an invite and I will send your link.</p>
+					<h1 id="hero-title">Privacy-first services we host and operate.</h1>
+					<p class="lede">We build and operate privacy-first tools for builders, sysadmins and teams. Every service states what it does, what it costs and whether you can use it today.</p>
 					<div class="btn-row">
 						<a class="btn btn-primary" href="https://starhold.dev/contact?intent=invite">Request an invite</a>
 						<a class="btn btn-secondary" href="#bays">See the services</a>
@@ -126,124 +130,120 @@
 		<section class="section" id="bays" aria-labelledby="bays-title">
 			<p class="eyebrow">Under development</p>
 			<h2 id="bays-title">In the <span class="accent-word">bays</span></h2>
-			<p class="lede section-lede">Everything here is under development. Some tools are open today; the rest are invitation only. Where a chip shows, it reads the latest check from my monitoring. Without a recent check it says Unknown, never Up.</p>
+			<p class="lede section-lede">Each service carries one status label. A live chip appears only where we monitor the service, and it reads Unknown without a recent check, never Up.</p>
 
-			<!-- One card per service (STAR-134 brief, fleet table). The state tag is copy, not live
-			     data; the chip is live. A dashed edge (.bay--wip) marks anything not yet open. -->
-			<div class="bays">
-				<article class="tile bay bay--wide reveal">
-					<svg class="bay-art" viewBox="0 0 240 160" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+			<section class="category" id="cat-teams" aria-labelledby="cat-teams-title">
+				<h3 class="category-title" id="cat-teams-title">For teams and MSPs</h3>
+				<div class="bays">
+					<article class="tile bay bay--wip reveal" data-product="status">
+						<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 12h4l2.5-6 5 12 2.5-6h4"/></svg></span>
+						<h3>Starhold Status</h3>
+						<p class="tile-meta"><span class="tag" data-label>Invitation only</span></p>
+						<p class="purpose">Private and white-label status pages that let MSPs and teams show customers the health of the services they run.</p>
+						<p class="host">status.<wbr>starhold.<wbr>app</p>
+						<p class="note">Not open for sign-up yet; we send each invitation by hand.</p>
+						<p class="action"><a class="stretched" href="https://starhold.dev/contact?intent=invite">Request an invite</a> →</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="category" id="cat-builders" aria-labelledby="cat-builders-title">
+				<h3 class="category-title" id="cat-builders-title">For builders and sysadmins</h3>
+				<div class="bays">
+					<article class="tile bay bay--wide reveal" data-product="umbermark">
+						<svg class="bay-art" viewBox="0 0 240 160" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
 						<path class="bay-art-frame" d="M20 150 L20 34 L40 14 L200 14 L220 34 L220 150"/>
 						<path class="bay-art-frame" d="M6 150 L234 150"/>
 						<path class="bay-art-hull" d="M150 92 L135 118 L105 118 L90 92 L105 66 L135 66 Z"/>
 						<path class="bay-art-frame" d="M90 92 L70 112 L70 124 L96 114 M150 92 L170 112 L170 124 L144 114 M111 118 L105 136 M129 118 L135 136 M97 136 L111 136 M129 136 L143 136"/>
 					</svg>
-					<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5 19.5 5.5v6c0 4.6-3.2 8.4-7.5 10-4.3-1.6-7.5-5.4-7.5-10v-6z"/><path d="M8.5 12.2 11 14.6l4.6-5"/></svg></span>
-					<h3><a class="stretched" href="https://umbermark.starhold.app">Umbermark</a></h3>
-					<p class="purpose">Scored server hardening report with a shareable link. Free scan; the full report and plans are paid.</p>
-					<p class="host">umbermark.<wbr>starhold.<wbr>app</p>
-					<p class="tile-meta"><span class="tag tag-accent">Early access</span> <span class="state-chip" data-chip="umbermark" data-state="nojs">Live status: status.starhold.fyi</span> <span class="checked" data-checked="umbermark"></span></p>
-					<span class="go" aria-hidden="true">→</span>
-				</article>
+						<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5 19.5 5.5v6c0 4.6-3.2 8.4-7.5 10-4.3-1.6-7.5-5.4-7.5-10v-6z"/><path d="M8.5 12.2 11 14.6l4.6-5"/></svg></span>
+						<h3><a class="stretched" href="https://umbermark.starhold.app">Umbermark</a></h3>
+						<p class="tile-meta"><span class="tag tag-accent" data-label>Open · early access, paid plans</span> <span class="state-chip" data-chip="umbermark" data-state="nojs">Live status: status.starhold.fyi</span> <span class="checked" data-checked="umbermark"></span></p>
+						<p class="purpose">Scans a server and produces a scored hardening report, with a link you can share with whoever needs to see it.</p>
+						<p class="host">umbermark.<wbr>starhold.<wbr>app</p>
+						<p class="note">The scan is free; the full report and plans are paid.</p>
+						<p class="action" aria-hidden="true">Open Umbermark →</p>
+					</article>
 
-				<article class="tile bay reveal">
-					<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 6.5h17v11h-17z"/><path d="m3.5 7 8.5 6.5L20.5 7"/></svg></span>
-					<h3><a class="stretched" href="https://zenithmark.starhold.app">Zenithmark</a></h3>
-					<p class="purpose">Mail and DNS scorecard for a domain: SPF, DKIM, DMARC, MX, MTA-STS, TLS, DNSSEC, CAA, BIMI. Free while in development.</p>
-					<p class="host">zenithmark.<wbr>starhold.<wbr>app</p>
-					<p class="tile-meta"><span class="tag tag-accent">Live</span></p>
-					<span class="go" aria-hidden="true">→</span>
-				</article>
+					<article class="tile bay reveal" data-product="zenithmark">
+						<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 6.5h17v11h-17z"/><path d="m3.5 7 8.5 6.5L20.5 7"/></svg></span>
+						<h3><a class="stretched" href="https://zenithmark.starhold.app">Zenithmark</a></h3>
+						<p class="tile-meta"><span class="tag tag-accent" data-label>Open · free</span></p>
+						<p class="purpose">Scores a domain's mail and DNS setup: SPF, DKIM, DMARC, MX, MTA-STS, TLS, DNSSEC, CAA and BIMI.</p>
+						<p class="host">zenithmark.<wbr>starhold.<wbr>app</p>
+						<p class="note">Free while it is in development.</p>
+						<p class="action" aria-hidden="true">Open Zenithmark →</p>
+					</article>
 
-				<article class="tile bay bay--wip reveal">
-					<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 4.5h17v15h-17z"/><path d="m3.5 16 5-5 4 4 3-3 5 5"/><path d="M15.5 8.5h.01"/></svg></span>
-					<h3><a class="stretched" href="https://render.starhold.app">Starhold Render</a></h3>
-					<p class="purpose">OG image, PDF and screenshot API.</p>
-					<p class="host">render.<wbr>starhold.<wbr>app</p>
-					<p class="tile-meta"><span class="tag">Invitation only</span></p>
-					<span class="go" aria-hidden="true">→</span>
-				</article>
+					<article class="tile bay bay--wip reveal" data-product="render">
+						<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 4.5h17v15h-17z"/><path d="m3.5 16 5-5 4 4 3-3 5 5"/><path d="M15.5 8.5h.01"/></svg></span>
+						<h3>Starhold Render</h3>
+						<p class="tile-meta"><span class="tag" data-label>Invitation only</span></p>
+						<p class="purpose">An API that renders Open Graph images, PDFs and screenshots for builders who need them inside their own applications.</p>
+						<p class="host">render.<wbr>starhold.<wbr>app</p>
+						<p class="note">Not open for sign-up yet; we send each invitation by hand.</p>
+						<p class="action"><a class="stretched" href="https://starhold.dev/contact?intent=invite">Request an invite</a> →</p>
+					</article>
+				</div>
+			</section>
 
-				<article class="tile bay bay--wip reveal">
-					<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 12h4l2.5-6 5 12 2.5-6h4"/></svg></span>
-					<h3><a class="stretched" href="https://status.starhold.app">Starhold Status</a></h3>
-					<p class="purpose">Private and white-label status pages for MSPs.</p>
-					<p class="host">status.<wbr>starhold.<wbr>app</p>
-					<p class="tile-meta"><span class="tag">Invitation only</span></p>
-					<span class="go" aria-hidden="true">→</span>
-				</article>
+			<section class="category" id="cat-discord" aria-labelledby="cat-discord-title">
+				<h3 class="category-title" id="cat-discord-title">Discord apps</h3>
+				<div class="bays">
+					<article class="tile bay bay--wip reveal" data-product="starbot">
+						<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8.5h14v10H5z"/><path d="M12 8.5V5M12 5h.01M9 13h.01M15 13h.01M9.5 16h5"/></svg></span>
+						<h3>Starbot</h3>
+						<p class="tile-meta"><span class="tag" data-label>In development</span></p>
+						<p class="purpose">A Discord bot for the Starhold community. It is still being built and cannot be added to a server yet.</p>
+						<p class="host">Discord, not yet public</p>
+						<p class="note">Not available yet; there is nothing to add or open.</p>
+					</article>
 
-				<article class="tile bay bay--wip reveal">
-					<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8.5h14v10H5z"/><path d="M12 8.5V5M12 5h.01M9 13h.01M15 13h.01M9.5 16h5"/></svg></span>
-					<h3><a class="stretched" href="https://discord.gg/Ug8CM86Bxv">Starbot</a></h3>
-					<p class="purpose">Discord assistant for the Starhold community.</p>
-					<p class="host">discord.gg/<wbr>Ug8CM86Bxv</p>
-					<p class="tile-meta"><span class="tag">In development</span></p>
-					<span class="go" aria-hidden="true">→</span>
-				</article>
+					<article class="tile bay reveal" data-product="shushgame">
+						<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h16v10H9l-5 4z"/><path d="M8.5 10h.01M12 10h.01M15.5 10h.01"/></svg></span>
+						<h3><a class="stretched" href="https://starhold.dev/shush">Shush</a></h3>
+						<p class="tile-meta"><span class="tag tag-accent" data-label>Open · free</span> <span class="state-chip" data-chip="shushgame" data-state="nojs">Live status: status.starhold.fyi</span> <span class="checked" data-checked="shushgame"></span></p>
+						<p class="purpose">A daily word game on Discord: one word is forbidden each day, and saying it in the server puts you on the list.</p>
+						<p class="host">shushgame.<wbr>com</p>
+						<p class="note">Free. Names and dates on the public list are removed after 30 days.</p>
+						<p class="action" aria-hidden="true">About Shush →</p>
+					</article>
+				</div>
+			</section>
 
-				<article class="tile bay reveal">
-					<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h16v10H9l-5 4z"/><path d="M8.5 10h.01M12 10h.01M15.5 10h.01"/></svg></span>
-					<h3><a class="stretched" href="https://shushgame.com">Shushgame</a></h3>
-					<p class="purpose">Discord Chat Game</p>
-					<p class="host">shushgame.com</p>
-					<p class="tile-meta"><span class="tag tag-accent">Live</span> <span class="state-chip" data-chip="shushgame" data-state="nojs">Live status: status.starhold.fyi</span> <span class="checked" data-checked="shushgame"></span></p>
-					<span class="go" aria-hidden="true">→</span>
-				</article>
-
-				<article class="tile bay bay--wip reveal">
-					<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2 21.5 7.5v9L12 22l-9.5-5.5v-9z"/><path d="M12 7v10M7.5 9.6 16.5 14.4M16.5 9.6 7.5 14.4"/></svg></span>
-					<h3><a class="stretched" href="https://starhold.dev/products/qnix">QNix</a></h3>
-					<p class="purpose">Durable Hosting</p>
-					<p class="host">starhold.dev/<wbr>products/<wbr>qnix</p>
-					<p class="tile-meta"><span class="tag">Paused</span></p>
-					<span class="go" aria-hidden="true">→</span>
-				</article>
-			</div>
-		</section>
-
-		<section class="section section-divided" id="principles" aria-labelledby="principles-title">
-			<p class="eyebrow">How I run them</p>
-			<h2 id="principles-title">Your data, your <span class="accent-word">call</span></h2>
-			<p class="lede section-lede">The same rules for every service and every person, wherever you live.</p>
-			<ul class="principles">
-				<li class="tile principle reveal">
-					<h3>Privacy</h3>
-					<p>No trackers. Logs only as far as running the service needs. Your data is never sold. Notifications are opt-in; only critical account and service notices are not.</p>
-				</li>
-				<li class="tile principle reveal">
-					<h3>Export and delete</h3>
-					<p>One click to export everything held on you, one click to delete it and the account with it. That is the standard each account is being built to; until it ships, ask through the contact form.</p>
-				</li>
-				<li class="tile principle reveal">
-					<h3>Fair terms</h3>
-					<p>No dark patterns, no expiring credits, no surprise charges. Plain-English terms and a public price table wherever something costs money.</p>
-				</li>
-			</ul>
+			<section class="category" id="cat-personal" aria-labelledby="cat-personal-title">
+				<h3 class="category-title" id="cat-personal-title">Personal hosting</h3>
+				<div class="bays">
+					<article class="tile bay bay--wip reveal" data-product="qnix">
+						<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2 21.5 7.5v9L12 22l-9.5-5.5v-9z"/><path d="M12 7v10M7.5 9.6 16.5 14.4M16.5 9.6 7.5 14.4"/></svg></span>
+						<h3><a class="stretched" href="https://starhold.dev/qnix">QNix</a></h3>
+						<p class="tile-meta"><span class="tag" data-label>In development</span></p>
+						<p class="purpose">Personal hosting we are planning. Nothing is available to use yet; the QNix page has an interest form.</p>
+						<p class="host">starhold.<wbr>dev/<wbr>qnix</p>
+						<p class="note">No sign-up, plans or prices yet.</p>
+						<p class="action" aria-hidden="true">Open the QNix page →</p>
+					</article>
+				</div>
+			</section>
 		</section>
 
 		<section class="section section-divided" id="runs" aria-labelledby="runs-title">
-			<p class="eyebrow">Self-hosted</p>
-			<h2 id="runs-title">How this <span class="accent-word">runs</span></h2>
-			<p class="lede section-lede">Starhold runs on machines I administer: a dedicated server and a VPS joined by a private Tailscale mesh, in rootless Podman containers.</p>
-			<ul class="proof">
-				<li><span class="proof-item">Dedicated server + VPS<span class="verifier">machines I administer</span></span></li>
-				<li><span class="proof-item">Tailscale mesh<span class="verifier">a private Tailscale mesh</span></span></li>
-				<li><span class="proof-item">Rootless Podman<span class="verifier">unprivileged containers</span></span></li>
-				<li><a href="https://status.starhold.fyi">Fleet status<span class="verifier">status.starhold.fyi</span></a></li>
-			</ul>
+			<p class="eyebrow">Fleet status</p>
+			<h2 id="runs-title">Designed so one machine failing doesn't take it <span class="accent-word">down</span></h2>
+			<p class="lede section-lede">We run services on machines we administer. That design reduces reliance on any single machine; it does not guarantee uninterrupted availability. Current health is on the <a href="https://status.starhold.fyi">public fleet status page</a>.</p>
+			<p class="lede section-lede">We're one person in Arizona. Whoever answers your message also runs the servers.</p>
 		</section>
 
 		<section class="section" id="invite" aria-labelledby="invite-title">
 			<div class="band reveal">
 				<p class="eyebrow">Invitation only: Render and Status</p>
 				<h2 id="invite-title">Want to try <span class="accent-word">one?</span></h2>
-				<p class="lede">Tell me which service and what you would use it for. Render and Status sign-in is by invitation while they are built, and I send each link myself.</p>
+				<p class="lede">Tell us which service and, if you like, what you would use it for. We review each request by hand and send each link ourselves; access is not guaranteed.</p>
 				<div class="btn-row">
 					<a class="btn btn-primary" href="https://starhold.dev/contact?intent=invite">Request an invite</a>
 					<a class="btn btn-secondary" href="https://starhold.dev/contact">Contact form</a>
 				</div>
-				<p class="byline">Need something built instead? <a href="https://starhold.dev/operator">How I work →</a></p>
 			</div>
 		</section>
 	</main>
@@ -252,9 +252,7 @@
 		<div class="fleet-footer-inner">
 			<div class="col">
 				<div class="brandwrap"><a class="brand" href="/" aria-label="Starhold services"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="12,2 21.5,7.5 21.5,16.5 12,22 2.5,16.5 2.5,7.5"/></svg><span class="wordmark header"><span class="solid">Star</span><span class="outline">hold</span></span></a></div>
-				<p class="brandline">Starhold Software — Quadstronaut</p>
-				<p class="strapline">Sovereign systems, built and operated.</p>
-				<p class="meta">Est. 2026</p>
+				<p class="strapline">Starhold · Sovereign systems, built and operated. · Est. 2026</p>
 			</div>
 			<nav class="col" aria-label="Sites">
 				<p class="eyebrow">Sites</p>
@@ -266,12 +264,10 @@
 				</ul>
 			</nav>
 			<div class="col">
-				<p class="eyebrow">Elsewhere</p>
+				<p class="eyebrow">Support</p>
 				<ul>
-					<li><a href="https://www.patreon.com/cw/Quadstronaut" rel="noopener">Patreon</a></li>
-					<li><a href="https://discord.gg/Ug8CM86Bxv" rel="noopener">Discord</a></li>
+					<li><a href="https://www.patreon.com/cw/Quadstronaut" rel="noopener">Back the work</a></li>
 				</ul>
-				<p class="meta">Back the work, or come and talk about it.</p>
 			</div>
 			<div class="col">
 				<p class="eyebrow">Legal</p>
