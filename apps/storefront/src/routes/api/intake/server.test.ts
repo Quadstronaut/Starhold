@@ -86,10 +86,23 @@ describe('POST /api/intake', () => {
 		expect(row).toEqual({ product: 'umbermark', kind: 'invite' });
 	});
 
-	it('ignores a product id that is not in our list', async () => {
-		await call({ ...good, kind: 'invite', product: '<script>' });
+	it('rejects an invite whose service is not in our list, and drops it from a contact message', async () => {
+		expect(await status(call({ ...good, kind: 'invite', product: '<script>' }))).toBe(400);
+		expect(await status(call({ ...good, kind: 'invite', product: '' }))).toBe(400);
+		expect(await status(call({ ...good, kind: 'invite', product: 'unsure' }))).toBe(400);
+		await call({ ...good, kind: 'contact', product: '<script>' });
 		const [, text] = postDiscord.mock.calls[0] as any[];
-		expect(text).toMatch(/^New invite request #\d+$/);
+		expect(text).toMatch(/^New message #\d+$/);
+	});
+
+	it('accepts an invite with an email and a service but no use line', async () => {
+		const res = (await call({ kind: 'invite', email: 'a@example.com', product: 'render', message: '', website: '' })) as Response;
+		expect(res.status).toBe(200);
+		expect(getDb(':memory:').prepare('SELECT product, kind FROM messages').get()).toEqual({ product: 'render', kind: 'invite' });
+	});
+
+	it('still requires a valid email on an invite', async () => {
+		expect(await status(call({ kind: 'invite', email: 'nope', product: 'render', message: '' }))).toBe(400);
 	});
 
 	it('still stores the message when Discord is down', async () => {

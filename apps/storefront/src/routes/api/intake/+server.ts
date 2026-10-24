@@ -32,7 +32,12 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
 	if (!env.CONTACT_AGE_RECIPIENT) throw error(503, 'Contact is temporarily unavailable');
 	if (typeof kind !== 'string' || !KINDS.includes(kind)) throw error(400, 'unknown intake kind');
 	if (typeof email !== 'string' || !EMAIL_RE.test(email)) throw error(400, 'a valid email is required');
-	if (typeof message !== 'string' || message.trim().length < 10 || message.length > 4000)
+	// An invite request needs a service and an email; the use line is optional.
+	if (kind === 'invite') {
+		if (!contact.products.some((p) => p.id === product && p.id !== 'unsure'))
+			throw error(400, 'choose a service');
+		if (typeof message !== 'string' || message.length > 4000) throw error(400, 'message must be at most 4000 characters');
+	} else if (typeof message !== 'string' || message.trim().length < 10 || message.length > 4000)
 		throw error(400, 'message must be 10–4000 characters');
 
 	// product must come from our own list; anything else is dropped, not trusted

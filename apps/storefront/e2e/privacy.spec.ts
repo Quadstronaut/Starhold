@@ -9,7 +9,9 @@ import { test, expect } from '@playwright/test';
 const ROUTES = [
 	'/',
 	'/contact',
-	'/products/shushgame',
+	'/shush',
+	'/invite',
+	'/account',
 	'/qnix',
 	'/legal/terms',
 	'/legal/privacy',

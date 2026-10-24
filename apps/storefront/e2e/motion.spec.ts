@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 // Task G: motion layer, pill buttons, inner-page components.
 
 const INNER = [
-	'/products/shushgame', '/qnix', '/contact'
+	'/shush', '/invite', '/account', '/qnix', '/contact'
 ];
 
 test('inner pages: .reveal content is visible under reduced motion; phone has no overflow; no console errors', async ({ page }) => {

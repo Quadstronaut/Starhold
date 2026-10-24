@@ -5,7 +5,6 @@ import * as nav from '../lib/nav';
 import * as copy from '../lib/content/copy';
 import catalog from '../../static/products.json';
 import { parseCatalog } from '../lib/products';
-import { DISCORD_INVITE } from '../lib/site-links';
 import { read, exists, templateText, collectStrings, srcFiles, relative } from './_helpers';
 
 /** Every route that must resolve. Paths are pinned by the spec. */
@@ -13,7 +12,9 @@ const PAGES = [
 	'',
 	'contact',
 	'qnix',
-	'products/shushgame',
+	'shush',
+	'invite',
+	'account',
 	'legal/terms',
 	'legal/privacy',
 	'legal/refunds'
@@ -28,7 +29,7 @@ describe('A4 · information architecture', () => {
 	});
 
 	it('A4.2 removed pages have no route left and redirect through the one map', () => {
-		for (const p of ['about', 'cart', 'work', 'rates', 'operator', 'capabilities', 'services', 'api/checkout', 'api/stripe'])
+		for (const p of ['about', 'cart', 'work', 'rates', 'operator', 'capabilities', 'services', 'api/checkout', 'api/stripe', 'products'])
 			expect(exists(`src/routes/${p}`), p).toBe(false);
 		expect(read('src/hooks.server.ts')).toMatch(/redirect\(\s*301/);
 		expect(read('src/hooks.server.ts')).toMatch(/\$lib\/redirects/);
@@ -41,23 +42,24 @@ describe('A4 · information architecture', () => {
 		expect(products.find((p) => p.id === 'shushgame')!.url).toBe('https://shushgame.com');
 	});
 
-	it('A4.4 the home page still owns the #fleet anchor', () => {
-		expect(read('src/routes/+page.svelte')).toMatch(/id="fleet"/);
+	it('A4.4 Services, Principles and Questions are home anchors, not pages', () => {
+		const home = read('src/routes/+page.svelte');
+		for (const id of ['services', 'principles', 'faq', 'fleet', 'operator']) expect(home, id).toMatch(new RegExp('id="' + id + '"'));
+		for (const p of ['services', 'principles', 'questions', 'faq']) expect(exists('src/routes/' + p), p).toBe(false);
 	});
 
-	it('A4.5 navigation is data-driven with 4-5 primary items and no cart', () => {
-		expect(nav.primary.length).toBeGreaterThanOrEqual(4);
-		expect(nav.primary.length).toBeLessThanOrEqual(5);
-		expect(nav.primary.map((i) => i.href)).toEqual(expect.arrayContaining(['/#fleet', '/contact']));
-		expect(nav).not.toHaveProperty('secondary');
-		expect(nav.utility.map((i) => i.href)).not.toContain('/cart');
-		expect(nav.cta.href).toBe('/contact?intent=invite');
+	it('A4.5 header: Services, Principles, Questions, Hangar, Docs, then Request an invite; no Sign in', () => {
+		expect(nav.primary.map((i) => i.label)).toEqual(['Services', 'Principles', 'Questions', 'Hangar', 'Docs']);
+		expect(nav.primary.map((i) => i.href)).toEqual(['/#services', '/#principles', '/#faq', 'https://starhold.app', 'https://starhold.fyi']);
+		expect(nav.cta).toEqual({ label: 'Request an invite', href: '/invite' });
+		const all = JSON.stringify([nav.primary, nav.cta, nav.footerSite]);
+		expect(all).not.toMatch(/sign in|signin|\/account|\/cart/i);
 
 		// the header renders from the module rather than hard-coding links
 		const header = read('src/lib/components/Header.svelte');
 		expect(header).toMatch(/from '\$lib\/nav'/);
 		expect(header).toMatch(/#each primary/);
-		expect(header).not.toMatch(/cart/i);
+		expect(header).not.toMatch(/cart|sign in/i);
 
 		// and the drawer exposes its state to assistive tech
 		expect(header).toMatch(/aria-expanded=\{menuOpen\}/);
@@ -92,7 +94,7 @@ describe('A4 · information architecture', () => {
 	it('A4.8 no commerce path is left on the storefront', () => {
 		expect(exists('src/routes/cart')).toBe(false);
 		expect(exists('src/lib/server/stripe.ts')).toBe(false);
-		expect(nav.utility.some((i) => i.href === '/cart')).toBe(false);
+		expect(nav.footerSite.some((i) => i.href === '/cart')).toBe(false);
 	});
 
 	// Regression guard: no LinkedIn anchor, evidence id, or href anywhere in source.
@@ -103,20 +105,36 @@ describe('A4 · information architecture', () => {
 		expect(hits).toEqual([]);
 	});
 
-	it('A4.10 the community list is Patreon plus Discord once minted, rendered by the footer and never the header', () => {
-		// Shape follows the invite: no invite, no Discord. The test reads the same
-		// constant the module does, so it is correct in both states.
-		expect(nav.community.map((i) => i.label)).toEqual(
-			DISCORD_INVITE ? ['Patreon', 'Discord'] : ['Patreon']
-		);
-		expect(new URL(nav.community[0].href).host).toBe('www.patreon.com');
-		if (DISCORD_INVITE) expect(nav.community[1].href).toBe(DISCORD_INVITE);
+	it('A4.10 footer: site links, legal links, hello@ address, Back the work, and the closing line', () => {
+		expect(nav.footerSite.map((i) => i.label)).toEqual([
+			'Services', 'Principles', 'Questions', 'Hangar', 'Docs', 'Fleet status', 'Contact'
+		]);
+		expect(nav.legal.map((i) => i.label)).toEqual(['Terms', 'Privacy', 'Refunds']);
+		expect(nav.backTheWork.label).toBe('Back the work');
+		expect(new URL(nav.backTheWork.href).host).toBe('www.patreon.com');
+		expect(nav.closingLine).toBe('Starhold · Sovereign systems, built and operated. · Est. 2026');
 
-		// every community link leaves starhold.dev and says so
-		expect(nav.community.every((i) => i.external === true)).toBe(true);
-
-		// the footer renders from the module; the header stays at its 4 + utility
-		expect(read('src/lib/components/Footer.svelte')).toMatch(/#each community/);
-		expect(read('src/lib/components/Header.svelte')).not.toMatch(/community/);
+		// ruling 5: no Discord link in the footer or the header
+		const footer = read('src/lib/components/Footer.svelte');
+		expect(footer).not.toMatch(/discord/i);
+		expect(read('src/lib/components/Header.svelte')).not.toMatch(/discord/i);
+		expect(footer).toMatch(/closingLine/);
+		expect(footer).toMatch(/site\.email/);
 	});
-});
+
+	it('A4.12 the 404 page has the brief copy, three exits and no animation', () => {
+		const err = read('src/routes/+error.svelte');
+		expect(err).toContain('404 · Page not found');
+		expect(err).toContain('No signal at this address.');
+		expect(err).toContain("This page doesn't exist here, or its address may have moved. Nothing else happened.".slice(1, -1));
+		for (const l of ['>Home<', '>Hangar<', '>Contact<']) expect(err).toContain(l);
+		expect(err).not.toMatch(/@keyframes|animation\s*:/);
+	});
+
+	it('A4.13 /account is one honest stub with the In development chip, and nothing links to it from the header', () => {
+		const page = read('src/routes/account/+page.svelte');
+		expect(page).toMatch(/labelFor\('account'\)/);
+		expect(copy.account.lede).toBe('Starhold Account is in development.');
+		expect(page).not.toMatch(/<form|<input/);
+		expect(read('src/lib/components/Header.svelte')).not.toMatch(/account/i);
+	});});

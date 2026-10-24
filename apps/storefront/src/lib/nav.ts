@@ -1,33 +1,35 @@
 // Navigation SSOT. The header, the mobile drawer, and the footer all render
 // from these arrays — there is exactly one place to add or rename a link.
-import { DISCORD_INVITE } from './site-links';
+// Shape follows the STAR-145 design brief section 2 and arbiter rulings 5-7.
 
 export type NavItem = {
 	label: string;
 	href: string;
-	/** true when the href leaves starhold.dev (gets rel=noopener + a hint) */
+	/** true when the href leaves starhold.dev (gets rel=noopener) */
 	external?: boolean;
 };
 
-/** Primary navigation. 4–5 items, no more — a solo operator's site does not
- *  need a mega-menu, and every extra item costs the 10-second evaluator.
- *  */
+const HANGAR: NavItem = { label: 'Hangar', href: 'https://starhold.app', external: true };
+const DOCS: NavItem = { label: 'Docs', href: 'https://starhold.fyi', external: true };
+
+/** Header: Services · Principles · Questions · Hangar · Docs, then the CTA.
+ *  No "Sign in" and no /account link until sign-in works (ruling 7). */
 export const primary: NavItem[] = [
-	{ label: 'Services', href: '/#fleet' },
+	{ label: 'Services', href: '/#services' },
 	{ label: 'Principles', href: '/#principles' },
 	{ label: 'Questions', href: '/#faq' },
-	{ label: 'Contact', href: '/contact' }
+	HANGAR,
+	DOCS
 ];
 
-/** The one visually distinct call to action that rides in the header. Every
- *  service is invitation only while it is under development. */
-export const cta: NavItem = { label: 'Request an invite', href: '/contact?intent=invite' };
+/** The one visually distinct call to action that rides in the header. */
+export const cta: NavItem = { label: 'Request an invite', href: '/invite' };
 
-/** Utility cluster: the things that prove the site is real. */
-export const utility: NavItem[] = [
-	{ label: 'Docs', href: 'https://starhold.fyi', external: true },
-	{ label: 'Status', href: 'https://status.starhold.fyi', external: true },
-	{ label: 'Hangar', href: 'https://starhold.app', external: true }
+/** Footer, first row: the header links plus fleet status and contact. */
+export const footerSite: NavItem[] = [
+	...primary,
+	{ label: 'Fleet status', href: 'https://status.starhold.fyi', external: true },
+	{ label: 'Contact', href: '/contact' }
 ];
 
 export const legal: NavItem[] = [
@@ -36,11 +38,13 @@ export const legal: NavItem[] = [
 	{ label: 'Refunds', href: '/legal/refunds' }
 ];
 
-/** Where to back the work and where to talk about it. Rendered by the footer
- *  only — the header stays at four primary items plus the utility cluster.
- *  Discord joins the list the moment DISCORD_INVITE is non-empty; until then
- *  the site does not advertise a door that is not open. */
-export const community: NavItem[] = [
-	{ label: 'Patreon', href: 'https://www.patreon.com/cw/Quadstronaut', external: true },
-	...(DISCORD_INVITE ? [{ label: 'Discord', href: DISCORD_INVITE, external: true }] : [])
-];
+/** Patreon only, as a plain link (ruling 5). Discord links live on the Shush and
+ *  Starbot pages, never in the footer. */
+export const backTheWork: NavItem = {
+	label: 'Back the work',
+	href: 'https://www.patreon.com/cw/Quadstronaut',
+	external: true
+};
+
+/** Closing line, exactly as in the brief. */
+export const closingLine = 'Starhold · Sovereign systems, built and operated. · Est. 2026';

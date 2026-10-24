@@ -34,8 +34,7 @@ const REQUIRED_IDS = [
 	'self-hosted-fleet',
 	'public-status-page',
 	'automated-tests',
-	'docs-site',
-	'qnix-design-docs'
+	'docs-site'
 ];
 
 /** Hosts a claim may point at. Anything else is not a verifier we control or
@@ -66,8 +65,9 @@ const USED = new Set<string>([
 		home: copy.home,
 		services: copy.services,
 		principles: copy.principles,
+		faq: copy.faq,
 		qnix: copy.qnix,
-		shushgame: copy.shushgame
+		shush: copy.shush
 	}),
 	...srcFiles(['.svelte']).flatMap((f) =>
 		[...readFileSync(f, 'utf8').matchAll(/data-evidence\s*=\s*"([^"{}]+)"/g)].map((m) => m[1])
@@ -142,7 +142,7 @@ describe('A3 · anti-fabrication', () => {
 						principles: copy.principles,
 				contact: copy.contact,
 				qnix: copy.qnix,
-				shushgame: copy.shushgame,
+				shush: copy.shush,
 				site: copy.site
 			}).join('\n'),
 			ITEMS.map((i) => i.claim).join('\n')
@@ -175,9 +175,12 @@ describe('A3 · anti-fabrication', () => {
 				principles: copy.principles,
 			contact: copy.contact,
 			services: copy.services,
-			pledges: copy.pledges,
+			faq: copy.faq,
+			invite: copy.invite,
+			account: copy.account,
+			comingSoon: copy.comingSoon,
 			qnix: copy.qnix,
-			shushgame: copy.shushgame
+			shush: copy.shush
 		}).join('\n');
 		const numbers = (strings.match(/\d+/g) ?? []).filter((n) => !derived.has(n));
 		expect(numbers).toEqual([]);
