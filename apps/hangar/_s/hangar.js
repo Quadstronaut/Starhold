@@ -6,9 +6,11 @@
 // Tile → Gatus key. Only services with a Gatus monitor get a chip; the rest
 // (Zenithmark, Render, Status, Starbot, QNix) show their state tag alone until
 // deploy/gatus.yaml watches them. Store/Docs/Fleet status live in the fleet nav.
+// STAR-154: Gatus display names are now product names, so the keys changed (products_umbermark, products_shush).
+// New keys win; the old ones are a fallback until the new Gatus config is deployed; drop them after that.
 const KEYS = {
-	shushgame: 'products_shushgame-com',
-	umbermark: 'products_umbermark-starhold-app'
+	shushgame: ['products_shush', 'products_shushgame-com'],
+	umbermark: ['products_umbermark', 'products_umbermark-starhold-app']
 };
 
 const OK_DELAY = 60e3;
@@ -58,7 +60,8 @@ function render(list) {
 	const now = Date.now();
 	const byKey = new Map(Array.isArray(list) ? list.map((e) => [e && e.key, e]) : []);
 	for (const [tile, key] of Object.entries(KEYS)) {
-		const results = byKey.get(key)?.results;
+		const found = key.map((k) => byKey.get(k)).find(Boolean);
+		const results = found?.results;
 		const last = Array.isArray(results) ? results[results.length - 1] : null;
 		if (!last) {
 			paint(tile, 'unknown', 'Unknown', '');
