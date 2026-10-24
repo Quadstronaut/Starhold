@@ -1,18 +1,18 @@
 ---
 title: Umbermark
-description: Scored server hardening report with a shareable link. Live, early access.
+description: Scored server hardening report with a shareable link. Open, early access, paid plans.
 sidebar:
   order: 2
 ---
 
 **A scored hardening report for your server, with a link you can share.** Run a scan, get a score and a report that explains each finding.
 
-- **State:** live, early access.
+- **State:** Open · early access, paid plans.
 - **Where:** [umbermark.starhold.app](https://umbermark.starhold.app)
 
 ## How to get in
 
-A free scan needs no account. A full report is a one-off purchase, and plans are sold through Polar; the [pricing page](https://umbermark.starhold.app/pricing) lists what each includes. Accounts are by invitation: ask through the [contact form](https://starhold.dev/contact?intent=invite) and I send your sign-in link.
+A free scan needs no account. A full report is a one-off purchase, and plans are sold through Polar; the [pricing page](https://umbermark.starhold.app/pricing) lists what each includes. Accounts are by invitation: ask through the [contact form](https://starhold.dev/contact?intent=invite) and we send your sign-in link.
 
 ## Fair terms and privacy defaults
 

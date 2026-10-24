@@ -1,18 +1,18 @@
 ---
 title: Starhold Status
-description: Private and white-label status pages for MSPs. Invitation only, in development.
+description: Private and white-label status pages for MSPs. Invitation only.
 sidebar:
   order: 5
 ---
 
 **Status pages for MSPs: public, password-protected or white-label.**
 
-- **State:** invitation only, in development.
+- **State:** Invitation only.
 - **Where:** [status.starhold.app](https://status.starhold.app)
 
 ## How to get in
 
-Sign-in is by invitation: ask through the [contact form](https://starhold.dev/contact?intent=invite) and I send your link. Paid plans are not open yet.
+Sign-in and checkout are not open yet. Invitations are sent by hand: ask through the [contact form](https://starhold.dev/contact?intent=invite) and we send your link. Paid plans are not open.
 
 ## What works today
 
@@ -28,4 +28,3 @@ A free public page with components, incidents, scheduled maintenance and monitor
 ## Not there yet
 
 - **Paid plans and billing** are not open, so cancel and refund terms do not apply yet.
-- **The "Email confirmed subscribers" box** on an incident is ticked by default, and sends nothing while email updates are not live. A fix is in progress.

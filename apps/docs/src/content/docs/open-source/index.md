@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-These are **Quadstronaut projects** — my personal open-source work, published under the MIT license. They are not Starhold products. Starhold is proud to surface utilities that solve real problems and happen to come from the same shop.
+These are **Quadstronaut projects** — personal open-source work by our operator, published under the MIT license. They are not Starhold products. Starhold is proud to surface utilities that solve real problems and happen to come from the same shop.
 
 ## QuadClicker
 

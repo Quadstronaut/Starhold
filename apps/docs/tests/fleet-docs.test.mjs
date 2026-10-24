@@ -42,7 +42,7 @@ test('the only font file is /fonts/michroma-latin.woff2, under 30 KB (B2)', () =
 		['/fonts/michroma-latin.woff2']
 	);
 	assert.ok(statSync(fonts[0]).size < 30 * 1024);
-	for (const route of ['', 'bots/ordering']) {
+	for (const route of ['', 'services/umbermark']) {
 		assert.match(page(route), /<link rel="preload" href="\/fonts\/michroma-latin\.woff2" as="font" type="font\/woff2" crossorigin/);
 	}
 });
@@ -58,7 +58,7 @@ test('no colour literal outside :root in the site CSS sources (B1)', () => {
 });
 
 test('dark only, no theme picker (B10)', () => {
-	for (const route of ['', 'bots/ordering']) {
+	for (const route of ['', 'services/umbermark']) {
 		const html = page(route);
 		assert.match(html, /<html[^>]*data-theme="dark"/);
 		assert.match(html, /<meta name="color-scheme" content="dark"/);
@@ -77,7 +77,7 @@ test('splash h1 is the hero promise, once, with id _top', () => {
 });
 
 test('fleet links come from fleet-nav.json and Docs is current', () => {
-	for (const route of ['', 'bots/ordering', 'qnix']) {
+	for (const route of ['', 'services/qnix']) {
 		const html = page(route);
 		for (const l of NAV.fleet) assert.ok(html.includes(`href="${l.href}"`), `${route}: ${l.href}`);
 		assert.ok(html.includes(`href="${NAV.cta.href.replace(/&/g, '&amp;')}"`) || html.includes(`href="${NAV.cta.href}"`));
@@ -91,7 +91,7 @@ test('search index never holds the chrome', () => {
 	assert.ok(fragments.length > 0, 'pagefind index built');
 	// Fragments are gzipped; the meta check is that every page is indexed from
 	// main[data-pagefind-body] and the footer and band opt out.
-	for (const route of ['', 'bots/ordering']) {
+	for (const route of ['', 'services/umbermark']) {
 		const html = page(route);
 		assert.match(html, /<main[^>]*data-pagefind-body/);
 		assert.match(html, /class="fleet-scope fyi-close[^"]*" data-pagefind-ignore/);
@@ -119,9 +119,11 @@ const proseText = (html) =>
 		.replace(/\s+/g, ' ');
 const pages = () => walk(DIST).filter((f) => f.endsWith('index.html') && !f.includes(join(DIST, 'pagefind')));
 
-test('no first person plural on any page (R26)', () => {
-	for (const f of pages()) {
-		const hits = proseText(read(f)).match(/(?<![\w-])(we|we'll|we're|we've|us|our|ours|ourselves)(?![\w-])/gi);
+// STAR-152 (arbiter ruling 9): "we" voice everywhere, so first person singular is the banned form.
+// Dated log entries before 2026-10-24 are history and stay untouched (Q41).
+test('no first person singular on any page', () => {
+	for (const f of pages().filter((f) => !/2026-0[67]-/.test(f))) {
+		const hits = proseText(read(f)).replace(/"[^"]*"|“[^”]*”|&quot;.*?&quot;/g, ' ').match(/(?<![\w-])(I|I'll|I'm|I've|my|me|mine|myself)(?![\w-])/g);
 		assert.equal(hits, null, `${f.slice(DIST.length)}: ${hits}`);
 	}
 });
@@ -140,13 +142,13 @@ test('only true claims: one person, QNix in development, no incident promise (B9
 		assert.doesNotMatch(text, /\b(build|Starhold|support|dev) team\b/i, `${f.slice(DIST.length)}: Starhold is one person`);
 		assert.doesNotMatch(text, /incident (status|history)/i, `${f.slice(DIST.length)}: the status page has no incident reports`);
 	}
-	const qnix = page('qnix');
+	const qnix = page('services/qnix');
 	assert.doesNotMatch(qnix, /products? run on|runs on QNix|this documentation site|real tenants/i);
 	assert.match(qnix, /<meta name="description" content="[^"]*in development/i);
 });
 
 test('every checked page has an accent-word h2 (R29) and no accent word in an h1', () => {
-	for (const route of ['', 'bots/ordering']) {
+	for (const route of ['', 'services/umbermark']) {
 		const html = page(route);
 		assert.match(html, /<h2\b[^>]*>[^<]*<span class="accent-word"/);
 		for (const h1 of html.matchAll(/<h1\b[\s\S]*?<\/h1>/g)) assert.doesNotMatch(h1[0], /accent-word/);

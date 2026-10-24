@@ -1,13 +1,13 @@
 ---
 title: Shushgame
-description: The quiet game on Discord. Live, free.
+description: The quiet game on Discord. Open, free.
 sidebar:
   order: 7
 ---
 
 **The Quiet Game.** A Discord server that is itself the game: every day, one word becomes forbidden. Say it and you die.
 
-- **State:** live, free.
+- **State:** Open · free.
 - **Where:** [shushgame.com](https://shushgame.com)
 
 ## How to get in

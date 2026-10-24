@@ -4,8 +4,20 @@ import starlight from '@astrojs/starlight';
 // starhold.fyi: Starlight, reskinned onto the shared Starhold fleet design system
 // (STAR-27 spec §2). Token copies under src/styles/fleet/ are written by
 // `node brand/check-drift.mjs --write` and are never edited here.
+// STAR-152: retired pages. Astro writes these as meta-refresh stubs; the real 301s
+// live in deploy/Caddyfile.vps (starhold.fyi block), which is what visitors hit.
+// The qnix sources are kept in git under _drafts/qnix and are not built.
 export default defineConfig({
 	site: 'https://starhold.fyi',
+	redirects: {
+		'/qnix': 'https://starhold.dev/qnix',
+		'/qnix/architecture': 'https://starhold.dev/qnix',
+		'/qnix/build-chronicle': 'https://starhold.dev/qnix',
+		'/qnix/hosting': 'https://starhold.dev/qnix',
+		'/qnix/tenancy-security': 'https://starhold.dev/qnix',
+		'/bots/features': '/',
+		'/bots/ordering': '/'
+	},
 	integrations: [
 		starlight({
 			title: 'Starhold docs',
@@ -51,9 +63,7 @@ export default defineConfig({
 				{ label: 'Start here', link: '/' },
 				// STAR-134: one page per hosted service, state and privacy defaults first.
 				{ label: 'Services', items: [{ autogenerate: { directory: 'services' } }] },
-				{ label: 'Custom Discord Bots', items: [{ autogenerate: { directory: 'bots' } }] },
 				{ label: 'Shushgame', items: [{ autogenerate: { directory: 'shushgame' } }] },
-				{ label: 'QNix Platform (paused)', items: [{ autogenerate: { directory: 'qnix' } }] },
 				{ label: 'Open Source', items: [{ autogenerate: { directory: 'open-source' } }] },
 				// Q8: "Mission Log" renamed. Slugs unchanged.
 				{ label: 'Build log', items: [{ autogenerate: { directory: 'log' } }] }

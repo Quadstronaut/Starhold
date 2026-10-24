@@ -1,19 +1,16 @@
 ---
-title: QNix (paused)
-description: Encrypted, multi-tenant hosting platform. In development, paused.
+title: QNix
+description: Personal hosting, built to be hard to break. In development.
 sidebar:
   order: 8
 ---
 
-**A private, encrypted, multi-tenant Kubernetes platform.**
+**Personal hosting, built to be hard to break.**
 
-- **State:** paused. Not open to anyone yet.
-- **Where:** [starhold.dev/products/qnix](https://starhold.dev/products/qnix)
+- **State:** In development. Not open to anyone yet.
+- **Where:** [starhold.dev/qnix](https://starhold.dev/qnix)
 
 ## How to get in
 
-Not yet. To ask about it, use the [contact form](https://starhold.dev/contact) or write to [hello@starhold.dev](mailto:hello@starhold.dev).
+Not yet. Leave your interest on the form at [starhold.dev/qnix](https://starhold.dev/qnix).
 
-## Design notes
-
-How it is meant to work: [What is QNix](/qnix/), then architecture, hosting, and tenancy and security.

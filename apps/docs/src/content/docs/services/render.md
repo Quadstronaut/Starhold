@@ -1,18 +1,18 @@
 ---
 title: Starhold Render
-description: OG image, PDF and screenshot API. Invitation only, in development.
+description: OG image, PDF and screenshot API. Invitation only.
 sidebar:
   order: 4
 ---
 
 **An API that turns a page or HTML into an OG image, a PDF or a screenshot.**
 
-- **State:** invitation only, in development.
+- **State:** Invitation only.
 - **Where:** [render.starhold.app](https://render.starhold.app)
 
 ## How to get in
 
-Signup is closed while Render is in development. Sign-in is by invitation: ask through the [contact form](https://starhold.dev/contact?intent=invite) and I send your link. Four plans, from $0 to $49 a month, are on the [pricing page](https://render.starhold.app/pricing); Free is 50 renders a month with a small watermark.
+Signup is closed. Sign-in and checkout are not open yet. Invitations are sent by hand: ask through the [contact form](https://starhold.dev/contact?intent=invite) and we send your link. Four plans, from $0 to $49 a month, are on the [pricing page](https://render.starhold.app/pricing); Free is 50 renders a month with a small watermark.
 
 ## Fair terms and privacy defaults
 
