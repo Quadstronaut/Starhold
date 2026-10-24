@@ -388,3 +388,9 @@ h1#_top {
 .pagination-links a:hover {
 	border-color: var(--accent);
 }
+
+/* One availability line per service tile (STAR-142 B1). */
+.fyi-shelf .availability {
+	font-weight: 600;
+	color: var(--text);
+}

@@ -251,6 +251,12 @@ h2 + .bays {
 	font-size: var(--fs-3);
 	margin-bottom: var(--sp-4);
 }
+.tile .availability {
+	margin-top: var(--sp-2);
+	font-size: var(--fs-1);
+	font-weight: 600;
+	color: var(--text);
+}
 .tile .note {
 	margin-top: var(--sp-2);
 	font-size: var(--fs-0);

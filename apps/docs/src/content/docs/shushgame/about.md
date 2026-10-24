@@ -1,5 +1,5 @@
 ---
-title: What is Shushgame?
+title: What is Shush?
 description: The Quiet Game — a Discord server where one word per day becomes forbidden. Say it and you die.
 sidebar:
   order: 1

@@ -10,7 +10,7 @@
 </svelte:head>
 
 <section class="section">
-	<p class="eyebrow">{labelFor('qnix')}</p>
+	<p class="eyebrow verbatim">{labelFor('qnix')}</p>
 	<h1>QNix</h1>
 	<p class="lede">{formNotices.qnix.line}</p>
 </section>

@@ -19,18 +19,18 @@ import ShelfTile from '../../components/ShelfTile.astro';
 
 <section class="section" aria-labelledby="start-title">
 	<h2 id="start-title">Start <span class="accent-word">here</span></h2>
-	<p class="lede">Each service has its own label: Open, Invitation only or In development. Sign-in is closed until Starhold Account opens, and checkout is paused. Invitations are sent by hand. Ask through the <a href="https://starhold.dev/contact?intent=invite">contact form</a> or write to <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
+	<p class="lede">Each service has its own label: Open, Invitation only or In development. Open means you can use it now, during testing; it is still under development. Sign-in is closed until Starhold Account opens. Checkout is paused; nothing is for sale today. These rules apply when it reopens. Invitations are sent by hand. Ask through the <a href="https://starhold.dev/contact?intent=invite">contact form</a> or write to <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
 </section>
 
 <section class="section section-divided" aria-labelledby="shelf-title">
 	<h2 id="shelf-title">The <span class="accent-word">services</span></h2>
 	<div class="tiles fyi-shelves">
-		<ShelfTile title="Umbermark" href="/services/umbermark/" icon="shield">Scored server hardening report with a shareable link. Open, early access, paid plans.</ShelfTile>
-		<ShelfTile title="Zenithmark" href="/services/zenithmark/" icon="mail">Mail and DNS scorecard for a domain. Open, free.</ShelfTile>
-		<ShelfTile title="Starhold Render" href="/services/render/" icon="frame">OG image, PDF and screenshot API. Invitation only.</ShelfTile>
-		<ShelfTile title="Starhold Status" href="/services/status/" icon="status">Private and white-label status pages for MSPs. Invitation only.</ShelfTile>
-		<ShelfTile title="Starbot" href="/services/starbot/" icon="bots">Discord assistant for the Starhold community. In development.</ShelfTile>
-		<ShelfTile title="Shushgame" href="/shushgame/about/" icon="shush">The quiet game on Discord: one forbidden word a day. Open, free.</ShelfTile>
+		<ShelfTile title="Umbermark" href="/services/umbermark/" icon="shield" availability="Free scans open; purchases paused">Scored server hardening report with a shareable link. Open, early access, paid plans.</ShelfTile>
+		<ShelfTile title="Zenithmark" href="/services/zenithmark/" icon="mail" availability="Open">Mail and DNS scorecard for a domain. Open, free.</ShelfTile>
+		<ShelfTile title="Starhold Render" href="/services/render/" icon="frame" availability="Free tier open; sign-in and checkout closed">OG image, PDF and screenshot API. Invitation only.</ShelfTile>
+		<ShelfTile title="Starhold Status" href="/services/status/" icon="status" availability="Public pages open; sign-in closed">Private and white-label status pages for MSPs. Invitation only.</ShelfTile>
+		<ShelfTile title="Starbot" href="/services/starbot/" icon="bots" availability="In development">Discord assistant for the Starhold community. In development.</ShelfTile>
+		<ShelfTile title="Shush" href="/shushgame/about/" icon="shush" availability="Open">The quiet game on Discord: one forbidden word a day. Open, free.</ShelfTile>
 	</div>
 </section>
 
@@ -39,8 +39,8 @@ import ShelfTile from '../../components/ShelfTile.astro';
 	<p class="lede">Starhold Account is not built yet, so everything in this section is a promise, not a feature. Each service page lists what is not there yet.</p>
 	<div class="grid">
 		<article class="fleet-card"><h3>Starhold Account (not built)</h3><p>One sign-in for every service. In development; sign-in stays closed until it opens.</p></article>
-		<article class="fleet-card"><h3>Export and delete (not built)</h3><p>One click to download what we hold on you and one click to delete it. Until then, ask and we do it by hand.</p></article>
-		<article class="fleet-card"><h3>Cancel and refunds (not built)</h3><p>Checkout is paused. The refund terms are on <a href="https://starhold.dev">starhold.dev</a> with the new terms and privacy policy.</p></article>
+		<article class="fleet-card"><h3>Export and delete (not built)</h3><p>One click to download what we hold on you and one click to delete it. Until then, export and delete are by request to privacy@starhold.dev, done by hand within 30 days.</p></article>
+		<article class="fleet-card"><h3>Cancel and refunds (not built)</h3><p>Checkout is paused; nothing is for sale today. These rules apply when it reopens. The refund terms are on <a href="https://starhold.dev">starhold.dev</a> with the new terms and privacy policy.</p></article>
 		<article class="fleet-card"><h3>Contact inbox</h3><p>Messages from the contact form go to an encrypted inbox. We delete what we hold within 12 months.</p></article>
 	</div>
 </section>

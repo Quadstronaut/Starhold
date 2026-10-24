@@ -313,6 +313,13 @@ hr {
 	display: block;
 }
 
+/* Status chips render the label text verbatim (STAR-142 m1): no uppercase, no tracking. */
+.tag,
+.verbatim {
+	text-transform: none;
+	letter-spacing: normal;
+}
+
 .tag,
 .badge {
 	display: inline-block;

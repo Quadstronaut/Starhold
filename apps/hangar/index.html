@@ -117,7 +117,7 @@
 				<div class="fleet-hero-mark"><span class="wordmark hero" aria-hidden="true"><span class="solid">Star</span><span class="outline">hold</span></span></div>
 				<div class="fleet-hero-copy">
 					<h1 id="hero-title">Privacy-first services we host and operate.</h1>
-					<p class="lede">We build and operate privacy-first tools for builders, sysadmins and teams. Every service states what it does, what it costs and whether you can use it today.</p>
+					<p class="lede">We build and operate privacy-first tools for builders, sysadmins and teams. Every service states what it does, what it will cost and whether you can use it today.</p>
 					<div class="btn-row">
 						<a class="btn btn-primary" href="https://starhold.dev/contact?intent=invite">Request an invite</a>
 						<a class="btn btn-secondary" href="#bays">See the services</a>
@@ -130,7 +130,7 @@
 		<section class="section" id="bays" aria-labelledby="bays-title">
 			<p class="eyebrow">Under development</p>
 			<h2 id="bays-title">In the <span class="accent-word">bays</span></h2>
-			<p class="lede section-lede">Each service carries one status label. A live chip appears only where we monitor the service, and it reads Unknown without a recent check, never Up.</p>
+			<p class="lede section-lede">Each service carries one status label and one availability line. Open means you can use it now, during testing; it is still under development. A live chip appears only where we monitor the service, and it reads Unknown without a recent check, never Up.</p>
 
 			<section class="category" id="cat-teams" aria-labelledby="cat-teams-title">
 				<h3 class="category-title" id="cat-teams-title">For teams and MSPs</h3>
@@ -139,6 +139,7 @@
 						<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 12h4l2.5-6 5 12 2.5-6h4"/></svg></span>
 						<h3>Starhold Status</h3>
 						<p class="tile-meta"><span class="tag" data-label>Invitation only</span></p>
+						<p class="availability" data-availability>Public pages open; sign-in closed</p>
 						<p class="purpose">Private and white-label status pages that let MSPs and teams show customers the health of the services they run.</p>
 						<p class="host">status.<wbr>starhold.<wbr>app</p>
 						<p class="note">Not open for sign-up yet; we send each invitation by hand.</p>
@@ -159,10 +160,10 @@
 					</svg>
 						<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5 19.5 5.5v6c0 4.6-3.2 8.4-7.5 10-4.3-1.6-7.5-5.4-7.5-10v-6z"/><path d="M8.5 12.2 11 14.6l4.6-5"/></svg></span>
 						<h3><a class="stretched" href="https://umbermark.starhold.app">Umbermark</a></h3>
-						<p class="tile-meta"><span class="tag tag-accent" data-label>Open · early access, paid plans</span> <span class="state-chip" data-chip="umbermark" data-state="nojs">Live status: status.starhold.fyi</span> <span class="checked" data-checked="umbermark"></span></p>
+						<p class="tile-meta"><span class="tag tag-accent" data-label>Open · early access, paid plans</span> <span class="state-chip" title="Unknown: no recent check" data-chip="umbermark" data-state="nojs">Unknown</span> <span class="checked" data-checked="umbermark"></span></p>
+						<p class="availability" data-availability>Free scans open; purchases paused</p>
 						<p class="purpose">Scans a server and produces a scored hardening report, with a link you can share with whoever needs to see it.</p>
 						<p class="host">umbermark.<wbr>starhold.<wbr>app</p>
-						<p class="note">The scan is free; the full report and plans are paid.</p>
 						<p class="action" aria-hidden="true">Open Umbermark →</p>
 					</article>
 
@@ -170,6 +171,7 @@
 						<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 6.5h17v11h-17z"/><path d="m3.5 7 8.5 6.5L20.5 7"/></svg></span>
 						<h3><a class="stretched" href="https://zenithmark.starhold.app">Zenithmark</a></h3>
 						<p class="tile-meta"><span class="tag tag-accent" data-label>Open · free</span></p>
+						<p class="availability" data-availability>Open</p>
 						<p class="purpose">Scores a domain's mail and DNS setup: SPF, DKIM, DMARC, MX, MTA-STS, TLS, DNSSEC, CAA and BIMI.</p>
 						<p class="host">zenithmark.<wbr>starhold.<wbr>app</p>
 						<p class="note">Free while it is in development.</p>
@@ -180,6 +182,7 @@
 						<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 4.5h17v15h-17z"/><path d="m3.5 16 5-5 4 4 3-3 5 5"/><path d="M15.5 8.5h.01"/></svg></span>
 						<h3>Starhold Render</h3>
 						<p class="tile-meta"><span class="tag" data-label>Invitation only</span></p>
+						<p class="availability" data-availability>Free tier open; sign-in and checkout closed</p>
 						<p class="purpose">An API that renders Open Graph images, PDFs and screenshots for builders who need them inside their own applications.</p>
 						<p class="host">render.<wbr>starhold.<wbr>app</p>
 						<p class="note">Not open for sign-up yet; we send each invitation by hand.</p>
@@ -195,6 +198,7 @@
 						<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8.5h14v10H5z"/><path d="M12 8.5V5M12 5h.01M9 13h.01M15 13h.01M9.5 16h5"/></svg></span>
 						<h3>Starbot</h3>
 						<p class="tile-meta"><span class="tag" data-label>In development</span></p>
+						<p class="availability" data-availability>In development</p>
 						<p class="purpose">A Discord bot for the Starhold community. It is still being built and cannot be added to a server yet.</p>
 						<p class="host">Discord, not yet public</p>
 						<p class="note">Not available yet; there is nothing to add or open.</p>
@@ -203,10 +207,11 @@
 					<article class="tile bay reveal" data-product="shushgame">
 						<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h16v10H9l-5 4z"/><path d="M8.5 10h.01M12 10h.01M15.5 10h.01"/></svg></span>
 						<h3><a class="stretched" href="https://starhold.dev/shush">Shush</a></h3>
-						<p class="tile-meta"><span class="tag tag-accent" data-label>Open · free</span> <span class="state-chip" data-chip="shushgame" data-state="nojs">Live status: status.starhold.fyi</span> <span class="checked" data-checked="shushgame"></span></p>
+						<p class="tile-meta"><span class="tag tag-accent" data-label>Open · free</span> <span class="state-chip" title="Unknown: no recent check" data-chip="shushgame" data-state="nojs">Unknown</span> <span class="checked" data-checked="shushgame"></span></p>
+						<p class="availability" data-availability>Open</p>
 						<p class="purpose">A daily word game on Discord: one word is forbidden each day, and saying it in the server puts you on the list.</p>
 						<p class="host">shushgame.<wbr>com</p>
-						<p class="note">Free. Names and dates on the public list are removed after 30 days.</p>
+						<p class="note">Free. Names stay on the public list until you ask us to remove them. A 30-day automatic expiry is in development.</p>
 						<p class="action" aria-hidden="true">About Shush →</p>
 					</article>
 				</div>
@@ -219,6 +224,7 @@
 						<span class="chip-lg"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2 21.5 7.5v9L12 22l-9.5-5.5v-9z"/><path d="M12 7v10M7.5 9.6 16.5 14.4M16.5 9.6 7.5 14.4"/></svg></span>
 						<h3><a class="stretched" href="https://starhold.dev/qnix">QNix</a></h3>
 						<p class="tile-meta"><span class="tag" data-label>In development</span></p>
+						<p class="availability" data-availability>Interest form only</p>
 						<p class="purpose">Personal hosting we are planning. Nothing is available to use yet; the QNix page has an interest form.</p>
 						<p class="host">starhold.<wbr>dev/<wbr>qnix</p>
 						<p class="note">No sign-up, plans or prices yet.</p>
@@ -232,7 +238,6 @@
 			<p class="eyebrow">Fleet status</p>
 			<h2 id="runs-title">Designed so one machine failing doesn't take it <span class="accent-word">down</span></h2>
 			<p class="lede section-lede">We run services on machines we administer. That design reduces reliance on any single machine; it does not guarantee uninterrupted availability. Current health is on the <a href="https://status.starhold.fyi">public fleet status page</a>.</p>
-			<p class="lede section-lede">We're one person in Arizona. Whoever answers your message also runs the servers.</p>
 		</section>
 
 		<section class="section" id="invite" aria-labelledby="invite-title">
@@ -263,12 +268,6 @@
 					<li><a href="https://starhold.app" aria-current="page">Hangar</a></li>
 				</ul>
 			</nav>
-			<div class="col">
-				<p class="eyebrow">Support</p>
-				<ul>
-					<li><a href="https://www.patreon.com/cw/Quadstronaut" rel="noopener">Back the work</a></li>
-				</ul>
-			</div>
 			<div class="col">
 				<p class="eyebrow">Legal</p>
 				<ul>

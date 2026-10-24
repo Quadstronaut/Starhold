@@ -264,6 +264,11 @@ body.fleet-page {
 	margin: 0;
 	line-height: 1.5;
 }
+/* Status labels render verbatim: no uppercase, no tracking (STAR-142 m1). */
+.tag[data-label] {
+	text-transform: none;
+	letter-spacing: normal;
+}
 .badge-accent,
 .tag-accent {
 	color: var(--accent);

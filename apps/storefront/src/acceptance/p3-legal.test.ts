@@ -15,6 +15,7 @@ const text = (k: keyof typeof PAGES) => templateText(raw(k)).replace(/ ([,.;])/g
 const CARVE_OUT = 'Nothing here limits rights you have under the consumer law where you live.';
 const Q73 =
 	'We never ask for your password, never send sign-in links by hand, and never look at your account unless you ask us to or the law requires it. Any access is logged.';
+const CHECKOUT = 'Checkout is paused; nothing is for sale today. These rules apply when it reopens.';
 const Q71 =
 	"If the report fails or isn't what we described, ask within 14 days and we refund it in full. EU/UK buyers keep their legal withdrawal rights.";
 
@@ -57,19 +58,29 @@ describe('terms', () => {
 		expect(t).toContain('does not count as agreeing');
 		expect(t).toContain('refund the unused part');
 	});
+	it('says checkout is paused, names the merchant of record, carves out open source (B1, M4, M7)', () => {
+		const t = text('terms');
+		expect(t).toContain(CHECKOUT);
+		expect(t).toContain('The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side.');
+		expect(t).toContain('Our open-source code is covered by its own licence (for example MIT); these terms cover the hosted services.');
+	});
 });
 
 describe('privacy', () => {
 	const t = () => text('privacy');
 	it('has the operator-access sentence (Q73), address stub, US storage', () => {
 		expect(t()).toContain(Q73);
-		expect(t()).toContain('[POSTAL ADDRESS — pending PO box]');
+		expect(t()).toContain('Postal address: available on request at legal@starhold.dev until our registered business address is published.');
 		expect(t()).toContain('Data is stored in the United States');
 		expect(t()).toContain('Umbermark, in early access with paid plans through Polar');
 	});
-	it('names exactly the wired vendors, with a transfer-mechanism stub each', () => {
+	it('names exactly the wired vendors; no unfilled placeholders remain (STAR-142 B3)', () => {
 		for (const v of ['Discord', 'Polar', 'Patreon', 'Backblaze B2', 'OVH']) expect(t()).toContain(v);
-		expect(t().match(/\[transfer mechanism — lawyer\]/g)?.length).toBe(5);
+		expect(t()).not.toMatch(/\[[^\]]*(lawyer|pending|POSTAL|transfer mechanism)[^\]]*\]/i);
+		expect(t().match(/standard contractual terms \(see section 5\)/g)?.length).toBe(5);
+		expect(t()).toContain(
+			'Transfers to our US processors rely on each processor\'s standard contractual terms; we are completing our transfer documentation with counsel.'
+		);
 	});
 	it('carries the grep-able email-provider stub marker', () => {
 		expect(raw('privacy')).toContain('<!-- VENDOR-STUB: email provider -->');
@@ -97,15 +108,48 @@ describe('privacy', () => {
 	});
 	it('pledge wording, no access logs, three-layer deletion, contact-form notice behaviour', () => {
 		expect(t()).toContain('no third-party tracking and no per-person behaviour analytics');
-		expect(t()).toContain('Our web servers keep no access logs');
+		expect(t()).toContain(
+			'We keep no request logs. Error logs can contain your IP for up to 30 days. Sign-in abuse limiting uses a keyed hash of your IP for 7 days. Admin access to account data through our tools is logged; that log is about us, not you.'
+		);
+		expect(t()).not.toContain('Our web servers keep no access logs');
 		expect(t()).toContain('Anonymous');
 		expect(t()).toContain('Pseudonymous');
 		expect(t()).toContain('Deletion works in three layers');
 		expect(t()).toContain('New invite request #id · product');
 	});
+	it('contact-form encryption and Discord boundary (M5)', () => {
+		expect(t()).toContain(
+			'Your message is encrypted with a public key before it is stored; only an offline key held by the operator can read it. Discord receives only the ticket number and the service name'
+		);
+	});
+	it('export and delete are by hand, no sign-in is open (B2)', () => {
+		expect(t()).toContain('export and delete are by request to privacy@starhold.dev, done by hand within 30 days');
+		expect(t()).toContain('No sign-in is open today.');
+		expect(t()).not.toMatch(/from the dashboard|we send your sign-in link/i);
+	});
+	it('email statement agrees with the QNix notice (M6)', () => {
+		expect(t()).toContain(
+			'We do not send email yet. When QNix opens we will email you once, through a provider we will name on this page first.'
+		);
+	});
+	it('Shush and Starbot rows are marked as built today (M11)', () => {
+		expect(t()).toContain('Shush and Starbot, as built today');
+		expect(raw('privacy')).toMatch(/<tr><td>Starbot<\/td>/);
+		expect(raw('privacy')).toMatch(/<tr><td>Shush<\/td>/);
+	});
+	it('Shush retention states the current rule, not the future one (B4)', () => {
+		expect(t()).toContain('Names stay on the public list until you ask us to remove them');
+		expect(t()).toContain('A 30-day automatic expiry is in development.');
+	});
 });
 
 describe('refunds', () => {
+	it('opens with the checkout state and the by-hand deletion rule (B1, B2, M4)', () => {
+		const t = text('refunds');
+		expect(t).toContain(CHECKOUT);
+		expect(t).toContain('deletion is by request to privacy@starhold.dev, done by hand within 30 days');
+		expect(t).toContain('The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side.');
+	});
 	it('one-off wording (Q71) and carve-out', () => {
 		expect(text('refunds')).toContain(Q71);
 		expect(text('refunds')).toContain(CARVE_OUT);

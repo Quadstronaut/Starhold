@@ -63,7 +63,7 @@ export default defineConfig({
 				{ label: 'Start here', link: '/' },
 				// STAR-134: one page per hosted service, state and privacy defaults first.
 				{ label: 'Services', items: [{ autogenerate: { directory: 'services' } }] },
-				{ label: 'Shushgame', items: [{ autogenerate: { directory: 'shushgame' } }] },
+				{ label: 'Shush', items: [{ autogenerate: { directory: 'shushgame' } }] },
 				{ label: 'Open Source', items: [{ autogenerate: { directory: 'open-source' } }] },
 				// Q8: "Mission Log" renamed. Slugs unchanged.
 				{ label: 'Build log', items: [{ autogenerate: { directory: 'log' } }] }

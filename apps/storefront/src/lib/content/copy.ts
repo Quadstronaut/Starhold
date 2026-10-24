@@ -16,6 +16,7 @@
 import { ev } from './evidence';
 import stats from './stats.json';
 import { labelFor } from '../labels';
+import { availabilityFor, CHECKOUT_NOTICE, OPEN_MEANS } from '../availability';
 
 export const site = {
 	/** Accessible name of the brand. Title case, not caps. */
@@ -67,12 +68,12 @@ export type Feature = {
 export const home = {
 	title: 'Starhold — privacy-first services we host and operate',
 	description:
-		'Privacy-first tools for builders, sysadmins, and teams. Every service states what it does, what it costs, and whether you can use it today.',
+		'Privacy-first tools for builders, sysadmins, and teams. Every service states what it does, what it will cost, and whether you can use it today.',
 
 	hero: {
 		eyebrow: 'Starhold is under development. Access varies by service.',
 		h1: 'Privacy-first services we host and operate.',
-		sub: 'We build and operate privacy-first tools for builders, sysadmins, and teams. Every service states what it does, what it costs, and whether you can use it today.',
+		sub: 'We build and operate privacy-first tools for builders, sysadmins, and teams. Every service states what it does, what it will cost, and whether you can use it today.',
 		ctaPrimary: { label: 'Request an invite', href: '/invite' },
 		ctaSecondary: { label: 'Explore services', href: '/#services' }
 	},
@@ -112,7 +113,7 @@ export const home = {
 	work: {
 		eyebrow: 'Services',
 		h2: { pre: 'Find the tool for the', em: 'job' },
-		sub: 'Each service carries one of five labels, so you know before you click whether you can use it today.',
+		sub: `Each service carries one of five labels, so you know before you click whether you can use it today. ${OPEN_MEANS}`,
 		hangar: { label: 'Browse everything in the Hangar', href: 'https://starhold.app' }
 	},
 
@@ -133,7 +134,7 @@ export const home = {
 		eyebrow: 'Principles',
 		h2: { pre: 'Privacy is a design constraint, not a', em: 'slogan' },
 		sub: 'These are in place today. The rest are not built yet, and we say so.',
-		soonHeading: 'Coming soon'
+		soonHeading: 'Not built yet'
 	},
 
 	/** Section 6. */
@@ -173,7 +174,7 @@ export type Principle = {
 export const principles: Principle[] = [
 	{
 		title: 'No third-party trackers.',
-		detail: 'No cookie banner, because nothing on this site needs one. Open DevTools and see one host.',
+		detail: 'No cookie banner, because nothing on this site needs one. Open DevTools: every request goes to our own hosts.',
 		evidence: ev('no-third-party-tracking'),
 		link: { href: '/legal/privacy', label: 'Read the policy' }
 	},
@@ -184,7 +185,7 @@ export const principles: Principle[] = [
 	},
 	{
 		title: 'Cancel any time.',
-		detail: 'Run out the period or take a prorated refund now. Local consumer rights still apply.',
+		detail: `${CHECKOUT_NOTICE} Run out the period or take a prorated refund now. Local consumer rights still apply.`,
 		evidence: ev('refund-policy'),
 		link: { href: '/legal/refunds', label: 'Refund policy' }
 	}
@@ -216,6 +217,8 @@ export type Service = {
 	/** True when the action is an invite request (href is built from the id). */
 	invite: boolean;
 	status: string;
+	/** One availability line per service, from docs/shared/availability.json. */
+	availability: string;
 	what: string;
 	/** One limitation or price note, only where needed. */
 	note?: string;
@@ -231,6 +234,7 @@ export const serviceItems: Service[] = [
 		action: 'Request an invite',
 		invite: true,
 		status: labelFor('status'),
+		availability: availabilityFor('status'),
 		what: 'Private and white-label status pages for MSPs.'
 	},
 	{
@@ -241,8 +245,8 @@ export const serviceItems: Service[] = [
 		action: 'Open Umbermark',
 		invite: false,
 		status: labelFor('umbermark'),
-		what: 'A scored server hardening report with a shareable link.',
-		note: 'The scan is free. Paid plans are in early access.'
+		availability: availabilityFor('umbermark'),
+		what: 'A scored server hardening report with a shareable link.'
 	},
 	{
 		id: 'zenithmark',
@@ -252,6 +256,7 @@ export const serviceItems: Service[] = [
 		action: 'Open Zenithmark',
 		invite: false,
 		status: labelFor('zenithmark'),
+		availability: availabilityFor('zenithmark'),
 		what: 'A mail and DNS scorecard for a domain: SPF, DKIM, DMARC, MX, MTA-STS, TLS, DNSSEC, CAA and BIMI.'
 	},
 	{
@@ -262,6 +267,7 @@ export const serviceItems: Service[] = [
 		action: 'Request an invite',
 		invite: true,
 		status: labelFor('render'),
+		availability: availabilityFor('render'),
 		what: 'An API for OG images, PDFs and screenshots.'
 	},
 	{
@@ -272,6 +278,7 @@ export const serviceItems: Service[] = [
 		action: 'About Shush',
 		invite: false,
 		status: labelFor('shushgame'),
+		availability: availabilityFor('shushgame'),
 		what: 'The quiet game on Discord: a new word is banned each day.',
 		note: 'Free. Nothing to buy.',
 		evidence: ev('shushgame-live')
@@ -284,6 +291,7 @@ export const serviceItems: Service[] = [
 		action: '',
 		invite: false,
 		status: labelFor('starbot'),
+		availability: availabilityFor('starbot'),
 		what: 'A Discord assistant for the Starhold community.'
 	},
 	{
@@ -294,6 +302,7 @@ export const serviceItems: Service[] = [
 		action: 'Register interest',
 		invite: false,
 		status: labelFor('qnix'),
+		availability: availabilityFor('qnix'),
 		what: 'Bring-your-own-device hosting with high availability.'
 	}
 ];
@@ -346,7 +355,7 @@ export const faq = {
 		},
 		{
 			q: 'How do payments and refunds work?',
-			a: 'Paid plans go through a merchant of record. Cancel any time: run out the period or take a prorated refund now. Local consumer rights still apply.',
+			a: `${CHECKOUT_NOTICE} Paid plans will go through a merchant of record. Cancel any time: run out the period or take a prorated refund now. Local consumer rights still apply.`,
 			evidence: ev('refund-policy'),
 			link: { href: '/legal/refunds', label: 'Refund policy' }
 		},
@@ -426,7 +435,7 @@ export const formNotices = {
 	contact: {
 		// from data-flow-inventory: storefront.contact (sf-contact-form notice_text)
 		notice:
-			'Your message is stored encrypted on our server and deleted 90 days after we close the conversation (12 months at most); Discord only gets a ticket notice and keeps its own copies.',
+			'Your message is encrypted with a public key before it is stored; only an offline key held by the operator can read it. Discord receives only the ticket number and the service name. We delete the message 90 days after we close the conversation (12 months at most).',
 		secrets: "Don't send passwords or secrets.",
 		deletion:
 			'We delete your message 90 days after we close it, and never keep it longer than 12 months. Discord keeps its own copy of the notice line only.'
@@ -470,7 +479,7 @@ export const shush = {
 	privacyHeading: 'What the public list shows',
 	privacy: [
 		'The public list shows Discord display names and dates.',
-		'Coming soon: names and dates come off the list after thirty days, and /hide-me opts you out. Until then, write to hello@starhold.dev and we’ll take your name off by hand.'
+		'Names stay on the public list until you ask us to remove them (hello@starhold.dev or /hide-me when it ships). A thirty-day automatic expiry is in development.'
 	],
 	evidence: ev('shushgame-live')
 };

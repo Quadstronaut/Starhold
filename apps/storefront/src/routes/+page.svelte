@@ -91,6 +91,7 @@
 							<h4>{s.name}</h4>
 							<span class="tag">{s.status}</span>
 						</div>
+						<p class="availability" data-testid="availability">{s.availability}</p>
 						<p class="what">{s.what}</p>
 						{#if s.host}<p class="host">{s.host}</p>{/if}
 						{#if s.note}<p class="note">{s.note}</p>{/if}
@@ -335,6 +336,12 @@
 	}
 	.what {
 		color: var(--text);
+	}
+	.availability {
+		margin: 0 0 var(--sp-2);
+		color: var(--text-muted);
+		font-size: var(--fs-1);
+		font-weight: 600;
 	}
 	.service .host {
 		font-family: var(--font-mono);

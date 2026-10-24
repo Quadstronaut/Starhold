@@ -9,7 +9,7 @@
 	<h2>1. Who is responsible</h2>
 	<p>Starhold is the trade name of <strong>Copper Jerky LLC</strong>, an Arizona limited liability company ("Starhold", "we", "us"). We are the controller of the data described here.</p>
 	<ul>
-		<li>Postal address: [POSTAL ADDRESS — pending PO box]</li>
+		<li>Postal address: available on request at <a href="mailto:legal@starhold.dev">legal@starhold.dev</a> until our registered business address is published.</li>
 		<li>Email for any privacy question or request: <a href="mailto:hello@starhold.dev">hello@starhold.dev</a></li>
 	</ul>
 
@@ -20,7 +20,7 @@
 		<li><strong>Anonymous</strong> means we cannot tie it to a person, even by looking it up. Our daily visit tallies are anonymous.</li>
 		<li><strong>Pseudonymous</strong> means it is tied to a code, such as a keyed hash of an IP address, instead of your name. We still treat it as personal data.</li>
 	</ul>
-	<p>Our sites set no cookies. Our web servers keep no access logs.</p>
+	<p>Our sites set no cookies. We keep no request logs. Error logs can contain your IP for up to 30 days. Sign-in abuse limiting uses a keyed hash of your IP for 7 days. Admin access to account data through our tools is logged; that log is about us, not you.</p>
 
 	<h2>3. What we collect, why, and our legal basis</h2>
 	<table>
@@ -41,6 +41,18 @@
 			<tr><td>Backups of the above.</td><td>Recover from disk or host loss.</td><td>Legitimate interests</td></tr>
 		</tbody>
 	</table>
+		<h3>Shush and Starbot, as built today</h3>
+	<p>These two services are not written up in full yet. This is what they hold as built today, not a promise about how they will work.</p>
+	<table>
+		<thead>
+			<tr><th>Service</th><th>What it holds today</th><th>Kept for</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>Shush</td><td>Your Discord id, banned words you triggered, death times, word counts and points. Message ids are kept for reference, never message content. Your Discord display name and dates appear on the public list.</td><td>Game data rolls per round. Names stay on the public list until you ask us to remove them (hello@starhold.dev or /hide-me when it ships). A 30-day automatic expiry is in development.</td></tr>
+			<tr><td>Shush</td><td>Help-desk tickets: your Discord id, subject and open and close times. The messages live in a private Discord thread.</td><td>No fixed period yet. Ask and we delete it by hand.</td></tr>
+			<tr><td>Starbot</td><td>Server settings and Discord ids the bot features need to work. Contact notices in intake channels.</td><td>No fixed period yet. A 12-month automatic purge of contact notices is not built. Ask and we delete it by hand.</td></tr>
+		</tbody>
+	</table>
 	<p>Where the basis is consent, you can withdraw it at any time. Withdrawing does not affect what we did before. You do not have to give us any of this, but without it we cannot do the thing it is for.</p>
 
 	<h2>4. Who receives data</h2>
@@ -50,19 +62,19 @@
 			<tr><th>Recipient</th><th>Role and data</th><th>Transfer mechanism</th></tr>
 		</thead>
 		<tbody>
-			<tr><td>Discord</td><td>Our Discord server and apps. It receives the ticket notice for a contact message, and whatever you post in Discord, under <a href="https://discord.com/privacy" target="_blank" rel="noopener">Discord's Privacy Policy</a>.</td><td>[transfer mechanism — lawyer]</td></tr>
-			<tr><td>Polar</td><td>Payment provider and merchant of record for sales. It takes your payment and keeps its own records, under <a href="https://polar.sh/legal/privacy" target="_blank" rel="noopener">its privacy policy</a>. We keep only the order reference and plan.</td><td>[transfer mechanism — lawyer]</td></tr>
-			<tr><td>Patreon</td><td>Payment platform for people who choose to back our work. We receive your membership status from it. Backing buys no perks.</td><td>[transfer mechanism — lawyer]</td></tr>
-			<tr><td>Backblaze B2</td><td>Off-site storage of backups.</td><td>[transfer mechanism — lawyer]</td></tr>
-			<tr><td>OVH</td><td>Hosting. We rent the servers our services run on and administer them ourselves.</td><td>[transfer mechanism — lawyer]</td></tr>
+			<tr><td>Discord</td><td>Our Discord server and apps. It receives the ticket notice for a contact message, and whatever you post in Discord, under <a href="https://discord.com/privacy" target="_blank" rel="noopener">Discord's Privacy Policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
+			<tr><td>Polar</td><td>Payment provider and merchant of record for sales. It takes your payment and keeps its own records, under <a href="https://polar.sh/legal/privacy" target="_blank" rel="noopener">its privacy policy</a>. We keep only the order reference and plan.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
+			<tr><td>Patreon</td><td>Payment platform for people who choose to back our work. We receive your membership status from it. Backing buys no perks.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
+			<tr><td>Backblaze B2</td><td>Off-site storage of backups.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
+			<tr><td>OVH</td><td>Hosting. We rent the servers our services run on and administer them ourselves.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 		</tbody>
 	</table>
 	<!-- VENDOR-STUB: email provider -->
-	<p>We do not send email yet. When we do, the email provider will be listed here before any mail goes out.</p>
+	<p>We do not send email yet. When QNix opens we will email you once, through a provider we will name on this page first.</p>
 	<p>We also share data when the law requires it through valid legal process, or when needed to protect our rights, our users or the public.</p>
 
 	<h2>5. Where data is stored</h2>
-	<p>Data is stored in the United States, and we operate from Arizona. If you are outside the United States, your data is transferred there. The mechanism for each recipient is shown in the table above.</p>
+	<p>Data is stored in the United States, and we operate from Arizona. If you are outside the United States, your data is transferred there. Transfers to our US processors rely on each processor's standard contractual terms; we are completing our transfer documentation with counsel.</p>
 
 	<h2>6. How long we keep it</h2>
 	<p>Each period has a start, shown here.</p>
@@ -91,14 +103,14 @@
 		<li>Backups drop it within 30 days.</li>
 		<li>Only the bare purchase record (amount, date, provider reference, no content) is kept, as tax law requires, for up to 7 years.</li>
 	</ol>
-	<p>Every destructive action asks you to confirm first.</p>
+	<p>Until Starhold Account exists, export and delete are by request to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a>, done by hand within 30 days. Every destructive action asks you to confirm first.</p>
 
 	<h2>8. The contact form and QNix notice</h2>
-	<p>Your message is stored encrypted in a database on our server. Discord gets only a short notice reading "New invite request #id · product", with the ticket number and the product concerned, and no message body and no email address. We delete the stored message 90 days after we close the conversation, and never later than 12 months after we received it. Our backups drop it within 30 days after that. Discord keeps its own copy of the short notice under its policy. Please do not send passwords or secrets in a message.</p>
+	<p>Your message is encrypted with a public key before it is stored; only an offline key held by the operator can read it. Discord receives only the ticket number and the service name, in a short notice reading "New invite request #id · product", with no message body and no email address. We delete the stored message 90 days after we close the conversation, and never later than 12 months after we received it. Our backups drop it within 30 days after that. Discord keeps its own copy of the short notice under its policy. Please do not send passwords or secrets in a message.</p>
 	<p>If you ask to be told when QNix opens, we store your email address encrypted. We send you one notice, then delete the address. If QNix has not opened after 24 months, we delete it anyway.</p>
 
 	<h2>9. Our access to your account</h2>
-	<p>We never ask for your password, never send sign-in links by hand, and never look at your account unless you ask us to or the law requires it. Any access is logged.</p>
+	<p>We never ask for your password, never send sign-in links by hand, and never look at your account unless you ask us to or the law requires it. Any access is logged. That log is about us, not you (see section 2). No sign-in is open today.</p>
 
 	<h2>10. Your rights and how to use them</h2>
 	<p>Wherever you live, you can ask us to:</p>
@@ -110,7 +122,7 @@
 		<li>give you your data in a portable format;</li>
 		<li>stop relying on your consent.</li>
 	</ul>
-	<p>Write to <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>. We answer within 30 days. We may need to confirm it is you, and we will not ask for more than we need. We make no decisions about you by automated means that have legal or similar effects.</p>
+	<p>Write to <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>, or to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a> for export and delete, which we do by hand until Starhold Account exists. We answer within 30 days. We may need to confirm it is you, and we will not ask for more than we need. We make no decisions about you by automated means that have legal or similar effects.</p>
 	<p>If you are unhappy with our answer, you can complain to your local data protection authority, or in the United States to the Arizona Attorney General. We would like the chance to fix it first.</p>
 
 	<h2>11. Children</h2>
