@@ -17,7 +17,7 @@ Free to play, no invitation needed. Start at [shushgame.com](https://shushgame.c
 
 ## What Shush keeps
 
-As built today, Shush keeps your Discord id, the banned words you triggered, death times and points. The public list shows Discord display names and dates. Names stay on the public list until you ask us to remove them (hello@starhold.dev or `/hide-me` when it ships). A 30-day automatic expiry is in development. The privacy policy lists the rest as built today.
+As built today, Shush keeps your Discord id, the banned words you triggered, death times and points. The public list shows a display name, the word and the date, for thirty days, then it drops off. Use `/hide-me` in Discord to leave every list we keep; we also edit the bot's own recent messages. Copies kept by Discord or other players, and older bot messages, can't be changed. The privacy policy lists the rest as built today.
 
 ## The manual
 

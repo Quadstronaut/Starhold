@@ -111,7 +111,7 @@ describe('A2 · voice', () => {
 		expect(HOME_TEXT).toContain('Open DevTools: every request goes to our own hosts.');
 		expect(HOME_TEXT).toContain('Open means you can use it now, during testing; it is still under development.');
 		expect(HOME_TEXT).not.toMatch(/Coming soon/);
-		expect(collectStrings(copy.shush).join('\n')).toContain('Names stay on the public list until you ask us to remove them');
+		expect(collectStrings(copy.shush).join('\n')).toContain('for thirty days, then it drops off');
 		const lines = copy.serviceItems.map((s) => s.availability);
 		expect(lines.every((l) => l.length > 0)).toBe(true);
 		expect(copy.serviceItems.find((s) => s.id === 'umbermark')!.availability).toBe('Free scans open; purchases paused');

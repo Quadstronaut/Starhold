@@ -478,8 +478,8 @@ export const shush = {
 	cta: { label: 'Play Shush', href: 'https://shushgame.com' },
 	privacyHeading: 'What the public list shows',
 	privacy: [
-		'The public list shows Discord display names and dates.',
-		'Names stay on the public list until you ask us to remove them (hello@starhold.dev or /hide-me when it ships). A thirty-day automatic expiry is in development.'
+		'The public list shows a display name, the word and the date, for thirty days, then it drops off.',
+		"Use /hide-me in Discord to leave every list we keep; we also edit the bot's own recent messages. Copies kept by Discord or other players, and older bot messages, can't be changed."
 	],
 	evidence: ev('shushgame-live')
 };
