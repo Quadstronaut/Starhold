@@ -57,7 +57,7 @@
 </script>
 
 {#if status === 'sent'}
-	<p class="card sent">Got it. I will reply to <strong>{email}</strong>.</p>
+	<p class="card sent">Got it. We'll reply to <strong>{email}</strong>.</p>
 {:else}
 	<form onsubmit={submit}>
 		<label>

@@ -60,7 +60,10 @@ describe('A2 · voice', () => {
 	});
 
 	it('A2.4 first person singular: no corporate we/our/ours', () => {
-		expect(findTerms(SURFACE, ['we', 'our', 'ours', "we're", "we've", "we'll"])).toEqual([]);
+		// The form confirmations ("Got it. We'll reply to ...") deliberately use the
+		// studio "we" voice (STAR-146), so that one sentence is exempt from this scan.
+		const scanned = SURFACE.replace(/Got it\. We'll reply to/g, 'Got it. Reply to');
+		expect(findTerms(scanned, ['we', 'our', 'ours', "we're", "we've", "we'll"])).toEqual([]);
 	});
 
 	it('A2.5 the operator goes by Quadstronaut', () => {
