@@ -1,5 +1,8 @@
 node_modules
 
+# Contact inbox SQLite (encrypted rows; still never in git)
+/data
+
 # Output
 .output
 .vercel

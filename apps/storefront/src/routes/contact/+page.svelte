@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { DISCORD_INVITE, DISCORD_TICKET_URL, CONTACT_EMAIL } from '$lib/site-links';
 	import IntakeForm from '$lib/components/IntakeForm.svelte';
-	import { contact } from '$lib/content/copy';
+	import FormNotice from '$lib/components/FormNotice.svelte';
+	import { contact, formNotices } from '$lib/content/copy';
 
 	let { data } = $props();
 	const isInvite = $derived(data.intent === 'invite');
@@ -53,6 +54,7 @@
 	{:else}
 		<IntakeForm kind="contact" cta="Send" />
 	{/if}
+	<FormNotice lines={[formNotices.contact.notice, formNotices.contact.secrets, formNotices.contact.deletion]} />
 </section>
 
 <style>

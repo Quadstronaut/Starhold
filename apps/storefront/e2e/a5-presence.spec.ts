@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 // light (weight budget) and that structured data matches what is on screen.
 
 const ROUTES = [
-	'/', '/contact', '/products/shushgame', '/products/qnix'
+	'/', '/contact', '/products/shushgame', '/qnix'
 ];
 
 // ── 1. No JavaScript ────────────────────────────────────────────────────────

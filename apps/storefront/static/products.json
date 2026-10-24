@@ -1,4 +1,4 @@
 {"products":[
  {"id":"shushgame","name":"Shushgame","tagline":"","status":"live","url":"https://shushgame.com","pricing_url":"https://shushgame.com","pricing":{"model":"external"},"order":1,"card_label":"Discord Chat Game","badge":"Free","discord_widget_id":"1437714782844096556"},
- {"id":"qnix","name":"QNix","tagline":"","status":"coming-soon","url":"https://starhold.dev/products/qnix","pricing_url":null,"pricing":{"model":"tbd"},"order":2,"card_label":"Durable Hosting","card_sub":"Click for more info →"}
+ {"id":"qnix","name":"QNix","tagline":"","status":"coming-soon","url":"https://starhold.dev/qnix","pricing_url":null,"pricing":{"model":"tbd"},"order":2,"card_label":"Durable Hosting","card_sub":"Click for more info →"}
 ]}

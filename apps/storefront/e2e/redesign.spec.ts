@@ -18,7 +18,7 @@ const MARKETING = ['/', '/contact'];
 const ALL_ROUTES = [
 	'/',
 	'/contact',
-	'/products/qnix',
+	'/qnix',
 	'/products/shushgame'
 ];
 

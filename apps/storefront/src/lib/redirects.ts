@@ -20,10 +20,17 @@ export const REMOVED_PATHS: readonly string[] = [
 	'/api/stripe/webhook'
 ];
 
+// Moved pages that have a real new home (ledger Q34/Q50): old QNix URLs -> /qnix.
+export const MOVED_PATHS: Readonly<Record<string, string>> = {
+	'/services/qnix': '/qnix',
+	'/products/qnix': '/qnix'
+};
+
 const REMOVED = new Set(REMOVED_PATHS);
 
-/** Where a removed path now lives, or null if the path was not removed. */
+/** Where a removed or moved path now lives, or null if the path was not touched. */
 export function redirectFor(pathname: string): string | null {
 	const p = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
+	if (p in MOVED_PATHS) return MOVED_PATHS[p];
 	return REMOVED.has(p) ? '/' : null;
 }

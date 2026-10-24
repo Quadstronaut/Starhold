@@ -10,7 +10,7 @@ const ROUTES = [
 	'/',
 	'/contact',
 	'/products/shushgame',
-	'/products/qnix',
+	'/qnix',
 	'/legal/terms',
 	'/legal/privacy',
 	'/legal/refunds'

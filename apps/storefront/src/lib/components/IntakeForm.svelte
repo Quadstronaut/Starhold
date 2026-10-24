@@ -7,7 +7,7 @@
 		productLabel = 'Service',
 		product: initialProduct = ''
 	}: {
-		kind: 'contact' | 'qnix' | 'invite';
+		kind: 'contact' | 'invite';
 		cta?: string;
 		/** Optional service picker (the invite form). Empty list = no picker. */
 		products?: Choice[];
@@ -16,14 +16,9 @@
 		product?: string;
 	} = $props();
 
-	// The intake API takes a single message, so the chosen service rides as its
-	// first line. The textarea cap shrinks by the room that line needs, which
-	// keeps the server's 4000-character limit exact.
-	const PREFIX_ROOM = 100;
 	// svelte-ignore state_referenced_locally
 	let product = $state(initialProduct || products[0]?.id || '');
-	const productName = $derived(products.find((p) => p.id === product)?.label ?? '');
-	const maxMessage = $derived(products.length ? 4000 - PREFIX_ROOM : 4000);
+	const maxMessage = 4000; // the server's limit
 
 	let name = $state('');
 	let email = $state('');
@@ -44,7 +39,8 @@
 					kind,
 					name,
 					email,
-					message: productName ? `${productLabel}: ${productName}\n\n${message}` : message,
+					message,
+					product, // id from our own list; stored as its own column, not in the text
 					website
 				})
 			});
