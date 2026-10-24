@@ -1,13 +1,13 @@
 ---
 title: Zenithmark
-description: Mail and DNS scorecard for a domain. Live, free, in development.
+description: Mail and DNS scorecard for a domain. Open, free.
 sidebar:
   order: 3
 ---
 
 **A mail and DNS scorecard for any domain.** Enter a domain and get a report on SPF, DKIM, DMARC, MX, MTA-STS, TLS, DNSSEC, CAA and BIMI.
 
-- **State:** live, free, in development.
+- **State:** Open · free.
 - **Where:** [zenithmark.starhold.app](https://zenithmark.starhold.app)
 
 ## How to get in

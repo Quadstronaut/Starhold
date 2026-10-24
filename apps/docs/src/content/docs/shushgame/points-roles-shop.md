@@ -1,13 +1,13 @@
 ---
 title: Points, Roles & the Shop
-description: How points are earned, what they buy, the glamour ladder, and the absolute money↔points wall.
+description: How points are earned, what they buy, the glamour ladder, and the free name colours.
 sidebar:
   order: 4
 ---
 
 ## Earning points
 
-Points are earned only by playing — never bought.
+Points are earned only by playing.
 
 - **Survive each day** — more points the more you chatted (risk = reward;
   lurkers earn the floor)
@@ -24,7 +24,7 @@ Check `/points me` and `/leaderboard`.
 
 ## Spending points
 
-In **#the-exchange**: `/shop` cosmetics (21 name-colors, 300 pts each),
+In **#the-exchange**: `/shop` for the 21 name colours, which are free,
 lottery entries when Management opens one, or your own resurrection via
 `/redeem buyback`.
 
@@ -44,21 +44,10 @@ Round champions earn permanent trophy roles (e.g. *🏆 2026-06 Last Voice*).
 Some roles only exist as lottery prizes. Roles the machine grants cannot be
 bought — the machine does not negotiate.
 
-## Money (entirely optional)
+## Public kill list
 
-The wall is absolute: **money can never buy points, revives, lottery
-entries, or your way out of the graveyard.**
-
-What dollars *can* buy — cosmetic only, 18+:
-
-| Item | Price |
-|---|---|
-| Name color (any of the 21 shades) | $1 |
-| Billboard ad — 3 days | $2 |
-| Billboard ad — 7 days | $5 |
-| Billboard ad — 30 days (pinned) | $15 |
-
-All purchases run through Stripe — the server never touches your card.
-Refunds walk the perk right back out.
+The kill list on [shushgame.com](https://shushgame.com) shows each entry for 30
+days, with the date only and no time. To take yourself off it, type `/hide-me`
+in the Discord server.
 
 The game is free. The dying is free. The dying is always free.
