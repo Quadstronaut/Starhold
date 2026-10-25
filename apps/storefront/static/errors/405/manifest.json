@@ -1,0 +1,66 @@
+{
+	"code": "405",
+	"title": "WRONG DOCKING PORT",
+	"note": "First entry = the no-JS fallback. ?img=<id> forces one entry. An entry whose file is missing is pending and left out of the pool (drop the file in, run pools/build.mjs). Built by brand/errors/pools/build.mjs.",
+	"entries": [
+		{
+			"id": "opus",
+			"seat": "opus",
+			"model": "Claude Opus (SVG drawn from font outlines and geometry, brand/errors/gen/draw.mjs)",
+			"kind": "svg",
+			"file": "opus.svg",
+			"generated": "2026-10-24",
+			"prompt_ref": "brand/errors/pools/README.md#prompt",
+			"width": 1600,
+			"height": 900
+		},
+		{
+			"id": "chatgpt",
+			"seat": "chatgpt",
+			"model": "ChatGPT image generation (chatgpt.com, operator account)",
+			"kind": "raster",
+			"file": "chatgpt.png",
+			"generated": "2026-10-24",
+			"prompt_ref": "brand/errors/pools/README.md#prompt",
+			"width": 1672,
+			"height": 940,
+			"widths": [
+				800,
+				1600
+			],
+			"fade": false
+		},
+		{
+			"id": "grok",
+			"seat": "grok",
+			"model": "Grok Imagine (grok.com, operator account)",
+			"kind": "raster",
+			"file": "grok.png",
+			"generated": "2026-10-24",
+			"prompt_ref": "brand/errors/pools/README.md#prompt",
+			"width": 1168,
+			"height": 784,
+			"widths": [
+				800,
+				1168
+			],
+			"fade": true
+		},
+		{
+			"id": "gemini",
+			"seat": "gemini",
+			"model": "Gemini image generation (gemini.google.com, operator account)",
+			"kind": "raster",
+			"file": "gemini.png",
+			"generated": "2026-10-24",
+			"prompt_ref": "brand/errors/pools/README.md#prompt",
+			"width": 1376,
+			"height": 768,
+			"widths": [
+				800,
+				1376
+			],
+			"fade": true
+		}
+	]
+}

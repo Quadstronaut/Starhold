@@ -22,6 +22,10 @@ const PAGES = [
 
 const ENDPOINTS = ['api/intake'];
 
+function copy404() {
+	return JSON.stringify(JSON.parse(read('src/lib/error-copy.json')).codes['404']);
+}
+
 describe('A4 · information architecture', () => {
 	it('A4.1 every pinned route has a page component', () => {
 		const missing = PAGES.filter((p) => !exists(`src/routes/${p ? p + '/' : ''}+page.svelte`));
@@ -70,7 +74,7 @@ describe('A4 · information architecture', () => {
 		expect(copy.home.hero.h1.length).toBeLessThanOrEqual(70);
 		// One sanctioned user: the decorative hero art pool (STAR-166, operator decision
 		// 2026-10-24) picks an image, never copy. Nothing else may randomise.
-		const RANDOM_OK = new Set(['src/lib/heroes.ts']);
+		const RANDOM_OK = new Set(['src/lib/heroes.ts', 'src/lib/errors.ts']);
 		const randomUsers = srcFiles(['.svelte', '.ts'])
 			.filter((f) => /Math\.random/.test(read(relative(f))))
 			.map(relative)
@@ -126,13 +130,11 @@ describe('A4 · information architecture', () => {
 		expect(footer).toMatch(/site\.email/);
 	});
 
-	it('A4.12 the 404 page has the brief copy, three exits and no animation', () => {
+	it('A4.12 the error page renders the shared Starhold set (STAR-168): copy.json, Go back / Home, pool image, no inline script', () => {
 		const err = read('src/routes/+error.svelte');
-		expect(err).toContain('404 · Page not found');
-		expect(err).toContain('No signal at this address.');
-		expect(err).toContain("This page doesn't exist here, or its address may have moved. Nothing else happened.".slice(1, -1));
-		for (const l of ['>Home<', '>Hangar<', '>Contact<']) expect(err).toContain(l);
-		expect(err).not.toMatch(/@keyframes|animation\s*:/);
+		for (const l of ['copyFor(', 'errLinks.back', 'errLinks.home', 'poolFor(', 'pickErr(']) expect(err).toContain(l);
+		expect(err).not.toMatch(/<script[^>]*>\s*(?!lang)[^<]*document\./);
+		expect(copy404()).toContain('LOST IN SPACE');
 	});
 
 	it('A4.13 /account is one honest stub with the In development chip, and nothing links to it from the header', () => {

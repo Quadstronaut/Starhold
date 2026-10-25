@@ -60,12 +60,12 @@ test('header and footer follow the brief; no Sign in anywhere', async ({ page })
 	await expect(footer).toContainText('Starhold · Sovereign systems, built and operated. · Est. 2026');
 });
 
-test('404 shows the brief copy and three exits', async ({ page }) => {
+test('404 shows the shared Starhold error page', async ({ page }) => {
 	const res = await page.goto('/no-such-page');
 	expect(res?.status()).toBe(404);
-	await expect(page.locator('h1')).toHaveText('No signal at this address.');
-	await expect(page.getByText('404 · Page not found')).toBeVisible();
-	await expect(page.locator('main').getByRole('link')).toHaveText(['Home', 'Hangar', 'Contact']);
+	await expect(page.locator('h1')).toHaveText('404 · LOST IN SPACE');
+	await expect(page.locator('main').getByRole('link')).toHaveText(['← Go back', 'Home →']);
+	await expect(page.locator('figure.err-figure')).toBeVisible();
 });
 
 test('/shush says what the game really does and does not cross-promote', async ({ page }) => {
