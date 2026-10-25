@@ -1,0 +1,65 @@
+{
+  "$comment": "STAR-168 error page copy. Opus seat draft, revised per the pre-ship review and operator rulings (2026-10-24): never imply a page exists, no promises or timelines, 429 = a limit for now, 401 = sign-in not open (invitation only), contact = hello@starhold.dev (build.mjs links it). Titles are fixed by the spec. build.mjs renders it into every page.",
+  "links": {
+    "back": "← Go back",
+    "home": "Home →"
+  },
+  "contact": {
+    "email": "hello@starhold.dev",
+    "label": "Contact"
+  },
+  "footer": {
+    "requestId": "Request id",
+    "brand": "Starhold"
+  },
+  "codes": {
+    "400": {
+      "title": "GARBLED TRANSMISSION",
+      "explanation": "Your browser sent a request we could not read, often because a link was cut short or a form arrived incomplete. Go back and try again, or start again from the home page."
+    },
+    "401": {
+      "title": "AIRLOCK SEALED",
+      "explanation": "This page is for signed-in accounts, and sign-in is not open yet: access is by invitation only. Go back, or start again from the home page."
+    },
+    "403": {
+      "title": "RESTRICTED SECTOR",
+      "explanation": "This address is not open to you. If you followed a link you expected to work, its access may have changed. Go back, or write to hello@starhold.dev with the address."
+    },
+    "404": {
+      "title": "LOST IN SPACE",
+      "explanation": "There is no page at this address. It may have moved, or the link may have a typo in it. Go back, or start again from the home page."
+    },
+    "405": {
+      "title": "WRONG DOCKING PORT",
+      "explanation": "This address does not accept the kind of request your browser sent, for example a form sent to a page that only displays. Go back and use the page's own form or button."
+    },
+    "410": {
+      "title": "DECOMMISSIONED",
+      "explanation": "The page that lived here has been removed on purpose and is not coming back. The home page shows what is available now. If you relied on it, you can write to hello@starhold.dev."
+    },
+    "429": {
+      "title": "TOO MANY SIGNALS",
+      "explanation": "This service limits how many requests it accepts from one connection, and yours has reached that limit for now. Please try again later; when the service knows how long the limit lasts, its reply says so."
+    },
+    "500": {
+      "title": "ENGINE FAULT",
+      "explanation": "Something broke on our side while we were handling your request. It is not something you did. Try again later; if it keeps happening, write to hello@starhold.dev and tell us roughly when it happened."
+    },
+    "502": {
+      "title": "RELAY OFFLINE",
+      "explanation": "We could not reach the service behind this page, so we could not get you an answer. This is a problem on our side, not yours. Try again later."
+    },
+    "503": {
+      "title": "IN DRY DOCK",
+      "explanation": "This service cannot answer right now, usually because it is restarting or under maintenance. Try again later. If it stays down, write to hello@starhold.dev."
+    },
+    "504": {
+      "title": "NO REPLY FROM RELAY",
+      "explanation": "The service behind this page took too long to answer, so we stopped waiting. Try again later. If the same page keeps timing out, write to hello@starhold.dev."
+    },
+    "default": {
+      "title": "UNEXPECTED SIGNAL",
+      "explanation": "Something went wrong and this page could not be shown. Go back, or start again from the home page. If it keeps happening, write to hello@starhold.dev and tell us roughly when it happened."
+    }
+  }
+}
