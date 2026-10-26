@@ -1,5 +1,5 @@
 ---
-title: Starhold Status
+title: Status
 description: Private and white-label status pages for MSPs. Invitation only.
 sidebar:
   order: 5

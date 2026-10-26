@@ -228,7 +228,7 @@ export type Service = {
 export const serviceItems: Service[] = [
 	{
 		id: 'status',
-		name: 'Starhold Status',
+		name: 'Status',
 		host: 'status.starhold.app',
 		href: null,
 		action: 'Request an invite',
@@ -261,7 +261,7 @@ export const serviceItems: Service[] = [
 	},
 	{
 		id: 'render',
-		name: 'Starhold Render',
+		name: 'Render',
 		host: 'render.starhold.app',
 		href: null,
 		action: 'Request an invite',
@@ -387,8 +387,8 @@ export const invite = {
 	services: [
 		{ id: 'umbermark', label: 'Umbermark' },
 		{ id: 'zenithmark', label: 'Zenithmark' },
-		{ id: 'render', label: 'Starhold Render' },
-		{ id: 'status', label: 'Starhold Status' },
+		{ id: 'render', label: 'Render' },
+		{ id: 'status', label: 'Status' },
 		{ id: 'starbot', label: 'Starbot' }
 	]
 };
@@ -419,8 +419,8 @@ export const contact = {
 	products: [
 		{ id: 'umbermark', label: 'Umbermark' },
 		{ id: 'zenithmark', label: 'Zenithmark' },
-		{ id: 'render', label: 'Starhold Render' },
-		{ id: 'status', label: 'Starhold Status' },
+		{ id: 'render', label: 'Render' },
+		{ id: 'status', label: 'Status' },
 		{ id: 'starbot', label: 'Starbot' },
 		{ id: 'unsure', label: 'Not sure yet' }
 	],

@@ -11,8 +11,8 @@ We host and operate these services for people who care where their data goes. Mo
 |---|---|---|---|
 | [Umbermark](/services/umbermark/) | Scored server hardening report with a shareable link | Open · early access, paid plans | Free scans open; purchases paused |
 | [Zenithmark](/services/zenithmark/) | Mail and DNS scorecard for a domain | Open · free | Open |
-| [Starhold Render](/services/render/) | OG image, PDF and screenshot API | Invitation only | Free tier open; sign-in and checkout closed |
-| [Starhold Status](/services/status/) | Private and white-label status pages for MSPs | Invitation only | Public pages open; sign-in closed |
+| [Render](/services/render/) | OG image, PDF and screenshot API | Invitation only | Free tier open; sign-in and checkout closed |
+| [Status](/services/status/) | Private and white-label status pages for MSPs | Invitation only | Public pages open; sign-in closed |
 | [Starbot](/services/starbot/) | Discord assistant for the Starhold community | In development | In development |
 | [Shush](/services/shushgame/) | The quiet game on Discord | Open · free | Open |
 | [QNix](/services/qnix/) | Personal hosting, built to be hard to break | In development | Interest form only |
