@@ -1,5 +1,5 @@
 ---
-title: Starhold Render
+title: Render
 description: OG image, PDF and screenshot API. Invitation only.
 sidebar:
   order: 4
