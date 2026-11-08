@@ -1,5 +1,5 @@
 // starhold.app live chips (spec §4.4). Reads /_status on this origin: the dedi
-// Caddy proxies that one path to Gatus's public list, newest result only.
+// Caddy proxies that one path to the Status fleet page's status.json (STAR-154); the legacy Gatus array is still accepted.
 // Rules: "Up" only when the latest result passed AND is fresh; anything missing,
 // failed to load or stale reads "Unknown", never green. No storage, no cookies.
 
@@ -12,6 +12,11 @@ const KEYS = {
 	shushgame: ['products_shush', 'products_shushgame-com'],
 	umbermark: ['products_umbermark', 'products_umbermark-starhold-app']
 };
+
+// Fleet status.json component name per tile, and its state → chip mapping. Server-side the page already turns a
+// stale check into "unknown"; checker_silent_since means the checker itself is dead, so nothing may read Up.
+const NAMES = { shushgame: 'Shush', umbermark: 'Umbermark' };
+const DOWN_STATES = new Set(['degraded', 'partial_outage', 'major_outage']);
 
 const OK_DELAY = 60e3;
 const BACKOFF = [60e3, 120e3, 300e3];
@@ -75,6 +80,18 @@ function render(list) {
 	}
 }
 
+function renderFleet(data) {
+	const comps = new Map((Array.isArray(data.components) ? data.components : []).map((c) => [c && c.name, c]));
+	const silent = !!data.checker_silent_since;
+	for (const [tile, name] of Object.entries(NAMES)) {
+		const st = comps.get(name)?.status;
+		if (silent || !st) paint(tile, 'unknown', 'Unknown', '');
+		else if (st === 'operational') paint(tile, 'ok', 'Up', '');
+		else if (DOWN_STATES.has(st)) paint(tile, 'down', 'Down', '');
+		else paint(tile, 'unknown', 'Unknown', '');
+	}
+}
+
 const allUnknown = () => Object.keys(KEYS).forEach((t) => paint(t, 'unknown', 'Unknown', ''));
 
 async function poll() {
@@ -85,8 +102,9 @@ async function poll() {
 		const res = await fetch('/_status', { signal: ctl.signal, cache: 'no-store', credentials: 'omit' });
 		if (!res.ok) throw new Error(`HTTP ${res.status}`);
 		const data = await res.json();
-		if (!Array.isArray(data)) throw new Error('bad payload');
-		render(data);
+		if (Array.isArray(data)) render(data);
+		else if (data && Array.isArray(data.components)) renderFleet(data);
+		else throw new Error('bad payload');
 		failures = 0;
 	} catch {
 		allUnknown();
