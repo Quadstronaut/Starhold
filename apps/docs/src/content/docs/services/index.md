@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-We host and operate these services for people who care where their data goes. Most of it is **under development**, and some of it is **invitation only**. Open means you can use it now, during testing; it is still under development. Each page says what the service does today, how to get in, and which of the [Starhold rules](/) it already meets.
+Starhold hosts and operates these services for people who care where their data goes. Most of it is **under development**, and some of it is **invitation only**. Open means you can use it now, during testing; it is still under development. Each page says what the service does today, how to get in, and which of the [Starhold rules](/) it already meets.
 
 | Service | What it is | State today | Availability |
 |---|---|---|---|
@@ -19,6 +19,6 @@ We host and operate these services for people who care where their data goes. Mo
 
 ## Getting in
 
-Sign-in is closed until Starhold Account opens. Checkout is paused; nothing is for sale today. These rules apply when it reopens. Invitations are sent by hand: ask, and we reply by hand. Use the contact form at [starhold.dev/contact](https://starhold.dev/contact?intent=invite) or write to [hello@starhold.dev](mailto:hello@starhold.dev).
+Sign-in is closed until Starhold Account opens. Checkout is paused; nothing is for sale today. These rules apply when it reopens. Invitations are sent by hand: ask, and the reply is written by hand. Use the contact form at [starhold.dev/contact](https://starhold.dev/contact?intent=invite) or write to [hello@starhold.dev](mailto:hello@starhold.dev).
 
 Whether each service is up right now: [Fleet status](https://status.starhold.fyi).
