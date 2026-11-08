@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Heading from '$lib/components/Heading.svelte';
-	import Wordmark from '$lib/components/Wordmark.svelte';
-	import HeroArt from '$lib/components/HeroArt.svelte';
-	import Faq from '$lib/components/Faq.svelte';
-	import { home, services, principles, comingSoon, faq } from '$lib/content/copy';
-	import { HERO_BASE, HERO_SIZES, heroFallbackSrc, heroPool, heroSrcset } from '$lib/heroes';
+	import Heading from '#lib/components/Heading.svelte';
+	import Wordmark from '#lib/components/Wordmark.svelte';
+	import HeroArt from '#lib/components/HeroArt.svelte';
+	import Faq from '#lib/components/Faq.svelte';
+	import { home, services, principles, comingSoon, faq } from '#lib/content/copy.js';
+	import { HERO_BASE, HERO_SIZES, heroFallbackSrc, heroPool, heroSrcset } from '#lib/heroes.js';
 
 	// STAR-166 hero pool: +page.ts picks an id (server first, client on every
 	// navigation back here); data-hero-pool lists the pool for the staging switcher.

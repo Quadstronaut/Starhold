@@ -3,11 +3,11 @@
 // validate -> encrypt (age) -> SQLite -> notice-only Discord ping (id + product).
 // Name, email and body are never logged and never sent to Discord.
 import { json, error } from '@sveltejs/kit';
-import { env } from '$env/dynamic/private';
-import { allow } from '$lib/server/rate-limit';
-import { postDiscord, noticeText } from '$lib/server/discord';
-import { getDb, saveMessage, DEFAULT_DB_PATH } from '$lib/server/contact-store';
-import { contact } from '$lib/content/copy';
+import { CONTACT_AGE_RECIPIENT, CONTACT_DB_PATH, DISCORD_WEBHOOK_INTAKE } from '$app/env/private';
+import { allow } from '#lib/server/rate-limit.js';
+import { postDiscord, noticeText } from '#lib/server/discord.js';
+import { getDb, saveMessage, DEFAULT_DB_PATH } from '#lib/server/contact-store.js';
+import { contact } from '#lib/content/copy.js';
 import type { RequestHandler } from './$types';
 
 // 'invite' is /contact?intent=invite: a request to be let into one of the
@@ -29,7 +29,7 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
 	if (website) return json({ ok: true }); // pretend success, store nothing
 	if (!allow(getClientAddress())) throw error(429, 'too many requests — try again in a few minutes');
 	// fail closed: with no public key we must not store (or relay) plaintext
-	if (!env.CONTACT_AGE_RECIPIENT) throw error(503, 'Contact is temporarily unavailable');
+	if (!CONTACT_AGE_RECIPIENT) throw error(503, 'Contact is temporarily unavailable');
 	if (typeof kind !== 'string' || !KINDS.includes(kind)) throw error(400, 'unknown intake kind');
 	if (typeof email !== 'string' || !EMAIL_RE.test(email)) throw error(400, 'a valid email is required');
 	// An invite request needs a service and an email; the use line is optional.
@@ -45,7 +45,7 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
 
 	let id: number;
 	try {
-		id = await saveMessage(getDb(env.CONTACT_DB_PATH || DEFAULT_DB_PATH), env.CONTACT_AGE_RECIPIENT, {
+		id = await saveMessage(getDb(CONTACT_DB_PATH || DEFAULT_DB_PATH), CONTACT_AGE_RECIPIENT, {
 			product: picked?.id ?? '',
 			kind,
 			name: String(name).slice(0, 100),
@@ -59,9 +59,9 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
 	}
 
 	// The message is safely stored; a Discord outage must not lose it or fail the form.
-	if (env.DISCORD_WEBHOOK_INTAKE) {
+	if (DISCORD_WEBHOOK_INTAKE) {
 		try {
-			await postDiscord(env.DISCORD_WEBHOOK_INTAKE, noticeText(kind, id, picked?.label));
+			await postDiscord(DISCORD_WEBHOOK_INTAKE, noticeText(kind, id, picked?.label));
 		} catch (e) {
 			console.error('intake: discord notice failed:', e instanceof Error ? e.message : 'error');
 		}

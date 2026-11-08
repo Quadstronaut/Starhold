@@ -36,7 +36,7 @@ describe('A4 · information architecture', () => {
 		for (const p of ['about', 'cart', 'work', 'rates', 'operator', 'capabilities', 'services', 'api/checkout', 'api/stripe', 'products'])
 			expect(exists(`src/routes/${p}`), p).toBe(false);
 		expect(read('src/hooks.server.ts')).toMatch(/redirect\(\s*301/);
-		expect(read('src/hooks.server.ts')).toMatch(/\$lib\/redirects/);
+		expect(read('src/hooks.server.ts')).toMatch(/#lib\/redirects/);
 	});
 
 	it('A4.3 the published products.json contract lists only live products', () => {
@@ -61,7 +61,7 @@ describe('A4 · information architecture', () => {
 
 		// the header renders from the module rather than hard-coding links
 		const header = read('src/lib/components/Header.svelte');
-		expect(header).toMatch(/from '\$lib\/nav'/);
+		expect(header).toMatch(/from '#lib\/nav\.js'/);
 		expect(header).toMatch(/#each primary/);
 		expect(header).not.toMatch(/cart|sign in/i);
 

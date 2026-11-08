@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { invite } from '$lib/content/copy';
+	import { invite } from '#lib/content/copy.js';
 
 	// Invite request. Reuses the encrypted intake endpoint (kind "invite"): the
 	// email and the service are required, the use line is optional. Success says

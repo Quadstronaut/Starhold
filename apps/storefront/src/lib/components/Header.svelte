@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { primary, cta } from '$lib/nav';
-	import Brand from '$lib/components/Brand.svelte';
+	import { primary, cta } from '#lib/nav.js';
+	import Brand from '#lib/components/Brand.svelte';
 
 	// Hamburger drawer state — only reachable below the 640px breakpoint.
 	let menuOpen = $state(false);

@@ -1,5 +1,5 @@
 import type { Load } from '@sveltejs/kit';
-import { invite } from '$lib/content/copy';
+import { invite } from '#lib/content/copy.js';
 
 // /invite?service=<id> preselects the service. Read on the server too so the
 // right option ships in the first HTML response. An unknown id is ignored.

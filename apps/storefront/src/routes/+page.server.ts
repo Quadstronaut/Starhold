@@ -1,4 +1,4 @@
-import { heroPool, pickHero } from '$lib/heroes';
+import { heroPool, pickHero } from '#lib/heroes.js';
 import type { PageServerLoad } from './$types';
 
 // STAR-166 hero pool: pick on the server only. A universal (+page.ts) load would run

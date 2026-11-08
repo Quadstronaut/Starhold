@@ -1,5 +1,6 @@
-import { redirect, type Handle } from '@sveltejs/kit';
-import { redirectFor } from '$lib/redirects';
+import { redirect } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit/hooks';
+import { redirectFor } from '#lib/redirects.js';
 
 // Pages removed in STAR-145 answer with a permanent 301 to the home page, so old
 // links and search results do not 404. The map lives in src/lib/redirects.ts.

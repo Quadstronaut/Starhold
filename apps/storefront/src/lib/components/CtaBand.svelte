@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Heading from './Heading.svelte';
-	import { site } from '$lib/content/copy';
+	import { site } from '#lib/content/copy.js';
 
 	// Closing panel for inner pages: same amber-halo look as the home band,
 	// minus the checklist. One primary action, one fallback (email).

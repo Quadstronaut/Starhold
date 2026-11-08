@@ -4,11 +4,16 @@ import { generateIdentity, identityToRecipient, Decrypter } from 'age-encryption
 const envMock = vi.hoisted(() => ({
 	env: { DISCORD_WEBHOOK_INTAKE: 'https://discord.test/intake', CONTACT_DB_PATH: ':memory:' } as Record<string, string>
 }));
-vi.mock('$env/dynamic/private', () => envMock);
+// $app/env/private exports live bindings; getters keep the mutable envMock working.
+vi.mock('$app/env/private', () => ({
+	get CONTACT_AGE_RECIPIENT() { return envMock.env.CONTACT_AGE_RECIPIENT ?? ''; },
+	get CONTACT_DB_PATH() { return envMock.env.CONTACT_DB_PATH ?? ''; },
+	get DISCORD_WEBHOOK_INTAKE() { return envMock.env.DISCORD_WEBHOOK_INTAKE ?? ''; }
+}));
 const fetchSpy = vi.spyOn(globalThis, 'fetch');
 
 import { POST } from './+server';
-import { getDb } from '$lib/server/contact-store';
+import { getDb } from '#lib/server/contact-store.js';
 
 let identity: string;
 beforeAll(async () => {

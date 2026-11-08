@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { footerSite, legal, backTheWork, closingLine } from '$lib/nav';
-	import { site } from '$lib/content/copy';
-	import Brand from '$lib/components/Brand.svelte';
+	import { footerSite, legal, backTheWork, closingLine } from '#lib/nav.js';
+	import { site } from '#lib/content/copy.js';
+	import Brand from '#lib/components/Brand.svelte';
 </script>
 
 <footer>

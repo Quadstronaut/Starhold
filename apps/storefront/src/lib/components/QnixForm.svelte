@@ -1,6 +1,6 @@
 <script lang="ts">
 	// QNix "notify me" form: email only, posts to /api/qnix (STAR-145, Q48/Q66).
-	import { formNotices } from '$lib/content/copy';
+	import { formNotices } from '#lib/content/copy.js';
 	import FormNotice from './FormNotice.svelte';
 
 	let email = $state('');

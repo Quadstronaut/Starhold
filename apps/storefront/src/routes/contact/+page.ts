@@ -1,5 +1,5 @@
 import type { Load } from '@sveltejs/kit';
-import { contact } from '$lib/content/copy';
+import { contact } from '#lib/content/copy.js';
 
 const INTENTS = ['invite'] as const;
 type Intent = (typeof INTENTS)[number] | 'contact';

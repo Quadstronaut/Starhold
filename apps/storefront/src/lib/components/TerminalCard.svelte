@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { TermLine } from '$lib/content/copy';
+	import type { TermLine } from '#lib/content/copy.js';
 
 	// A faux terminal window: chrome bar plus monospace lines. Pure CSS and
 	// text, so it is visible with JS off, selectable, and read by screen readers

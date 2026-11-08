@@ -1,7 +1,7 @@
 <script lang="ts">
-	import QnixForm from '$lib/components/QnixForm.svelte';
-	import { labelFor } from '$lib/labels';
-	import { formNotices } from '$lib/content/copy';
+	import QnixForm from '#lib/components/QnixForm.svelte';
+	import { labelFor } from '#lib/labels.js';
+	import { formNotices } from '#lib/content/copy.js';
 </script>
 
 <svelte:head>

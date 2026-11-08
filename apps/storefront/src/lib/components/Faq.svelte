@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { FaqItem } from '$lib/content/copy';
+	import type { FaqItem } from '#lib/content/copy.js';
 
 	// Native <details>/<summary>: keyboard, screen-reader and no-JS behaviour
 	// all come from the browser. The chevron is pure CSS and rotates on [open].

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import InviteForm from '$lib/components/InviteForm.svelte';
-	import FormNotice from '$lib/components/FormNotice.svelte';
-	import { invite, formNotices } from '$lib/content/copy';
+	import InviteForm from '#lib/components/InviteForm.svelte';
+	import FormNotice from '#lib/components/FormNotice.svelte';
+	import { invite, formNotices } from '#lib/content/copy.js';
 
 	let { data } = $props();
 </script>

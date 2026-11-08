@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Wordmark from '$lib/components/Wordmark.svelte';
+	import Wordmark from '#lib/components/Wordmark.svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import {
@@ -13,7 +13,7 @@
 		pickErr,
 		poolFor,
 		type ErrEntry
-	} from '$lib/errors';
+	} from '#lib/errors.js';
 
 	// STAR-168: the shared Starhold error page (brand/errors). SvelteKit keeps the HTTP status;
 	// this only renders the body. The server render and no-JS visitors get the pool's first

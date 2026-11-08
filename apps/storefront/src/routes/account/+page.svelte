@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { account } from '$lib/content/copy';
-	import { labelFor } from '$lib/labels';
+	import { account } from '#lib/content/copy.js';
+	import { labelFor } from '#lib/labels.js';
 </script>
 
 <svelte:head>

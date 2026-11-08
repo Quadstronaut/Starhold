@@ -1,10 +1,10 @@
 import { describe, it, expect, vi } from 'vitest';
 
 // No CONTACT_AGE_RECIPIENT: fail closed, store nothing.
-vi.mock('$env/dynamic/private', () => ({ env: { CONTACT_DB_PATH: ':memory:' } }));
+vi.mock('$app/env/private', () => ({ CONTACT_AGE_RECIPIENT: '', CONTACT_DB_PATH: ':memory:' }));
 
 import { POST } from './+server';
-import { getDb } from '$lib/server/contact-store';
+import { getDb } from '#lib/server/contact-store.js';
 
 describe('POST /api/qnix without CONTACT_AGE_RECIPIENT', () => {
 	it('503s "Contact is temporarily unavailable" and stores nothing', async () => {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { shush } from '$lib/content/copy';
+	import { shush } from '#lib/content/copy.js';
 </script>
 
 <svelte:head>

@@ -2,17 +2,19 @@ import { describe, it, expect, vi } from 'vitest';
 
 // Separate file: env mock omits CONTACT_AGE_RECIPIENT to exercise the
 // fail-closed guard (no public key => never accept a message).
-vi.mock('$env/dynamic/private', () => ({
-	env: { DISCORD_WEBHOOK_INTAKE: 'https://discord.test/intake', CONTACT_DB_PATH: ':memory:' }
+vi.mock('$app/env/private', () => ({
+	CONTACT_AGE_RECIPIENT: '',
+	DISCORD_WEBHOOK_INTAKE: 'https://discord.test/intake',
+	CONTACT_DB_PATH: ':memory:'
 }));
 const postDiscord = vi.fn(async (..._a: unknown[]) => {});
-vi.mock('$lib/server/discord', async (importOriginal) => ({
-	...(await importOriginal<typeof import('$lib/server/discord')>()),
+vi.mock('#lib/server/discord.js', async (importOriginal) => ({
+	...(await importOriginal<typeof import('#lib/server/discord.js')>()),
 	postDiscord: (...a: unknown[]) => postDiscord(...a)
 }));
 
 import { POST } from './+server';
-import { getDb } from '$lib/server/contact-store';
+import { getDb } from '#lib/server/contact-store.js';
 
 function req(h: any, body: unknown, ip: string) {
 	return h({

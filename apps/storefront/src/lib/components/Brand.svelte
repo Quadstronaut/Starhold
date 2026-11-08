@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Wordmark from '$lib/components/Wordmark.svelte';
+	import Wordmark from '#lib/components/Wordmark.svelte';
 
 	// The brand lockup: the mark (the operator's PNG, brand/mark/, STAR-166) + wordmark, as one home link.
 	// Header and Footer both render this, so the logo can only ever change in
