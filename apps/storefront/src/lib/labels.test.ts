@@ -8,7 +8,7 @@ describe('shared product labels', () => {
 	it('are exactly the agreed labels (five before launch, four after)', () => {
 		expect([...LABELS]).toEqual(
 			LAUNCHED
-				? ['Open · free', 'Open', 'In development', 'Retired']
+				? ['Open · free', 'Open', 'Open · paid plans', 'In development', 'Retired']
 				: ['Open · free', 'Open · early access, paid plans', 'Invitation only', 'In development', 'Retired']
 		);
 	});
@@ -23,11 +23,11 @@ describe('shared product labels', () => {
 
 	it('pins the arbiter-ruled label for every product (STAR-145 ruling 1)', () => {
 		expect(PRODUCT_LABELS).toEqual({
-			umbermark: LAUNCHED ? 'Open' : 'Open · early access, paid plans',
+			umbermark: LAUNCHED ? 'Open · paid plans' : 'Open · early access, paid plans',
 			zenithmark: LAUNCHED ? 'Open' : 'Open · free',
 			shushgame: 'Open · free',
-			render: LAUNCHED ? 'Open' : 'Invitation only',
-			status: LAUNCHED ? 'Open' : 'Invitation only',
+			render: LAUNCHED ? 'Open · paid plans' : 'Invitation only',
+			status: LAUNCHED ? 'Open · paid plans' : 'Invitation only',
 			starbot: 'In development',
 			account: LAUNCHED ? 'Open' : 'In development',
 			qnix: 'In development',

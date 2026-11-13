@@ -82,7 +82,8 @@ describe('launch switch', () => {
 
 		it('the four products and the account read Open, the rest are untouched', async () => {
 			const { labels, copy } = await load(true);
-			for (const id of [...OPEN_PRODUCTS, 'account']) expect(labels.labelFor(id), id).toBe('Open');
+			for (const id of [...OPEN_PRODUCTS, 'account'])
+				expect(labels.labelFor(id), id).toBe(['umbermark', 'render', 'status'].includes(id) ? 'Open · paid plans' : 'Open');
 			expect(labels.labelFor('shushgame')).toBe('Open · free');
 			expect(labels.labelFor('starbot')).toBe('In development');
 			expect(labels.labelFor('qnix')).toBe('In development');

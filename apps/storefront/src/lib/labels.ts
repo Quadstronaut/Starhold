@@ -7,6 +7,7 @@ import { pick } from './launch';
 export const LABEL_OPEN_FREE = 'Open · free';
 export const LABEL_OPEN_PAID = 'Open · early access, paid plans';
 export const LABEL_OPEN = 'Open'; // launch wording (STAR-142): replaces the invitation and early-access labels
+export const LABEL_OPEN_PAID_LAUNCHED = 'Open · paid plans'; // launch wording for products that sell paid plans (operator, 2026-11-13)
 export const LABEL_INVITE_ONLY = 'Invitation only';
 export const LABEL_IN_DEVELOPMENT = 'In development';
 export const LABEL_RETIRED = 'Retired';
@@ -19,9 +20,16 @@ const PRE_LAUNCH_LABELS = [
 	LABEL_IN_DEVELOPMENT,
 	LABEL_RETIRED
 ] as const;
-const LAUNCHED_LABELS = [LABEL_OPEN_FREE, LABEL_OPEN, LABEL_IN_DEVELOPMENT, LABEL_RETIRED] as const;
+const LAUNCHED_LABELS = [
+	LABEL_OPEN_FREE,
+	LABEL_OPEN,
+	LABEL_OPEN_PAID_LAUNCHED,
+	LABEL_IN_DEVELOPMENT,
+	LABEL_RETIRED
+] as const;
 
-export type Label = (typeof PRE_LAUNCH_LABELS)[number] | typeof LABEL_OPEN;
+export type Label = (typeof PRE_LAUNCH_LABELS)[number] | typeof LABEL_OPEN
+	| typeof LABEL_OPEN_PAID_LAUNCHED;
 
 export const LABELS: readonly Label[] = pick<readonly Label[]>(PRE_LAUNCH_LABELS, LAUNCHED_LABELS);
 
@@ -40,10 +48,10 @@ export const PRODUCT_LABELS: Record<string, Label> = pick<Record<string, Label>>
 		'custom-bots': LABEL_RETIRED
 	},
 	{
-		umbermark: LABEL_OPEN,
+		umbermark: LABEL_OPEN_PAID_LAUNCHED,
 		zenithmark: LABEL_OPEN,
-		render: LABEL_OPEN,
-		status: LABEL_OPEN,
+		render: LABEL_OPEN_PAID_LAUNCHED,
+		status: LABEL_OPEN_PAID_LAUNCHED,
 		account: LABEL_OPEN, // Starhold Account: sign in with Google at ACCOUNT_URL
 		starbot: LABEL_IN_DEVELOPMENT,
 		shushgame: LABEL_OPEN_FREE,
