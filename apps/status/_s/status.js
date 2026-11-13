@@ -15,9 +15,6 @@ const TEXT = {
 	unknown: 'Status unknown',
 	api: "Can't reach the status API right now."
 };
-// Endpoints Gatus watches that are not in products.json. Spec B9's carve-out
-// (owner ruling Q1) lets them appear only with this label, never as a product.
-const NOT_FOR_SALE = new Set(['products_umbermark-starhold-app']);
 
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -106,7 +103,7 @@ function groupSection(group) {
 		sec.setAttribute('aria-labelledby', id);
 		sec.innerHTML = `<div class="group-head"><h3></h3><p class="group-sum" data-group-sum></p></div><div class="rows" data-rows></div>`;
 		$('h3', sec).id = id;
-		$('h3', sec).textContent = group || 'Other';
+		$('h3', sec).textContent = GROUPS[group] || group || 'Other';
 		// Unknown groups by name; the ungrouped "Other" bucket goes last.
 		const rank = (g) => g || '￿';
 		const host = $('[data-extra-groups]');
@@ -139,7 +136,7 @@ function renderRow(row, ep, at) {
 	setText(chip, c.chip);
 	setText($('[data-host]', el), last?.hostname || '—');
 	const note = $('[data-note]', el);
-	const noteText = NOT_FOR_SALE.has(ep.key) ? 'Pre-launch · not for sale' : expects401(last) ? 'Rejects unauthenticated requests' : '';
+	const noteText = expects401(last) ? 'Rejects unauthenticated requests' : '';
 	note.hidden = !noteText;
 	setText(note, noteText);
 

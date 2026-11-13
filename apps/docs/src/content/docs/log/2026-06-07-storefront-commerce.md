@@ -1,4 +1,4 @@
 ---
-title: "2026-06-07: Storefront and checkout"
+title: "2026-06-07: Storefront and docs expansion"
 ---
-2026-06-07 — Storefront commerce online: bot configurator, cart, Stripe subscription checkout, and order relay to me all operational. Docs expansion: full Shushgame player manual published.
+2026-06-07 — Storefront pages went up. Checkout is paused today and nothing is for sale; when it reopens it will run through Polar only. Docs expansion: full Shushgame player manual published.

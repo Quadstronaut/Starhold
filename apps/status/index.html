@@ -90,11 +90,6 @@
 				<p class="noscript-note">This page needs JavaScript to show live checks. Raw check data:</p>
 			</noscript>
 
-			<section class="group" data-group="web" aria-labelledby="g-web">
-				<div class="group-head"><h3 id="g-web">Sites</h3><p class="group-sum" data-group-sum></p></div>
-				<div class="rows" data-rows></div>
-			</section>
-
 			<section class="group" data-group="products" aria-labelledby="g-products">
 				<div class="group-head"><h3 id="g-products">Products</h3><p class="group-sum" data-group-sum></p></div>
 				<div class="rows" data-rows></div>
@@ -124,14 +119,18 @@
 
 			<div data-extra-groups></div>
 
-			<noscript>
-				<ul class="raw-list">
-					<li><a href="/api/v1/endpoints/starhold_starhold-account/statuses">starhold_starhold-account</a> <span>raw JSON</span></li>
-					<li><a href="/api/v1/endpoints/starhold_docs/statuses">starhold_docs</a> <span>raw JSON</span></li>
-					<li><a href="/api/v1/endpoints/starhold_hangar/statuses">starhold_hangar</a> <span>raw JSON</span></li>
-					<li><a href="/api/v1/endpoints/starhold_dashboard-auth/statuses">starhold_dashboard-auth</a> <span>raw JSON</span></li>
-				</ul>
-			</noscript>
+			<section class="group" data-group="starhold" aria-labelledby="g-starhold">
+				<div class="group-head"><h3 id="g-starhold">Starhold</h3><p class="group-sum" data-group-sum></p></div>
+				<div class="rows" data-rows></div>
+				<noscript>
+					<ul class="raw-list">
+						<li><a href="/api/v1/endpoints/starhold_starhold-account/statuses">starhold_starhold-account</a> <span>raw JSON</span></li>
+						<li><a href="/api/v1/endpoints/starhold_docs/statuses">starhold_docs</a> <span>raw JSON</span></li>
+						<li><a href="/api/v1/endpoints/starhold_hangar/statuses">starhold_hangar</a> <span>raw JSON</span></li>
+						<li><a href="/api/v1/endpoints/starhold_dashboard-auth/statuses">starhold_dashboard-auth</a> <span>raw JSON</span></li>
+					</ul>
+				</noscript>
+			</section>
 
 			<template id="row-tpl">
 				<article class="fleet-card check" data-state="pending">
