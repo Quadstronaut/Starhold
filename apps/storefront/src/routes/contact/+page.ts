@@ -1,5 +1,7 @@
+import { redirect } from '@sveltejs/kit';
 import type { Load } from '@sveltejs/kit';
 import { contact } from '#lib/content/copy.js';
+import { LAUNCHED } from '#lib/launch.js';
 
 const INTENTS = ['invite'] as const;
 type Intent = (typeof INTENTS)[number] | 'contact';
@@ -11,6 +13,8 @@ type Intent = (typeof INTENTS)[number] | 'contact';
 // the service, and an id that is not in the list is ignored rather than trusted.
 export const load: Load = ({ url }) => {
 	const i = url.searchParams.get('intent');
+	// Once LAUNCHED the invite flow is closed (lib/launch.ts): old links land on the service list.
+	if (LAUNCHED && i === 'invite') redirect(307, '/#services');
 	const intent: Intent = (INTENTS as readonly string[]).includes(i ?? '') ? (i as Intent) : 'contact';
 	const p = url.searchParams.get('product');
 	const product = contact.products.some((x) => x.id === p) ? (p as string) : '';

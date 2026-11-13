@@ -3,6 +3,7 @@
 // the literal template text of every marketing surface.
 import { describe, it, expect } from 'vitest';
 import * as copy from '../lib/content/copy';
+import { LAUNCHED } from '../lib/launch';
 import evidence from '../lib/content/evidence.json';
 import {
 	read,
@@ -95,8 +96,10 @@ describe('A2 · voice', () => {
 	});
 
 	it('A2.6 metaphor budget: <=8 on the home page, <=2 in the hero', () => {
-		expect(countTerms(HOME_TEXT, METAPHORS)).toBeLessThanOrEqual(8);
-		expect(countTerms(HERO_TEXT, METAPHORS)).toBeLessThanOrEqual(2);
+		// Addresses are not prose: the account host (starship.starhold.app) is not a metaphor.
+		const prose = (s: string) => s.replace(/(https?:\/\/)?[a-z.]*starhold\.(app|dev|fyi)\S*/gi, ' ');
+		expect(countTerms(prose(HOME_TEXT), METAPHORS)).toBeLessThanOrEqual(8);
+		expect(countTerms(prose(HERO_TEXT), METAPHORS)).toBeLessThanOrEqual(2);
 	});
 
 	it('A2.7 commerce wording stays plain', () => {
@@ -105,16 +108,19 @@ describe('A2 · voice', () => {
 	});
 
 	it('A2.10 pass-1 wording: honest state, will-cost, DevTools scope, Open means, one availability line each (STAR-142)', () => {
-		expect(HOME_TEXT).toContain('Checkout is paused; nothing is for sale today. These rules apply when it reopens.');
+		// Launched wording is pinned in lib/launch.test.ts; these are the pre-launch pins.
+		const PAUSED = 'Checkout is paused; nothing is for sale today. These rules apply when it reopens.';
+		if (LAUNCHED) expect(HOME_TEXT).not.toContain('Checkout is paused');
+		else expect(HOME_TEXT).toContain(PAUSED);
 		expect(HOME_TEXT).toContain('what it will cost');
 		expect(HOME_TEXT).not.toContain('what it costs');
 		expect(HOME_TEXT).toContain('Open DevTools: every request goes to our own hosts.');
-		expect(HOME_TEXT).toContain('Open means you can use it now, during testing; it is still under development.');
+		if (!LAUNCHED) expect(HOME_TEXT).toContain('Open means you can use it now, during testing; it is still under development.');
 		expect(HOME_TEXT).not.toMatch(/Coming soon/);
 		expect(collectStrings(copy.shush).join('\n')).toContain('for thirty days, then it drops off');
 		const lines = copy.serviceItems.map((s) => s.availability);
 		expect(lines.every((l) => l.length > 0)).toBe(true);
-		expect(copy.serviceItems.find((s) => s.id === 'umbermark')!.availability).toBe('Free scans open; purchases paused');
+		expect(copy.serviceItems.find((s) => s.id === 'umbermark')!.availability).toBe(LAUNCHED ? 'Open: free scans; report $5 one-off, Pro $19 a month' : 'Free scans open; purchases paused');
 		expect(copy.serviceItems.find((s) => s.id === 'umbermark')!.note).toBeUndefined();
 	});
 

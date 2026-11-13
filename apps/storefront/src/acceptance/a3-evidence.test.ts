@@ -182,7 +182,8 @@ describe('A3 · anti-fabrication', () => {
 			qnix: copy.qnix,
 			shush: copy.shush
 		}).join('\n');
-		const numbers = (strings.match(/\d+/g) ?? []).filter((n) => !derived.has(n));
+		// Launch prices ($5, $19...) are stated on purpose; launch.test.ts pins each one (STAR-142).
+		const numbers = (strings.replace(/\$\d+/g, '').match(/\d+/g) ?? []).filter((n) => !derived.has(n));
 		expect(numbers).toEqual([]);
 	});
 });

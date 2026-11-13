@@ -2,6 +2,8 @@
 // from these arrays — there is exactly one place to add or rename a link.
 // Shape follows the STAR-145 design brief section 2 and arbiter rulings 5-7.
 
+import { pick } from './launch';
+
 export type NavItem = {
 	label: string;
 	href: string;
@@ -23,7 +25,10 @@ export const primary: NavItem[] = [
 ];
 
 /** The one visually distinct call to action that rides in the header. */
-export const cta: NavItem = { label: 'Request an invite', href: '/invite' };
+export const cta: NavItem = pick<NavItem>(
+	{ label: 'Request an invite', href: '/invite' },
+	{ label: 'Get started', href: '/#services' }
+);
 
 /** Footer, first row: the header links plus fleet status and contact. */
 export const footerSite: NavItem[] = [

@@ -2,6 +2,7 @@
 // Route map, navigation shape, hero determinism, and the commerce demotion.
 import { describe, it, expect } from 'vitest';
 import * as nav from '../lib/nav';
+import { LAUNCHED } from '../lib/launch';
 import * as copy from '../lib/content/copy';
 import catalog from '../../static/products.json';
 import { parseCatalog } from '../lib/products';
@@ -55,7 +56,7 @@ describe('A4 · information architecture', () => {
 	it('A4.5 header: Services, Principles, Questions, Hangar, Docs, then Request an invite; no Sign in', () => {
 		expect(nav.primary.map((i) => i.label)).toEqual(['Services', 'Principles', 'Questions', 'Hangar', 'Docs']);
 		expect(nav.primary.map((i) => i.href)).toEqual(['/#services', '/#principles', '/#faq', 'https://starhold.app', 'https://starhold.fyi']);
-		expect(nav.cta).toEqual({ label: 'Request an invite', href: '/invite' });
+		expect(nav.cta).toEqual(LAUNCHED ? { label: 'Get started', href: '/#services' } : { label: 'Request an invite', href: '/invite' });
 		const all = JSON.stringify([nav.primary, nav.cta, nav.footerSite]);
 		expect(all).not.toMatch(/sign in|signin|\/account|\/cart/i);
 
@@ -140,7 +141,7 @@ describe('A4 · information architecture', () => {
 	it('A4.13 /account is one honest stub with the In development chip, and nothing links to it from the header', () => {
 		const page = read('src/routes/account/+page.svelte');
 		expect(page).toMatch(/labelFor\('account'\)/);
-		expect(copy.account.lede).toBe('Starhold Account is in development.');
+		expect(copy.account.lede).toBe(LAUNCHED ? 'One account for every Starhold service.' : 'Starhold Account is in development.');
 		expect(page).not.toMatch(/<form|<input/);
 		expect(read('src/lib/components/Header.svelte')).not.toMatch(/account/i);
 	});});

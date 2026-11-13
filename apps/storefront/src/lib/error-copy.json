@@ -12,6 +12,13 @@
     "requestId": "Request id",
     "brand": "Starhold"
   },
+  "launched": {
+    "$comment": "STAR-142 launch switch: when LAUNCHED is true (apps/storefront/src/lib/launch.ts) these entries replace the same code under codes. Nothing here renders while the switch is off.",
+    "401": {
+      "title": "AIRLOCK SEALED",
+      "explanation": "This page is for signed-in accounts. Please sign in with your Starhold Account at https://starship.starhold.app, then try again. Or start again from the home page."
+    }
+  },
   "codes": {
     "400": {
       "title": "GARBLED TRANSMISSION",

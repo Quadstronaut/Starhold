@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { AVAILABILITY, CHECKOUT_NOTICE, OPEN_MEANS, availabilityFor } from './availability';
 import { serviceItems } from './content/copy';
 import { PRODUCT_LABELS } from './labels';
+import { LAUNCHED } from './launch';
 import json from '../../../../docs/shared/availability.json';
 
 describe('availability source', () => {
@@ -14,10 +15,10 @@ describe('availability source', () => {
 	it('every product with an availability line has a label, and the rulings are pinned', () => {
 		for (const id of Object.keys(AVAILABILITY)) expect(PRODUCT_LABELS[id], id).toBeTruthy();
 		expect(AVAILABILITY).toEqual({
-			umbermark: 'Free scans open; purchases paused',
+			umbermark: LAUNCHED ? 'Open: free scans; report $5 one-off, Pro $19 a month' : 'Free scans open; purchases paused',
 			zenithmark: 'Open',
-			render: 'Free tier open; sign-in and checkout closed',
-			status: 'Public pages open; sign-in closed',
+			render: LAUNCHED ? 'Open: free tier; Hobby $5, Pro $19, Scale $49 a month' : 'Free tier open; sign-in and checkout closed',
+			status: LAUNCHED ? 'Open: free tier; Private $15, MSP $29 a month' : 'Public pages open; sign-in closed',
 			shushgame: 'Open',
 			starbot: 'In development',
 			qnix: 'Interest form only'

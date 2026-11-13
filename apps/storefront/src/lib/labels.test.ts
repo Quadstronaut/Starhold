@@ -1,17 +1,16 @@
 import { describe, it, expect } from 'vitest';
 import { LABELS, PRODUCT_LABELS, labelFor } from './labels';
+import { LAUNCHED } from './launch';
 import catalog from '../../static/products.json';
 import json from '../../../../docs/shared/labels.json';
 
 describe('shared product labels', () => {
-	it('are exactly the five agreed labels', () => {
-		expect([...LABELS]).toEqual([
-			'Open · free',
-			'Open · early access, paid plans',
-			'Invitation only',
-			'In development',
-			'Retired'
-		]);
+	it('are exactly the agreed labels (five before launch, four after)', () => {
+		expect([...LABELS]).toEqual(
+			LAUNCHED
+				? ['Open · free', 'Open', 'In development', 'Retired']
+				: ['Open · free', 'Open · early access, paid plans', 'Invitation only', 'In development', 'Retired']
+		);
 	});
 
 	it('every product in products.json has one of the five labels', () => {
@@ -24,13 +23,13 @@ describe('shared product labels', () => {
 
 	it('pins the arbiter-ruled label for every product (STAR-145 ruling 1)', () => {
 		expect(PRODUCT_LABELS).toEqual({
-			umbermark: 'Open · early access, paid plans',
-			zenithmark: 'Open · free',
+			umbermark: LAUNCHED ? 'Open' : 'Open · early access, paid plans',
+			zenithmark: LAUNCHED ? 'Open' : 'Open · free',
 			shushgame: 'Open · free',
-			render: 'Invitation only',
-			status: 'Invitation only',
+			render: LAUNCHED ? 'Open' : 'Invitation only',
+			status: LAUNCHED ? 'Open' : 'Invitation only',
 			starbot: 'In development',
-			account: 'In development',
+			account: LAUNCHED ? 'Open' : 'In development',
 			qnix: 'In development',
 			'hangar-hosting': 'Retired',
 			'custom-bots': 'Retired'

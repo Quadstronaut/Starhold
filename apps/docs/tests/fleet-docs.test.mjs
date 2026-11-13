@@ -7,6 +7,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readLaunched } from '../../../deploy/launch-overlay.mjs';
 
 const APP = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = join(APP, 'dist');
@@ -200,7 +201,10 @@ test('export, delete and sign-in are described as they are today (B2)', () => {
 		assert.doesNotMatch(text, /from the dashboard|we send your sign-in link|and we send your link/i, f.slice(DIST.length));
 	}
 	for (const route of ['services/render', 'services/status', 'services/umbermark']) {
-		assert.ok(proseText(page(route)).replace(/ ([,.;])/g, '$1').includes('by request to privacy@starhold.dev, done by hand within 30 days'), route);
+		const prose = proseText(page(route)).replace(/ ([,.;])/g, '$1');
+		// STAR-142: once LAUNCHED (apps/storefront/src/lib/launch.ts), export and delete live in Starhold Account.
+		if (readLaunched()) assert.ok(prose.includes('Starhold Account') && !prose.includes('by hand'), route);
+		else assert.ok(prose.includes('by request to privacy@starhold.dev, done by hand within 30 days'), route);
 	}
 });
 

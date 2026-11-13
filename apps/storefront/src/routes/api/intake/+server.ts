@@ -8,11 +8,13 @@ import { allow } from '#lib/server/rate-limit.js';
 import { postDiscord, noticeText } from '#lib/server/discord.js';
 import { getDb, saveMessage, DEFAULT_DB_PATH } from '#lib/server/contact-store.js';
 import { contact } from '#lib/content/copy.js';
+import { LAUNCHED } from '#lib/launch.js';
 import type { RequestHandler } from './$types';
 
 // 'invite' is /contact?intent=invite: a request to be let into one of the
 // invitation-only services. (QNix interest has its own endpoint: /api/qnix.)
-const KINDS = ['contact', 'invite'];
+// Once LAUNCHED the invite kind is refused (lib/launch.ts); the handling below stays.
+const KINDS = LAUNCHED ? ['contact'] : ['contact', 'invite'];
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 export const POST: RequestHandler = async ({ request, getClientAddress }) => {

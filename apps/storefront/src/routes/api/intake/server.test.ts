@@ -19,6 +19,7 @@ vi.mock('#lib/server/discord.js', async (importOriginal) => ({
 }));
 
 import { POST } from './+server';
+import { LAUNCHED } from '#lib/launch.js';
 import { MAX_PER_WINDOW } from '#lib/server/rate-limit.js';
 import { getDb } from '#lib/server/contact-store.js';
 
@@ -82,7 +83,9 @@ describe('POST /api/intake', () => {
 		for (const pii of ['alex@example.com', 'Alex', 'bot please']) expect(text).not.toContain(pii);
 	});
 
+	// Once LAUNCHED the invite kind is closed: these two tests then assert the refusal instead.
 	it('invite relay is "New invite request #<id> · <product>"', async () => {
+		if (LAUNCHED) return expect(await status(call({ ...good, kind: 'invite', product: 'umbermark' }))).toBe(400);
 		await call({ ...good, kind: 'invite', product: 'umbermark' });
 		const [, text] = postDiscord.mock.calls[0] as any[];
 		expect(text).toMatch(/^New invite request #\d+ · Umbermark$/);
@@ -101,6 +104,7 @@ describe('POST /api/intake', () => {
 	});
 
 	it('accepts an invite with an email and a service but no use line', async () => {
+		if (LAUNCHED) return expect(await status(call({ kind: 'invite', email: 'a@example.com', product: 'render', message: '', website: '' }))).toBe(400);
 		const res = (await call({ kind: 'invite', email: 'a@example.com', product: 'render', message: '', website: '' })) as Response;
 		expect(res.status).toBe(200);
 		expect(getDb(':memory:').prepare('SELECT product, kind FROM messages').get()).toEqual({ product: 'render', kind: 'invite' });

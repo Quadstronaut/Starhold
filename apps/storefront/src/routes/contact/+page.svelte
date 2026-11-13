@@ -38,14 +38,14 @@
 </section>
 
 <section class="section section-divided reveal">
-	<h2>{isInvite ? 'Invite request' : 'Send a message'}</h2>
+	<h2>{isInvite ? contact.inviteHeading : 'Send a message'}</h2>
 	{#if isInvite}
 		<!-- Keyed on the preselected product so a client-side hop between two
 		     ?product= links re-seeds the select instead of keeping the old one. -->
 		{#key data.product}
 			<IntakeForm
 				kind="invite"
-				cta="Request an invite"
+				cta={contact.inviteCta}
 				products={contact.products}
 				productLabel={contact.productLabel}
 				product={data.product}

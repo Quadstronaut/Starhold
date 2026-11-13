@@ -6,6 +6,7 @@
 // The first manifest entry is the no-JS / server-render fallback; the browser re-rolls on mount
 // (same rule as brand/errors/err-pool.js: ?img=<id> forces one entry, otherwise random).
 import copyJson from './error-copy.json';
+import { LAUNCHED } from './launch';
 
 export type ErrEntry = {
 	id: string;
@@ -33,7 +34,9 @@ export const errContact = copyJson.contact;
 /** Title and explanation for a status; any code without its own entry gets `default`. */
 export function copyFor(status: number): ErrCopy {
 	const codes = copyJson.codes as Record<string, { title: string; explanation: string }>;
-	const c = codes[String(status)] ?? codes.default;
+	// STAR-142: once LAUNCHED, copy.json's "launched" entries replace the same code (the 401 sign-in line).
+	const launched = (copyJson as unknown as { launched?: Record<string, { title: string; explanation: string }> }).launched;
+	const c = (LAUNCHED ? launched?.[String(status)] : undefined) ?? codes[String(status)] ?? codes.default;
 	return { code: String(status), title: c.title, explanation: c.explanation };
 }
 
