@@ -4,9 +4,9 @@ import { describe, it, expect } from 'vitest';
 import { read, templateText } from './_helpers';
 
 const PAGES = {
-	terms: 'src/routes/legal/terms/+page.svelte',
-	privacy: 'src/routes/legal/privacy/+page.svelte',
-	refunds: 'src/routes/legal/refunds/+page.svelte'
+	terms: 'src/lib/legal/terms.launched.svelte',
+	privacy: 'src/lib/legal/privacy.launched.svelte',
+	refunds: 'src/lib/legal/refunds.launched.svelte'
 } as const;
 
 const raw = (k: keyof typeof PAGES) => read(PAGES[k]);
@@ -15,15 +15,19 @@ const text = (k: keyof typeof PAGES) => templateText(raw(k)).replace(/ ([,.;])/g
 const CARVE_OUT = 'Nothing here limits rights you have under the consumer law where you live.';
 const Q73 =
 	'We never ask for your password, never send sign-in links by hand, and never look at your account unless you ask us to or the law requires it. Any access is logged.';
-const CHECKOUT = 'Checkout is paused; nothing is for sale today. These rules apply when it reopens.';
+// Launch wording (approved 2026-11-13; shown only when LAUNCHED is true): none of the pre-launch "paused / testing / no sign-in" statements may remain.
+const PRELAUNCH = /checkout is paused|nothing is for sale|when it reopens|under construction|testing period|no sign-in is open|until starhold account exists|once the account opens|once plans open/i;
 const Q71 =
 	"If the report fails or isn't what we described, ask within 14 days and we refund it in full. EU/UK buyers keep their legal withdrawal rights.";
 
 describe('legal pages · all three', () => {
 	for (const k of Object.keys(PAGES) as (keyof typeof PAGES)[]) {
-		it(`${k}: dated 2026-10-24, says Starhold not Starhold Software`, () => {
-			expect(text(k)).toContain('Last updated 2026-10-24');
+		it(`${k}: dated 2026-11-13, says Starhold not Starhold Software`, () => {
+			expect(text(k)).toContain('Last updated 2026-11-13');
 			expect(raw(k)).not.toMatch(/Starhold Software/);
+		});
+		it(`${k}: no pre-launch wording`, () => {
+			expect(text(k)).not.toMatch(PRELAUNCH);
 		});
 		it(`${k}: none of the retired or banned wording`, () => {
 			for (const banned of [/Stripe/i, /Managed Ops/i, /hourly/i, /class[- ]action waiver/i, /continued use/i, /JoJo/i, /QuadstroNot/i, /QFlix/i, /\bcart\b/i, /gatus/i, /Postmark/i, /Turnstile/i, /Scaleway/i])
@@ -38,9 +42,9 @@ describe('terms', () => {
 			'Copper Jerky LLC, an Arizona limited liability company doing business as Starhold'
 		);
 	});
-	it('has the testing-period clause and the consumer-rights carve-out', () => {
+	it('has the service-status clause and the consumer-rights carve-out', () => {
 		expect(text('terms')).toContain(
-			'Starhold is under construction. Everything here is online for development and testing only, may change or break without notice, and is provided as-is with no warranty. Don\'t rely on it for anything important. Your privacy rights still apply.'
+			'Features may change as we build (see section 16). The services are provided as-is, as section 12 explains. Your privacy rights still apply.'
 		);
 		expect(text('terms')).toContain(CARVE_OUT);
 	});
@@ -58,9 +62,8 @@ describe('terms', () => {
 		expect(t).toContain('does not count as agreeing');
 		expect(t).toContain('refund the unused part');
 	});
-	it('says checkout is paused, names the merchant of record, carves out open source (B1, M4, M7)', () => {
+	it('names the merchant of record, carves out open source (B1, M4, M7)', () => {
 		const t = text('terms');
-		expect(t).toContain(CHECKOUT);
 		expect(t).toContain('The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side.');
 		expect(t).toContain('Our open-source code is covered by its own licence (for example MIT); these terms cover the hosted services.');
 	});
@@ -72,15 +75,20 @@ describe('privacy', () => {
 		expect(t()).toContain(Q73);
 		expect(t()).toContain('Postal address: available on request at legal@starhold.dev until our registered business address is published.');
 		expect(t()).toContain('Data is stored in the United States');
-		expect(t()).toContain('Umbermark, in early access with paid plans through Polar');
+		expect(t()).toContain('Umbermark, with paid plans through Polar');
 	});
 	it('names exactly the wired vendors; no unfilled placeholders remain (STAR-142 B3)', () => {
-		for (const v of ['Discord', 'Polar', 'Patreon', 'Backblaze B2', 'OVH']) expect(t()).toContain(v);
+		for (const v of ['Discord', 'Polar', 'Google', 'Patreon', 'Backblaze B2', 'OVH']) expect(t()).toContain(v);
 		expect(t()).not.toMatch(/\[[^\]]*(lawyer|pending|POSTAL|transfer mechanism)[^\]]*\]/i);
-		expect(t().match(/standard contractual terms \(see section 5\)/g)?.length).toBe(5);
+		expect(t().match(/standard contractual terms \(see section 5\)/g)?.length).toBe(6);
 		expect(t()).toContain(
 			'Transfers to our US processors rely on each processor\'s standard contractual terms; we are completing our transfer documentation with counsel.'
 		);
+	});
+	it('names Google as sign-in provider and states only what is true about scopes and email', () => {
+		expect(t()).toContain('Google learns that you signed in to Starhold');
+		expect(t()).toContain('only if you tick the optional box to share it');
+		expect(t()).toContain('We do not request your name, and we never receive your password.');
 	});
 	it('carries the grep-able email-provider stub marker', () => {
 		expect(raw('privacy')).toContain('<!-- VENDOR-STUB: email provider -->');
@@ -122,9 +130,8 @@ describe('privacy', () => {
 			'Your message is encrypted with a public key before it is stored; only an offline key held by the operator can read it. Discord receives only the ticket number and the service name'
 		);
 	});
-	it('export and delete are by hand, no sign-in is open (B2)', () => {
-		expect(t()).toContain('export and delete are by request to privacy@starhold.dev, done by hand within 30 days');
-		expect(t()).toContain('No sign-in is open today.');
+	it('export and delete are self-service, with the email fallback (B2)', () => {
+		expect(t()).toContain('You can export and delete your data yourself from the account page. If you cannot, write to privacy@starhold.dev and we will do it within 30 days.');
 		expect(t()).not.toMatch(/from the dashboard|we send your sign-in link/i);
 	});
 	it('email statement agrees with the QNix notice (M6)', () => {
@@ -145,10 +152,9 @@ describe('privacy', () => {
 });
 
 describe('refunds', () => {
-	it('opens with the checkout state and the by-hand deletion rule (B1, B2, M4)', () => {
+	it('has the self-service deletion rule with email fallback, and the merchant of record (B1, B2, M4)', () => {
 		const t = text('refunds');
-		expect(t).toContain(CHECKOUT);
-		expect(t).toContain('deletion is by request to privacy@starhold.dev, done by hand within 30 days');
+		expect(t).toContain('You can delete your account yourself from the account page. If you cannot, write to privacy@starhold.dev and we will do it within 30 days.');
 		expect(t).toContain('The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side.');
 	});
 	it('one-off wording (Q71) and carve-out', () => {
