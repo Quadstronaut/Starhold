@@ -37,7 +37,7 @@
 			<tr><td>Email for the QNix notice.</td><td>Send one email when QNix opens.</td><td>Consent</td></tr>
 			<tr><td>Starhold Account details: your sign-in (through Google), your plan, and your email address only if you choose to share it at sign-in.</td><td>Run your account.</td><td>Contract</td></tr>
 			<tr><td>Purchase record: amount, date, provider reference. No content.</td><td>Keep the books and meet tax law.</td><td>Legal obligation</td></tr>
-			<tr><td>Patreon membership status, if you back our work.</td><td>Know who has backed the work.</td><td>Consent</td></tr>
+			<tr><td>Patreon membership status and tier, if you back our work.</td><td>Know who has backed the work and at which tier.</td><td>Consent</td></tr>
 			<tr><td>Backups of the above.</td><td>Recover from disk or host loss.</td><td>Legitimate interests</td></tr>
 		</tbody>
 	</table>
@@ -65,7 +65,7 @@
 			<tr><td>Discord</td><td>Our Discord server and apps. It receives the ticket notice for a contact message, and whatever you post in Discord, under <a href="https://discord.com/privacy" target="_blank" rel="noopener">Discord's Privacy Policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Polar</td><td>Payment provider and merchant of record for sales. It takes your payment and keeps its own records, under <a href="https://polar.sh/legal/privacy" target="_blank" rel="noopener">its privacy policy</a>. We keep only the order reference and plan.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Google</td><td>Sign-in provider for the Starhold Account. Google learns that you signed in to Starhold, under <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. We ask Google only to confirm who you are, and we receive Google's account identifier for you. We receive your Google account email address only if you tick the optional box to share it, and we keep it only if Google confirms it is verified. We do not request your name, and we never receive your password.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
-			<tr><td>Patreon</td><td>Payment platform for people who choose to back our work. We receive your membership status from it. Backing buys no perks.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
+			<tr><td>Patreon</td><td>Payment platform for people who choose to back our work. We receive your membership status and tier from it. If you connect Discord to Patreon, Patreon gives you a role in the Starhold Discord named after your tier. Backing buys nothing else: no product access, no discounts and no special support.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Backblaze B2</td><td>Off-site storage of backups.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>OVH</td><td>Hosting. We rent the servers our services run on and administer them ourselves.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 		</tbody>

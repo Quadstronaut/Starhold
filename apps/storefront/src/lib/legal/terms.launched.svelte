@@ -35,8 +35,8 @@
 	<h2>8. Discord apps</h2>
 	<p>Discord apps from Starhold are software. Buying or using one gives you the software, not membership in or access to any community, server or channel. We never sell access to a community.</p>
 
-	<h2>9. Donations and backing the work</h2>
-	<p>If you back our work through Patreon or a similar platform, it is a donation to support the work. It buys no perks, no product access and no special support. Backing is optional and does not change what any product costs or does.</p>
+	<h2>9. Backing the work</h2>
+	<p>If you back our work through Patreon or a similar platform, it is support for the work, not a purchase, and it is not tax-deductible. As a thank-you, backers get a role in the Starhold Discord named after their tier, and nothing else. There is no backer-only room; the Discord is open to everyone. Backing buys no product access, no discounts and no special support, and does not change what any product costs or does. Backing is optional.</p>
 
 	<h2>10. Ownership</h2>
 	<p>We own the services, including the software, designs and content we provide. All rights are reserved. Our open-source code is covered by its own licence (for example MIT); these terms cover the hosted services. We give you a limited, non-exclusive, non-transferable, revocable license to use the services while you follow these terms. You keep ownership of your own content, and you give us only the permission we need to run the service for you. If you send us feedback, we may use it to improve the services without owing you anything for it.</p>

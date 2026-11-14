@@ -1,6 +1,7 @@
 // STAR-142: legal documents in both launch states, and their plain-text twins.
 //   prelaunch : the sources are byte-for-byte what origin/master served before the switch existed.
-//   launched  : the text the operator approved on 2026-11-13, pinned by the same hash Starhold Account's
+//   launched  : the text the operator approved on 2026-11-13, with Terms section 9 and the two Patreon rows of the
+//               Privacy Policy as approved on 2026-11-14 (STAR-272 option C: a tier-named Discord role, nothing else), pinned by the same hash Starhold Account's
 //               release gate computes (gate.legal_hash), so the served text can be checked against it.
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
 import { describe, it, expect, vi, afterEach } from 'vitest';
@@ -31,8 +32,8 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // The approved launch text, as legal_hash sees the served /legal/<name>.txt. Changing the wording changes these:
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
-	terms: '1cf193aaf9b845494bb005059d422db45d96cdc0072e99d0199342fa408c3ebe',
-	privacy: 'd6768bd970bfbdfc6660d5412f1aeaef5a386cf85a5b6830b4a2892319069b1b',
+	terms: 'f26d0227a39c4fbbcc8c5d94667715ae97bc8d71becff5d69f4e23f14e18986d',
+	privacy: '0b702daf6bda4790184d035feeb07d664e5606ecd93dcff8aea4c0e2a24c9894',
 	refunds: '32f9205ed3c603e7e9ba10264679f55d0989172b282fcdbee01bab69e92bf24e'
 };
 

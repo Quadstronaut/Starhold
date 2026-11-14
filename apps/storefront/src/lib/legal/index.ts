@@ -2,7 +2,7 @@
 //
 // Each document exists twice, as a content component:
 //   <name>.prelaunch.svelte  today's live text (checkout paused, no sign-in).
-//   <name>.launched.svelte   the launch text the operator approved on 2026-11-13.
+//   <name>.launched.svelte   the launch text the operator approved on 2026-11-13 (backing wording: 2026-11-14, STAR-272).
 // pick() from ../launch chooses by the one launch switch. The HTML pages
 // (routes/legal/<name>/+page.svelte) and the plain-text endpoints
 // (routes/legal/<name>.txt/+server.ts) both read `documents` below, so the page

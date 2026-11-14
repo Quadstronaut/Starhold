@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { LAUNCHED, pick, ACCOUNT_URL } from './_launch';
 
 // Home structure after the STAR-145 redesign (brief section 3).
 
@@ -16,7 +17,12 @@ test('services: four groups in Hangar order, a label chip on every card', async 
 	await expect(cards).toHaveCount(7);
 	const tags = await cards.locator('.tag').allTextContents();
 	for (const t of tags)
-		expect(['Open · free', 'Open · early access, paid plans', 'Invitation only', 'In development', 'Retired']).toContain(t);
+		expect(
+			pick(
+				['Open · free', 'Open · early access, paid plans', 'Invitation only', 'In development', 'Retired'],
+				['Open · free', 'Open', 'Open · paid plans', 'In development', 'Retired']
+			)
+		).toContain(t);
 	// QNix sits under Personal hosting as In development, linking to its interest form
 	const qnix = cards.filter({ hasText: 'QNix' });
 	await expect(qnix.locator('.tag')).toHaveText('In development');
@@ -42,18 +48,24 @@ test('faq: six native details work without JS and JSON-LD mirrors them', async (
 	await ctx.close();
 });
 
-test('closing band: heading, Request an invite and Read the docs, nothing else', async ({ page }) => {
+test('closing band: heading, the primary call to action and Read the docs, nothing else', async ({ page }) => {
 	await page.goto('/');
 	const band = page.locator('#start');
-	await expect(band.getByRole('link')).toHaveText(['Request an invite', 'Read the docs']);
+	await expect(band.getByRole('link')).toHaveText([pick('Request an invite', 'Get started'), 'Read the docs']);
 });
 
-test('header and footer follow the brief; no Sign in anywhere', async ({ page }) => {
+test('header and footer follow the brief; Sign in shows only once sign-in works', async ({ page }) => {
 	await page.goto('/');
 	const header = page.locator('header nav');
 	await expect(header.locator('ul.primary > li:not(.drawer-only) a')).toHaveText(['Services', 'Principles', 'Questions', 'Hangar', 'Docs']);
-	await expect(page.locator('header .header-cta')).toHaveText('Request an invite');
-	await expect(page.getByRole('link', { name: /sign in/i })).toHaveCount(0);
+	await expect(page.locator('header .header-cta')).toHaveText(pick('Request an invite', 'Get started'));
+	await expect(page.locator('header .header-cta')).toHaveAttribute('href', pick('/invite', '/#services'));
+	const signIn = page.getByRole('link', { name: /sign in/i });
+	if (LAUNCHED) {
+		// Every Sign in link goes to the Starhold Account, and there is at least one.
+		expect(await signIn.count()).toBeGreaterThan(0);
+		for (const a of await signIn.all()) await expect(a).toHaveAttribute('href', ACCOUNT_URL);
+	} else await expect(signIn).toHaveCount(0);
 	const footer = page.locator('footer');
 	await expect(footer.getByRole('link', { name: 'Back the work' })).toBeVisible();
 	await expect(footer.getByRole('link', { name: /discord/i })).toHaveCount(0);
@@ -75,9 +87,11 @@ test('/shush says what the game really does and does not cross-promote', async (
 	await expect(page.locator('main a[href*="starhold"]')).toHaveCount(0);
 });
 
-test('/account is a stub with the In development chip and no form', async ({ page }) => {
+test('/account states the real state of the account, with its chip and no form', async ({ page }) => {
 	await page.goto('/account');
-	await expect(page.getByText('Starhold Account is in development.')).toBeVisible();
-	await expect(page.locator('main .tag')).toHaveText('In development');
+	await expect(page.getByText(pick('Starhold Account is in development.', 'One account for every Starhold service.'))).toBeVisible();
+	await expect(page.locator('main .tag')).toHaveText(pick('In development', 'Open'));
+	await expect(page.locator('main .btn-primary')).toHaveText(pick('Request an invite', 'Sign in'));
+	await expect(page.locator('main .btn-primary')).toHaveAttribute('href', pick('/invite', ACCOUNT_URL));
 	await expect(page.locator('main form')).toHaveCount(0);
 });

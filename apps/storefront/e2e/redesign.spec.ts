@@ -5,6 +5,7 @@ import { test, expect, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { join, dirname } from 'node:path';
+import { LAUNCHED, pick, ACCOUNT_URL } from './_launch';
 
 const APP_ROOT = join(dirname(fileURLToPath(new URL(import.meta.url))), '..');
 const json = (rel: string) => JSON.parse(readFileSync(join(APP_ROOT, rel), 'utf8'));
@@ -40,6 +41,14 @@ const countTerms = (text: string, terms: string[]) =>
 	);
 
 const bodyText = (page: Page) => page.locator('body').innerText();
+
+/** Page text with each service's availability line removed. Those lines are the one place a price
+ *  may stand once paid plans are on sale; they are checked word for word against
+ *  docs/shared/availability.json by the STAR-142 test at the end of this file. */
+async function textOutsideAvailability(page: Page): Promise<string> {
+	const lines = await page.getByTestId('availability').allInnerTexts();
+	return lines.reduce((s, l) => s.replace(l, ''), await bodyText(page));
+}
 
 /** WCAG relative luminance from a computed `rgb(r, g, b)` string. */
 function luminance(css: string): number {
@@ -90,20 +99,35 @@ test('B1.2 hero, both CTAs, and a proof signal sit above the 800px fold', async 
 	}
 });
 
-test('B1.3 the CTA pair points at the invite form and at the services list', async ({ page }) => {
+test('B1.3 the CTA pair points at the open door and at the next step', async ({ page }) => {
 	await page.goto('/');
 	const primary = page.getByTestId('cta-primary');
 	const secondary = page.getByTestId('cta-secondary');
-	expect(await primary.getAttribute('href')).toBe('/invite');
-	expect(await secondary.getAttribute('href')).toBe('/#services');
+	// Before launch: invite form, then the services list. After: the services list, then sign-in.
+	expect(await primary.getAttribute('href')).toBe(pick('/invite', '/#services'));
+	expect(await secondary.getAttribute('href')).toBe(pick('/#services', ACCOUNT_URL));
+	if (LAUNCHED) {
+		await expect(primary).toHaveText('Get started');
+		await expect(secondary).toHaveText('Sign in');
+		await primary.click();
+		await expect(page).toHaveURL(/\/#services$/);
+		await expect(page.locator('#services')).toBeVisible();
+		return;
+	}
 
 	await primary.click();
 	await expect(page.getByRole('button', { name: /request an invite/i })).toBeVisible();
 	await expect(page.getByRole('combobox', { name: /service/i })).toBeVisible();
 });
 
-test('B1.3b a service card preselects its service on the invite form', async ({ page }) => {
+test('B1.3b a service card preselects its service on the invite form (closed after launch)', async ({ page }) => {
 	await page.goto('/invite?service=render');
+	if (LAUNCHED) {
+		// The invite flow is closed: the old link lands on the service list and serves no form.
+		await expect(page).toHaveURL(/\/#services$/);
+		await expect(page.getByRole('combobox', { name: /service/i })).toHaveCount(0);
+		return;
+	}
 	await expect(page.getByRole('combobox', { name: /service/i })).toHaveValue('render');
 	// an unknown service is ignored, not trusted: the placeholder stays selected
 	await page.goto('/invite?service=nope');
@@ -186,7 +210,7 @@ test('B3.2 every number on a marketing page is derived, except the founding year
 	]);
 	for (const route of MARKETING) {
 		await page.goto(route);
-		const numbers = ((await bodyText(page)).match(/\d+/g) ?? []).filter((n) => !allowed.has(n));
+		const numbers = ((await textOutsideAvailability(page)).match(/\d+/g) ?? []).filter((n) => !allowed.has(n));
 		expect(numbers, route + ' renders an undocumented number').toEqual([]);
 	}
 });
@@ -210,9 +234,11 @@ test('B3.3 the home page carries a proof strip of 3-5 checkable outbound links',
 
 // ═══ B4 · information architecture ══════════════════════════════════════════
 
-test('B4.2 no price string renders anywhere on the home page', async ({ page }) => {
+test('B4.2 no price string renders on the home page outside the availability lines', async ({ page }) => {
 	await page.goto('/');
-	const text = await bodyText(page);
+	const text = await textOutsideAvailability(page);
+	// Before launch nothing is for sale, so the availability lines carry no price either.
+	if (!LAUNCHED) expect(await bodyText(page)).not.toMatch(/\$\s?\d/);
 	expect(text).not.toMatch(/\$\s?\d/);
 	expect(text).not.toMatch(/\b\d+\s*\/\s*(mo|month)\b/i);
 });

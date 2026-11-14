@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { pick } from './_launch';
 
 // Tier A · A5 — presence acceptance. Proves the redesign degrades safely
 // (no JS, reduced motion), stays clean (no errors, no failed requests), stays
@@ -80,7 +81,8 @@ for (const [name, size] of [
 		await page.setViewportSize(size);
 		await page.goto('/');
 		await page.waitForLoadState('networkidle');
-		await expect(page).toHaveScreenshot(`home-${name}.png`, {
+		// The home page reads differently once launched, so each state keeps its own baseline.
+		await expect(page).toHaveScreenshot(`home-${name}${pick('', '-launched')}.png`, {
 			fullPage: true,
 			animations: 'disabled',
 			maxDiffPixelRatio: 0.02

@@ -57,7 +57,12 @@ describe('terms', () => {
 		expect(t).toContain('merchant of record');
 		expect(t).toContain('your contract of sale is with the provider');
 		expect(t).toContain('not membership in or access to any community');
-		expect(t).toContain('buys no perks');
+		// STAR-272 option C (operator, 2026-11-14): support, not a donation; a tier-named Discord role and nothing else.
+		expect(t).toContain('it is support for the work, not a purchase, and it is not tax-deductible');
+		expect(t).toContain('backers get a role in the Starhold Discord named after their tier, and nothing else');
+		expect(t).toContain('There is no backer-only room; the Discord is open to everyone.');
+		expect(t).toContain('Backing buys no product access, no discounts and no special support');
+		expect(t).not.toMatch(/donation|no perks|patron-lounge/i);
 		expect(t).toContain('only to your misuse or illegal use');
 		expect(t).toContain('does not count as agreeing');
 		expect(t).toContain('refund the unused part');
