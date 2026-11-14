@@ -24,7 +24,7 @@ describe('shared product labels', () => {
 	it('pins the arbiter-ruled label for every product (STAR-145 ruling 1)', () => {
 		expect(PRODUCT_LABELS).toEqual({
 			umbermark: LAUNCHED ? 'Open · paid plans' : 'Open · early access, paid plans',
-			zenithmark: LAUNCHED ? 'Open' : 'Open · free',
+			zenithmark: LAUNCHED ? 'Open · paid plans' : 'Open · free',
 			shushgame: 'Open · free',
 			render: LAUNCHED ? 'Open · paid plans' : 'Invitation only',
 			status: LAUNCHED ? 'Open · paid plans' : 'Invitation only',

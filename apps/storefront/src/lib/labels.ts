@@ -49,7 +49,7 @@ export const PRODUCT_LABELS: Record<string, Label> = pick<Record<string, Label>>
 	},
 	{
 		umbermark: LABEL_OPEN_PAID_LAUNCHED,
-		zenithmark: LABEL_OPEN,
+		zenithmark: LABEL_OPEN_PAID_LAUNCHED,
 		render: LABEL_OPEN_PAID_LAUNCHED,
 		status: LABEL_OPEN_PAID_LAUNCHED,
 		account: LABEL_OPEN, // Starhold Account: sign in with Google at ACCOUNT_URL

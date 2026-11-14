@@ -83,7 +83,7 @@ describe('launch switch', () => {
 		it('the four products and the account read Open, the rest are untouched', async () => {
 			const { labels, copy } = await load(true);
 			for (const id of [...OPEN_PRODUCTS, 'account'])
-				expect(labels.labelFor(id), id).toBe(['umbermark', 'render', 'status'].includes(id) ? 'Open · paid plans' : 'Open');
+				expect(labels.labelFor(id), id).toBe(['umbermark', 'render', 'status', 'zenithmark'].includes(id) ? 'Open · paid plans' : 'Open');
 			expect(labels.labelFor('shushgame')).toBe('Open · free');
 			expect(labels.labelFor('starbot')).toBe('In development');
 			expect(labels.labelFor('qnix')).toBe('In development');
@@ -92,14 +92,14 @@ describe('launch switch', () => {
 			for (const s of copy.serviceItems) expect(s.status, s.id).toBe(labels.labelFor(s.id));
 		});
 
-		it('states the agreed prices, and no Zenithmark price', async () => {
+		it('states the agreed prices, Zenithmark included (STAR-64)', async () => {
 			const { avail, copy } = await load(true);
 			expect(avail.availabilityFor('render')).toContain('Hobby $5, Pro $19, Scale $49 a month');
 			expect(avail.availabilityFor('status')).toContain('Private $15, MSP $29 a month');
 			expect(avail.availabilityFor('umbermark')).toContain('report $5 one-off, Pro $19 a month');
-			expect(avail.availabilityFor('zenithmark')).toBe('Open');
+			expect(avail.availabilityFor('zenithmark')).toContain('monitoring $9 or $29 a month');
 			const zen = copy.serviceItems.find((s) => s.id === 'zenithmark')!;
-			expect(JSON.stringify(zen)).not.toMatch(/\$\d/);
+			expect(zen.availability).toBe(avail.availabilityFor('zenithmark'));
 		});
 
 		it('sends people to sign in or to the services, never to an invite', async () => {

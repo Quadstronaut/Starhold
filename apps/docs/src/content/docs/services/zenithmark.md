@@ -1,19 +1,19 @@
 ---
 title: Zenithmark
-description: Mail and DNS scorecard for a domain. Open.
+description: Mail and DNS scorecard for a domain. Open, paid plans.
 sidebar:
   order: 3
 ---
 
 **A mail and DNS scorecard for any domain.** Enter a domain and get a report on SPF, DKIM, DMARC, MX, MTA-STS, TLS, DNSSEC, CAA and BIMI.
 
-- **State:** Open.
-- **Availability:** Open.
+- **State:** Open · paid plans.
+- **Availability:** Open: free scorecard; monitoring $9 or $29 a month.
 - **Where:** [zenithmark.starhold.app](https://zenithmark.starhold.app)
 
 ## How to get in
 
-The scorecard needs no account. Open the site and enter a domain. Daily monitoring, where it is on sale, needs a sign-in with a [Starhold Account](https://starship.starhold.app).
+The scorecard needs no account. Open the site and enter a domain. Daily monitoring with the DMARC report inbox is a paid plan: Monitor is $9 a month for 1 domain and Monitor 5 is $29 a month for 5 domains, on the [plans page](https://zenithmark.starhold.app/plans). Sign in with your [Starhold Account](https://starship.starhold.app) to buy and manage a plan. Paid plans are on sale. These rules apply to every purchase.
 
 ## Fair terms and privacy defaults
 
