@@ -1,29 +1,28 @@
 ---
 title: Render
-description: OG image, PDF and screenshot API. Invitation only.
+description: OG image, PDF and screenshot API. Open, paid plans.
 sidebar:
   order: 4
 ---
 
 **An API that turns a page or HTML into an OG image, a PDF or a screenshot.**
 
-- **State:** Invitation only.
-- **Availability:** Free tier open; sign-in and checkout closed.
+- **State:** Open · paid plans.
+- **Availability:** Open: free tier; Hobby $5, Pro $19, Scale $49 a month.
 - **Where:** [render.starhold.app](https://render.starhold.app)
 
 ## How to get in
 
-Signup is closed. Sign-in and checkout are not open yet. Invitations are sent by hand: ask through the [contact form](https://starhold.dev/contact?intent=invite) and we reply by hand. Checkout is paused; nothing is for sale today. These rules apply when it reopens. Four plans, from $0 to $49 a month, are on the [pricing page](https://render.starhold.app/pricing); Free is 50 renders a month with a small watermark.
+Sign in with your [Starhold Account](https://starship.starhold.app), then use the API on the free tier or buy a paid plan. The four plans are Free, Hobby $5, Pro $19 and Scale $49 a month, on the [pricing page](https://render.starhold.app/pricing); Free is 50 renders a month with a small watermark. Paid plans are on sale. These rules apply to every purchase.
 
 ## Fair terms and privacy defaults
 
 - **Your content is not kept:** the pages, HTML and images you render live in a cache for at most 24 hours. Logs hold no page content, URL paths, queries or parameter values.
 - **No trackers.**
-- **Export and delete:** by request to privacy@starhold.dev, done by hand within 30 days. No sign-in is open today, so there is no dashboard yet.
+- **Export and delete:** from your [Starhold Account](https://starship.starhold.app): sign in, then export your data or delete your account.
 - **Hard limits, clear errors:** over a limit you get a 4xx with the limit named. No plan jumps the queue; plans differ in how many renders run at once.
 - **No surprise charges:** at your allowance renders stop; nothing upgrades without your click.
 
-## Not there yet
+## Cancel any time
 
-- **Sign-in emails** are not sent automatically yet. Invitations are sent by hand.
-- **Cancel with a prorated refund** is built and tested against Polar's sandbox, not yet on a live purchase.
+- **Cancel with a prorated refund** through the Polar customer portal. The [refund terms](https://starhold.dev/legal/refunds) apply.

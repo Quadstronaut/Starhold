@@ -13,6 +13,6 @@
   "community": [
     { "label": "Discord", "href": "https://discord.gg/Ug8CM86Bxv" }
   ],
-  "cta": { "label": "Request an invite", "href": "https://starhold.dev/contact?intent=invite" },
+  "cta": { "label": "Get started", "href": "https://starhold.dev/#services" },
   "contact": "hello@starhold.dev"
 }

@@ -13,7 +13,7 @@
 //     "Launch day").
 // Flip it, run the proof in deploy/DEPLOY.md, deploy. Nothing else to hand-edit.
 // ─────────────────────────────────────────────────────────────────────────────
-export const LAUNCHED = false;
+export const LAUNCHED = true;
 
 /** Pick the value for the current state. Both arguments are plain data. */
 export function pick<T>(off: T, on: T): T {

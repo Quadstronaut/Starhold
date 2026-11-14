@@ -1,19 +1,19 @@
 ---
 title: Status
-description: Private and white-label status pages for MSPs. Invitation only.
+description: Private and white-label status pages for MSPs. Open, paid plans.
 sidebar:
   order: 5
 ---
 
 **Status pages for MSPs: public, password-protected or white-label.**
 
-- **State:** Invitation only.
-- **Availability:** Public pages open; sign-in closed.
+- **State:** Open · paid plans.
+- **Availability:** Open: free tier; Private $15, MSP $29 a month.
 - **Where:** [status.starhold.app](https://status.starhold.app)
 
 ## How to get in
 
-Sign-in and checkout are not open yet. Invitations are sent by hand: ask through the [contact form](https://starhold.dev/contact?intent=invite) and we reply by hand. Paid plans are not open. Checkout is paused; nothing is for sale today. These rules apply when it reopens.
+Sign in with your [Starhold Account](https://starship.starhold.app) and create a status page. The free tier is open, and Private ($15 a month) and MSP ($29 a month) are paid plans. Paid plans are on sale. These rules apply to every purchase.
 
 ## What works today
 
@@ -23,9 +23,9 @@ A free public page with components, incidents, scheduled maintenance and monitor
 
 - **No trackers,** including on your customers' pages.
 - **Your content is never logged:** incident text, passwords, tokens and check bodies stay out of the logs.
-- **Export and delete:** by request to privacy@starhold.dev, done by hand within 30 days. No sign-in is open today.
+- **Export and delete:** from your [Starhold Account](https://starship.starhold.app): sign in, then export your data or delete your account.
 - **Hard caps, clear messages:** every limit names itself and its value.
 
-## Not there yet
+## Cancel any time
 
-- **Paid plans and billing** are not open, so cancel and refund terms do not apply yet.
+- **Paid plans** can be cancelled through the Polar customer portal. The [refund terms](https://starhold.dev/legal/refunds) apply.
