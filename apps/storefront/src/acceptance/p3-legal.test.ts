@@ -33,8 +33,9 @@ describe('legal pages · all three', () => {
 		});
 		it(`${k}: none of the retired or banned wording`, () => {
 			for (const banned of [/Stripe/i, /Managed Ops/i, /hourly/i, /class[- ]action waiver/i, /continued use/i, /JoJo/i, /QuadstroNot/i, /QFlix/i, /\bcart\b/i, /gatus/i, /Postmark/i, /Turnstile/i, /Scaleway/i])
-				// Postmark is the wired email provider and is named in the Privacy Policy only (STAR-271).
-				if (!(k === 'privacy' && banned.source === 'Postmark')) expect(raw(k), String(banned)).not.toMatch(banned);
+				// Postmark (email) and Cloudflare Turnstile (bot check on the scan forms) are wired and are named in the
+				// Privacy Policy only (STAR-271, STAR-278).
+				if (!(k === 'privacy' && ['Postmark', 'Turnstile'].includes(banned.source))) expect(raw(k), String(banned)).not.toMatch(banned);
 		});
 	}
 });
@@ -86,9 +87,9 @@ describe('privacy', () => {
 		expect(t()).toContain('Umbermark, with paid plans through Polar');
 	});
 	it('names exactly the wired vendors; no unfilled placeholders remain (STAR-142 B3)', () => {
-		for (const v of ['Discord', 'Polar', 'Google', 'Patreon', 'Postmark', 'Backblaze B2', 'OVH']) expect(t()).toContain(v);
+		for (const v of ['Discord', 'Polar', 'Google', 'Patreon', 'Postmark', 'Cloudflare (Turnstile)', 'Cloudflare (R2)', 'OVH']) expect(t()).toContain(v);
 		expect(t()).not.toMatch(/\[[^\]]*(lawyer|pending|POSTAL|transfer mechanism)[^\]]*\]/i);
-		expect(t().match(/standard contractual terms \(see section 5\)/g)?.length).toBe(7);
+		expect(t().match(/standard contractual terms \(see section 5\)/g)?.length).toBe(8);
 		expect(t()).toContain(
 			'Transfers to our US processors rely on each processor\'s standard contractual terms; we are completing our transfer documentation with counsel.'
 		);

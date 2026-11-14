@@ -67,7 +67,7 @@
 			<tr><td>Patreon</td><td>Payment platform for people who choose to back our work. We receive your membership status and tier from it. If you connect Discord to Patreon, Patreon gives you a role in the Starhold Discord named after your tier. Backing buys nothing else: no product access, no discounts and no special support.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Postmark</td><td>Email delivery. It sends the email our products send you, and receives your email address and the message to do so, under <a href="https://postmarkapp.com/privacy-policy" target="_blank" rel="noopener">its privacy policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Cloudflare (Turnstile)</td><td>Bot check on the Umbermark and Zenithmark scan forms. When you submit a scan, your browser loads Cloudflare's check, and Cloudflare receives your IP address and browser details to decide whether you are a person, under <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare's Privacy Policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
-			<tr><td>Backblaze B2</td><td>Off-site storage of backups.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
+			<tr><td>Cloudflare (R2)</td><td>Off-site storage of backups.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>OVH</td><td>Hosting. We rent the servers our services run on and administer them ourselves.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 		</tbody>
 	</table>
