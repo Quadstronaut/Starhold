@@ -22,8 +22,10 @@ const Q71 =
 
 describe('legal pages · all three', () => {
 	for (const k of Object.keys(PAGES) as (keyof typeof PAGES)[]) {
-		it(`${k}: dated 2026-11-13, says Starhold not Starhold Software`, () => {
-			expect(text(k)).toContain('Last updated 2026-11-13');
+		// Privacy was amended after launch (STAR-271: Postmark named, invite rows gone); the other two keep the approval date.
+		const dated = k === 'privacy' ? '2026-11-14' : '2026-11-13';
+		it(`${k}: dated ${dated}, says Starhold not Starhold Software`, () => {
+			expect(text(k)).toContain(`Last updated ${dated}`);
 			expect(raw(k)).not.toMatch(/Starhold Software/);
 		});
 		it(`${k}: no pre-launch wording`, () => {
@@ -31,7 +33,8 @@ describe('legal pages · all three', () => {
 		});
 		it(`${k}: none of the retired or banned wording`, () => {
 			for (const banned of [/Stripe/i, /Managed Ops/i, /hourly/i, /class[- ]action waiver/i, /continued use/i, /JoJo/i, /QuadstroNot/i, /QFlix/i, /\bcart\b/i, /gatus/i, /Postmark/i, /Turnstile/i, /Scaleway/i])
-				expect(raw(k), String(banned)).not.toMatch(banned);
+				// Postmark is the wired email provider and is named in the Privacy Policy only (STAR-271).
+				if (!(k === 'privacy' && banned.source === 'Postmark')) expect(raw(k), String(banned)).not.toMatch(banned);
 		});
 	}
 });
@@ -83,9 +86,9 @@ describe('privacy', () => {
 		expect(t()).toContain('Umbermark, with paid plans through Polar');
 	});
 	it('names exactly the wired vendors; no unfilled placeholders remain (STAR-142 B3)', () => {
-		for (const v of ['Discord', 'Polar', 'Google', 'Patreon', 'Backblaze B2', 'OVH']) expect(t()).toContain(v);
+		for (const v of ['Discord', 'Polar', 'Google', 'Patreon', 'Postmark', 'Backblaze B2', 'OVH']) expect(t()).toContain(v);
 		expect(t()).not.toMatch(/\[[^\]]*(lawyer|pending|POSTAL|transfer mechanism)[^\]]*\]/i);
-		expect(t().match(/standard contractual terms \(see section 5\)/g)?.length).toBe(6);
+		expect(t().match(/standard contractual terms \(see section 5\)/g)?.length).toBe(7);
 		expect(t()).toContain(
 			'Transfers to our US processors rely on each processor\'s standard contractual terms; we are completing our transfer documentation with counsel.'
 		);
@@ -95,8 +98,9 @@ describe('privacy', () => {
 		expect(t()).toContain('only if you tick the optional box to share it');
 		expect(t()).toContain('We do not request your name, and we never receive your password.');
 	});
-	it('carries the grep-able email-provider stub marker', () => {
-		expect(raw('privacy')).toContain('<!-- VENDOR-STUB: email provider -->');
+	it('names the email provider; the stub marker is gone (STAR-271)', () => {
+		expect(raw('privacy')).not.toContain('VENDOR-STUB');
+		expect(t()).toContain('Postmark Email delivery.');
 	});
 	it('retention table rows with clock starts', () => {
 		const rows: [string, string][] = [
@@ -128,21 +132,25 @@ describe('privacy', () => {
 		expect(t()).toContain('Anonymous');
 		expect(t()).toContain('Pseudonymous');
 		expect(t()).toContain('Deletion works in three layers');
-		expect(t()).toContain('New invite request #id · product');
+		expect(t()).toContain('in a short notice reading "New message #id"');
+		expect(t()).not.toMatch(/invite request|Invite requests|request for an invitation/i);
 	});
 	it('contact-form encryption and Discord boundary (M5)', () => {
 		expect(t()).toContain(
-			'Your message is encrypted with a public key before it is stored; only an offline key held by the operator can read it. Discord receives only the ticket number and the service name'
+			'Your message is encrypted with a public key before it is stored; only an offline key held by the operator can read it. Discord receives only the ticket number, in a short notice'
 		);
 	});
 	it('export and delete are self-service, with the email fallback (B2)', () => {
 		expect(t()).toContain('You can export and delete your data yourself from the account page. If you cannot, write to privacy@starhold.dev and we will do it within 30 days.');
 		expect(t()).not.toMatch(/from the dashboard|we send your sign-in link/i);
 	});
-	it('email statement agrees with the QNix notice (M6)', () => {
+	it('email statement is true after launch and agrees with the QNix notice (M6, STAR-271)', () => {
 		expect(t()).toContain(
-			'We do not send email yet. When QNix opens we will email you once, through a provider we will name on this page first.'
+			'Our products send email through Postmark, from no-reply@starhold.app; replies go to hello@starhold.dev.'
 		);
+		expect(t()).toContain('We send only the email that is required to operate the service and maintain your account: sign-in and account notices, billing and refund notices, and alerts and updates you turned on, such as status-page subscriptions, monitoring alerts and score-drop alerts.');
+		expect(t()).toContain('We do not send marketing email, upsells or newsletters. If you asked to be told when QNix opens, we will email you once.');
+		expect(t()).not.toContain('We do not send email yet');
 	});
 	it('Shush and Starbot rows are marked as built today (M11)', () => {
 		expect(t()).toContain('Shush and Starbot, as built today');

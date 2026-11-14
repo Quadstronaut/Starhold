@@ -3,6 +3,8 @@
 //   launched  : the text the operator approved on 2026-11-13, with Terms section 9 and the two Patreon rows of the
 //               Privacy Policy as approved on 2026-11-14 (STAR-272 option C: a tier-named Discord role, nothing else), pinned by the same hash Starhold Account's
 //               release gate computes (gate.legal_hash), so the served text can be checked against it.
+//               Privacy Policy amended after launch (STAR-271, DRAFT until the operator approves): Postmark named as the
+//               email provider, the invite-request rows removed, dated 2026-11-14.
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { createHash } from 'node:crypto';
@@ -33,7 +35,7 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
 	terms: 'f26d0227a39c4fbbcc8c5d94667715ae97bc8d71becff5d69f4e23f14e18986d',
-	privacy: '0b702daf6bda4790184d035feeb07d664e5606ecd93dcff8aea4c0e2a24c9894',
+	privacy: '38b842fb0a030eee5a30e8cbc9af6c83af413258dcd05f22ec360ad8fa1b02c0',
 	refunds: '32f9205ed3c603e7e9ba10264679f55d0989172b282fcdbee01bab69e92bf24e'
 };
 
@@ -79,9 +81,9 @@ describe('legal documents · launched state', () => {
 				expect(t, w).not.toMatch(new RegExp('\\b' + w + '\\b', 'i'));
 		});
 	}
-	it('dated 2026-11-13; pre-launch keeps master\'s date', () => {
+	it('dated 2026-11-13 (privacy 2026-11-14, STAR-271); pre-launch keeps master\'s date', () => {
 		for (const k of KEYS) {
-			expect(textOf('launched', k)).toContain('Last updated 2026-11-13');
+			expect(textOf('launched', k)).toContain(`Last updated ${k === 'privacy' ? '2026-11-14' : '2026-11-13'}`);
 			expect(textOf('prelaunch', k)).toContain('Last updated 2026-10-24');
 		}
 	});

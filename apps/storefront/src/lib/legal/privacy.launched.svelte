@@ -1,7 +1,7 @@
 <svelte:head><title>Privacy Policy · Starhold</title></svelte:head>
 
 <section class="section legal">
-	<div class="label">Last updated 2026-11-13</div>
+	<div class="label">Last updated 2026-11-14</div>
 	<h1>Privacy Policy</h1>
 
 	<p>This policy says what personal data Starhold collects, why, on what legal basis, who receives it, how long we keep it, and how to use your rights. It covers the Starhold Account, our websites (starhold.dev, starhold.fyi, starhold.app), the contact form and our Discord server. Each product has its own privacy notice for what it adds. Umbermark, with paid plans through Polar, is one of them.</p>
@@ -33,7 +33,6 @@
 			<tr><td>Abuse-prevention records: a keyed hash of your IP address (pseudonymous).</td><td>Stop abuse of free tools.</td><td>Legitimate interests</td></tr>
 			<tr><td>Your IP address, held in memory only.</td><td>Spam control on forms.</td><td>Legitimate interests</td></tr>
 			<tr><td>Contact messages: your name, email and message.</td><td>Answer you.</td><td>Legitimate interests (replying to you)</td></tr>
-			<tr><td>Invite requests.</td><td>Handle your request for an invitation.</td><td>Consent</td></tr>
 			<tr><td>Email for the QNix notice.</td><td>Send one email when QNix opens.</td><td>Consent</td></tr>
 			<tr><td>Starhold Account details: your sign-in (through Google), your plan, and your email address only if you choose to share it at sign-in.</td><td>Run your account.</td><td>Contract</td></tr>
 			<tr><td>Purchase record: amount, date, provider reference. No content.</td><td>Keep the books and meet tax law.</td><td>Legal obligation</td></tr>
@@ -66,12 +65,12 @@
 			<tr><td>Polar</td><td>Payment provider and merchant of record for sales. It takes your payment and keeps its own records, under <a href="https://polar.sh/legal/privacy" target="_blank" rel="noopener">its privacy policy</a>. We keep only the order reference and plan.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Google</td><td>Sign-in provider for the Starhold Account. Google learns that you signed in to Starhold, under <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. We ask Google only to confirm who you are, and we receive Google's account identifier for you. We receive your Google account email address only if you tick the optional box to share it, and we keep it only if Google confirms it is verified. We do not request your name, and we never receive your password.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Patreon</td><td>Payment platform for people who choose to back our work. We receive your membership status and tier from it. If you connect Discord to Patreon, Patreon gives you a role in the Starhold Discord named after your tier. Backing buys nothing else: no product access, no discounts and no special support.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
+			<tr><td>Postmark</td><td>Email delivery. It sends the email our products send you, and receives your email address and the message to do so, under <a href="https://postmarkapp.com/privacy-policy" target="_blank" rel="noopener">its privacy policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Backblaze B2</td><td>Off-site storage of backups.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>OVH</td><td>Hosting. We rent the servers our services run on and administer them ourselves.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 		</tbody>
 	</table>
-	<!-- VENDOR-STUB: email provider -->
-	<p>We do not send email yet. When QNix opens we will email you once, through a provider we will name on this page first.</p>
+	<p>Our products send email through Postmark, from no-reply@starhold.app; replies go to hello@starhold.dev. We send only the email that is required to operate the service and maintain your account: sign-in and account notices, billing and refund notices, and alerts and updates you turned on, such as status-page subscriptions, monitoring alerts and score-drop alerts. We do not send marketing email, upsells or newsletters. If you asked to be told when QNix opens, we will email you once.</p>
 	<p>We also share data when the law requires it through valid legal process, or when needed to protect our rights, our users or the public.</p>
 
 	<h2>5. Where data is stored</h2>
@@ -107,7 +106,7 @@
 	<p>You can export and delete your data yourself from the account page. If you cannot, write to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a> and we will do it within 30 days. Every destructive action asks you to confirm first.</p>
 
 	<h2>8. The contact form and QNix notice</h2>
-	<p>Your message is encrypted with a public key before it is stored; only an offline key held by the operator can read it. Discord receives only the ticket number and the service name, in a short notice reading "New invite request #id · product", with no message body and no email address. We delete the stored message 90 days after we close the conversation, and never later than 12 months after we received it. Our backups drop it within 30 days after that. Discord keeps its own copy of the short notice under its policy. Please do not send passwords or secrets in a message.</p>
+	<p>Your message is encrypted with a public key before it is stored; only an offline key held by the operator can read it. Discord receives only the ticket number, in a short notice reading "New message #id", with no message body and no email address. We delete the stored message 90 days after we close the conversation, and never later than 12 months after we received it. Our backups drop it within 30 days after that. Discord keeps its own copy of the short notice under its policy. Please do not send passwords or secrets in a message.</p>
 	<p>If you ask to be told when QNix opens, we store your email address encrypted. We send you one notice, then delete the address. If QNix has not opened after 24 months, we delete it anyway.</p>
 
 	<h2>9. Our access to your account</h2>
@@ -138,7 +137,7 @@
 	<h2>14. Contact</h2>
 	<p>Copper Jerky LLC, doing business as Starhold — <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
 
-	<p class="label">Last updated 2026-11-13.</p>
+	<p class="label">Last updated 2026-11-14.</p>
 </section>
 
 <style>
