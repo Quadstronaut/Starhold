@@ -36,13 +36,14 @@ test('no third-party hosts anywhere in dist (B3)', () => {
 	}
 });
 
-test('the only font file is /fonts/michroma-latin.woff2, under 30 KB (B2)', () => {
+// STAR-166 added the two IBM Plex faces; the wordmark face is still the only preload-critical one under 30 KB.
+test('the font files are the three fleet faces; michroma is under 30 KB (B2)', () => {
 	const fonts = walk(DIST).filter((f) => /\.(woff2?|ttf|otf|eot)$/.test(f));
 	assert.deepEqual(
 		fonts.map((f) => f.slice(DIST.length).replace(/\\/g, '/')),
-		['/fonts/michroma-latin.woff2']
+		['/fonts/ibm-plex-mono-latin.woff2', '/fonts/ibm-plex-sans-latin.woff2', '/fonts/michroma-latin.woff2']
 	);
-	assert.ok(statSync(fonts[0]).size < 30 * 1024);
+	assert.ok(statSync(fonts.find((f) => f.endsWith('michroma-latin.woff2'))).size < 30 * 1024);
 	for (const route of ['', 'services/umbermark']) {
 		assert.match(page(route), /<link rel="preload" href="\/fonts\/michroma-latin\.woff2" as="font" type="font\/woff2" crossorigin/);
 	}

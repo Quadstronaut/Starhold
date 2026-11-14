@@ -1,6 +1,11 @@
 ---
 title: "2026-10-24: Services and hiring removed, sign-in closed, checkout paused"
+sidebar:
+  order: 2
+  label: "2026-10-24: Services and hiring removed"
 ---
+*This entry is history. Sign-in and checkout opened on 2026-11-14: see [the launch entry](/log/2026-11-14-launch/).*
+
 2026-10-24
 
 **What changed.** We removed the hourly and managed server work and the hiring pages; there is no longer a way to hire us. Sign-in is closed until Starhold Account exists. Checkout is paused; nothing is for sale today. New terms, a new privacy policy and new refund terms are published on starhold.dev. The contact form now sends to an encrypted inbox. The QNix design notes are unpublished and QNix is labelled In development. The retired custom-bot pages are gone, and Shush name colours are free.

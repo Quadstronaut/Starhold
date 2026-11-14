@@ -23,7 +23,7 @@ export const AVAILABILITY: Record<string, string> = pick(
 		qnix: 'Interest form only'
 	},
 	{
-		umbermark: 'Open: free scans; report $5 one-off, Pro $19 a month',
+		umbermark: 'Open: free scans; report $5 one-off; Solo $9, Pro $19, Agency $49 a month',
 		zenithmark: 'Open: free scorecard; monitoring $9 or $29 a month',
 		render: 'Open: free tier; Hobby $5, Pro $19, Scale $49 a month',
 		status: 'Open: free tier; Private $15, MSP $29 a month',

@@ -1,49 +1,30 @@
-# Starlight Starter Kit: Basics
+<div align="center">
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+# 📚 Starhold docs
 
+**The source of [starhold.fyi](https://starhold.fyi): how the Starhold services work, what they support today, and where their limits are.**
+
+[![Astro](https://img.shields.io/badge/Astro-BC52EE?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
+[![Starlight](https://img.shields.io/badge/Starlight-docs-7C3AED?style=flat-square&logo=astro&logoColor=white)](https://starlight.astro.build)
+[![Live](https://img.shields.io/badge/live-starhold.fyi-0D1117?style=flat-square)](https://starhold.fyi)
+
+</div>
+
+| Path | What |
+|---|---|
+| `src/content/docs/services/` | One page per service: state, how to get in, plans, privacy defaults |
+| `src/content/docs/log/` | The dated build log |
+| `src/content/docs/shushgame/` | The Shush player manual |
+| `src/content/docs/open-source/` | Open-source utilities |
+| `src/components/`, `src/styles/` | The Starlight overrides and the shared Starhold look |
+| `tests/` | Checks run against the built site |
+
+```sh
+npm ci
+npm run dev          # local preview
+npm run build        # static site in dist/
+npm run test:fleet   # checks dist/ (run the build first)
 ```
-npm create astro@latest -- --template starlight
-```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro + Starlight project, you'll see the following folders and files:
-
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
-```
-
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
-
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
-
-Static assets, like favicons, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+> [!NOTE]
+> The availability line on each service page is checked by the tests against the same shared source the storefront uses, so a page cannot quietly disagree with it.

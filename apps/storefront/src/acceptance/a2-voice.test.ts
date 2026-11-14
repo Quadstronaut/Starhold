@@ -120,7 +120,7 @@ describe('A2 · voice', () => {
 		expect(collectStrings(copy.shush).join('\n')).toContain('for thirty days, then it drops off');
 		const lines = copy.serviceItems.map((s) => s.availability);
 		expect(lines.every((l) => l.length > 0)).toBe(true);
-		expect(copy.serviceItems.find((s) => s.id === 'umbermark')!.availability).toBe(LAUNCHED ? 'Open: free scans; report $5 one-off, Pro $19 a month' : 'Free scans open; purchases paused');
+		expect(copy.serviceItems.find((s) => s.id === 'umbermark')!.availability).toBe(LAUNCHED ? 'Open: free scans; report $5 one-off; Solo $9, Pro $19, Agency $49 a month' : 'Free scans open; purchases paused');
 		expect(copy.serviceItems.find((s) => s.id === 'umbermark')!.note).toBeUndefined();
 	});
 

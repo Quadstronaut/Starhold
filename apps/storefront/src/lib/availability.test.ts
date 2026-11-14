@@ -15,7 +15,7 @@ describe('availability source', () => {
 	it('every product with an availability line has a label, and the rulings are pinned', () => {
 		for (const id of Object.keys(AVAILABILITY)) expect(PRODUCT_LABELS[id], id).toBeTruthy();
 		expect(AVAILABILITY).toEqual({
-			umbermark: LAUNCHED ? 'Open: free scans; report $5 one-off, Pro $19 a month' : 'Free scans open; purchases paused',
+			umbermark: LAUNCHED ? 'Open: free scans; report $5 one-off; Solo $9, Pro $19, Agency $49 a month' : 'Free scans open; purchases paused',
 			zenithmark: LAUNCHED ? 'Open: free scorecard; monitoring $9 or $29 a month' : 'Open',
 			render: LAUNCHED ? 'Open: free tier; Hobby $5, Pro $19, Scale $49 a month' : 'Free tier open; sign-in and checkout closed',
 			status: LAUNCHED ? 'Open: free tier; Private $15, MSP $29 a month' : 'Public pages open; sign-in closed',
