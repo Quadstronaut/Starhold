@@ -40,8 +40,8 @@ Four tools for builders, sysadmins and teams. Each one says what it does, what i
 |---|---|---|---|---|
 | 🖼️ | [**Solatype**](https://render.starhold.app) | An API that turns a page or HTML into an OG image, a PDF or a screenshot | 50 renders a month, watermarked | $5, $19 or $49 a month |
 | 📟 | [**Heliostat**](https://status.starhold.app) | Status pages for MSPs: public, password-protected or white-label | 1 public page | $15 or $29 a month |
-| 🛡️ | [**Umbermark**](https://umbermark.starhold.app) | A scored hardening report for a Linux server, with a link you can share | Scans | $5 report; $9, $19 or $49 a month |
-| ✉️ | [**Zenithmark**](https://zenithmark.starhold.app) | A mail and DNS scorecard for a domain, with daily monitoring as a paid plan | Scorecard | $9 or $29 a month |
+| 🛡️ | [**Umbermark**](https://serverscanner.starhold.app) | A scored hardening report for a Linux server, with a link you can share | Scans | $5 report; $9, $19 or $49 a month |
+| ✉️ | [**Zenithmark**](https://domainscanner.starhold.app) | A mail and DNS scorecard for a domain, with daily monitoring as a paid plan | Scorecard | $9 or $29 a month |
 
 Prices are in US dollars. The pricing page of each service is the authority; the tables below were copied from them on 2026-11-14.
 
@@ -103,7 +103,7 @@ Scan a Linux server, get a score and a report that explains each finding. A free
 | Agency | $49 a month | Up to 50 saved servers, re-scans daily at most |
 | Enterprise | By email | More than 50 servers: write to hello@starhold.dev |
 
-[Site](https://umbermark.starhold.app) · [Pricing](https://umbermark.starhold.app/pricing)
+[Site](https://serverscanner.starhold.app) · [Pricing](https://serverscanner.starhold.app/pricing)
 
 <a id="zenithmark"></a>
 
@@ -117,7 +117,7 @@ Enter a domain and get a report on SPF, DKIM, DMARC, MX, MTA-STS, TLS, DNSSEC, C
 | Monitor | $9 a month | 1 |
 | Monitor 5 | $29 a month | 5 |
 
-[Site](https://zenithmark.starhold.app) · [Plans](https://zenithmark.starhold.app/plans)
+[Site](https://domainscanner.starhold.app) · [Plans](https://domainscanner.starhold.app/plans)
 
 <details>
 <summary><b>Also on the shelf</b></summary>

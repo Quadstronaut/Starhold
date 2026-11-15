@@ -15,7 +15,7 @@ test('journey 1: a free user goes from the home page to the Hangar', async ({ pa
 	// the services section also points at it
 	await expect(page.locator('#services').getByRole('link', { name: /Hangar/ })).toHaveAttribute('href', 'https://starhold.app');
 	// and the free tool opens on its own host
-	await expect(zenith.getByRole('link', { name: /Open Zenithmark/ })).toHaveAttribute('href', 'https://zenithmark.starhold.app');
+	await expect(zenith.getByRole('link', { name: /Open Zenithmark/ })).toHaveAttribute('href', 'https://domainscanner.starhold.app');
 });
 
 // Before launch the door is the invite form. After launch the invite flow is closed: the same

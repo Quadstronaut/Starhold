@@ -259,8 +259,8 @@ export const serviceItems: Service[] = [
 	{
 		id: 'umbermark',
 		name: 'Umbermark',
-		host: 'umbermark.starhold.app',
-		href: 'https://umbermark.starhold.app',
+		host: 'serverscanner.starhold.app',
+		href: 'https://serverscanner.starhold.app',
 		action: 'Open Umbermark',
 		invite: false,
 		status: labelFor('umbermark'),
@@ -270,8 +270,8 @@ export const serviceItems: Service[] = [
 	{
 		id: 'zenithmark',
 		name: 'Zenithmark',
-		host: 'zenithmark.starhold.app',
-		href: 'https://zenithmark.starhold.app',
+		host: 'domainscanner.starhold.app',
+		href: 'https://domainscanner.starhold.app',
 		action: 'Open Zenithmark',
 		invite: false,
 		status: labelFor('zenithmark'),
