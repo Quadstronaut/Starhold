@@ -1,11 +1,13 @@
 ---
-title: Render
+title: Solatype
 description: OG image, PDF and screenshot API. Open, paid plans.
 sidebar:
   order: 4
 ---
 
 **An API that turns a page or HTML into an OG image, a PDF or a screenshot.**
+
+Solatype was called Render until 2026-11-14. Only the name changed: the address, API paths, keys and `X-Render-*` headers are the same.
 
 - **State:** Open · paid plans.
 - **Availability:** Open: free tier; Hobby $5, Pro $19, Scale $49 a month.

@@ -280,10 +280,10 @@ export const serviceItems: Service[] = [
 	},
 	{
 		id: 'render',
-		name: 'Render',
+		name: 'Solatype',
 		host: 'render.starhold.app',
 		href: pick<string | null>(null, 'https://render.starhold.app'),
-		action: pick('Request an invite', 'Open Render'),
+		action: pick('Request an invite', 'Open Solatype'),
 		invite: pick(true, false),
 		status: labelFor('render'),
 		availability: availabilityFor('render'),
@@ -424,7 +424,7 @@ export const invite = {
 	services: [
 		{ id: 'umbermark', label: 'Umbermark' },
 		{ id: 'zenithmark', label: 'Zenithmark' },
-		{ id: 'render', label: 'Render' },
+		{ id: 'render', label: 'Solatype' },
 		{ id: 'status', label: 'Heliostat' },
 		{ id: 'starbot', label: 'Starbot' }
 	]
@@ -469,7 +469,7 @@ export const contact = {
 	products: [
 		{ id: 'umbermark', label: 'Umbermark' },
 		{ id: 'zenithmark', label: 'Zenithmark' },
-		{ id: 'render', label: 'Render' },
+		{ id: 'render', label: 'Solatype' },
 		{ id: 'status', label: 'Heliostat' },
 		{ id: 'starbot', label: 'Starbot' },
 		{ id: 'unsure', label: 'Not sure yet' }

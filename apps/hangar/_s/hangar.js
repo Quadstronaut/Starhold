@@ -4,7 +4,7 @@
 // failed to load or stale reads "Unknown", never green. No storage, no cookies.
 
 // Tile → Gatus key. Only services with a Gatus monitor get a chip; the rest
-// (Zenithmark, Render, Heliostat, Starbot, QNix) show their state tag alone until
+// (Zenithmark, Solatype, Heliostat, Starbot, QNix) show their state tag alone until
 // deploy/gatus.yaml watches them. Store/Docs/Fleet status live in the fleet nav.
 // STAR-154: Gatus display names are now product names, so the keys changed (products_umbermark, products_shush).
 // New keys win; the old ones are a fallback until the new Gatus config is deployed; drop them after that.
