@@ -1,7 +1,7 @@
 <svelte:head><title>Privacy Policy · Starhold</title></svelte:head>
 
 <section class="section legal">
-	<div class="label">Last updated 2026-11-14</div>
+	<div class="label">Last updated 2026-11-15</div>
 	<h1>Privacy Policy</h1>
 
 	<p>This policy says what personal data Starhold collects, why, on what legal basis, who receives it, how long we keep it, and how to use your rights. It covers the Starhold Account, our websites (starhold.dev, starhold.fyi, starhold.app), the contact form and our Discord server. Each product has its own privacy notice for what it adds. Umbermark, with paid plans through Polar, is one of them.</p>
@@ -20,7 +20,7 @@
 		<li><strong>Anonymous</strong> means we cannot tie it to a person, even by looking it up. Our daily visit tallies are anonymous.</li>
 		<li><strong>Pseudonymous</strong> means it is tied to a code, such as a keyed hash of an IP address, instead of your name. We still treat it as personal data.</li>
 	</ul>
-	<p>Our sites set no cookies. We keep no request logs. Error logs can contain your IP for up to 30 days. Sign-in abuse limiting uses a keyed hash of your IP for 7 days. Admin access to account data through our tools is logged; that log is about us, not you.</p>
+	<p>The Starhold websites (starhold.dev, starhold.fyi and starhold.app) set no cookies. The Starhold Account and our products set cookies only to keep you signed in, to protect forms, and to remember a scan, a report or an unlocked status page in your browser. None lasts longer than 90 days, and none is used for advertising or tracking. We keep no request logs. Error logs can contain your IP for up to 30 days. Sign-in abuse limiting uses a keyed hash of your IP for 7 days. Admin access to account data through our tools is logged; that log is about us, not you.</p>
 
 	<h2>3. What we collect, why, and our legal basis</h2>
 	<table>
@@ -36,7 +36,7 @@
 			<tr><td>Email for the QNix notice.</td><td>Send one email when QNix opens.</td><td>Consent</td></tr>
 			<tr><td>Starhold Account details: your sign-in (through Google), your plan, and your email address only if you choose to share it at sign-in.</td><td>Run your account.</td><td>Contract</td></tr>
 			<tr><td>Purchase record: amount, date, provider reference. No content.</td><td>Keep the books and meet tax law.</td><td>Legal obligation</td></tr>
-			<tr><td>Patreon membership status and tier, if you back our work.</td><td>Know who has backed the work and at which tier.</td><td>Consent</td></tr>
+			<tr><td>If you back our work on Patreon: your Patreon user id, name, email, membership status, tier, pledge amount, last charge status, next charge date and, if you linked it, your Discord id.</td><td>Know who has backed the work and at which tier.</td><td>Consent</td></tr>
 			<tr><td>Backups of the above.</td><td>Recover from disk or host loss.</td><td>Legitimate interests</td></tr>
 		</tbody>
 	</table>
@@ -47,7 +47,7 @@
 			<tr><th>Service</th><th>What it holds today</th><th>Kept for</th></tr>
 		</thead>
 		<tbody>
-			<tr><td>Shush</td><td>Your Discord id, banned words you triggered, death times, word counts and points. Message ids are kept for reference, never message content. The public list shows a display name, the word and the date, for thirty days, then it drops off.</td><td>Game data rolls per round. Use /hide-me in Discord to leave every list we keep; we also edit the bot's own recent messages. Copies kept by Discord or other players, and older bot messages, can't be changed.</td></tr>
+			<tr><td>Shush</td><td>Your Discord id, the words you type in the arena (including words read from images you post there), counted per day, banned words you triggered, death times and points. Message ids are kept for reference for thirty days; we store word counts, never the messages themselves. The public list shows a display name, the word and the date, for thirty days, then it drops off. A climb board shows your display name and lifetime XP.</td><td>Erased 30 days after you use /hide-me in Discord, or after 12 months without playing. /hide-me takes you off every list we show at once, and we also edit the bot's own recent messages. We keep only a record that you opted out, so it stays honoured. Copies kept by Discord or other players, and older bot messages, can't be changed.</td></tr>
 			<tr><td>Shush</td><td>Help-desk tickets: your Discord id, subject and open and close times. The messages live in a private Discord thread.</td><td>No fixed period yet. Ask and we delete it by hand.</td></tr>
 			<tr><td>Starbot</td><td>Server settings and Discord ids the bot features need to work. Contact notices in intake channels.</td><td>No fixed period yet. A 12-month automatic purge of contact notices is not built. Ask and we delete it by hand.</td></tr>
 		</tbody>
@@ -64,7 +64,7 @@
 			<tr><td>Discord</td><td>Our Discord server and apps. It receives the ticket notice for a contact message, and whatever you post in Discord, under <a href="https://discord.com/privacy" target="_blank" rel="noopener">Discord's Privacy Policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Polar</td><td>Payment provider and merchant of record for sales. It takes your payment and keeps its own records, under <a href="https://polar.sh/legal/privacy" target="_blank" rel="noopener">its privacy policy</a>. We keep only the order reference and plan.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Google</td><td>Sign-in provider for the Starhold Account. Google learns that you signed in to Starhold, under <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. We ask Google only to confirm who you are, and we receive Google's account identifier for you. We receive your Google account email address only if you tick the optional box to share it, and we keep it only if Google confirms it is verified. We do not request your name, and we never receive your password.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
-			<tr><td>Patreon</td><td>Payment platform for people who choose to back our work. We receive your membership status and tier from it. If you connect Discord to Patreon, Patreon gives you a role in the Starhold Discord named after your tier. Backing buys nothing else: no product access, no discounts and no special support.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
+			<tr><td>Patreon</td><td>Payment platform for people who choose to back our work. We receive from it the membership details listed in section 3. If you connect Discord to Patreon, Patreon gives you a role in the Starhold Discord named after your tier. Backing buys nothing else: no product access, no discounts and no special support.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Postmark</td><td>Email delivery. It sends the email our products send you, and receives your email address and the message to do so, under <a href="https://postmarkapp.com/privacy-policy" target="_blank" rel="noopener">its privacy policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Cloudflare (Turnstile)</td><td>Bot check on the Umbermark and Zenithmark scan forms. When you submit a scan, your browser loads Cloudflare's check, and Cloudflare receives your IP address and browser details to decide whether you are a person, under <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare's Privacy Policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Cloudflare (R2)</td><td>Off-site storage of backups.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
@@ -93,6 +93,7 @@
 			<tr><td>Contact messages</td><td>90 days after we close the conversation, and never more than 12 months from receipt</td><td>Conversation closed; message received</td></tr>
 			<tr><td>QNix notice list</td><td>Until the one notice is sent, or 24 months if QNix has not opened</td><td>Form submitted</td></tr>
 			<tr><td>Purchase record</td><td>As tax law requires, up to 7 years</td><td>Payment</td></tr>
+			<tr><td>Patreon membership details</td><td>While you are a patron, then deleted within 30 days</td><td>The day we see you are no longer an active patron</td></tr>
 		</tbody>
 	</table>
 	<p>Spam-control IP addresses are held in memory for 10 minutes and are lost on restart.</p>
@@ -138,7 +139,7 @@
 	<h2>14. Contact</h2>
 	<p>Copper Jerky LLC, doing business as Starhold — <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
 
-	<p class="label">Last updated 2026-11-14.</p>
+	<p class="label">Last updated 2026-11-15.</p>
 </section>
 
 <style>

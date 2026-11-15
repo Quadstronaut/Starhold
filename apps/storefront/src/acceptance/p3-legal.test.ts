@@ -22,8 +22,9 @@ const Q71 =
 
 describe('legal pages · all three', () => {
 	for (const k of Object.keys(PAGES) as (keyof typeof PAGES)[]) {
-		// Privacy was amended after launch (STAR-271: Postmark named, invite rows gone); the other two keep the approval date.
-		const dated = k === 'privacy' ? '2026-11-14' : '2026-11-13';
+		// Privacy was amended after launch (STAR-271: Postmark named, invite rows gone; STAR-155 on 2026-11-15: cookies,
+		// Patreon and Shush wording); the other two keep the approval date.
+		const dated = k === 'privacy' ? '2026-11-15' : '2026-11-13';
 		it(`${k}: dated ${dated}, says Starhold not Starhold Software`, () => {
 			expect(text(k)).toContain(`Last updated ${dated}`);
 			expect(raw(k)).not.toMatch(/Starhold Software/);
@@ -160,8 +161,22 @@ describe('privacy', () => {
 	});
 	it('Shush retention states the current rule, not the future one (B4)', () => {
 		expect(t()).toContain('for thirty days, then it drops off');
-		expect(t()).toContain('Use /hide-me in Discord to leave every list we keep');
+		expect(t()).toContain('Erased 30 days after you use /hide-me in Discord, or after 12 months without playing.');
+		expect(t()).toContain('/hide-me takes you off every list we show at once');
+		expect(t()).not.toContain('rolls per round');
 		expect(t()).not.toContain('in development');
+	});
+	it('says what the code does about cookies, Patreon data and Shush word counts (STAR-155)', () => {
+		// Each sentence is backed by code: product cookie max-ages (90 days at most), QuadstroNot's 29 day sweep of
+		// former patrons, Shush's per-day word counts and climb board.
+		expect(t()).not.toContain('Our sites set no cookies');
+		expect(t()).toContain('The Starhold websites (starhold.dev, starhold.fyi and starhold.app) set no cookies.');
+		expect(t()).toContain('None lasts longer than 90 days, and none is used for advertising or tracking.');
+		expect(t()).toContain('your Patreon user id, name, email, membership status, tier, pledge amount, last charge status, next charge date');
+		expect(t()).toContain('While you are a patron, then deleted within 30 days');
+		expect(t()).not.toContain('Patreon membership status and tier, if you back our work.');
+		expect(t()).toContain('the words you type in the arena (including words read from images you post there), counted per day');
+		expect(t()).toContain('A climb board shows your display name and lifetime XP.');
 	});
 });
 
