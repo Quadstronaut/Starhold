@@ -247,14 +247,14 @@ export type Service = {
 export const serviceItems: Service[] = [
 	{
 		id: 'status',
-		name: 'Status',
+		name: 'Heliostat',
 		host: 'status.starhold.app',
 		href: pick<string | null>(null, 'https://status.starhold.app'),
-		action: pick('Request an invite', 'Open Status'),
+		action: pick('Request an invite', 'Open Heliostat'),
 		invite: pick(true, false),
 		status: labelFor('status'),
 		availability: availabilityFor('status'),
-		what: 'Private and white-label status pages for MSPs.'
+		what: 'Private and white-label status pages for MSPs (formerly Status).'
 	},
 	{
 		id: 'umbermark',
@@ -425,7 +425,7 @@ export const invite = {
 		{ id: 'umbermark', label: 'Umbermark' },
 		{ id: 'zenithmark', label: 'Zenithmark' },
 		{ id: 'render', label: 'Render' },
-		{ id: 'status', label: 'Status' },
+		{ id: 'status', label: 'Heliostat' },
 		{ id: 'starbot', label: 'Starbot' }
 	]
 };
@@ -470,7 +470,7 @@ export const contact = {
 		{ id: 'umbermark', label: 'Umbermark' },
 		{ id: 'zenithmark', label: 'Zenithmark' },
 		{ id: 'render', label: 'Render' },
-		{ id: 'status', label: 'Status' },
+		{ id: 'status', label: 'Heliostat' },
 		{ id: 'starbot', label: 'Starbot' },
 		{ id: 'unsure', label: 'Not sure yet' }
 	],

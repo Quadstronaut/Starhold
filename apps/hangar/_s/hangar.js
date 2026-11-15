@@ -1,10 +1,10 @@
 // starhold.app live chips (spec §4.4). Reads /_status on this origin: the dedi
-// Caddy proxies that one path to the Status fleet page's status.json (STAR-154); the legacy Gatus array is still accepted.
+// Caddy proxies that one path to the fleet page's status.json (served by Heliostat) (STAR-154); the legacy Gatus array is still accepted.
 // Rules: "Up" only when the latest result passed AND is fresh; anything missing,
 // failed to load or stale reads "Unknown", never green. No storage, no cookies.
 
 // Tile → Gatus key. Only services with a Gatus monitor get a chip; the rest
-// (Zenithmark, Render, Status, Starbot, QNix) show their state tag alone until
+// (Zenithmark, Render, Heliostat, Starbot, QNix) show their state tag alone until
 // deploy/gatus.yaml watches them. Store/Docs/Fleet status live in the fleet nav.
 // STAR-154: Gatus display names are now product names, so the keys changed (products_umbermark, products_shush).
 // New keys win; the old ones are a fallback until the new Gatus config is deployed; drop them after that.

@@ -1,11 +1,13 @@
 ---
-title: Status
+title: Heliostat
 description: Private and white-label status pages for MSPs. Open, paid plans.
 sidebar:
   order: 5
 ---
 
 **Status pages for MSPs: public, password-protected or white-label.**
+
+Heliostat was called Status until 2026-11-14. Only the name changed: the address, your pages, feeds, badges and API keys are the same.
 
 - **State:** Open · paid plans.
 - **Availability:** Open: free tier; Private $15, MSP $29 a month.

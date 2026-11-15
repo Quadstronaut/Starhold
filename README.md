@@ -30,7 +30,7 @@ Four tools for builders, sysadmins and teams. Each one says what it does, what i
 ---
 
 > [!NOTE]
-> **Open since 2026-11-14.** Sign-in and paid checkout are open on Render, Status, Umbermark and Zenithmark. Free tiers cost nothing.
+> **Open since 2026-11-14.** Sign-in and paid checkout are open on Render, Heliostat, Umbermark and Zenithmark. Free tiers cost nothing.
 
 <a id="glance"></a>
 
@@ -39,7 +39,7 @@ Four tools for builders, sysadmins and teams. Each one says what it does, what i
 | | Service | What it is | Free | Paid |
 |---|---|---|---|---|
 | 🖼️ | [**Render**](https://render.starhold.app) | An API that turns a page or HTML into an OG image, a PDF or a screenshot | 50 renders a month, watermarked | $5, $19 or $49 a month |
-| 📟 | [**Status**](https://status.starhold.app) | Status pages for MSPs: public, password-protected or white-label | 1 public page | $15 or $29 a month |
+| 📟 | [**Heliostat**](https://status.starhold.app) | Status pages for MSPs: public, password-protected or white-label | 1 public page | $15 or $29 a month |
 | 🛡️ | [**Umbermark**](https://umbermark.starhold.app) | A scored hardening report for a Linux server, with a link you can share | Scans | $5 report; $9, $19 or $49 a month |
 | ✉️ | [**Zenithmark**](https://zenithmark.starhold.app) | A mail and DNS scorecard for a domain, with daily monitoring as a paid plan | Scorecard | $9 or $29 a month |
 
@@ -48,7 +48,7 @@ Prices are in US dollars. The pricing page of each service is the authority; the
 ```mermaid
 flowchart LR
     You(["You"]) --> Store["starhold.dev<br/>pick a service"]
-    Store --> Product["Render, Status,<br/>Umbermark or Zenithmark"]
+    Store --> Product["Render, Heliostat,<br/>Umbermark or Zenithmark"]
     Product -->|Sign in| Account["Starhold Account<br/>Google sign-in"]
     Account -->|Paid plan| Polar["Polar<br/>merchant of record"]
     Account -->|Any time| Data["Export your data<br/>or delete your account"]
@@ -76,9 +76,9 @@ An API for OG images, PDFs and screenshots. Send a `POST` with an API key from y
 
 <a id="status"></a>
 
-### 📟 Status
+### 📟 Heliostat
 
-Status pages with components, incidents, scheduled maintenance and monitors, plus RSS, Atom, a JSON endpoint and a badge on every plan. Visitors can subscribe by email.
+Formerly Status (renamed 2026-11-14; same address, pages and keys). Status pages with components, incidents, scheduled maintenance and monitors, plus RSS, Atom, a JSON endpoint and a badge on every plan. Visitors can subscribe by email.
 
 | Plan | Price | Pages | Who can view | Monitors | Email subscribers per page | Emails a month |
 |---|---|---|---|---|---|---|
@@ -147,7 +147,7 @@ One sign-in for every service, at [starship.starhold.app](https://starship.starh
 - Paid plans are sold through [Polar](https://polar.sh), the merchant of record. Polar handles the payment and the sales tax.
 - **Cancel any time.** Run out the period you paid for, or take a prorated refund now. There are no cancellation fees.
 - **The $5 Umbermark report** is refunded in full if it fails or is not what we described and you ask within 14 days.
-- On Render and Status, hitting a limit stops the action: nothing upgrades without your click, and nothing is billed beyond your plan.
+- On Render and Heliostat, hitting a limit stops the action: nothing upgrades without your click, and nothing is billed beyond your plan.
 - Local consumer rights still apply. The full text: [refund policy](https://starhold.dev/legal/refunds) and [terms](https://starhold.dev/legal/terms).
 
 <a id="privacy"></a>
