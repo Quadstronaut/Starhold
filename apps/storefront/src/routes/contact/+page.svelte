@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { DISCORD_INVITE, DISCORD_TICKET_URL, CONTACT_EMAIL } from '#lib/site-links.js';
+	import {
+		DISCORD_INVITE,
+		DISCORD_TICKET_URL,
+		CONTACT_EMAIL,
+		CONTACT_PHONE,
+		CONTACT_PHONE_TEL
+	} from '#lib/site-links.js';
 	import IntakeForm from '#lib/components/IntakeForm.svelte';
 	import FormNotice from '#lib/components/FormNotice.svelte';
 	import { contact, formNotices } from '#lib/content/copy.js';
@@ -25,6 +31,12 @@
 	<p class="email">
 		<span class="eyebrow">{contact.emailLabel}</span>
 		<a href={'mailto:' + CONTACT_EMAIL}>{CONTACT_EMAIL}</a>
+	</p>
+
+	<p class="phone">
+		<span class="eyebrow">Voicemail</span>
+		<a href={'tel:' + CONTACT_PHONE_TEL}>{CONTACT_PHONE}</a>
+		<span class="phone-note">This line is not answered. Leave your name, email address and what you need, and we reply by email.</span>
 	</p>
 
 	{#if DISCORD_INVITE}
@@ -60,6 +72,14 @@
 <style>
 	.email {
 		margin-top: var(--sp-6);
+	}
+	.phone {
+		margin-top: var(--sp-4);
+	}
+	.phone-note {
+		display: block;
+		margin-top: var(--sp-2);
+		color: var(--text-muted);
 	}
 	.discord {
 		display: flex;

@@ -13,3 +13,7 @@ export const DISCORD_TICKET_URL =
 
 export const CONTACT_EMAIL = 'hello@starhold.dev';
 
+// Voicemail line (Google Voice). Never answered live: messages forward to email and are answered by email.
+// Say so wherever the number is shown; it is not phone support.
+export const CONTACT_PHONE = '(520) 314-7936';
+export const CONTACT_PHONE_TEL = '+15203147936';
