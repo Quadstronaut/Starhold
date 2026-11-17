@@ -95,9 +95,9 @@ describe('launch switch', () => {
 		it('states the agreed prices, Zenithmark included (STAR-64)', async () => {
 			const { avail, copy } = await load(true);
 			expect(avail.availabilityFor('render')).toContain('Hobby $5, Pro $19, Scale $49 a month');
-			expect(avail.availabilityFor('status')).toContain('Private $15, MSP $29 a month');
-			expect(avail.availabilityFor('umbermark')).toContain('report $5 one-off; Solo $9, Pro $19, Agency $49 a month');
-			expect(avail.availabilityFor('zenithmark')).toContain('monitoring $9 or $29 a month');
+			expect(avail.availabilityFor('status')).toContain('Private $5, MSP $19 a month');
+			expect(avail.availabilityFor('umbermark')).toContain('report $5 one-off; Solo $5, Pro $19, Agency $49 a month');
+			expect(avail.availabilityFor('zenithmark')).toContain('monitoring $5 or $19 a month');
 			const zen = copy.serviceItems.find((s) => s.id === 'zenithmark')!;
 			expect(zen.availability).toBe(avail.availabilityFor('zenithmark'));
 		});

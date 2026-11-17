@@ -39,9 +39,9 @@ Four tools for builders, sysadmins and teams. Each one says what it does, what i
 | | Service | What it is | Free | Paid |
 |---|---|---|---|---|
 | 🖼️ | [**Solatype**](https://render.starhold.app) | An API that turns a page or HTML into an OG image, a PDF or a screenshot | 50 renders a month, watermarked | $5, $19 or $49 a month |
-| 📟 | [**Heliostat**](https://status.starhold.app) | Status pages for MSPs: public, password-protected or white-label | 1 public page | $15 or $29 a month |
-| 🛡️ | [**Umbermark**](https://serverscanner.starhold.app) | A scored hardening report for a Linux server, with a link you can share | Scans | $5 report; $9, $19 or $49 a month |
-| ✉️ | [**Zenithmark**](https://domainscanner.starhold.app) | A mail and DNS scorecard for a domain, with daily monitoring as a paid plan | Scorecard | $9 or $29 a month |
+| 📟 | [**Heliostat**](https://status.starhold.app) | Status pages for MSPs: public, password-protected or white-label | 1 public page | $5 or $19 a month |
+| 🛡️ | [**Umbermark**](https://serverscanner.starhold.app) | A scored hardening report for a Linux server, with a link you can share | Scans | $5 report; $5, $19 or $49 a month |
+| ✉️ | [**Zenithmark**](https://domainscanner.starhold.app) | A mail and DNS scorecard for a domain, with daily monitoring as a paid plan | Scorecard | $5 or $19 a month |
 
 Prices are in US dollars. The pricing page of each service is the authority; the tables below were copied from them on 2026-11-14.
 
@@ -83,8 +83,8 @@ Formerly Status (renamed 2026-11-14; same address, pages and keys). Status pages
 | Plan | Price | Pages | Who can view | Monitors | Email subscribers per page | Emails a month |
 |---|---|---|---|---|---|---|
 | Free | $0 | 1 | Public | 5 | 50 | 100 |
-| Private | $15 a month | 1 | Public, password or named viewers | 20 | 1,000 | 5,000 |
-| MSP | $29 a month | 5 | Public, password or named viewers | 50 | 1,000 | 15,000 |
+| Private | $5 a month | 1 | Public, password or named viewers | 20 | 1,000 | 5,000 |
+| MSP | $19 a month | 5 | Public, password or named viewers | 50 | 1,000 | 15,000 |
 
 [Site](https://status.starhold.app) · [Pricing](https://status.starhold.app/pricing) · [Docs](https://status.starhold.app/docs)
 
@@ -98,7 +98,7 @@ Scan a Linux server, get a score and a report that explains each finding. A free
 |---|---|---|
 | Free scan | $0 | Anonymous scan, HTML report, shareable link for 30 days |
 | Report | $5 one-off | One report kept 3 months, PDF download, every fix step |
-| Solo | $9 a month | Up to 7 saved servers, re-scans weekly at most |
+| Solo | $5 a month | Up to 7 saved servers, re-scans weekly at most |
 | Pro | $19 a month | Up to 15 saved servers, re-scans daily at most |
 | Agency | $49 a month | Up to 50 saved servers, re-scans daily at most |
 | Enterprise | By email | More than 50 servers: write to hello@starhold.dev |
@@ -114,8 +114,8 @@ Enter a domain and get a report on SPF, DKIM, DMARC, MX, MTA-STS, TLS, DNSSEC, C
 | Plan | Price | Monitored domains |
 |---|---|---|
 | Scorecard | $0 | No account needed |
-| Monitor | $9 a month | 1 |
-| Monitor 5 | $29 a month | 5 |
+| Monitor | $5 a month | 1 |
+| Monitor 5 | $19 a month | 5 |
 
 [Site](https://domainscanner.starhold.app) · [Plans](https://domainscanner.starhold.app/plans)
 

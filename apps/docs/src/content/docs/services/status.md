@@ -10,12 +10,12 @@ sidebar:
 Heliostat was called Status until 2026-11-14. Only the name changed: the address, your pages, feeds, badges and API keys are the same.
 
 - **State:** Open · paid plans.
-- **Availability:** Open: free tier; Private $15, MSP $29 a month.
+- **Availability:** Open: free tier; Private $5, MSP $19 a month.
 - **Where:** [status.starhold.app](https://status.starhold.app)
 
 ## How to get in
 
-Sign in with your [Starhold Account](https://starship.starhold.app) and create a status page. The free tier is open, and Private ($15 a month) and MSP ($29 a month) are paid plans. Paid plans are on sale. These rules apply to every purchase.
+Sign in with your [Starhold Account](https://starship.starhold.app) and create a status page. The free tier is open, and Private ($5 a month) and MSP ($19 a month) are paid plans. Paid plans are on sale. These rules apply to every purchase.
 
 ## What works today
 
@@ -25,7 +25,7 @@ A free public page with components, incidents, scheduled maintenance and monitor
 
 | | Free | Private | MSP |
 |---|---|---|---|
-| Price | $0 | $15 a month | $29 a month |
+| Price | $0 | $5 a month | $19 a month |
 | Status pages | 1 | 1 | 5 |
 | Who can view a page | Public | Public, password or named viewers | Public, password or named viewers |
 | Components per page | 20 | 50 | 50 |

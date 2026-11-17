@@ -23,10 +23,10 @@ export const AVAILABILITY: Record<string, string> = pick(
 		dysonsphere: 'Interest form only'
 	},
 	{
-		umbermark: 'Open: free scans; report $5 one-off; Solo $9, Pro $19, Agency $49 a month',
-		zenithmark: 'Open: free scorecard; monitoring $9 or $29 a month',
+		umbermark: 'Open: free scans; report $5 one-off; Solo $5, Pro $19, Agency $49 a month',
+		zenithmark: 'Open: free scorecard; monitoring $5 or $19 a month',
 		render: 'Open: free tier; Hobby $5, Pro $19, Scale $49 a month',
-		status: 'Open: free tier; Private $15, MSP $29 a month',
+		status: 'Open: free tier; Private $5, MSP $19 a month',
 		shushgame: 'Open',
 		starbot: 'In development',
 		dysonsphere: 'Interest form only'
