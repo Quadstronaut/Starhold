@@ -15,7 +15,9 @@ const ROUTES = [
 	'/dysonsphere',
 	'/legal/terms',
 	'/legal/privacy',
-	'/legal/refunds'
+	'/legal/refunds',
+	'/peridot/privacy',
+	'/peridot/delete'
 ];
 
 for (const route of ROUTES) {

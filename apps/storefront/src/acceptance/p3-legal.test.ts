@@ -113,7 +113,7 @@ describe('privacy', () => {
 			['Free scan reports', '30 days'],
 			['Paid reports, unclaimed', '3 months'],
 			['Contact messages', '90 days after we close the conversation'],
-			['QNix notice list', '24 months'],
+			['DysonSphere notice list', '24 months'],
 			['Purchase record', 'up to 7 years']
 		];
 		const src = raw('privacy');
@@ -146,12 +146,12 @@ describe('privacy', () => {
 		expect(t()).toContain('You can export and delete your data yourself from the account page. If you cannot, write to privacy@starhold.dev and we will do it within 30 days.');
 		expect(t()).not.toMatch(/from the dashboard|we send your sign-in link/i);
 	});
-	it('email statement is true after launch and agrees with the QNix notice (M6, STAR-271)', () => {
+	it('email statement is true after launch and agrees with the DysonSphere notice (M6, STAR-271)', () => {
 		expect(t()).toContain(
 			'Our products send email through Postmark, from no-reply@starhold.app; replies go to hello@starhold.dev.'
 		);
 		expect(t()).toContain('We send only the email that is required to operate the service and maintain your account: sign-in and account notices, billing and refund notices, and alerts and updates you turned on, such as status-page subscriptions, monitoring alerts and score-drop alerts.');
-		expect(t()).toContain('We do not send marketing email, upsells or newsletters. If you asked to be told when QNix opens, we will email you once.');
+		expect(t()).toContain('We do not send marketing email, upsells or newsletters. If you asked to be told when DysonSphere opens, we will email you once.');
 		expect(t()).not.toContain('We do not send email yet');
 	});
 	it('Shush and Starbot rows are marked as built today (M11)', () => {
