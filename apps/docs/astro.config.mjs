@@ -6,15 +6,16 @@ import starlight from '@astrojs/starlight';
 // `node brand/check-drift.mjs --write` and are never edited here.
 // STAR-152: retired pages. Astro writes these as meta-refresh stubs; the real 301s
 // live in deploy/Caddyfile.vps (starhold.fyi block), which is what visitors hit.
-// The qnix sources are kept in git under _drafts/qnix and are not built.
+// The qnix sources are kept in git under _drafts/qnix (QNIX-45: public name is now DysonSphere) and are not built.
 export default defineConfig({
 	site: 'https://starhold.fyi',
 	redirects: {
-		'/qnix': 'https://starhold.dev/qnix',
-		'/qnix/architecture': 'https://starhold.dev/qnix',
-		'/qnix/build-chronicle': 'https://starhold.dev/qnix',
-		'/qnix/hosting': 'https://starhold.dev/qnix',
-		'/qnix/tenancy-security': 'https://starhold.dev/qnix',
+		'/qnix': 'https://starhold.dev/dysonsphere',
+		'/services/qnix': '/services/dysonsphere',
+		'/qnix/architecture': 'https://starhold.dev/dysonsphere',
+		'/qnix/build-chronicle': 'https://starhold.dev/dysonsphere',
+		'/qnix/hosting': 'https://starhold.dev/dysonsphere',
+		'/qnix/tenancy-security': 'https://starhold.dev/dysonsphere',
 		'/bots/features': '/',
 		'/bots/ordering': '/'
 	},

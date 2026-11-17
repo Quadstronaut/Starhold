@@ -5,6 +5,8 @@
 //               release gate computes (gate.legal_hash), so the served text can be checked against it.
 //               Privacy Policy amended after launch (STAR-271, DRAFT until the operator approves): Postmark named as the
 //               email provider, the invite-request rows removed, dated 2026-11-14.
+//               Amended 2026-11-17 (operator approved): the QNix notice renamed DysonSphere (QNIX-45) and a
+//               voicemail line with 90-day retention added (STAR-292).
 //               Amended 2026-11-15 (STAR-155, operator approved): cookies, the Patreon data held and its 30 day
 //               deletion, and the Shush row now say what the code does.
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
@@ -37,7 +39,7 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
 	terms: 'f26d0227a39c4fbbcc8c5d94667715ae97bc8d71becff5d69f4e23f14e18986d',
-	privacy: 'e48d0c2bc01eb9d5f027e75748ade44df431c00fed2d4e36d0c6b9a30de0d48c',
+	privacy: '5a1448a2157d28dcf527a8ee692be44d4a240189194078b8323c5b58e7888f6a',
 	refunds: '32f9205ed3c603e7e9ba10264679f55d0989172b282fcdbee01bab69e92bf24e'
 };
 

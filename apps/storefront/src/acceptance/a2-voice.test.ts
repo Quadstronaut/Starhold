@@ -28,7 +28,7 @@ const COPY_STRINGS = collectStrings({
 	invite: copy.invite,
 	account: copy.account,
 	comingSoon: copy.comingSoon,
-	qnix: copy.qnix,
+	dysonsphere: copy.dysonsphere,
 	shush: copy.shush,
 	site: copy.site
 }).join('\n');

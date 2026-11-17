@@ -79,7 +79,7 @@ test('splash h1 is the hero promise, once, with id _top', () => {
 });
 
 test('fleet links come from fleet-nav.json and Docs is current', () => {
-	for (const route of ['', 'services/qnix']) {
+	for (const route of ['', 'services/dysonsphere']) {
 		const html = page(route);
 		for (const l of NAV.fleet) assert.ok(html.includes(`href="${l.href}"`), `${route}: ${l.href}`);
 		assert.ok(html.includes(`href="${NAV.cta.href.replace(/&/g, '&amp;')}"`) || html.includes(`href="${NAV.cta.href}"`));
@@ -138,15 +138,15 @@ test('no banned lexicon in prose on any page (B8)', () => {
 	}
 });
 
-test('only true claims: one person, QNix in development, no incident promise (B9)', () => {
+test('only true claims: one person, DysonSphere in development, no incident promise (B9)', () => {
 	for (const f of pages()) {
 		const text = proseText(read(f));
 		assert.doesNotMatch(text, /\b(build|Starhold|support|dev) team\b/i, `${f.slice(DIST.length)}: Starhold is one person`);
 		assert.doesNotMatch(text, /incident (status|history)/i, `${f.slice(DIST.length)}: the status page has no incident reports`);
 	}
-	const qnix = page('services/qnix');
-	assert.doesNotMatch(qnix, /products? run on|runs on QNix|this documentation site|real tenants/i);
-	assert.match(qnix, /<meta name="description" content="[^"]*in development/i);
+	const dysonsphere = page('services/dysonsphere');
+	assert.doesNotMatch(dysonsphere, /products? run on|runs on DysonSphere|this documentation site|real tenants/i);
+	assert.match(dysonsphere, /<meta name="description" content="[^"]*in development/i);
 });
 
 test('every checked page has an accent-word h2 (R29) and no accent word in an h1', () => {
@@ -169,7 +169,7 @@ const SERVICE_PAGES = {
 	status: 'services/status',
 	starbot: 'services/starbot',
 	shushgame: 'services/shushgame',
-	qnix: 'services/qnix'
+	dysonsphere: 'services/dysonsphere'
 };
 
 test('every service page shows its availability line from availability.json', () => {
@@ -184,8 +184,8 @@ test('the services table and the splash shelf show every product availability li
 	const table = proseText(page('services'));
 	for (const line of Object.values(AVAIL.products)) assert.ok(table.includes(line), `services table: ${line}`);
 	const shelf = [...page('').matchAll(/<p class="availability">([^<]+)<\/p>/g)].map((m) => m[1]);
-	const expected = Object.entries(AVAIL.products).filter(([id]) => id !== 'qnix').map(([, v]) => v);
-	assert.deepEqual(shelf.sort(), expected.sort(), 'one availability line per shelf tile (QNix is not on the shelf)');
+	const expected = Object.values(AVAIL.products);
+	assert.deepEqual(shelf.sort(), expected.sort(), 'one availability line per shelf tile (DysonSphere has a tile, QNIX-45 F3)');
 });
 
 test('purchase and plan sentences carry the checkout state (B1)', () => {

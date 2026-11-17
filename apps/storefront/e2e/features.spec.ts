@@ -23,10 +23,10 @@ test('services: four groups in Hangar order, a label chip on every card', async 
 				['Open · free', 'Open', 'Open · paid plans', 'In development', 'Retired']
 			)
 		).toContain(t);
-	// QNix sits under Personal hosting as In development, linking to its interest form
-	const qnix = cards.filter({ hasText: 'QNix' });
-	await expect(qnix.locator('.tag')).toHaveText('In development');
-	await expect(qnix.locator('a')).toHaveAttribute('href', '/qnix');
+	// DysonSphere sits under Personal hosting as In development, linking to its interest form
+	const dysonsphere = cards.filter({ hasText: 'DysonSphere' });
+	await expect(dysonsphere.locator('.tag')).toHaveText('In development');
+	await expect(dysonsphere.locator('a')).toHaveAttribute('href', '/dysonsphere');
 });
 
 test('access: three static steps', async ({ page }) => {

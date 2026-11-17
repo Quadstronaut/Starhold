@@ -20,7 +20,7 @@ export const AVAILABILITY: Record<string, string> = pick(
 		status: 'Public pages open; sign-in closed',
 		shushgame: 'Open',
 		starbot: 'In development',
-		qnix: 'Interest form only'
+		dysonsphere: 'Interest form only'
 	},
 	{
 		umbermark: 'Open: free scans; report $5 one-off; Solo $9, Pro $19, Agency $49 a month',
@@ -29,7 +29,7 @@ export const AVAILABILITY: Record<string, string> = pick(
 		status: 'Open: free tier; Private $15, MSP $29 a month',
 		shushgame: 'Open',
 		starbot: 'In development',
-		qnix: 'Interest form only'
+		dysonsphere: 'Interest form only'
 	}
 );
 

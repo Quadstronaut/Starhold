@@ -15,7 +15,7 @@ Starhold hosts and operates these services for people who care where their data 
 | [Heliostat](/services/status/) | Private and white-label status pages for MSPs | Open · paid plans | Open: free tier; Private $15, MSP $29 a month |
 | [Starbot](/services/starbot/) | Discord assistant for the Starhold community | In development | In development |
 | [Shush](/services/shushgame/) | The quiet game on Discord | Open · free | Open |
-| [QNix](/services/qnix/) | Personal hosting, built to be hard to break | In development | Interest form only |
+| [DysonSphere](/services/dysonsphere/) | Personal hosting, built to be hard to break | In development | Interest form only |
 
 ## Getting in
 

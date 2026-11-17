@@ -12,7 +12,7 @@ import { LAUNCHED } from '#lib/launch.js';
 import type { RequestHandler } from './$types';
 
 // 'invite' is /contact?intent=invite: a request to be let into one of the
-// invitation-only services. (QNix interest has its own endpoint: /api/qnix.)
+// invitation-only services. (DysonSphere interest has its own endpoint: /api/dysonsphere.)
 // Once LAUNCHED the invite kind is refused (lib/launch.ts); the handling below stays.
 const KINDS = LAUNCHED ? ['contact'] : ['contact', 'invite'];
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;

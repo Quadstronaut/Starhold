@@ -72,7 +72,7 @@ describe('STAR-145 · no marketing on the home page', () => {
 
 	it('the Shush page does not cross-link to other Starhold products', () => {
 		const t = collectStrings(copy.shush).join('\n') + templateText(read('src/routes/shush/+page.svelte'));
-		expect(t).not.toMatch(/umbermark|zenithmark|render|starbot|qnix/i);
+		expect(t).not.toMatch(/umbermark|zenithmark|render|starbot|dysonsphere/i);
 	});
 
 	it('nothing under src/ pulls a third-party script host', () => {

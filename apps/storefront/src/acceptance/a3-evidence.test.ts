@@ -66,7 +66,7 @@ const USED = new Set<string>([
 		services: copy.services,
 		principles: copy.principles,
 		faq: copy.faq,
-		qnix: copy.qnix,
+		dysonsphere: copy.dysonsphere,
 		shush: copy.shush
 	}),
 	...srcFiles(['.svelte']).flatMap((f) =>
@@ -141,7 +141,7 @@ describe('A3 · anti-fabrication', () => {
 				home: copy.home,
 						principles: copy.principles,
 				contact: copy.contact,
-				qnix: copy.qnix,
+				dysonsphere: copy.dysonsphere,
 				shush: copy.shush,
 				site: copy.site
 			}).join('\n'),
@@ -179,7 +179,7 @@ describe('A3 · anti-fabrication', () => {
 			invite: copy.invite,
 			account: copy.account,
 			comingSoon: copy.comingSoon,
-			qnix: copy.qnix,
+			dysonsphere: copy.dysonsphere,
 			shush: copy.shush
 		}).join('\n');
 		// Launch prices ($5, $19...) are stated on purpose; launch.test.ts pins each one (STAR-142).

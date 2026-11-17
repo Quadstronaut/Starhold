@@ -13,10 +13,15 @@ describe('removed-path redirects', () => {
 			'/services/automation', '/services/fullstack', '/capabilities', '/work', '/rates', '/operator', '/legal/services'])
 			expect(REMOVED_PATHS).toContain(p);
 	});
-	it('moves the old QNix URLs to /qnix', () => {
-		expect(redirectFor('/services/qnix')).toBe('/qnix');
-		expect(redirectFor('/services/qnix/')).toBe('/qnix');
-		expect(redirectFor('/products/qnix')).toBe('/qnix');
+	it('moves the old QNix URLs to /dysonsphere', () => {
+		expect(redirectFor('/qnix')).toBe('/dysonsphere');
+		expect(redirectFor('/qnix/')).toBe('/dysonsphere');
+		expect(redirectFor('/services/qnix')).toBe('/dysonsphere');
+		expect(redirectFor('/products/qnix')).toBe('/dysonsphere');
+		expect(redirectFor('/qnix/architecture')).toBe('/dysonsphere');
+		expect(redirectFor('/services/dysonsphere')).toBe('/dysonsphere');
+		expect(redirectFor('/services/dysonsphere/')).toBe('/dysonsphere');
+		expect(redirectFor('/products/dysonsphere')).toBe('/dysonsphere');
 	});
 	it('moves the old Shush page to /shush', () => {
 		expect(redirectFor('/products/shushgame')).toBe('/shush');

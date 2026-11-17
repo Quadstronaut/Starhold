@@ -19,7 +19,7 @@ const MARKETING = ['/', '/contact', '/invite', '/shush'];
 const ALL_ROUTES = [
 	'/',
 	'/contact',
-	'/qnix',
+	'/dysonsphere',
 	'/shush',
 	'/invite',
 	'/account'

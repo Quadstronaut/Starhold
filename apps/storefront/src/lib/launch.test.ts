@@ -86,7 +86,7 @@ describe('launch switch', () => {
 				expect(labels.labelFor(id), id).toBe(['umbermark', 'render', 'status', 'zenithmark'].includes(id) ? 'Open · paid plans' : 'Open');
 			expect(labels.labelFor('shushgame')).toBe('Open · free');
 			expect(labels.labelFor('starbot')).toBe('In development');
-			expect(labels.labelFor('qnix')).toBe('In development');
+			expect(labels.labelFor('dysonsphere')).toBe('In development');
 			for (const l of Object.values(labels.PRODUCT_LABELS)) expect(labels.LABELS as readonly string[]).toContain(l);
 			// the cards carry their own label and availability line
 			for (const s of copy.serviceItems) expect(s.status, s.id).toBe(labels.labelFor(s.id));

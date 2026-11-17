@@ -21,7 +21,7 @@ describe('availability source', () => {
 			status: LAUNCHED ? 'Open: free tier; Private $15, MSP $29 a month' : 'Public pages open; sign-in closed',
 			shushgame: 'Open',
 			starbot: 'In development',
-			qnix: 'Interest form only'
+			dysonsphere: 'Interest form only'
 		});
 	});
 

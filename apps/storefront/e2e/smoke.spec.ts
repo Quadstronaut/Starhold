@@ -16,7 +16,7 @@ test('products.json is served and lists only live products', async ({ request })
 	expect(res.ok()).toBeTruthy();
 	const catalog = await res.json();
 	const ids = catalog.products.map((p: { id: string }) => p.id);
-	expect(ids).toEqual(['shushgame', 'qnix']);
+	expect(ids).toEqual(['shushgame', 'dysonsphere']);
 });
 
 test('removed pages answer 301 to the home page', async ({ request }) => {

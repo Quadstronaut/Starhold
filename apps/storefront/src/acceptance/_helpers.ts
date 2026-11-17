@@ -339,7 +339,7 @@ export function collectEvidenceRefs(value: unknown, out: Set<string> = new Set()
 export const MARKETING_ROUTES = [
 	'src/routes/+page.svelte',
 	'src/routes/contact/+page.svelte',
-	'src/routes/qnix/+page.svelte',
+	'src/routes/dysonsphere/+page.svelte',
 	'src/routes/shush/+page.svelte',
 	'src/routes/invite/+page.svelte',
 	'src/routes/account/+page.svelte',

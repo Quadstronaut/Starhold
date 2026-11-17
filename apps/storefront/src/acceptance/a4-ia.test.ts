@@ -12,7 +12,7 @@ import { read, exists, templateText, collectStrings, srcFiles, relative } from '
 const PAGES = [
 	'',
 	'contact',
-	'qnix',
+	'dysonsphere',
 	'shush',
 	'invite',
 	'account',
@@ -42,8 +42,8 @@ describe('A4 · information architecture', () => {
 
 	it('A4.3 the published products.json contract lists only live products', () => {
 		const products = parseCatalog(catalog);
-		expect(products.map((p) => p.id)).toEqual(['shushgame', 'qnix']);
-		expect(products.find((p) => p.id === 'qnix')!.status).toBe('coming-soon');
+		expect(products.map((p) => p.id)).toEqual(['shushgame', 'dysonsphere']);
+		expect(products.find((p) => p.id === 'dysonsphere')!.status).toBe('coming-soon');
 		expect(products.find((p) => p.id === 'shushgame')!.url).toBe('https://shushgame.com');
 	});
 

@@ -222,7 +222,7 @@ export const comingSoon: string[] = pick(['Export and delete your own data from 
 // The same set and order as the Hangar on starhold.app. A card is: name + label
 // chip, one factual sentence, hostname, an optional limitation or price note,
 // and at most one action. An invitation-only service offers "Request an invite";
-// an open one offers "Open X"; an in-development one offers nothing (QNix links
+// an open one offers "Open X"; an in-development one offers nothing (DysonSphere links
 // to its interest form). Starbot has no public door yet, so no link (brief 5).
 export type Service = {
 	id: string;
@@ -314,15 +314,15 @@ export const serviceItems: Service[] = [
 		what: 'A Discord assistant for the Starhold community.'
 	},
 	{
-		id: 'qnix',
-		name: 'QNix',
-		host: 'starhold.dev/qnix',
-		href: '/qnix',
+		id: 'dysonsphere',
+		name: 'DysonSphere',
+		host: 'starhold.dev/dysonsphere',
+		href: '/dysonsphere',
 		action: 'Register interest',
 		invite: false,
-		status: labelFor('qnix'),
-		availability: availabilityFor('qnix'),
-		what: 'Bring-your-own-device hosting with high availability.'
+		status: labelFor('dysonsphere'),
+		availability: availabilityFor('dysonsphere'),
+		what: 'Personal hosting, built to be hard to break. In development.'
 	}
 ];
 
@@ -333,7 +333,7 @@ export const services = {
 		{ id: 'teams', title: 'For teams and MSPs', ids: ['status'] },
 		{ id: 'builders', title: 'For builders and sysadmins', ids: ['umbermark', 'zenithmark', 'render'] },
 		{ id: 'discord', title: 'Discord apps', ids: ['shushgame', 'starbot'] },
-		{ id: 'personal', title: 'Personal hosting', ids: ['qnix'] }
+		{ id: 'personal', title: 'Personal hosting', ids: ['dysonsphere'] }
 	],
 	items: serviceItems
 };
@@ -490,23 +490,26 @@ export const formNotices = {
 		deletion:
 			'We delete your message 90 days after we close it, and never keep it longer than 12 months. Discord keeps its own copy of the notice line only.'
 	},
-	// from data-flow-inventory: storefront.qnix (sf-qnix-interest), wording per ledger Q66
-	qnix: {
-		line: 'QNix: personal hosting, built to be hard to break.',
-		heading: 'Notify me when QNix opens. One email, then we delete your address.',
+	// from data-flow-inventory: storefront.dysonsphere (sf-dysonsphere-interest), wording per ledger Q66
+	dysonsphere: {
+		line: 'DysonSphere: personal hosting, built to be hard to break.',
+		heading: 'Notify me when DysonSphere opens. One email, then we delete your address.',
 		notice:
-			'We store your address encrypted, email you once when QNix opens, then delete it. If QNix never opens we delete it after 24 months.',
+			'We store your address encrypted, email you once when DysonSphere opens, then delete it. If DysonSphere never opens we delete it after 24 months.',
 		cta: 'Notify me'
 	}
 };
 
 // ── Product and service pages ────────────────────────────────────────────────
-export const qnix = {
-	title: 'QNix · Starhold',
-	description: 'QNix: bring-your-own-device hosting with high availability. In development; register interest on its page.',
-	eyebrow: labelFor('qnix'),
-	h1: 'QNix',
-	lede: 'Bring-your-own-device hosting with high availability: hold your own infrastructure the way we hold ours.'
+export const dysonsphere = {
+	title: 'DysonSphere · Starhold',
+	description: 'DysonSphere: personal hosting, built to be hard to break. In development; register interest on its page.',
+	eyebrow: labelFor('dysonsphere'),
+	h1: 'DysonSphere',
+	// QNIX-45: the rename tagline, verbatim from the plan.
+	tagline:
+		'Your Starship can take you to Starhold services or the DysonSphere for self-provisioned managed private services/containers/clusters.',
+	lede: 'Personal hosting, built to be hard to break.'
 };
 
 // /shush (design brief section 4). Mechanics were checked against the Shush

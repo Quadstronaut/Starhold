@@ -12,7 +12,7 @@ const ROUTES = [
 	'/shush',
 	'/invite',
 	'/account',
-	'/qnix',
+	'/dysonsphere',
 	'/legal/terms',
 	'/legal/privacy',
 	'/legal/refunds'

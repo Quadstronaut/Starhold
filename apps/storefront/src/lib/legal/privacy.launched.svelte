@@ -33,7 +33,7 @@
 			<tr><td>Abuse-prevention records: a keyed hash of your IP address (pseudonymous).</td><td>Stop abuse of free tools.</td><td>Legitimate interests</td></tr>
 			<tr><td>Your IP address, held in memory only.</td><td>Spam control on forms.</td><td>Legitimate interests</td></tr>
 			<tr><td>Contact messages: your name, email and message.</td><td>Answer you.</td><td>Legitimate interests (replying to you)</td></tr>
-			<tr><td>Email for the QNix notice.</td><td>Send one email when QNix opens.</td><td>Consent</td></tr>
+			<tr><td>Email for the DysonSphere notice.</td><td>Send one email when DysonSphere opens.</td><td>Consent</td></tr>
 			<tr><td>Starhold Account details: your sign-in (through Google), your plan, and your email address only if you choose to share it at sign-in.</td><td>Run your account.</td><td>Contract</td></tr>
 			<tr><td>Purchase record: amount, date, provider reference. No content.</td><td>Keep the books and meet tax law.</td><td>Legal obligation</td></tr>
 			<tr><td>If you back our work on Patreon: your Patreon user id, name, email, membership status, tier, pledge amount, last charge status, next charge date and, if you linked it, your Discord id.</td><td>Know who has backed the work and at which tier.</td><td>Consent</td></tr>
@@ -71,7 +71,7 @@
 			<tr><td>OVH</td><td>Hosting. We rent the servers our services run on and administer them ourselves.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 		</tbody>
 	</table>
-	<p>Our products send email through Postmark, from no-reply@starhold.app; replies go to hello@starhold.dev. We send only the email that is required to operate the service and maintain your account: sign-in and account notices, billing and refund notices, and alerts and updates you turned on, such as status-page subscriptions, monitoring alerts and score-drop alerts. We do not send marketing email, upsells or newsletters. If you asked to be told when QNix opens, we will email you once.</p>
+	<p>Our products send email through Postmark, from no-reply@starhold.app; replies go to hello@starhold.dev. We send only the email that is required to operate the service and maintain your account: sign-in and account notices, billing and refund notices, and alerts and updates you turned on, such as status-page subscriptions, monitoring alerts and score-drop alerts. We do not send marketing email, upsells or newsletters. If you asked to be told when DysonSphere opens, we will email you once.</p>
 	<p>We also share data when the law requires it through valid legal process, or when needed to protect our rights, our users or the public.</p>
 
 	<h2>5. Where data is stored</h2>
@@ -91,7 +91,8 @@
 			<tr><td>Free scan reports</td><td>30 days</td><td>Report created</td></tr>
 			<tr><td>Paid reports, unclaimed</td><td>3 months, or until you delete it</td><td>Payment. A report claimed into an account lives with the account.</td></tr>
 			<tr><td>Contact messages</td><td>90 days after we close the conversation, and never more than 12 months from receipt</td><td>Conversation closed; message received</td></tr>
-			<tr><td>QNix notice list</td><td>Until the one notice is sent, or 24 months if QNix has not opened</td><td>Form submitted</td></tr>
+			<tr><td>DysonSphere notice list</td><td>Until the one notice is sent, or 24 months if DysonSphere has not opened</td><td>Form submitted</td></tr>
+			<tr><td>Voicemails</td><td>90 days</td><td>Time of the call</td></tr>
 			<tr><td>Purchase record</td><td>As tax law requires, up to 7 years</td><td>Payment</td></tr>
 			<tr><td>Patreon membership details</td><td>While you are a patron, then deleted within 30 days</td><td>The day we see you are no longer an active patron</td></tr>
 		</tbody>
@@ -107,9 +108,10 @@
 	</ol>
 	<p>You can export and delete your data yourself from the account page. If you cannot, write to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a> and we will do it within 30 days. Every destructive action asks you to confirm first.</p>
 
-	<h2>8. The contact form and QNix notice</h2>
+	<h2>8. The contact form and DysonSphere notice</h2>
 	<p>Your message is encrypted with a public key before it is stored; only an offline key held by the operator can read it. Discord receives only the ticket number, in a short notice reading "New message #id", with no message body and no email address. We delete the stored message 90 days after we close the conversation, and never later than 12 months after we received it. Our backups drop it within 30 days after that. Discord keeps its own copy of the short notice under its policy. Please do not send passwords or secrets in a message.</p>
-	<p>If you ask to be told when QNix opens, we store your email address encrypted. We send you one notice, then delete the address. If QNix has not opened after 24 months, we delete it anyway.</p>
+	<p>If you ask to be told when DysonSphere opens, we store your email address encrypted. We send you one notice, then delete the address. If DysonSphere has not opened after 24 months, we delete it anyway.</p>
+	<p>Voicemail: if you call our public number, Google Voice records your message and number and emails it to us. We reply by email and delete the voicemail within 90 days.</p>
 
 	<h2>9. Our access to your account</h2>
 	<p>We never ask for your password, never send sign-in links by hand, and never look at your account unless you ask us to or the law requires it. Any access is logged. That log is about us, not you (see section 2).</p>

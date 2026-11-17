@@ -6,7 +6,7 @@ import { pick } from './_launch';
 // light (weight budget) and that structured data matches what is on screen.
 
 const ROUTES = [
-	'/', '/contact', '/shush', '/invite', '/account', '/qnix'
+	'/', '/contact', '/shush', '/invite', '/account', '/dysonsphere'
 ];
 
 // ── 1. No JavaScript ────────────────────────────────────────────────────────

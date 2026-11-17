@@ -6,11 +6,11 @@ vi.mock('$app/env/private', () => ({ CONTACT_AGE_RECIPIENT: '', CONTACT_DB_PATH:
 import { POST } from './+server';
 import { getDb } from '#lib/server/contact-store.js';
 
-describe('POST /api/qnix without CONTACT_AGE_RECIPIENT', () => {
+describe('POST /api/dysonsphere without CONTACT_AGE_RECIPIENT', () => {
 	it('503s "Contact is temporarily unavailable" and stores nothing', async () => {
 		try {
 			await POST({
-				request: new Request('http://localhost/api/qnix', {
+				request: new Request('http://localhost/api/dysonsphere', {
 					method: 'POST',
 					headers: { 'content-type': 'application/json' },
 					body: JSON.stringify({ email: 'a@b.co' })

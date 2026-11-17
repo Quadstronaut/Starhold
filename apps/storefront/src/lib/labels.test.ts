@@ -30,7 +30,7 @@ describe('shared product labels', () => {
 			status: LAUNCHED ? 'Open · paid plans' : 'Invitation only',
 			starbot: 'In development',
 			account: LAUNCHED ? 'Open' : 'In development',
-			qnix: 'In development',
+			dysonsphere: 'In development',
 			'hangar-hosting': 'Retired',
 			'custom-bots': 'Retired'
 		});

@@ -1,5 +1,5 @@
 <script lang="ts">
-	// QNix "notify me" form: email only, posts to /api/qnix (STAR-145, Q48/Q66).
+	// DysonSphere "notify me" form: email only, posts to /api/dysonsphere (STAR-145, Q48/Q66).
 	import { formNotices } from '#lib/content/copy.js';
 	import FormNotice from './FormNotice.svelte';
 
@@ -13,7 +13,7 @@
 		status = 'busy';
 		errorMsg = '';
 		try {
-			const res = await fetch('/api/qnix', {
+			const res = await fetch('/api/dysonsphere', {
 				method: 'POST',
 				headers: { 'content-type': 'application/json' },
 				body: JSON.stringify({ email, website })
@@ -31,7 +31,7 @@
 </script>
 
 {#if status === 'sent'}
-	<p class="card sent">Got it. We will email <strong>{email}</strong> once, when QNix opens.</p>
+	<p class="card sent">Got it. We will email <strong>{email}</strong> once, when DysonSphere opens.</p>
 {:else}
 	<form onsubmit={submit}>
 		<label>
@@ -40,12 +40,12 @@
 		</label>
 		<input class="hp" type="text" bind:value={website} name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
 		<button class="btn btn-primary" disabled={status === 'busy'}>
-			{status === 'busy' ? 'Sending…' : formNotices.qnix.cta}
+			{status === 'busy' ? 'Sending…' : formNotices.dysonsphere.cta}
 		</button>
 		{#if status === 'error'}<p class="err">{errorMsg}</p>{/if}
 	</form>
 {/if}
-<FormNotice lines={[formNotices.qnix.notice]} />
+<FormNotice lines={[formNotices.dysonsphere.notice]} />
 
 <style>
 	form {

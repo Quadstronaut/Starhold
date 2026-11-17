@@ -12,7 +12,7 @@ interface Props {
 	title: string;
 	href: string;
 	availability?: string;
-	icon: 'bots' | 'shush' | 'qnix' | 'code' | 'log' | 'store' | 'apps' | 'status' | 'shield' | 'mail' | 'frame';
+	icon: 'bots' | 'shush' | 'dysonsphere' | 'code' | 'log' | 'store' | 'apps' | 'status' | 'shield' | 'mail' | 'frame';
 }
 const { title, href, icon, availability } = Astro.props;
 const external = /^https?:\/\//.test(href);
@@ -23,7 +23,7 @@ const paths: Record<Props['icon'], string> = {
 	// speech bubble, struck through: the quiet game
 	shush: 'M4 5h16v11H9l-5 4z M5 4l15 15',
 	// stacked hex layers
-	qnix: 'M12 3l8 4.5-8 4.5-8-4.5z M4 12l8 4.5 8-4.5 M4 16.5L12 21l8-4.5',
+	dysonsphere: 'M12 3l8 4.5-8 4.5-8-4.5z M4 12l8 4.5 8-4.5 M4 16.5L12 21l8-4.5',
 	// braces
 	code: 'M9 4c-2 0-3 1-3 3v2c0 1.5-1 3-2 3 1 0 2 1.5 2 3v2c0 2 1 3 3 3 M15 4c2 0 3 1 3 3v2c0 1.5 1 3 2 3-1 0-2 1.5-2 3v2c0 2-1 3-3 3',
 	// dated entries

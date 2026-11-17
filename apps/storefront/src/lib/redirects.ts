@@ -20,10 +20,13 @@ export const REMOVED_PATHS: readonly string[] = [
 	'/api/stripe/webhook'
 ];
 
-// Moved pages that have a real new home (ledger Q34/Q50): old QNix URLs -> /qnix, the old Shush page -> /shush.
+// Moved pages that have a real new home (ledger Q34/Q50): old QNix URLs (QNIX-45 rename to DysonSphere) -> /dysonsphere, the old Shush page -> /shush.
 export const MOVED_PATHS: Readonly<Record<string, string>> = {
-	'/services/qnix': '/qnix',
-	'/products/qnix': '/qnix',
+	'/qnix': '/dysonsphere',
+	'/services/qnix': '/dysonsphere',
+	'/products/qnix': '/dysonsphere',
+	'/services/dysonsphere': '/dysonsphere',
+	'/products/dysonsphere': '/dysonsphere',
 	// Shush moved from /products/shushgame to /shush (STAR-145).
 	'/products/shushgame': '/shush'
 };
@@ -34,5 +37,7 @@ const REMOVED = new Set(REMOVED_PATHS);
 export function redirectFor(pathname: string): string | null {
 	const p = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
 	if (p in MOVED_PATHS) return MOVED_PATHS[p];
+	// Old QNix doc subpages (architecture, hosting...) 301 on starhold.fyi; mirror that here for .dev.
+	if (p.startsWith('/qnix/')) return '/dysonsphere';
 	return REMOVED.has(p) ? '/' : null;
 }
