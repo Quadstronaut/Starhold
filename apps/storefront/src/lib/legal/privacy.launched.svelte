@@ -1,7 +1,7 @@
 <svelte:head><title>Privacy Policy · Starhold</title></svelte:head>
 
 <section class="section legal">
-	<div class="label">Last updated 2026-11-15</div>
+	<div class="label">Last updated 2026-11-17</div>
 	<h1>Privacy Policy</h1>
 
 	<p>This policy says what personal data Starhold collects, why, on what legal basis, who receives it, how long we keep it, and how to use your rights. It covers the Starhold Account, our websites (starhold.dev, starhold.fyi, starhold.app), the contact form and our Discord server. Each product has its own privacy notice for what it adds. Umbermark, with paid plans through Polar, is one of them.</p>
@@ -9,7 +9,7 @@
 	<h2>1. Who is responsible</h2>
 	<p>Starhold is the trade name of <strong>Copper Jerky LLC</strong>, an Arizona limited liability company ("Starhold", "we", "us"). We are the controller of the data described here.</p>
 	<ul>
-		<li>Postal address: available on request at <a href="mailto:legal@starhold.dev">legal@starhold.dev</a> until our registered business address is published.</li>
+		<li>Postal address: Copper Jerky LLC, 6917 W. Hedge Rose Dr, Tucson, AZ 85757, USA.</li>
 		<li>Email for any privacy question or request: <a href="mailto:hello@starhold.dev">hello@starhold.dev</a></li>
 	</ul>
 
@@ -35,7 +35,7 @@
 			<tr><td>Contact messages: your name, email and message.</td><td>Answer you.</td><td>Legitimate interests (replying to you)</td></tr>
 			<tr><td>Email for the DysonSphere notice.</td><td>Send one email when DysonSphere opens.</td><td>Consent</td></tr>
 			<tr><td>Starhold Account details: your sign-in (through Google), your plan, and your email address only if you choose to share it at sign-in.</td><td>Run your account.</td><td>Contract</td></tr>
-			<tr><td>Purchase record: amount, date, provider reference. No content.</td><td>Keep the books and meet tax law.</td><td>Legal obligation</td></tr>
+			<tr><td>Purchase record: amount, date, provider reference. No content.</td><td>Keep the books and meet tax law.</td><td>Legitimate interests (keeping the business records that United States tax law requires)</td></tr>
 			<tr><td>If you back our work on Patreon: your Patreon user id, name, email, membership status, tier, pledge amount, last charge status, next charge date and, if you linked it, your Discord id.</td><td>Know who has backed the work and at which tier.</td><td>Consent</td></tr>
 			<tr><td>Backups of the above.</td><td>Recover from disk or host loss.</td><td>Legitimate interests</td></tr>
 		</tbody>
@@ -61,17 +61,18 @@
 			<tr><th>Recipient</th><th>Role and data</th><th>Transfer mechanism</th></tr>
 		</thead>
 		<tbody>
-			<tr><td>Discord</td><td>Our Discord server and apps. It receives the ticket notice for a contact message, and whatever you post in Discord, under <a href="https://discord.com/privacy" target="_blank" rel="noopener">Discord's Privacy Policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
-			<tr><td>Polar</td><td>Payment provider and merchant of record for sales. It takes your payment and keeps its own records, under <a href="https://polar.sh/legal/privacy" target="_blank" rel="noopener">its privacy policy</a>. We keep only the order reference and plan.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
-			<tr><td>Google</td><td>Sign-in provider for the Starhold Account. Google learns that you signed in to Starhold, under <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. We ask Google only to confirm who you are, and we receive Google's account identifier for you. We receive your Google account email address only if you tick the optional box to share it, and we keep it only if Google confirms it is verified. We do not request your name, and we never receive your password.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
-			<tr><td>Patreon</td><td>Payment platform for people who choose to back our work. We receive from it the membership details listed in section 3. If you connect Discord to Patreon, Patreon gives you a role in the Starhold Discord named after your tier. Backing buys nothing else: no product access, no discounts and no special support.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
+			<tr><td>Discord</td><td>Our Discord server and apps. It receives the ticket notice for a contact message, and whatever you post in Discord, under <a href="https://discord.com/privacy" target="_blank" rel="noopener">Discord's Privacy Policy</a>.</td><td>Its own controller, under its own privacy policy</td></tr>
+			<tr><td>Polar</td><td>Payment provider and merchant of record for sales. It takes your payment and keeps its own records, under <a href="https://polar.sh/legal/privacy" target="_blank" rel="noopener">its privacy policy</a>. We keep only the order reference and plan.</td><td>Its own controller, under its own privacy policy</td></tr>
+			<tr><td>Google</td><td>Sign-in provider for the Starhold Account. Google learns that you signed in to Starhold, under <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. We ask Google only to confirm who you are, and we receive Google's account identifier for you. We receive your Google account email address only if you tick the optional box to share it, and we keep it only if Google confirms it is verified. We do not request your name, and we never receive your password. Google also provides the mailbox and voicemail that receive messages you send us, under its own privacy policy.</td><td>Its own controller, under its own privacy policy</td></tr>
+			<tr><td>Porkbun</td><td>Forwards email sent to our starhold addresses, under its own privacy policy.</td><td>Its own controller, under its own privacy policy</td></tr>
+			<tr><td>Patreon</td><td>Payment platform for people who choose to back our work. We receive from it the membership details listed in section 3. If you connect Discord to Patreon, Patreon gives you a role in the Starhold Discord named after your tier. Backing buys nothing else: no product access, no discounts and no special support.</td><td>Its own controller, under its own privacy policy</td></tr>
 			<tr><td>Postmark</td><td>Email delivery. It sends the email our products send you, and receives your email address and the message to do so, under <a href="https://postmarkapp.com/privacy-policy" target="_blank" rel="noopener">its privacy policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
-			<tr><td>Cloudflare (Turnstile)</td><td>Bot check on the Umbermark and Zenithmark scan forms. When you submit a scan, your browser loads Cloudflare's check, and Cloudflare receives your IP address and browser details to decide whether you are a person, under <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare's Privacy Policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
+			<tr><td>Cloudflare (Turnstile)</td><td>Bot check on the Umbermark and Zenithmark scan forms. When you start a scan, your browser loads Cloudflare's check, and Cloudflare receives your IP address and browser details to decide whether you are a person, under <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare's Privacy Policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Cloudflare (R2)</td><td>Off-site storage of backups.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>OVH</td><td>Hosting. We rent the servers our services run on and administer them ourselves.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 		</tbody>
 	</table>
-	<p>Our products send email through Postmark, from no-reply@starhold.app; replies go to hello@starhold.dev. We send only the email that is required to operate the service and maintain your account: sign-in and account notices, billing and refund notices, and alerts and updates you turned on, such as status-page subscriptions, monitoring alerts and score-drop alerts. We do not send marketing email, upsells or newsletters. If you asked to be told when DysonSphere opens, we will email you once.</p>
+	<p>Our products send email through Postmark, from no-reply@starhold.app; replies go to hello@starhold.dev. We send only the email that is required to operate the service and maintain your account: sign-in and account notices, billing and refund notices, and alerts and updates you turned on, such as status-page subscriptions, monitoring alerts and score-drop alerts. We send no marketing email, upsells or newsletters unless you tick the Product updates box, which allows at most one email a month about Starhold products. If you tick the Product updates box, we store the email address you enter, the time you confirmed it and the wording you saw, and use them only to send you at most one email a month about Starhold products. You can stop at any time with the unsubscribe link in every email or by unticking the box on your account page, and the address is then deleted from our list at once. Our email provider, Postmark, keeps its own delivery record of each message for about 45 days. If you asked to be told when DysonSphere opens, we will email you once.</p>
 	<p>We also share data when the law requires it through valid legal process, or when needed to protect our rights, our users or the public.</p>
 
 	<h2>5. Where data is stored</h2>
@@ -85,11 +86,12 @@
 		</thead>
 		<tbody>
 			<tr><td>Usage counts (anonymous)</td><td>90 days</td><td>The day of the tally</td></tr>
-			<tr><td>Abuse-prevention records</td><td>1 year</td><td>Record created</td></tr>
+			<tr><td>Abuse-prevention records</td><td>24 hours to 1 year, depending on the product</td><td>Record created</td></tr>
 			<tr><td>Error logs</td><td>30 days</td><td>Log line written</td></tr>
 			<tr><td>Backups</td><td>Deleted data leaves backups within 30 days</td><td>Deletion from live data</td></tr>
 			<tr><td>Free scan reports</td><td>30 days</td><td>Report created</td></tr>
 			<tr><td>Paid reports, unclaimed</td><td>3 months, or until you delete it</td><td>Payment. A report claimed into an account lives with the account.</td></tr>
+			<tr><td>Starhold Account details</td><td>Until you delete the account</td><td>Account created</td></tr>
 			<tr><td>Contact messages</td><td>90 days after we close the conversation, and never more than 12 months from receipt</td><td>Conversation closed; message received</td></tr>
 			<tr><td>DysonSphere notice list</td><td>Until the one notice is sent, or 24 months if DysonSphere has not opened</td><td>Form submitted</td></tr>
 			<tr><td>Voicemails</td><td>90 days</td><td>Time of the call</td></tr>
@@ -102,11 +104,11 @@
 	<h2>7. Deleting your data</h2>
 	<p>Deletion works in three layers.</p>
 	<ol>
-		<li>Live data is gone at once. Keys and sessions stop working.</li>
+		<li>Live data is gone when the delete runs: at once, after 24 hours if you have a paid plan, or at the end of your period if you chose that. Keys and sessions stop working.</li>
 		<li>Backups drop it within 30 days.</li>
 		<li>Only the bare purchase record (amount, date, provider reference, no content) is kept, as tax law requires, for up to 7 years.</li>
 	</ol>
-	<p>You can export and delete your data yourself from the account page. If you cannot, write to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a> and we will do it within 30 days. Every destructive action asks you to confirm first.</p>
+	<p>You can export and delete your data yourself from the account page. If you cannot, write to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a> and we will do it within one month. Every destructive action asks you to confirm first.</p>
 
 	<h2>8. The contact form and DysonSphere notice</h2>
 	<p>Your message is encrypted with a public key before it is stored; only an offline key held by the operator can read it. Discord receives only the ticket number, in a short notice reading "New message #id", with no message body and no email address. We delete the stored message 90 days after we close the conversation, and never later than 12 months after we received it. Our backups drop it within 30 days after that. Discord keeps its own copy of the short notice under its policy. Please do not send passwords or secrets in a message.</p>
@@ -126,11 +128,11 @@
 		<li>give you your data in a portable format;</li>
 		<li>stop relying on your consent.</li>
 	</ul>
-	<p>Write to <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>, or to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a> for export and delete if you cannot do them from the account page. We answer within 30 days. We may need to confirm it is you, and we will not ask for more than we need. We make no decisions about you by automated means that have legal or similar effects.</p>
+	<p>Write to <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>, or to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a> for export and delete if you cannot do them from the account page. We answer within one month. We may need to confirm it is you, and we will not ask for more than we need. We make no decisions about you by automated means that have legal or similar effects.</p>
 	<p>If you are unhappy with our answer, you can complain to your local data protection authority, or in the United States to the Arizona Attorney General. We would like the chance to fix it first.</p>
 
 	<h2>11. Children</h2>
-	<p>You must be at least 13 to use our services, and 18 (or old enough to make a binding purchase where you live) to buy. We do not knowingly collect data from children under 13. If you think a child has given us data, tell us and we will delete it.</p>
+	<p>You must be at least 16 to use our services, and 18 (or old enough to make a binding purchase where you live) to buy. We do not knowingly collect data from children under 16. If you think a child has given us data, tell us and we will delete it.</p>
 
 	<h2>12. Security</h2>
 	<p>Our services run on servers we administer, behind access controls, with data encrypted in transit. Payment details go to the payment provider and never to us. No system is perfectly secure, so we also collect little, which leaves little to expose.</p>
@@ -141,7 +143,7 @@
 	<h2>14. Contact</h2>
 	<p>Copper Jerky LLC, doing business as Starhold — <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
 
-	<p class="label">Last updated 2026-11-15.</p>
+	<p class="label">Last updated 2026-11-17.</p>
 </section>
 
 <style>

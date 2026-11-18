@@ -9,6 +9,9 @@
 //               voicemail line with 90-day retention added (STAR-292).
 //               Amended 2026-11-15 (STAR-155, operator approved): cookies, the Patreon data held and its 30 day
 //               deletion, and the Shush row now say what the code does.
+//               Amended 2026-11-17 (LEGAL-3, operator approved, all three documents): postal address, Google mailbox and
+//               Porkbun as recipients, independent controllers relabelled, minimum age 16, "within one month",
+//               purchase-record basis, account and abuse retention rows, deletion timing, Product updates email, Turnstile.
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { createHash } from 'node:crypto';
@@ -38,9 +41,9 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // The approved launch text, as legal_hash sees the served /legal/<name>.txt. Changing the wording changes these:
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
-	terms: 'f26d0227a39c4fbbcc8c5d94667715ae97bc8d71becff5d69f4e23f14e18986d',
-	privacy: '5a1448a2157d28dcf527a8ee692be44d4a240189194078b8323c5b58e7888f6a',
-	refunds: '32f9205ed3c603e7e9ba10264679f55d0989172b282fcdbee01bab69e92bf24e'
+	terms: '639a829c83ef50a61a490ee3969d62d7e7becbc3cf994554c503043b02f91633',
+	privacy: '2aadb4f90e4679111bf0d9a323b35e45cdace53b23191a770a9c5de2cc294f12',
+	refunds: 'c009b5bbed6916c032493123241bd4e9e66314fdf0e7476bbd0c116402524181'
 };
 
 const textOf = (state: 'prelaunch' | 'launched', k: (typeof KEYS)[number]) =>
@@ -85,9 +88,9 @@ describe('legal documents · launched state', () => {
 				expect(t, w).not.toMatch(new RegExp('\\b' + w + '\\b', 'i'));
 		});
 	}
-	it('dated 2026-11-13 (privacy 2026-11-15, STAR-155); pre-launch keeps master\'s date', () => {
+	it('dated 2026-11-17 (LEGAL-3); pre-launch keeps master\'s date', () => {
 		for (const k of KEYS) {
-			expect(textOf('launched', k)).toContain(`Last updated ${k === 'privacy' ? '2026-11-15' : '2026-11-13'}`);
+			expect(textOf('launched', k)).toContain('Last updated 2026-11-17');
 			expect(textOf('prelaunch', k)).toContain('Last updated 2026-10-24');
 		}
 	});

@@ -22,9 +22,8 @@ const Q71 =
 
 describe('legal pages · all three', () => {
 	for (const k of Object.keys(PAGES) as (keyof typeof PAGES)[]) {
-		// Privacy was amended after launch (STAR-271: Postmark named, invite rows gone; STAR-155 on 2026-11-15: cookies,
-		// Patreon and Shush wording); the other two keep the approval date.
-		const dated = k === 'privacy' ? '2026-11-15' : '2026-11-13';
+		// All three amended 2026-11-17 (LEGAL-3, operator approved): address, recipients, age 16, one month, deletion timing.
+		const dated = '2026-11-17';
 		it(`${k}: dated ${dated}, says Starhold not Starhold Software`, () => {
 			expect(text(k)).toContain(`Last updated ${dated}`);
 			expect(raw(k)).not.toMatch(/Starhold Software/);
@@ -81,16 +80,18 @@ describe('terms', () => {
 
 describe('privacy', () => {
 	const t = () => text('privacy');
-	it('has the operator-access sentence (Q73), address stub, US storage', () => {
+	it('has the operator-access sentence (Q73), postal address, US storage', () => {
 		expect(t()).toContain(Q73);
-		expect(t()).toContain('Postal address: available on request at legal@starhold.dev until our registered business address is published.');
+		expect(t()).toContain('Postal address: Copper Jerky LLC, 6917 W. Hedge Rose Dr, Tucson, AZ 85757, USA.');
 		expect(t()).toContain('Data is stored in the United States');
 		expect(t()).toContain('Umbermark, with paid plans through Polar');
 	});
 	it('names exactly the wired vendors; no unfilled placeholders remain (STAR-142 B3)', () => {
-		for (const v of ['Discord', 'Polar', 'Google', 'Patreon', 'Postmark', 'Cloudflare (Turnstile)', 'Cloudflare (R2)', 'OVH']) expect(t()).toContain(v);
+		for (const v of ['Discord', 'Polar', 'Google', 'Porkbun', 'Patreon', 'Postmark', 'Cloudflare (Turnstile)', 'Cloudflare (R2)', 'OVH']) expect(t()).toContain(v);
 		expect(t()).not.toMatch(/\[[^\]]*(lawyer|pending|POSTAL|transfer mechanism)[^\]]*\]/i);
-		expect(t().match(/standard contractual terms \(see section 5\)/g)?.length).toBe(8);
+		// LEGAL-3 D6: Discord, Polar, Google, Patreon and Porkbun are independent controllers; the other four are processors.
+		expect(t().match(/standard contractual terms \(see section 5\)/g)?.length).toBe(4);
+		expect(t().match(/Its own controller, under its own privacy policy/g)?.length).toBe(5);
 		expect(t()).toContain(
 			'Transfers to our US processors rely on each processor\'s standard contractual terms; we are completing our transfer documentation with counsel.'
 		);
@@ -107,11 +108,12 @@ describe('privacy', () => {
 	it('retention table rows with clock starts', () => {
 		const rows: [string, string][] = [
 			['Usage counts (anonymous)', '90 days'],
-			['Abuse-prevention records', '1 year'],
+			['Abuse-prevention records', '24 hours to 1 year, depending on the product'],
 			['Error logs', '30 days'],
 			['Backups', 'within 30 days'],
 			['Free scan reports', '30 days'],
 			['Paid reports, unclaimed', '3 months'],
+				['Starhold Account details', 'Until you delete the account'],
 			['Contact messages', '90 days after we close the conversation'],
 			['DysonSphere notice list', '24 months'],
 			['Purchase record', 'up to 7 years']
@@ -143,7 +145,7 @@ describe('privacy', () => {
 		);
 	});
 	it('export and delete are self-service, with the email fallback (B2)', () => {
-		expect(t()).toContain('You can export and delete your data yourself from the account page. If you cannot, write to privacy@starhold.dev and we will do it within 30 days.');
+		expect(t()).toContain('You can export and delete your data yourself from the account page. If you cannot, write to privacy@starhold.dev and we will do it within one month.');
 		expect(t()).not.toMatch(/from the dashboard|we send your sign-in link/i);
 	});
 	it('email statement is true after launch and agrees with the DysonSphere notice (M6, STAR-271)', () => {
@@ -151,7 +153,10 @@ describe('privacy', () => {
 			'Our products send email through Postmark, from no-reply@starhold.app; replies go to hello@starhold.dev.'
 		);
 		expect(t()).toContain('We send only the email that is required to operate the service and maintain your account: sign-in and account notices, billing and refund notices, and alerts and updates you turned on, such as status-page subscriptions, monitoring alerts and score-drop alerts.');
-		expect(t()).toContain('We do not send marketing email, upsells or newsletters. If you asked to be told when DysonSphere opens, we will email you once.');
+		// LEGAL-3 D9: true before and after the Product updates box is switched on.
+			expect(t()).toContain('We send no marketing email, upsells or newsletters unless you tick the Product updates box, which allows at most one email a month about Starhold products.');
+			expect(t()).toContain('the unsubscribe link in every email');
+			expect(t()).toContain('If you asked to be told when DysonSphere opens, we will email you once.');
 		expect(t()).not.toContain('We do not send email yet');
 	});
 	it('Shush and Starbot rows are marked as built today (M11)', () => {
@@ -183,7 +188,7 @@ describe('privacy', () => {
 describe('refunds', () => {
 	it('has the self-service deletion rule with email fallback, and the merchant of record (B1, B2, M4)', () => {
 		const t = text('refunds');
-		expect(t).toContain('You can delete your account yourself from the account page. If you cannot, write to privacy@starhold.dev and we will do it within 30 days.');
+		expect(t).toContain('You can delete your account yourself from the account page. If you cannot, write to privacy@starhold.dev and we will do it within one month.');
 		expect(t).toContain('The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side.');
 	});
 	it('one-off wording (Q71) and carve-out', () => {

@@ -1,7 +1,7 @@
 <svelte:head><title>Terms of Service · Starhold</title></svelte:head>
 
 <section class="section legal">
-	<div class="label">Last updated 2026-11-13</div>
+	<div class="label">Last updated 2026-11-17</div>
 	<h1>Terms of Service</h1>
 
 	<p>These are the shared rules for using Starhold: the Starhold Account and the services we run. Each product may add its own short terms on its own site. Where a product's terms and these differ for that product, the product's terms win. Our <a href="/legal/privacy">Privacy Policy</a> and <a href="/legal/refunds">Refund Policy</a> are part of this agreement.</p>
@@ -13,10 +13,10 @@
 	<p>Features may change as we build (see section 16). The services are provided as-is, as section 12 explains. Your privacy rights still apply.</p>
 
 	<h2>3. Eligibility</h2>
-	<p>You must be at least 13 to use our services. To buy anything you must be 18 or older, or old enough to make a binding purchase where you live. If your local law requires a parent or guardian to consent, they must. Our Discord apps also require you to follow <a href="https://discord.com/terms" target="_blank" rel="noopener">Discord's Terms of Service</a>.</p>
+	<p>You must be at least 16 to use our services. To buy anything you must be 18 or older, or old enough to make a binding purchase where you live. If your local law requires a parent or guardian to consent, they must. Our Discord apps also require you to follow <a href="https://discord.com/terms" target="_blank" rel="noopener">Discord's Terms of Service</a>.</p>
 
 	<h2>4. Your account</h2>
-	<p>The Starhold Account is how you sign in to Starhold services (through Google sign-in) and manage plans, exports and deletion. You can export and delete your data yourself from the account page. If you cannot, write to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a> and we will do it within 30 days. Keep your sign-in details to yourself. You are responsible for what happens under your account. If you act for a server or organization, you confirm you are allowed to.</p>
+	<p>The Starhold Account is how you sign in to Starhold services (through Google sign-in) and manage plans, exports and deletion. You can export and delete your data yourself from the account page. If you cannot, write to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a> and we will do it within one month. Keep your sign-in details to yourself. You are responsible for what happens under your account. If you act for a server or organization, you confirm you are allowed to.</p>
 
 	<h2>5. What we ask of you</h2>
 	<ul>
@@ -71,5 +71,5 @@
 	<h2>20. Contact</h2>
 	<p>Copper Jerky LLC, doing business as Starhold — <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
 
-	<p class="label">Last updated 2026-11-13.</p>
+	<p class="label">Last updated 2026-11-17.</p>
 </section>

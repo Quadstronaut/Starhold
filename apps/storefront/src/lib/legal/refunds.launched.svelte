@@ -1,7 +1,7 @@
 <svelte:head><title>Refund Policy · Starhold</title></svelte:head>
 
 <section class="section legal">
-	<div class="label">Last updated 2026-11-13</div>
+	<div class="label">Last updated 2026-11-17</div>
 	<h1>Refund Policy</h1>
 
 	<p>Nothing here limits rights you have under the consumer law where you live.</p>
@@ -20,13 +20,13 @@
 	</ul>
 
 	<h3>Delete your account</h3>
-	<p>You can delete your account yourself from the account page. If you cannot, write to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a> and we will do it within 30 days.</p>
+	<p>You can delete your account yourself from the account page. If you cannot, write to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a> and we will do it within one month.</p>
 	<p>You choose when it happens:</p>
 	<ul>
-		<li><strong>Delete now.</strong> After a short grace period, your account and data are removed, and we refund the unused time, pro rata.</li>
+		<li><strong>Delete now.</strong> With no paid plan, your account and data are removed from live systems as soon as you confirm. With a paid plan, they are removed after 24 hours, and we refund the unused time, pro rata.</li>
 		<li><strong>Delete at the end of the period.</strong> Access continues and the account shows "deleting on" the date. You can undo it until then. When the period ends, your data is deleted. No refund is needed.</li>
 	</ul>
-	<p>Every delete asks you to confirm first. Deletion works in three layers: live data is gone at once, backups drop it within 30 days, and only the bare purchase record (amount, date, provider reference, no content) is kept, as tax law requires, for up to 7 years.</p>
+	<p>Every delete asks you to confirm first. Deletion works in three layers: live data is gone when the delete runs, backups drop it within 30 days, and only the bare purchase record (amount, date, provider reference, no content) is kept, as tax law requires, for up to 7 years.</p>
 
 	<h2>How refunds are paid</h2>
 	<p>The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side. Refunds go back to your original payment method through them. Some providers review a refund before they pay it out. While the provider works through it, the status reads "refund issued, provider processing", and it can take several business days to reach you.</p>
@@ -34,5 +34,5 @@
 	<h2>Billing problems</h2>
 	<p>If a charge looks wrong, write to <a href="mailto:hello@starhold.dev">hello@starhold.dev</a> first. We answer billing questions within 5 business days. You always keep your card network's chargeback rights.</p>
 
-	<p class="label">Last updated 2026-11-13.</p>
+	<p class="label">Last updated 2026-11-17.</p>
 </section>
