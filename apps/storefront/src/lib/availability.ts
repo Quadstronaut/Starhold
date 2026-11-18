@@ -11,6 +11,10 @@ export const OPEN_MEANS = pick(
 	'Open means you can use it now, during testing; it is still under development.',
 	'Open means you can use it now. Sign in with a Starhold Account; free tiers are available and paid plans are on sale.'
 );
+/** The Suite is a plan, not a product: its line lives beside the product lines, not in them.
+ * Mirror of the "suite" key in docs/shared/availability.json. */
+export const SUITE_LINE = "Starhold Suite: every tool's middle plan for $49 a month";
+
 /** Availability line per product id (same ids as labels.ts). */
 export const AVAILABILITY: Record<string, string> = pick(
 	{

@@ -17,6 +17,10 @@ Starhold hosts and operates these services for people who care where their data 
 | [Shush](/services/shushgame/) | The quiet game on Discord | Open · free | Open |
 | [DysonSphere](/services/dysonsphere/) | Personal hosting, built to be hard to break | In development | Interest form only |
 
+## Starhold Suite
+
+The Starhold Suite is one plan at $49 a month. It includes the middle plan of every tool: Umbermark Pro, Zenithmark Monitor 5, Heliostat MSP, Solatype Pro, and a Starbot Custom Bot with the Ops Pack. You buy it from the [Starhold Account page](https://starship.starhold.app/account/subscriptions). Single plans stay available.
+
 ## Getting in
 
 Sign in with your [Starhold Account](https://starship.starhold.app) with Google. Free tiers are open. Paid plans are on sale. These rules apply to every purchase. Questions: use the contact form at [starhold.dev/contact](https://starhold.dev/contact) or write to [hello@starhold.dev](mailto:hello@starhold.dev).

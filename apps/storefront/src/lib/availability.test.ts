@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { AVAILABILITY, CHECKOUT_NOTICE, OPEN_MEANS, availabilityFor } from './availability';
+import { AVAILABILITY, CHECKOUT_NOTICE, OPEN_MEANS, SUITE_LINE, availabilityFor } from './availability';
 import { serviceItems } from './content/copy';
 import { PRODUCT_LABELS } from './labels';
 import { LAUNCHED } from './launch';
@@ -10,6 +10,8 @@ describe('availability source', () => {
 		expect(json.products).toEqual(AVAILABILITY);
 		expect(json.checkoutNotice).toBe(CHECKOUT_NOTICE);
 		expect(json.openMeans).toBe(OPEN_MEANS);
+		expect(json.suite).toBe(SUITE_LINE);
+		expect(SUITE_LINE).toBe("Starhold Suite: every tool's middle plan for $49 a month");
 	});
 
 	it('every product with an availability line has a label, and the rulings are pinned', () => {
