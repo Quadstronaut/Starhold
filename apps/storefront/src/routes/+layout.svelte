@@ -22,7 +22,8 @@
 	<!-- every page renders `main > section` children; the acceptance suite scopes
 	     its structural assertions to exactly that shape -->
 	<main>{@render children()}</main>
-	<Footer />
+	<!-- STAR-301: no "Back the work" under /peridot. Peridot's only Patreon mention is the thank-you link on that page; an ask would break the owner's rule. -->
+	<Footer showBackTheWork={!(page.url.pathname === '/peridot' || page.url.pathname.startsWith('/peridot/'))} />
 {/if}
 
 <style>

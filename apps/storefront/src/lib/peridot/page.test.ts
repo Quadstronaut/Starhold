@@ -2,6 +2,9 @@
 import { describe, it, expect } from 'vitest';
 import { render } from 'svelte/server';
 import Page from '../../routes/peridot/+page.svelte';
+import PrivacyPage from '../../routes/peridot/privacy/+page.svelte';
+import DeletePage from '../../routes/peridot/delete/+page.svelte';
+import Footer from '../components/Footer.svelte';
 import { exists, read } from '../../acceptance/_helpers';
 import { PERIDOT_SUPPORTERS, PERIDOT_DEDICATION, PATREON_URL, PATREON_LINK_TEXT } from './page-content';
 
@@ -57,5 +60,30 @@ describe('STAR-301 /peridot', () => {
 
 	it('keeps supporter names only in the constants file', () => {
 		expect(read('src/routes/peridot/+page.svelte')).toContain('PERIDOT_SUPPORTERS');
+	});
+});
+
+// STAR-301: the site-wide footer "Back the work" link is an ask, so it is hidden under /peridot.
+describe('STAR-301 footer on /peridot routes', () => {
+	const patreonLinks = (html: string) => [...html.matchAll(/<a\b[^>]*href="([^"]*patreon\.com[^"]*)"[^>]*>([\s\S]*?)<\/a>/g)];
+
+	it('the layout hides the footer link for /peridot and /peridot/* only', () => {
+		const layout = read('src/routes/+layout.svelte');
+		expect(layout).toContain("page.url.pathname === '/peridot'");
+		expect(layout).toContain("page.url.pathname.startsWith('/peridot/')");
+		expect(layout).toContain('showBackTheWork=');
+	});
+
+	it('Footer renders Back the work by default (home) and omits it when told to', () => {
+		expect(patreonLinks(render(Footer).body).map((m) => m[2].trim())).toEqual(['Back the work']);
+		expect(patreonLinks(render(Footer, { props: { showBackTheWork: false } }).body)).toHaveLength(0);
+	});
+
+	it('/peridot page plus peridot footer has exactly one patreon link, "Starhold on Patreon"; privacy and delete have none', () => {
+		const all = patreonLinks(render(Page).body + render(Footer, { props: { showBackTheWork: false } }).body);
+		expect(all.map((m) => m[2].trim())).toEqual(['Starhold on Patreon']);
+		for (const P of [PrivacyPage, DeletePage]) {
+			expect(patreonLinks(render(P).body + render(Footer, { props: { showBackTheWork: false } }).body)).toHaveLength(0);
+		}
 	});
 });

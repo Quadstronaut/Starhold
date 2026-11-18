@@ -2,6 +2,8 @@
 	import { footerSite, legal, backTheWork, closingLine } from '#lib/nav.js';
 	import { site } from '#lib/content/copy.js';
 	import Brand from '#lib/components/Brand.svelte';
+	// STAR-301: false on /peridot/*, where Patreon appears only as a thank you, never an ask.
+	let { showBackTheWork = true }: { showBackTheWork?: boolean } = $props();
 </script>
 
 <footer>
@@ -12,7 +14,9 @@
 			<p class="meta">
 				<a href={'mailto:' + site.email}>{site.email}</a>
 			</p>
-			<p class="meta"><a href={backTheWork.href} rel="noopener">{backTheWork.label}</a></p>
+			{#if showBackTheWork}
+				<p class="meta"><a href={backTheWork.href} rel="noopener">{backTheWork.label}</a></p>
+			{/if}
 			<!-- The privacy claim, on every page. Backed by e2e/privacy.spec.ts. -->
 			<p class="meta privacy" data-evidence={site.privacy.evidence}>
 				{site.privacy.label} · <a href={site.privacy.href}>{site.privacy.linkLabel}</a>
