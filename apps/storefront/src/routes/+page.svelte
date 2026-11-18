@@ -4,6 +4,8 @@
 	import HeroArt from '#lib/components/HeroArt.svelte';
 	import Faq from '#lib/components/Faq.svelte';
 	import { home, services, principles, comingSoon, faq } from '#lib/content/copy.js';
+	import { LAUNCHED, ACCOUNT_URL } from '#lib/launch.js';
+	import { SUITE_LINE } from '#lib/availability.js';
 	import { HERO_BASE, HERO_SIZES, heroFallbackSrc, heroPool, heroSrcset } from '#lib/heroes.js';
 
 	// STAR-166 hero pool: +page.ts picks an id (server first, client on every
@@ -136,6 +138,11 @@
 			</div>
 		</div>
 	{/each}
+	{#if LAUNCHED}
+		<p class="suite-line" data-testid="suite-line">
+			<a href={`${ACCOUNT_URL}/account/subscriptions`} rel="noopener">{SUITE_LINE}.</a>
+		</p>
+	{/if}
 	<div class="btn-row">
 		<a class="btn btn-secondary" href={home.work.hangar.href} rel="noopener">{home.work.hangar.label} →</a>
 	</div>
@@ -485,6 +492,10 @@
 	}
 	.what {
 		color: var(--text);
+	}
+	.suite-line {
+		margin: var(--sp-4) 0 0;
+		color: var(--text-muted);
 	}
 	.availability {
 		margin: 0 0 var(--sp-2);
