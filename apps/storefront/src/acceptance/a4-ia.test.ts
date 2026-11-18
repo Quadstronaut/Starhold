@@ -19,6 +19,7 @@ const PAGES = [
 	'legal/terms',
 	'legal/privacy',
 	'legal/refunds',
+	'peridot',
 	'peridot/privacy',
 	'peridot/delete'
 ];
