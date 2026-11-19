@@ -1,14 +1,14 @@
 # Peridot privacy policy
 
-Last updated: 17 November 2026
+Last updated: 19 November 2026
 
 Peridot is a menstrual cycle tracking app for Android made by Starhold (COPPER JERKY LLC). This policy explains what happens to the information you put into Peridot.
 
 ## Summary
 
 - Your cycle records are stored on your phone, encrypted.
-- Starhold runs no servers for Peridot and receives none of your data.
-- Data leaves your phone only when you use circles (encrypted, through public Nostr relays), sign in (with Google) or turn on backup to your Google Drive (encrypted on your phone first; off by default).
+- Starhold runs no servers that hold Peridot data and receives none of your data, except a problem report you choose to send (see "What Starhold receives").
+- Data leaves your phone only when you use circles (encrypted, through public Nostr relays), sign in with Google (optional: Peridot also works without a Google account), turn on backup to your Google Drive (encrypted on your phone first; off by default) or send a problem report.
 - Peridot contains no advertising, analytics or crash-reporting software.
 
 ## Information stored on your phone
@@ -17,7 +17,7 @@ Peridot stores the following on your phone:
 
 - cycle records: period days, flow, symptoms and their severity, mood, sleep hours and custom tags you log;
 - circle information: circle names, member display names and public keys, circle keys, approval votes;
-- sign-in information: the ID and display name of the Google account you signed in with, and a Google refresh token used to keep you signed in; if you turn on Google Drive backup, a second Google refresh token that lets Peridot reach its backup folder;
+- sign-in information, if you sign in with Google: the ID and display name of the Google account you signed in with, and a Google refresh token used to keep you signed in; if you turn on Google Drive backup, a second Google refresh token that lets Peridot reach its backup folder. If you continue without Google, Peridot keeps only the display name you chose for your circles, if any;
 - settings: reminder lead times, relay list, sharing choices.
 
 The database is encrypted with SQLCipher. Its key is derived from a random secret created on your phone and kept in Android secure storage. Android's own automatic backup and device-to-device transfer are turned off for Peridot, so Android does not copy this data to your Google account. Peridot's optional Google Drive backup, described below, is separate and is off unless you turn it on.
@@ -28,11 +28,11 @@ The database is encrypted with SQLCipher. Its key is derived from a random secre
 
 - Entries are encrypted on your phone with a key that only the circle's members hold before they are sent. The relays, Starhold and anyone else in between cannot read them.
 - Nostr relays are servers run by independent third parties, not by Starhold. The default relays are relay.damus.io, nos.lol, relay.primal.net and nostr.mom. You can change the list in Settings > Relay management.
-- Relays can see, and may store, technical information that is not encrypted: your Peridot public key, the random ID of each circle, the time of each event, the type of event, the public keys of members an event is addressed to, approval votes, and the IP address your phone connects from.
+- Relays can see, and may store, technical information that is not encrypted: your Peridot public key, the random ID of each circle, the time of each event, the type of event, the public keys of members an event is addressed to, approval votes, and the IP address your phone connects from. The label that identifies each entry on a relay is a keyed hash that only your Recovery Key can produce, so it does not show which dates you logged, and entries are padded to the same size so their length does not show what kind of entry they are. The time of an event is when it was sent, not the date it describes.
 - The circle name, sent when a circle key is shared with a member, and your display name, sent when you ask to join a circle, are encrypted to the one person they are for. Relays cannot read them.
 - Each relay's own privacy policy applies to what it stores. Peridot asks relays to delete your circle entries when you delete your data (see below), but cannot force a relay to comply.
 
-**Sign-in.** Peridot uses Google sign-in. You authenticate with Google directly; Google returns your account ID, name and profile picture link to the app. Peridot keeps the ID and name on your phone and does not send them to Starhold. Google's privacy policy applies to the sign-in itself. Your encryption keys do not depend on your Google account, and signing in sends no cycle data to Google.
+**Sign-in (optional).** You can use Peridot without any account: choose "Continue without Google" and nothing about sign-in leaves your phone. If you choose Google sign-in, you authenticate with Google directly; Google returns your account ID, name and profile picture link to the app. Peridot keeps the ID and name on your phone and does not send them to Starhold. Google's privacy policy applies to the sign-in itself. Your encryption keys do not depend on your Google account, and signing in sends no cycle data to Google.
 
 **Backup to your Google Drive (optional).** Off by default. If you turn it on in Settings > Data > Google Drive backup, Peridot asks Google for access to one hidden folder in your Google Drive that only Peridot can use. Peridot cannot see or change your other Drive files.
 
@@ -45,14 +45,20 @@ The database is encrypted with SQLCipher. Its key is derived from a random secre
 
 **Notifications.** Period reminders are scheduled on your phone. No push-notification service is used.
 
+**Problem reports (optional).** Settings > About > Report a problem sends a report only when you press Send, after showing you exactly what will be sent. It contains the text you wrote; the app version, Android version and phone model only if you switch on device details; and a contact address only if you tick "I would like a reply". It never contains cycle records, symptoms, circle or member names, keys or your Recovery Key. The app encrypts the report on your phone to Starhold's report key, signs it with a one-time key that is not your Peridot identity, and sends it through the Nostr relays it already uses, asking them to drop it after 14 days. Relays see that an encrypted message was sent, its time and the IP address your phone connects from, but cannot read it.
+
+**Feedback form.** The web form at https://starhold.dev/peridot/feedback receives what you type and, only if you tick "I would like a reply", a contact address. It sets no cookies, loads nothing from third parties, keeps no access log and stores no IP address, browser details or referrer. A short-lived rate limit keeps only a keyed hash in memory for 10 minutes.
+
 ## What Starhold receives
 
-Nothing. Starhold operates no server for Peridot, has no Peridot account database and cannot see, export or hand over your records. If Starhold is sold, closes or receives a legal demand, there is no Peridot user data on Starhold's side to transfer or disclose.
+Nothing, unless you send a problem report. Starhold operates no server that holds Peridot data, has no Peridot account database and cannot see, export or hand over your records. If Starhold is sold, closes or receives a legal demand, there is no Peridot user data on Starhold's side to transfer or disclose.
+
+The one exception is a problem report you choose to send, from the app or the feedback form. Starhold receives the text you wrote, plus device details and a contact address only if you added them, and nothing else. Each report is kept as an issue in a private GitHub repository, so GitHub (GitHub, Inc.) also stores it; GitHub's privacy policy applies to that storage. Reports are used only to fix problems and, if you asked, to reply, and are never copied anywhere public.
 
 ## Your choices and controls
 
 - **Export:** Settings > Data > Export data writes your history as JSON, plaintext or encrypted.
-- **Delete:** Settings > Data > Delete all data erases the local database and secure storage on your phone, cancels scheduled reminders and asks the relays to delete the circle entries, heartbeats and membership records you published (Nostr NIP-09 deletion requests). If Google Drive backup is on, it also deletes the backup file from your Drive, or tells you if Drive could not be reached.
+- **Delete:** Settings > Data > Delete all data erases the local database and secure storage on your phone and cancels scheduled reminders. On every relay it uses, it replaces each circle entry you shared with an empty encrypted deletion record, asks the relays to delete your circle entries, heartbeats and membership records (Nostr NIP-09 deletion requests) and takes you out of your circles. Requests that cannot be delivered right away are kept on your phone, with no cycle data in them, and sent when Peridot is next open and online, for up to 30 days. Peridot cannot check what a relay actually deletes, and the screen says so before and after. If Google Drive backup is on, it also deletes the backup file from your Drive, or tells you if Drive could not be reached. Afterwards your Recovery Key opens an empty identity.
 - **Google Drive backup:** off by default; turn it on or off in Settings > Data > Google Drive backup.
 - **Leave a circle:** possible at any time; the circle's key is replaced so later entries are unreadable to you.
 - **Relays:** add or remove relays in Settings > Relay management.
@@ -60,7 +66,7 @@ Nothing. Starhold operates no server for Peridot, has no Peridot account databas
 
 ## Recovery Key
 
-On first sign-in Peridot creates a 24-word Recovery Key. It recreates your identity and keys on a new phone. It is shown only on your phone, behind your screen lock. Starhold has no copy. If you lose your phone and your Recovery Key, records that existed only on that phone cannot be recovered. A Google Drive backup does not change this: it can only be opened with the Recovery Key.
+When you start, Peridot creates a 24-word Recovery Key. It recreates your identity and keys on a new phone. It is shown once when it is created, and afterwards only behind your screen lock; on a phone with no screen lock it cannot be shown again, and Peridot says so before you continue. Starhold has no copy. If you lose your phone and your Recovery Key, records that existed only on that phone cannot be recovered. A Google Drive backup does not change this: it can only be opened with the Recovery Key.
 
 ## Health information and medical use
 
@@ -72,7 +78,7 @@ Peridot is intended for people 18 and over and is not directed at children.
 
 ## Security
 
-Encryption at rest (SQLCipher), end-to-end encryption for circle data (XChaCha20-Poly1305; circle keys exchanged with NIP-44), encryption on the phone for the Google Drive backup (XChaCha20-Poly1305, key derived from the Recovery Key), TLS for every network connection (wss:// relays, https:// Google). No method of storage or transmission is perfectly secure; Peridot's design aims to make Starhold unable to access your records at all.
+Encryption at rest (SQLCipher), end-to-end encryption for circle data (XChaCha20-Poly1305; circle keys exchanged with NIP-44), encryption on the phone for the Google Drive backup (XChaCha20-Poly1305, key derived from the Recovery Key), TLS for every network connection (wss:// relays, https:// Google, https:// feedback form). No method of storage or transmission is perfectly secure; Peridot's design aims to make Starhold unable to access your records at all.
 
 ## Changes
 
