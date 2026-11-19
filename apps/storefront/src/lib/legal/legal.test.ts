@@ -42,7 +42,7 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
 	terms: '4e6f667aae617e287a7e10ad3d73c6a92e646c2080a257538884a0799bbff255',
-	privacy: '5797fd7a211b22433fe57e14ecdce6976b9e52e1c526ddbd11476b8ba90e764c',
+	privacy: 'a2d76a314c2541ee0e60ac77aae75494046218b2afa7c2d1776fefb004735dd4',
 	refunds: '914c4e64607a8560e4fdb90206340c2668098b86dbfbdb9ebb3d28d8bda545f6'
 };
 
