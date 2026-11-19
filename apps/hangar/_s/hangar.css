@@ -274,3 +274,8 @@ h2 + .bays {
 	margin-top: var(--sp-3);
 	font-size: var(--fs-1);
 }
+/* A button that is shown but cannot be used yet (Starbot while it is not open). */
+.tile .action--disabled {
+	color: var(--text-muted);
+	cursor: not-allowed;
+}

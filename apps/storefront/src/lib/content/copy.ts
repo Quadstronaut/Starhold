@@ -19,6 +19,7 @@ import { labelFor } from '../labels';
 import { availabilityFor, CHECKOUT_NOTICE, OPEN_MEANS } from '../availability';
 // STAR-142: pick(before launch, after launch) follows the one switch in ../launch.ts.
 import { pick, ACCOUNT_URL } from '../launch';
+import { STARBOT_AVAILABLE, STARBOT_ACTION, STARBOT_ADD_URL } from '../starbot';
 
 export const site = {
 	/** Accessible name of the brand. Title case, not caps. */
@@ -223,7 +224,7 @@ export const comingSoon: string[] = pick(['Export and delete your own data from 
 // chip, one factual sentence, hostname, an optional limitation or price note,
 // and at most one action. An invitation-only service offers "Request an invite";
 // an open one offers "Open X"; an in-development one offers nothing (DysonSphere links
-// to its interest form). Starbot has no public door before launch, so no link (brief 5); once launched it opens its dashboard.
+// to its interest form). Starbot's button follows the one switch in lib/starbot.ts: disabled while closed, a link when open.
 export type Service = {
 	id: string;
 	name: string;
@@ -235,6 +236,8 @@ export type Service = {
 	action: string;
 	/** True when the action is an invite request (href is built from the id). */
 	invite: boolean;
+	/** A button that is shown but cannot be used yet (href is null). */
+	disabled?: boolean;
 	status: string;
 	/** One availability line per service, from docs/shared/availability.json. */
 	availability: string;
@@ -305,16 +308,15 @@ export const serviceItems: Service[] = [
 	{
 		id: 'starbot',
 		name: 'Starbot',
-		host: pick<string | null>(null, 'dash.starhold.app'),
-		href: pick<string | null>(null, 'https://dash.starhold.app'),
-		action: pick('', 'Open Starbot'),
+		host: 'dash.starhold.app',
+		href: STARBOT_AVAILABLE ? STARBOT_ADD_URL : null,
+		action: STARBOT_ACTION,
+		disabled: !STARBOT_AVAILABLE,
 		invite: false,
 		status: labelFor('starbot'),
 		availability: availabilityFor('starbot'),
-		what: pick(
-			'A Discord assistant for the Starhold community.',
-			'Your own Discord bot, with your name and avatar, set up and run for you. Sign in with a Starhold Account to start.'
-		)
+		what: 'One bot, run by Starhold. Add it to your Discord server in one click.',
+		note: 'Free to add. Plus $5 and Pro $19 a month, for one server. It never asks for your bot token.'
 	},
 	{
 		id: 'dysonsphere',

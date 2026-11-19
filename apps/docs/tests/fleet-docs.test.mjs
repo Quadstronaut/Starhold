@@ -176,7 +176,7 @@ test('every service page shows its availability line from availability.json', ()
 	assert.deepEqual(Object.keys(SERVICE_PAGES).sort(), Object.keys(AVAIL.products).sort());
 	for (const [id, route] of Object.entries(SERVICE_PAGES)) {
 		const text = proseText(page(route));
-		assert.ok(text.includes(`Availability: ${AVAIL.products[id]}.`), `${route}: availability line for ${id}`);
+		assert.ok(text.includes(`Availability: ${AVAIL.products[id]}`), `${route}: availability line for ${id}`);
 	}
 });
 
@@ -230,8 +230,10 @@ test('no Patreon, no who-runs-it, no "Starhold Software" outside dated history (
 	}
 });
 
-test('Starbot is described as built today, not as keeping nothing (M11)', () => {
+test('Starbot says what it keeps and deletes, for the one shared bot (M11, STARBOT-28)', () => {
 	const text = proseText(page('services/starbot'));
 	assert.doesNotMatch(text, /keeps nothing/i);
-	assert.match(text, /As built today, Starbot keeps/);
+	assert.match(text, /What Starbot keeps and deletes/);
+	assert.match(text, /Starbot never asks for your bot token/);
+	assert.match(text, /deleted 48 hours later/);
 });

@@ -3,6 +3,7 @@
 // Mirror of docs/shared/labels.json (vendored by the docs and Hangar builders);
 // src/lib/labels.test.ts fails if the two drift apart.
 import { pick } from './launch';
+import { STARBOT_AVAILABLE } from './starbot';
 
 export const LABEL_OPEN_FREE = 'Open · free';
 export const LABEL_OPEN_PAID = 'Open · early access, paid plans';
@@ -41,7 +42,7 @@ export const PRODUCT_LABELS: Record<string, Label> = pick<Record<string, Label>>
 		render: LABEL_INVITE_ONLY,
 		status: LABEL_INVITE_ONLY,
 		account: LABEL_IN_DEVELOPMENT, // Starhold Account
-		starbot: LABEL_IN_DEVELOPMENT,
+		starbot: STARBOT_AVAILABLE ? LABEL_OPEN_PAID : LABEL_IN_DEVELOPMENT,
 		shushgame: LABEL_OPEN_FREE,
 		dysonsphere: LABEL_IN_DEVELOPMENT,
 		'hangar-hosting': LABEL_RETIRED,
@@ -53,7 +54,7 @@ export const PRODUCT_LABELS: Record<string, Label> = pick<Record<string, Label>>
 		render: LABEL_OPEN_PAID_LAUNCHED,
 		status: LABEL_OPEN_PAID_LAUNCHED,
 		account: LABEL_OPEN, // Starhold Account: sign in with Google at ACCOUNT_URL
-		starbot: LABEL_OPEN_PAID_LAUNCHED,
+		starbot: STARBOT_AVAILABLE ? LABEL_OPEN_PAID_LAUNCHED : LABEL_IN_DEVELOPMENT,
 		shushgame: LABEL_OPEN_FREE,
 		dysonsphere: LABEL_IN_DEVELOPMENT,
 		'hangar-hosting': LABEL_RETIRED,

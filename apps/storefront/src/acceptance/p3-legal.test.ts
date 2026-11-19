@@ -161,8 +161,10 @@ describe('privacy', () => {
 			expect(t()).toContain('If you asked to be told when DysonSphere opens, we will email you once.');
 		expect(t()).not.toContain('We do not send email yet');
 	});
-	it('Shush and Starbot rows are marked as built today (M11)', () => {
-		expect(t()).toContain('Shush and Starbot, as built today');
+	it('Shush is marked as built today and Starbot as applying from the day it opens (M11, STARBOT-28)', () => {
+		expect(t()).toContain('Shush as built today, and Starbot from the day it opens');
+		expect(t()).toContain('This row applies from the day Starbot opens; Starbot is not available yet.');
+		expect(t()).not.toMatch(/bot['’]s token|bot token is given|72 hours of paying/i);
 		expect(raw('privacy')).toMatch(/<tr><td>Starbot<\/td>/);
 		expect(raw('privacy')).toMatch(/<tr><td>Shush<\/td>/);
 	});

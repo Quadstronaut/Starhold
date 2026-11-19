@@ -4,6 +4,7 @@
 //        and the prices on the page are the ones the release bars state.
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { collectStrings } from '../acceptance/_helpers';
+import { STARBOT_AVAILABLE } from './starbot';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { REPO, loadPairs, transform } from '../../../../deploy/launch-overlay.mjs';
@@ -85,7 +86,7 @@ describe('launch switch', () => {
 			for (const id of [...OPEN_PRODUCTS, 'account'])
 				expect(labels.labelFor(id), id).toBe(['umbermark', 'render', 'status', 'zenithmark'].includes(id) ? 'Open · paid plans' : 'Open');
 			expect(labels.labelFor('shushgame')).toBe('Open · free');
-			expect(labels.labelFor('starbot')).toBe('Open · paid plans');
+			expect(labels.labelFor('starbot')).toBe(STARBOT_AVAILABLE ? 'Open · paid plans' : 'In development');
 			expect(labels.labelFor('dysonsphere')).toBe('In development');
 			for (const l of Object.values(labels.PRODUCT_LABELS)) expect(labels.LABELS as readonly string[]).toContain(l);
 			// the cards carry their own label and availability line
@@ -125,7 +126,7 @@ describe('launch switch', () => {
 				'One public price table.'
 			]);
 			const starbot = copy.serviceItems.find((s) => s.id === 'starbot')!;
-			expect(starbot.status).toBe('Open · paid plans');
+			expect(starbot.status).toBe(STARBOT_AVAILABLE ? 'Open · paid plans' : 'In development');
 		});
 
 		it('the overlay for docs/shared (what the hangar and docs apps read) equals the storefront wording', async () => {

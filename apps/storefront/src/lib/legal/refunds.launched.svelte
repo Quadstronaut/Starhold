@@ -33,9 +33,6 @@
 	<p>A refund because you changed your mind, on any Starhold product or the Starhold Suite, is paid less the payment processing cost. That is the fee our payment provider kept when you paid, which it does not give back to us when we refund. We hold back only that real cost for that order, nothing else. On a $5 plan it is typically under $1. When the refund is made, we show you what you paid, the cost held back and the amount refunded.</p>
 	<p>The refund is in full, with nothing held back, when it is our fault: a billing error, a duplicate charge, or a service we failed to provide. It is also in full when you leave because we made a material change to our terms, and wherever the law where you live gives you a right to a full refund.</p>
 
-	<h2>Starbot: the bot token deadline</h2>
-	<p>After you pay for a Starbot bot, give Starbot your bot's token within 72 hours. If you do not, the bot is removed, the subscription is cancelled and the payment is refunded automatically, less the payment processing cost.</p>
-
 	<h2>How refunds are paid</h2>
 	<p>The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side. Refunds go back to your original payment method through them. Some providers review a refund before they pay it out. While the provider works through it, the status reads "refund issued, provider processing", and it can take several business days to reach you.</p>
 

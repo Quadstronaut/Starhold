@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { LABELS, PRODUCT_LABELS, labelFor } from './labels';
 import { LAUNCHED } from './launch';
+import { STARBOT_AVAILABLE } from './starbot';
 import catalog from '../../static/products.json';
 import json from '../../../../docs/shared/labels.json';
 
@@ -28,7 +29,7 @@ describe('shared product labels', () => {
 			shushgame: 'Open · free',
 			render: LAUNCHED ? 'Open · paid plans' : 'Invitation only',
 			status: LAUNCHED ? 'Open · paid plans' : 'Invitation only',
-			starbot: LAUNCHED ? 'Open · paid plans' : 'In development',
+			starbot: STARBOT_AVAILABLE ? (LAUNCHED ? 'Open · paid plans' : 'Open · early access, paid plans') : 'In development',
 			account: LAUNCHED ? 'Open' : 'In development',
 			dysonsphere: 'In development',
 			'hangar-hosting': 'Retired',

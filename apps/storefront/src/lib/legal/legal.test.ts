@@ -12,6 +12,8 @@
 //               Amended 2026-11-17 (LEGAL-3, operator approved, all three documents): postal address, Google mailbox and
 //               Porkbun as recipients, independent controllers relabelled, minimum age 16, "within one month",
 //               purchase-record basis, account and abuse retention rows, deletion timing, Product updates email, Turnstile.
+//               Amended 2026-11-19 (STARBOT-28, operator standing approval): Starbot is one shared bot. The Privacy row says it
+//               applies from the day Starbot opens; the bot-token deadline is removed from the Refund Policy.
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { createHash } from 'node:crypto';
@@ -42,8 +44,8 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
 	terms: '4e6f667aae617e287a7e10ad3d73c6a92e646c2080a257538884a0799bbff255',
-	privacy: 'a2d76a314c2541ee0e60ac77aae75494046218b2afa7c2d1776fefb004735dd4',
-	refunds: '914c4e64607a8560e4fdb90206340c2668098b86dbfbdb9ebb3d28d8bda545f6'
+	privacy: 'ace642fa07bd3e7f73b7ba986182063c7ac195d5a27962d57a831fd8401ae5a7',
+	refunds: '06fc76cea5aee95f75e186e30cd6fe3fcc3a9978846c553913b11fe3429641e7'
 };
 
 const textOf = (state: 'prelaunch' | 'launched', k: (typeof KEYS)[number]) =>

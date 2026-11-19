@@ -125,7 +125,7 @@ Enter a domain and get a report on SPF, DKIM, DMARC, MX, MTA-STS, TLS, DNSSEC, C
 | | State |
 |---|---|
 | [**Shush**](https://shushgame.com) | The quiet game on Discord: a new word is banned each day. Open, free, nothing to buy. |
-| [**Starbot**](https://dash.starhold.app) | Your own Discord bot, set up and run for you. Open, paid plans. |
+| [**Starbot**](https://dash.starhold.app) | One bot, run by Starhold. Add it to your Discord server in one click. Not open yet. |
 | [**DysonSphere**](https://starhold.dev/dysonsphere) | Personal hosting. In development; interest form only. |
 
 </details>

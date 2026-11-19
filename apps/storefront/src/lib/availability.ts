@@ -2,6 +2,7 @@
 // Mirror of docs/shared/availability.json (vendored by the docs and Hangar pages);
 // src/lib/availability.test.ts fails if the two drift apart.
 import { pick } from './launch';
+import { STARBOT_AVAILABILITY } from './starbot';
 
 export const CHECKOUT_NOTICE = pick(
 	'Checkout is paused; nothing is for sale today. These rules apply when it reopens.',
@@ -23,7 +24,7 @@ export const AVAILABILITY: Record<string, string> = pick(
 		render: 'Free tier open; sign-in and checkout closed',
 		status: 'Public pages open; sign-in closed',
 		shushgame: 'Open',
-		starbot: 'In development',
+		starbot: STARBOT_AVAILABILITY,
 		dysonsphere: 'Interest form only'
 	},
 	{
@@ -32,7 +33,7 @@ export const AVAILABILITY: Record<string, string> = pick(
 		render: 'Open: free tier; Hobby $5, Pro $19, Scale $49 a month',
 		status: 'Open: free tier; Private $5, MSP $19 a month',
 		shushgame: 'Open',
-		starbot: 'Open: Custom Bot $5, Custom Bot + Ops Pack $19 a month',
+		starbot: STARBOT_AVAILABILITY,
 		dysonsphere: 'Interest form only'
 	}
 );

@@ -132,6 +132,8 @@
 							<p class="service-links">
 								<a href={s.href} rel={external(s.href) ? 'noopener' : undefined}>{s.action} →</a>
 							</p>
+						{:else if s.disabled}
+							<p class="service-links"><button type="button" disabled aria-disabled="true">{s.action}</button></p>
 						{/if}
 					</article>
 				{/each}
