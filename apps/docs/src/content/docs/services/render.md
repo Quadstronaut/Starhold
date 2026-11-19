@@ -47,4 +47,4 @@ A cache hit and a failed request are not counted. Allowances reset on the first 
 
 ## Cancel any time
 
-- **Cancel** from the Subscription Management page of your Starhold Account: run out the period or take a prorated refund now. The [refund terms](https://starhold.dev/legal/refunds) apply.
+- **Cancel** from the Subscription Management page of your Starhold Account: run out the period or take a prorated refund now. Refunds are paid less the payment processing cost. Full details in the [Refund Policy](https://starhold.dev/legal/refunds).

@@ -203,7 +203,7 @@ export const principles: Principle[] = [
 	},
 	{
 		title: 'Cancel any time.',
-		detail: `${CHECKOUT_NOTICE} Run out the period or take a prorated refund now. Local consumer rights still apply.`,
+		detail: `${CHECKOUT_NOTICE} Run out the period or take a prorated refund now. Refunds are paid less the payment processing cost. Full details in the Refund Policy. Local consumer rights still apply.`,
 		evidence: ev('refund-policy'),
 		link: { href: '/legal/refunds', label: 'Refund policy' }
 	}
@@ -387,7 +387,7 @@ export const faq = {
 		},
 		{
 			q: 'How do payments and refunds work?',
-			a: `${CHECKOUT_NOTICE} Paid plans ${pick('will go', 'go')} through a merchant of record. Cancel any time: run out the period or take a prorated refund now. Local consumer rights still apply.`,
+			a: `${CHECKOUT_NOTICE} Paid plans ${pick('will go', 'go')} through a merchant of record. Cancel any time: run out the period or take a prorated refund now. Refunds are paid less the payment processing cost. Full details in the Refund Policy. Local consumer rights still apply.`,
 			evidence: ev('refund-policy'),
 			link: { href: '/legal/refunds', label: 'Refund policy' }
 		},

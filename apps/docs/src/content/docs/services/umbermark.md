@@ -20,7 +20,7 @@ A free scan needs no account. A full report is a $5 one-off purchase. Monthly pl
 - **Credentials:** never stored for one-off scans. A saved server keeps an encrypted key.
 - **Report links:** anonymous report links expire after 30 days. Reports are not indexed by search engines.
 - **Cancel:** from the Subscription Management page of your Starhold Account. Run out the period or take a prorated refund now.
-- **Refunds:** cancel a monthly plan any time for a prorated refund. If a $5 report fails or is not what we described, ask within 14 days and we refund it in full. The [refund terms](https://starhold.dev/legal/refunds) apply.
+- **Refunds:** cancel a monthly plan any time for a prorated refund. If a $5 report fails or is not what we described, ask within 14 days and we refund it in full. Other refunds are paid less the payment processing cost. Full details in the [Refund Policy](https://starhold.dev/legal/refunds).
 - **Your data:** to see or delete what Umbermark holds on you, write to [privacy@starhold.dev](mailto:privacy@starhold.dev) or use the [contact form](https://starhold.dev/contact). Export and delete are in your [Starhold Account](https://starship.starhold.app).
 
 ## Alerts

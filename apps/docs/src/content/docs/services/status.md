@@ -45,4 +45,4 @@ RSS, Atom, the JSON endpoint and the badge are free on every plan. The [pricing 
 
 ## Cancel any time
 
-- **Paid plans** are cancelled from the Subscription Management page of your Starhold Account. The [refund terms](https://starhold.dev/legal/refunds) apply.
+- **Paid plans** are cancelled from the Subscription Management page of your Starhold Account. Refunds are paid less the payment processing cost. Full details in the [Refund Policy](https://starhold.dev/legal/refunds).

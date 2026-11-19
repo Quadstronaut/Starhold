@@ -42,8 +42,8 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
 	terms: '4e6f667aae617e287a7e10ad3d73c6a92e646c2080a257538884a0799bbff255',
-	privacy: '6d0dd441b90130c8cca7bc668c66c1f6db4c2ecdb3bc612c99c802252a3f77e0',
-	refunds: '8e9367b033c2175c113b4dfc64ac6ff3322b089ea40c3ec83a17daa6a6f1010d'
+	privacy: '5797fd7a211b22433fe57e14ecdce6976b9e52e1c526ddbd11476b8ba90e764c',
+	refunds: '914c4e64607a8560e4fdb90206340c2668098b86dbfbdb9ebb3d28d8bda545f6'
 };
 
 const textOf = (state: 'prelaunch' | 'launched', k: (typeof KEYS)[number]) =>
