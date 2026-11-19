@@ -13,7 +13,7 @@ sidebar:
 
 ## How to get in
 
-Go to [dash.starhold.app](https://dash.starhold.app) and sign in with your Starhold Account. Pick the features you want, subscribe, then give Starbot your own Discord bot's token. Starbot runs the bot for you under your bot's name and avatar. Each account can have one bot.
+Go to [dash.starhold.app](https://dash.starhold.app) and sign in with your Starhold Account. Pick the features you want, subscribe, then give Starbot your own Discord bot's token within 72 hours. Starbot runs the bot for you under your bot's name and avatar. Each account can have one bot.
 
 ## Plans
 
@@ -21,6 +21,8 @@ Go to [dash.starhold.app](https://dash.starhold.app) and sign in with your Starh
 |---|---|---|
 | Custom Bot | $5 a month | One bot with the standard features. |
 | Custom Bot + Ops Pack | $19 a month | One bot, including the operations features. |
+
+After you pay, give Starbot your bot's token within 72 hours. If you do not, the bot is removed and your payment is refunded automatically, less the payment processing cost.
 
 The [Starhold Suite](/services/) ($49 a month) includes one Starbot Custom Bot with the Ops Pack, with no separate checkout. Plans renew monthly until cancelled. Payment is taken by Polar, our merchant of record. Manage or cancel a plan bought on the dashboard from its Manage billing link, which opens Polar's customer portal. Cancel a Suite on your Starhold Account page. Refunds are paid less the payment processing cost. Full details in the [Refund Policy](https://starhold.dev/legal/refunds).
 
