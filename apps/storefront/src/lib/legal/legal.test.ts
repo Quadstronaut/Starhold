@@ -41,9 +41,9 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // The approved launch text, as legal_hash sees the served /legal/<name>.txt. Changing the wording changes these:
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
-	terms: '639a829c83ef50a61a490ee3969d62d7e7becbc3cf994554c503043b02f91633',
-	privacy: '2aadb4f90e4679111bf0d9a323b35e45cdace53b23191a770a9c5de2cc294f12',
-	refunds: 'c009b5bbed6916c032493123241bd4e9e66314fdf0e7476bbd0c116402524181'
+	terms: '4e6f667aae617e287a7e10ad3d73c6a92e646c2080a257538884a0799bbff255',
+	privacy: '6d0dd441b90130c8cca7bc668c66c1f6db4c2ecdb3bc612c99c802252a3f77e0',
+	refunds: '8e9367b033c2175c113b4dfc64ac6ff3322b089ea40c3ec83a17daa6a6f1010d'
 };
 
 const textOf = (state: 'prelaunch' | 'launched', k: (typeof KEYS)[number]) =>
@@ -88,9 +88,9 @@ describe('legal documents · launched state', () => {
 				expect(t, w).not.toMatch(new RegExp('\\b' + w + '\\b', 'i'));
 		});
 	}
-	it('dated 2026-11-17 (LEGAL-3); pre-launch keeps master\'s date', () => {
+	it('dated 2026-11-19 (LEGAL-4); pre-launch keeps master\'s date', () => {
 		for (const k of KEYS) {
-			expect(textOf('launched', k)).toContain('Last updated 2026-11-17');
+			expect(textOf('launched', k)).toContain('Last updated 2026-11-19');
 			expect(textOf('prelaunch', k)).toContain('Last updated 2026-10-24');
 		}
 	});

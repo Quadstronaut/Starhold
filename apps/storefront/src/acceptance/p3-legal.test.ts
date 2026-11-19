@@ -22,8 +22,8 @@ const Q71 =
 
 describe('legal pages · all three', () => {
 	for (const k of Object.keys(PAGES) as (keyof typeof PAGES)[]) {
-		// All three amended 2026-11-17 (LEGAL-3, operator approved): address, recipients, age 16, one month, deletion timing.
-		const dated = '2026-11-17';
+		// All three amended 2026-11-17 (LEGAL-3) and again 2026-11-19 (LEGAL-4, operator approved): renewal, sanctions, copyright, Starbot data, Cloudflare delivery.
+		const dated = '2026-11-19';
 		it(`${k}: dated ${dated}, says Starhold not Starhold Software`, () => {
 			expect(text(k)).toContain(`Last updated ${dated}`);
 			expect(raw(k)).not.toMatch(/Starhold Software/);
@@ -84,13 +84,13 @@ describe('privacy', () => {
 		expect(t()).toContain(Q73);
 		expect(t()).toContain('Postal address: Copper Jerky LLC, 6917 W. Hedge Rose Dr, Tucson, AZ 85757, USA.');
 		expect(t()).toContain('Data is stored in the United States');
-		expect(t()).toContain('Umbermark, with paid plans through Polar');
+		expect(t()).toContain('Each product (Umbermark, Zenithmark, Heliostat and Solatype) has its own privacy notice');
 	});
 	it('names exactly the wired vendors; no unfilled placeholders remain (STAR-142 B3)', () => {
-		for (const v of ['Discord', 'Polar', 'Google', 'Porkbun', 'Patreon', 'Postmark', 'Cloudflare (Turnstile)', 'Cloudflare (R2)', 'OVH']) expect(t()).toContain(v);
+		for (const v of ['Discord', 'Polar', 'Google', 'Porkbun', 'Patreon', 'Postmark', 'Cloudflare (Turnstile)', 'Cloudflare (R2)', 'Cloudflare (website delivery)', 'OVH']) expect(t()).toContain(v);
 		expect(t()).not.toMatch(/\[[^\]]*(lawyer|pending|POSTAL|transfer mechanism)[^\]]*\]/i);
 		// LEGAL-3 D6: Discord, Polar, Google, Patreon and Porkbun are independent controllers; the other four are processors.
-		expect(t().match(/standard contractual terms \(see section 5\)/g)?.length).toBe(4);
+		expect(t().match(/standard contractual terms \(see section 5\)/g)?.length).toBe(5);
 		expect(t().match(/Its own controller, under its own privacy policy/g)?.length).toBe(5);
 		expect(t()).toContain(
 			'Transfers to our US processors rely on each processor\'s standard contractual terms; we are completing our transfer documentation with counsel.'

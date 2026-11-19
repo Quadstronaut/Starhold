@@ -53,7 +53,7 @@ export const PRODUCT_LABELS: Record<string, Label> = pick<Record<string, Label>>
 		render: LABEL_OPEN_PAID_LAUNCHED,
 		status: LABEL_OPEN_PAID_LAUNCHED,
 		account: LABEL_OPEN, // Starhold Account: sign in with Google at ACCOUNT_URL
-		starbot: LABEL_IN_DEVELOPMENT,
+		starbot: LABEL_OPEN_PAID_LAUNCHED,
 		shushgame: LABEL_OPEN_FREE,
 		dysonsphere: LABEL_IN_DEVELOPMENT,
 		'hangar-hosting': LABEL_RETIRED,

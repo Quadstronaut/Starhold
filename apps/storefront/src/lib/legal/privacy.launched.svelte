@@ -1,10 +1,10 @@
 <svelte:head><title>Privacy Policy · Starhold</title></svelte:head>
 
 <section class="section legal">
-	<div class="label">Last updated 2026-11-17</div>
+	<div class="label">Last updated 2026-11-19</div>
 	<h1>Privacy Policy</h1>
 
-	<p>This policy says what personal data Starhold collects, why, on what legal basis, who receives it, how long we keep it, and how to use your rights. It covers the Starhold Account, our websites (starhold.dev, starhold.fyi, starhold.app), the contact form and our Discord server. Each product has its own privacy notice for what it adds. Umbermark, with paid plans through Polar, is one of them.</p>
+	<p>This policy says what personal data Starhold collects, why, on what legal basis, who receives it, how long we keep it, and how to use your rights. It covers the Starhold Account, our websites (starhold.dev, starhold.fyi, starhold.app), the contact form and our Discord server. Each product (Umbermark, Zenithmark, Heliostat and Solatype) has its own privacy notice for what it adds. Peridot has its own privacy policy.</p>
 
 	<h2>1. Who is responsible</h2>
 	<p>Starhold is the trade name of <strong>Copper Jerky LLC</strong>, an Arizona limited liability company ("Starhold", "we", "us"). We are the controller of the data described here.</p>
@@ -49,7 +49,7 @@
 		<tbody>
 			<tr><td>Shush</td><td>Your Discord id, the words you type in the arena (including words read from images you post there), counted per day, banned words you triggered, death times and points. Message ids are kept for reference for thirty days; we store word counts, never the messages themselves. The public list shows a display name, the word and the date, for thirty days, then it drops off. A climb board shows your display name and lifetime XP.</td><td>Erased 30 days after you use /hide-me in Discord, or after 12 months without playing. /hide-me takes you off every list we show at once, and we also edit the bot's own recent messages. We keep only a record that you opted out, so it stays honoured. Copies kept by Discord or other players, and older bot messages, can't be changed.</td></tr>
 			<tr><td>Shush</td><td>Help-desk tickets: your Discord id, subject and open and close times. The messages live in a private Discord thread.</td><td>No fixed period yet. Ask and we delete it by hand.</td></tr>
-			<tr><td>Starbot</td><td>Server settings and Discord ids the bot features need to work. Contact notices in intake channels.</td><td>No fixed period yet. A 12-month automatic purge of contact notices is not built. Ask and we delete it by hand.</td></tr>
+			<tr><td>Starbot</td><td>Server settings and Discord ids the bot features need. Your bot's Discord token, stored encrypted. Keys you add for other services (for example Google Sheets or Notion), stored encrypted, and the data the bot sends to them for you. Web addresses you ask the bot to check or watch. If the logging feature is on, the text of each new message is held in memory for up to 24 hours, so a deleted or edited message can be shown in your log channel. Contact notices in intake channels.</td><td>Settings, tokens and keys: while your bot is active, then until we remove them after you end the plan or ask us to; there is no automatic deletion yet. Message text in memory: up to 24 hours. Contact notices: no fixed period yet; a 12-month automatic purge is not built. Ask and we delete them by hand.</td></tr>
 		</tbody>
 	</table>
 	<p>Where the basis is consent, you can withdraw it at any time. Withdrawing does not affect what we did before. You do not have to give us any of this, but without it we cannot do the thing it is for.</p>
@@ -69,6 +69,7 @@
 			<tr><td>Postmark</td><td>Email delivery. It sends the email our products send you, and receives your email address and the message to do so, under <a href="https://postmarkapp.com/privacy-policy" target="_blank" rel="noopener">its privacy policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Cloudflare (Turnstile)</td><td>Bot check on the Umbermark and Zenithmark scan forms. When you start a scan, your browser loads Cloudflare's check, and Cloudflare receives your IP address and browser details to decide whether you are a person, under <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare's Privacy Policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>Cloudflare (R2)</td><td>Off-site storage of backups.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
+			<tr><td>Cloudflare (website delivery)</td><td>Delivers shushgame.com. It sees your IP address and browser details when you visit that site, under <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare's Privacy Policy</a>.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 			<tr><td>OVH</td><td>Hosting. We rent the servers our services run on and administer them ourselves.</td><td>Processor's standard contractual terms (see section 5)</td></tr>
 		</tbody>
 	</table>
@@ -143,7 +144,7 @@
 	<h2>14. Contact</h2>
 	<p>Copper Jerky LLC, doing business as Starhold — <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
 
-	<p class="label">Last updated 2026-11-17.</p>
+	<p class="label">Last updated 2026-11-19.</p>
 </section>
 
 <style>

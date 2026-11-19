@@ -13,7 +13,7 @@ Starhold hosts and operates these services for people who care where their data 
 | [Zenithmark](/services/zenithmark/) | Mail and DNS scorecard for a domain | Open · paid plans | Open: free scorecard; monitoring $5 or $19 a month |
 | [Solatype](/services/render/) | OG image, PDF and screenshot API | Open · paid plans | Open: free tier; Hobby $5, Pro $19, Scale $49 a month |
 | [Heliostat](/services/status/) | Private and white-label status pages for MSPs | Open · paid plans | Open: free tier; Private $5, MSP $19 a month |
-| [Starbot](/services/starbot/) | Discord assistant for the Starhold community | In development | In development |
+| [Starbot](/services/starbot/) | Your own Discord bot, set up and run for you | Open · paid plans | Open: Custom Bot $5, Custom Bot + Ops Pack $19 a month |
 | [Shush](/services/shushgame/) | The quiet game on Discord | Open · free | Open |
 | [DysonSphere](/services/dysonsphere/) | Personal hosting, built to be hard to break | In development | Interest form only |
 

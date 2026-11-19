@@ -28,7 +28,7 @@ describe('shared product labels', () => {
 			shushgame: 'Open · free',
 			render: LAUNCHED ? 'Open · paid plans' : 'Invitation only',
 			status: LAUNCHED ? 'Open · paid plans' : 'Invitation only',
-			starbot: 'In development',
+			starbot: LAUNCHED ? 'Open · paid plans' : 'In development',
 			account: LAUNCHED ? 'Open' : 'In development',
 			dysonsphere: 'In development',
 			'hangar-hosting': 'Retired',

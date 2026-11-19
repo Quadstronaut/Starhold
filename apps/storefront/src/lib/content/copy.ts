@@ -223,7 +223,7 @@ export const comingSoon: string[] = pick(['Export and delete your own data from 
 // chip, one factual sentence, hostname, an optional limitation or price note,
 // and at most one action. An invitation-only service offers "Request an invite";
 // an open one offers "Open X"; an in-development one offers nothing (DysonSphere links
-// to its interest form). Starbot has no public door yet, so no link (brief 5).
+// to its interest form). Starbot has no public door before launch, so no link (brief 5); once launched it opens its dashboard.
 export type Service = {
 	id: string;
 	name: string;
@@ -305,13 +305,16 @@ export const serviceItems: Service[] = [
 	{
 		id: 'starbot',
 		name: 'Starbot',
-		host: null,
-		href: null,
-		action: '',
+		host: pick<string | null>(null, 'dash.starhold.app'),
+		href: pick<string | null>(null, 'https://dash.starhold.app'),
+		action: pick('', 'Open Starbot'),
 		invite: false,
 		status: labelFor('starbot'),
 		availability: availabilityFor('starbot'),
-		what: 'A Discord assistant for the Starhold community.'
+		what: pick(
+			'A Discord assistant for the Starhold community.',
+			'Your own Discord bot, with your name and avatar, set up and run for you. Sign in with a Starhold Account to start.'
+		)
 	},
 	{
 		id: 'dysonsphere',
@@ -485,7 +488,10 @@ export const formNotices = {
 	contact: {
 		// from data-flow-inventory: storefront.contact (sf-contact-form notice_text)
 		notice:
-			'Your message is encrypted with a public key before it is stored; only an offline key held by the operator can read it. Discord receives only the ticket number and the service name. We delete the message 90 days after we close the conversation (12 months at most).',
+			pick(
+				'Your message is encrypted with a public key before it is stored; only an offline key held by the operator can read it. Discord receives only the ticket number and the service name. We delete the message 90 days after we close the conversation (12 months at most).',
+				'Your message is encrypted with a public key before it is stored; only an offline key held by the operator can read it. Discord receives only the ticket number. We delete the message 90 days after we close the conversation (12 months at most).'
+			),
 		secrets: "Don't send passwords or secrets.",
 		deletion:
 			'We delete your message 90 days after we close it, and never keep it longer than 12 months. Discord keeps its own copy of the notice line only.'

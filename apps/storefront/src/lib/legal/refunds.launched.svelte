@@ -1,7 +1,7 @@
 <svelte:head><title>Refund Policy · Starhold</title></svelte:head>
 
 <section class="section legal">
-	<div class="label">Last updated 2026-11-17</div>
+	<div class="label">Last updated 2026-11-19</div>
 	<h1>Refund Policy</h1>
 
 	<p>Nothing here limits rights you have under the consumer law where you live.</p>
@@ -10,7 +10,7 @@
 	<p>If the report fails or isn't what we described, ask within 14 days and we refund it in full. EU/UK buyers keep their legal withdrawal rights.</p>
 
 	<h2>Subscriptions</h2>
-	<p>You choose how to end a plan, and there are no cancellation fees. Cancelling and deleting your account are two separate actions.</p>
+	<p>Every plan renews automatically each month until you cancel. You can cancel at any time on the Subscription Management page of your Starhold Account. You choose how to end a plan, and there are no cancellation fees. Cancelling and deleting your account are two separate actions.</p>
 
 	<h3>Cancel</h3>
 	<p>Cancel stops renewal. Your account and your data stay. You choose:</p>
@@ -18,6 +18,7 @@
 		<li><strong>Run out the period.</strong> You keep access until the end of the time you paid for.</li>
 		<li><strong>Prorated refund now.</strong> We refund the unused part of the period, and access ends.</li>
 	</ul>
+	<p>If you are in the EU or UK, you may also withdraw from a new subscription within 14 days of buying it. We refund the unused part of the period, as with any cancellation.</p>
 
 	<h3>Delete your account</h3>
 	<p>You can delete your account yourself from the account page. If you cannot, write to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a> and we will do it within one month.</p>
@@ -34,5 +35,5 @@
 	<h2>Billing problems</h2>
 	<p>If a charge looks wrong, write to <a href="mailto:hello@starhold.dev">hello@starhold.dev</a> first. We answer billing questions within 5 business days. You always keep your card network's chargeback rights.</p>
 
-	<p class="label">Last updated 2026-11-17.</p>
+	<p class="label">Last updated 2026-11-19.</p>
 </section>

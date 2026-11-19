@@ -1,7 +1,7 @@
 <svelte:head><title>Terms of Service · Starhold</title></svelte:head>
 
 <section class="section legal">
-	<div class="label">Last updated 2026-11-17</div>
+	<div class="label">Last updated 2026-11-19</div>
 	<h1>Terms of Service</h1>
 
 	<p>These are the shared rules for using Starhold: the Starhold Account and the services we run. Each product may add its own short terms on its own site. Where a product's terms and these differ for that product, the product's terms win. Our <a href="/legal/privacy">Privacy Policy</a> and <a href="/legal/refunds">Refund Policy</a> are part of this agreement.</p>
@@ -13,7 +13,7 @@
 	<p>Features may change as we build (see section 16). The services are provided as-is, as section 12 explains. Your privacy rights still apply.</p>
 
 	<h2>3. Eligibility</h2>
-	<p>You must be at least 16 to use our services. To buy anything you must be 18 or older, or old enough to make a binding purchase where you live. If your local law requires a parent or guardian to consent, they must. Our Discord apps also require you to follow <a href="https://discord.com/terms" target="_blank" rel="noopener">Discord's Terms of Service</a>.</p>
+	<p>You must be at least 16 to use our services. To buy anything you must be 18 or older, or old enough to make a binding purchase where you live. If your local law requires a parent or guardian to consent, they must. Our Discord apps also require you to follow <a href="https://discord.com/terms" target="_blank" rel="noopener">Discord's Terms of Service</a>. You may not use the services if you are in a country under a comprehensive US embargo or are on a US sanctions list. You agree not to use or export the services in breach of US export rules.</p>
 
 	<h2>4. Your account</h2>
 	<p>The Starhold Account is how you sign in to Starhold services (through Google sign-in) and manage plans, exports and deletion. You can export and delete your data yourself from the account page. If you cannot, write to <a href="mailto:privacy@starhold.dev">privacy@starhold.dev</a> and we will do it within one month. Keep your sign-in details to yourself. You are responsible for what happens under your account. If you act for a server or organization, you confirm you are allowed to.</p>
@@ -27,7 +27,7 @@
 	</ul>
 
 	<h2>6. Payments and providers</h2>
-	<p>Payments are handled by payment providers who act as the merchant of record. Today that is Polar. If we add another provider, we will list it here and in the <a href="/legal/privacy">Privacy Policy</a> before it goes live. The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side. When you buy, your contract of sale is with the provider. The provider takes your payment, collects and pays sales tax and VAT where it must, and keeps its own records. We do not see your card details. Prices are shown at checkout.</p>
+	<p>Payments are handled by payment providers who act as the merchant of record. Today that is Polar. If we add another provider, we will list it here and in the <a href="/legal/privacy">Privacy Policy</a> before it goes live. The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side. When you buy, your contract of sale is with the provider. The provider takes your payment, collects and pays sales tax and VAT where it must, and keeps its own records. We do not see your card details. Prices are shown at checkout. Paid plans are monthly subscriptions. A subscription renews automatically at the start of each month, and you are charged the plan price until you cancel. You can cancel at any time on the Subscription Management page of your Starhold Account. Cancelling stops the next renewal, and you choose whether to run out the period or take a prorated refund now (see the <a href="/legal/refunds">Refund Policy</a>). If we raise the price of a plan you pay for, we will tell you at least 30 days before the new price applies, and you can cancel before then. One-off purchases do not renew.</p>
 
 	<h2>7. Cancel, delete and refunds</h2>
 	<p>Cancelling and deleting your account are two different actions, and you choose. The <a href="/legal/refunds">Refund Policy</a> explains both, and how refunds work.</p>
@@ -53,8 +53,9 @@
 	<h2>14. Indemnity for misuse</h2>
 	<p>If you use the services unlawfully or in breach of section 5, and that leads to a claim against us, you agree to cover our reasonable costs of dealing with that claim, including reasonable legal fees. This applies only to your misuse or illegal use. It does not apply to ordinary use of the services, and it does not apply to claims caused by us.</p>
 
-	<h2>15. Third-party services</h2>
+	<h2>15. Third-party services and copyright</h2>
 	<p>Our services work with Discord, payment providers and others, each under its own terms and policies. We are not responsible for them, and your use of them is subject to their agreements.</p>
+	<p>Copyright. If you think something on a Starhold service infringes your copyright, write to <a href="mailto:hello@starhold.dev">hello@starhold.dev</a> with the details the US Digital Millennium Copyright Act asks for (17 U.S.C. 512(c)(3)). We remove infringing material and close the accounts of repeat infringers.</p>
 
 	<h2>16. Changes to the services and to these terms</h2>
 	<p>We may change or retire features. We may also update these terms. For a material change, we will give you notice before it takes effect, with a short note of what changed. Using a service after a change does not count as agreeing to it. If you do not accept a material change, you can cancel, and if you pay on a subscription, we will refund the unused part of the period you already paid for, pro rata.</p>
@@ -69,7 +70,7 @@
 	<p>If part of these terms is unenforceable, the rest stays in effect. These terms, the Privacy Policy, the Refund Policy and any product terms are the entire agreement between us. Our not enforcing a term is not a waiver of it. You may not assign these terms; we may assign them to a successor, for example if the business is renamed or sold. Neither of us is liable for delays caused by events beyond our reasonable control.</p>
 
 	<h2>20. Contact</h2>
-	<p>Copper Jerky LLC, doing business as Starhold — <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
+	<p>Copper Jerky LLC, doing business as Starhold, 6917 W. Hedge Rose Dr, Tucson, AZ 85757, USA. Email: <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
 
-	<p class="label">Last updated 2026-11-17.</p>
+	<p class="label">Last updated 2026-11-19.</p>
 </section>

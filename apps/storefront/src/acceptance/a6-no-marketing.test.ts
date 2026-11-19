@@ -44,7 +44,7 @@ describe('STAR-145 · no marketing on the home page', () => {
 			'starhold.app', 'serverscanner.starhold.app', 'domainscanner.starhold.app', 'umbermark.starhold.app', 'zenithmark.starhold.app', 'status.starhold.fyi',
 			'starhold.fyi', 'github.com', 'shushgame.com',
 			// STAR-142 launch destinations (only present once lib/launch.ts has LAUNCHED = true)
-			'starship.starhold.app', 'status.starhold.app', 'render.starhold.app'
+			'starship.starhold.app', 'status.starhold.app', 'render.starhold.app', 'dash.starhold.app'
 		];
 		expect([...hosts].filter((h) => !allowed.includes(h))).toEqual([]);
 	});

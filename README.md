@@ -125,8 +125,8 @@ Enter a domain and get a report on SPF, DKIM, DMARC, MX, MTA-STS, TLS, DNSSEC, C
 | | State |
 |---|---|
 | [**Shush**](https://shushgame.com) | The quiet game on Discord: a new word is banned each day. Open, free, nothing to buy. |
-| **Starbot** | A Discord assistant for the Starhold community. In development. |
-| [**QNix**](https://starhold.dev/qnix) | Personal hosting. In development; interest form only. |
+| [**Starbot**](https://dash.starhold.app) | Your own Discord bot, set up and run for you. Open, paid plans. |
+| [**DysonSphere**](https://starhold.dev/dysonsphere) | Personal hosting. In development; interest form only. |
 
 </details>
 
@@ -210,6 +210,12 @@ cd apps/docs && npm ci && npm run dev
 
 > [!NOTE]
 > This repository is generated. A bot copies `apps/` and this README here from a private source repository on every change, so a pull request opened here would be overwritten by the next sync. To report a problem, write to hello@starhold.dev.
+
+<a id="license"></a>
+
+## 📜 License
+
+The code here is published so you can read it. It is not open source. All rights reserved, Copper Jerky LLC.
 
 <a id="contact"></a>
 

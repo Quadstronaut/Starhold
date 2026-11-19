@@ -32,7 +32,7 @@ export const AVAILABILITY: Record<string, string> = pick(
 		render: 'Open: free tier; Hobby $5, Pro $19, Scale $49 a month',
 		status: 'Open: free tier; Private $5, MSP $19 a month',
 		shushgame: 'Open',
-		starbot: 'In development',
+		starbot: 'Open: Custom Bot $5, Custom Bot + Ops Pack $19 a month',
 		dysonsphere: 'Interest form only'
 	}
 );
