@@ -28,6 +28,9 @@
 //               server stops at once and its data, backup copy included, goes within about five minutes.
 //               Amended 2026-11-20 (STARBOT-45, operator approved): Privacy Starbot row opens with "This row applies to
 //               Starbot." (was "This row applies from the day Starbot opens; Starbot is not available yet.").
+//               Amended 2026-11-20 (STARBOT-45, operator: implement, lawyer reviews the live site): Privacy Starbot
+//               retention cell says the backup copy goes once (self-delete included); Refunds says a plan bought inside
+//               Discord is refunded under Discord's rules, through Discord.
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { createHash } from 'node:crypto';
@@ -58,8 +61,8 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
 	terms: '4ff2787ad1f35b6c8f0d12b7f5b79f28841eb90116a7d55a9861e105651532b8',
-	privacy: '33a8cf59ecc257af4bececd521b3358a6cf29062efd06e61d3115f4fec7fec41',
-	refunds: '5e2189b97a7ff6be937b515e655b2c0ad71523c1810bf9c241928907c9ba98f6'
+	privacy: 'a61c9548aecf79a91c2c8477ab9f6cb30124a6c95ee06bd40d767cb4e65684e1',
+	refunds: 'aff1b7d8f2e019e2ed58e8c054faf48a0d6a382c0724b866427aa9b884d0b061'
 };
 
 const textOf = (state: 'prelaunch' | 'launched', k: (typeof KEYS)[number]) =>

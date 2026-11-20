@@ -10,7 +10,7 @@
 	<p>If the report fails or isn't what we described, ask within 14 days and we refund it in full. EU/UK buyers keep their legal withdrawal rights.</p>
 
 	<h2>Subscriptions</h2>
-	<p>Every plan renews automatically each month until you cancel. You can cancel at any time on the Subscription Management page of your Starhold Account. You choose how to end a plan, and there are no cancellation fees. Cancelling and deleting your account are two separate actions.</p>
+	<p>Every plan renews automatically each month until you cancel. You can cancel at any time on the Subscription Management page of your Starhold Account. You choose how to end a plan, and there are no cancellation fees. Cancelling and deleting your account are two separate actions. A plan bought inside Discord is refunded under Discord's rules, through Discord.</p>
 
 	<h3>Cancel</h3>
 	<p>Cancel stops renewal. Your account and your data stay. You choose:</p>
