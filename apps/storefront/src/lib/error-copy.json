@@ -1,8 +1,15 @@
 {
-  "$comment": "STAR-168 error page copy. Opus seat draft, revised per the pre-ship review and operator rulings (2026-10-24): never imply a page exists, no promises or timelines, 429 = a limit for now, 401 = sign-in not open (invitation only), contact = hello@starhold.dev (build.mjs links it). Titles are fixed by the spec. build.mjs renders it into every page.",
+  "$comment": "Error page copy. STAR-168 rules still hold (operator rulings 2026-10-24): never imply a page exists, no promises or timelines, 429 = a limit for now, 401 = sign-in not open (invitation only) until launch, contact = hello@starhold.dev (build.mjs links it). STAR-299 (operator, 2026-11-20): plain headlines and short sentences that say what happened and what to do next; the space titles live on in the art only. Every page also carries the four 'next' links below. build.mjs renders it into every page.",
   "links": {
     "back": "← Go back",
     "home": "Home →"
+  },
+  "next": {
+    "label": "Where to go next",
+    "home": "Home",
+    "products": "Products",
+    "status": "Status page",
+    "contact": "Contact"
   },
   "contact": {
     "email": "hello@starhold.dev",
@@ -15,58 +22,58 @@
   "launched": {
     "$comment": "STAR-142 launch switch: when LAUNCHED is true (apps/storefront/src/lib/launch.ts) these entries replace the same code under codes. Nothing here renders while the switch is off.",
     "401": {
-      "title": "AIRLOCK SEALED",
-      "explanation": "This page is for signed-in accounts. Please sign in with your Starhold Account at https://starship.starhold.app, then try again. Or start again from the home page."
+      "title": "Please sign in to see this page",
+      "explanation": "This page is for signed-in accounts. Please sign in with your Starhold Account at https://starship.starhold.app, then try again. Or start from the home page."
     }
   },
   "codes": {
     "400": {
-      "title": "GARBLED TRANSMISSION",
-      "explanation": "Your browser sent a request we could not read, often because a link was cut short or a form arrived incomplete. Go back and try again, or start again from the home page."
+      "title": "We could not read that request",
+      "explanation": "A link may have been cut short, or a form arrived incomplete. Go back and try again, or start from the home page."
     },
     "401": {
-      "title": "AIRLOCK SEALED",
-      "explanation": "This page is for signed-in accounts, and sign-in is not open yet: access is by invitation only. Go back, or start again from the home page."
+      "title": "This page needs a sign-in",
+      "explanation": "This page is for signed-in accounts, and sign-in is not open yet: access is by invitation only. Go back, or start from the home page."
     },
     "403": {
-      "title": "RESTRICTED SECTOR",
-      "explanation": "This address is not open to you. If you followed a link you expected to work, its access may have changed. Go back, or write to hello@starhold.dev with the address."
+      "title": "This page is not open to you",
+      "explanation": "If you followed a link you expected to work, its access may have changed. Go back, or email hello@starhold.dev with the address."
     },
     "404": {
-      "title": "LOST IN SPACE",
-      "explanation": "There is no page at this address. It may have moved, or the link may have a typo in it. Go back, or start again from the home page."
+      "title": "We cannot find that page",
+      "explanation": "There is no page at this address. It may have moved, or the link may have a typo in it. Go back, or start from the home page."
     },
     "405": {
-      "title": "WRONG DOCKING PORT",
-      "explanation": "This address does not accept the kind of request your browser sent, for example a form sent to a page that only displays. Go back and use the page's own form or button."
+      "title": "That page cannot do what was asked",
+      "explanation": "Your browser sent the wrong kind of request for this address, for example a form sent to a page that only shows information. Go back and use the page's own form or button."
     },
     "410": {
-      "title": "DECOMMISSIONED",
-      "explanation": "The page that lived here has been removed on purpose and is not coming back. The home page shows what is available now. If you relied on it, you can write to hello@starhold.dev."
+      "title": "This page has been removed",
+      "explanation": "It was removed on purpose and is not coming back. The home page shows what is available now. If you relied on it, email hello@starhold.dev."
     },
     "429": {
-      "title": "TOO MANY SIGNALS",
-      "explanation": "This service limits how many requests it accepts from one connection, and yours has reached that limit for now. Please try again later; when the service knows how long the limit lasts, its reply says so."
+      "title": "Too many requests for now",
+      "explanation": "This service limits how many requests it accepts from one connection, and yours has reached that limit for now. Wait a while, then try again. When the service knows how long the limit lasts, its reply says so."
     },
     "500": {
-      "title": "ENGINE FAULT",
-      "explanation": "Something broke on our side while we were handling your request. It is not something you did. Try again later; if it keeps happening, write to hello@starhold.dev and tell us roughly when it happened."
+      "title": "Something went wrong on our side",
+      "explanation": "It is not something you did. Try again later. If it keeps happening, check the status page, or email hello@starhold.dev and say roughly when it happened."
     },
     "502": {
-      "title": "RELAY OFFLINE",
-      "explanation": "We could not reach the service behind this page, so we could not get you an answer. This is a problem on our side, not yours. Try again later."
+      "title": "We could not reach the service behind this page",
+      "explanation": "The problem is on our side, not yours. Try again later, or check the status page."
     },
     "503": {
-      "title": "IN DRY DOCK",
-      "explanation": "This service cannot answer right now, usually because it is restarting or under maintenance. Try again later. If it stays down, write to hello@starhold.dev."
+      "title": "This service is not answering right now",
+      "explanation": "It is usually restarting or under maintenance. Try again later, or check the status page. If it stays down, email hello@starhold.dev."
     },
     "504": {
-      "title": "NO REPLY FROM RELAY",
-      "explanation": "The service behind this page took too long to answer, so we stopped waiting. Try again later. If the same page keeps timing out, write to hello@starhold.dev."
+      "title": "The service took too long to answer",
+      "explanation": "We stopped waiting for it. Try again later, or check the status page. If the same page keeps timing out, email hello@starhold.dev."
     },
     "default": {
-      "title": "UNEXPECTED SIGNAL",
-      "explanation": "Something went wrong and this page could not be shown. Go back, or start again from the home page. If it keeps happening, write to hello@starhold.dev and tell us roughly when it happened."
+      "title": "Something went wrong",
+      "explanation": "This page could not be shown. Go back, or start from the home page. If it keeps happening, email hello@starhold.dev and say roughly when it happened."
     }
   }
 }

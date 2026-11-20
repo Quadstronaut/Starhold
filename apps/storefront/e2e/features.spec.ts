@@ -187,8 +187,14 @@ test('header and footer follow the brief; Sign in shows only once sign-in works'
 test('404 shows the shared Starhold error page', async ({ page }) => {
 	const res = await page.goto('/no-such-page');
 	expect(res?.status()).toBe(404);
-	await expect(page.locator('h1')).toHaveText('404 · LOST IN SPACE');
-	await expect(page.locator('main').getByRole('link')).toHaveText(['← Go back', 'Home →']);
+	await expect(page.locator('h1')).toHaveText('404 · We cannot find that page');
+	await expect(page.locator('main .err-band').getByRole('link')).toHaveText(['← Go back', 'Home →']);
+	// the headline is ordinary text, not the red used for form errors (a global .err rule used to leak in)
+	expect(await page.locator('h1').evaluate((e) => getComputedStyle(e).color)).toBe('rgb(230, 233, 240)');
+	// STAR-299: every error page says where to go next
+	const next = page.locator('main nav.err-next a');
+	await expect(next).toHaveText(['Home', 'Products', 'Status page', 'Contact']);
+	expect(await next.evaluateAll((els) => els.map((e) => e.getAttribute('href')))).toEqual(['/', '/products', 'https://status.starhold.fyi', '/contact']);
 	await expect(page.locator('figure.err-figure')).toBeVisible();
 });
 

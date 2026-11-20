@@ -7,6 +7,7 @@
 		errContact,
 		errFallbackSrc,
 		errLinks,
+		errNext,
 		errSrcset,
 		errSvg,
 		ERR_SIZES,
@@ -72,6 +73,12 @@
 	</div>
 	<h1 class="err-title"><span class="err-code">{copy.code}</span> · {copy.title}</h1>
 	<p class="err-text">{copy.explanation}</p>
+	<!-- STAR-299: where to go next. Plain links, so they work without JavaScript. -->
+	<nav class="err-next" aria-label={errNext.label}>
+		{#each errNext.links as l (l.href)}
+			<a href={l.href} rel={l.external ? 'noopener' : undefined}>{l.label}</a>
+		{/each}
+	</nav>
 </main>
 <footer class="err-foot">
 	<p class="err-contact">{errContact.label} <a href="mailto:{errContact.email}">{errContact.email}</a></p>
@@ -83,6 +90,9 @@
 
 <style>
 	.err {
+		/* app.css has a global .err (red status text for forms). This page's <main class="err"> must not
+		   inherit it: the headline was rendering in the danger colour. Scoped, so it wins. */
+		color: var(--text);
 		flex: 1;
 		width: 100%;
 		padding: var(--sp-7) 0 var(--sp-6);
@@ -150,9 +160,10 @@
 		max-width: calc(var(--measure) + 2 * var(--sp-5));
 		font-size: var(--fs-5);
 		font-weight: 600;
-		letter-spacing: 0.06em;
+		letter-spacing: -0.01em;
 		line-height: 1.25;
 		text-align: center;
+		text-wrap: balance;
 	}
 	.err-code {
 		color: var(--accent);
@@ -163,6 +174,30 @@
 		max-width: calc(var(--measure) + 2 * var(--sp-5));
 		color: var(--text-muted);
 		text-align: center;
+	}
+	.err-next {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: var(--sp-2) var(--sp-5);
+		margin: var(--sp-5) auto 0;
+		padding-inline: var(--sp-5);
+		font-size: var(--fs-2);
+		font-weight: 600;
+	}
+	.err-next a {
+		padding: var(--sp-2) var(--sp-1);
+		text-decoration: none;
+	}
+	.err-next a:hover {
+		text-decoration: underline;
+	}
+	@media (max-width: 520px) {
+		.err-next {
+			gap: var(--sp-1) var(--sp-3);
+			padding-inline: var(--sp-3);
+			font-size: var(--fs-1);
+		}
 	}
 	.err-foot {
 		display: flex;

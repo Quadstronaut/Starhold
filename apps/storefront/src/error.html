@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="color-scheme" content="dark" />
+		<meta name="robots" content="noindex" />
+		<title>%sveltekit.status% · Something went wrong · Starhold</title>
+		<!-- STAR-299: the last-resort page. SvelteKit serves this only when the normal error page
+		     (routes/+error.svelte) cannot be rendered at all, so it depends on nothing: no script,
+		     no stylesheet file, no font file and no image. Same wording, colours and four links
+		     as the normal error pages. The colours are the site tokens, written out because this
+		     file cannot load app.css. -->
+		<style>
+			body {
+				margin: 0;
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				background: #0b0d12;
+				color: #e6e9f0;
+				font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+				font-size: 18px;
+				line-height: 1.6;
+				text-align: center;
+			}
+			main {
+				padding: 48px 24px;
+				max-width: 68ch;
+				margin: 0 auto;
+			}
+			h1 {
+				margin: 0 0 16px;
+				font-size: 28px;
+				line-height: 1.25;
+				font-weight: 600;
+			}
+			h1 span {
+				color: #ffb347;
+			}
+			p {
+				margin: 0 0 16px;
+				color: #9aa3b5;
+			}
+			nav {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				gap: 8px 24px;
+				margin-top: 24px;
+				font-size: 16px;
+				font-weight: 600;
+			}
+			a {
+				color: #ffb347;
+				text-decoration: none;
+				padding: 8px 4px;
+			}
+			a:hover {
+				color: #ffc770;
+				text-decoration: underline;
+			}
+			a:focus-visible {
+				outline: 2px solid #9ecbff;
+				outline-offset: 3px;
+				border-radius: 6px;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<h1><span>%sveltekit.status%</span> · Something went wrong</h1>
+			<p>This page could not be shown. It is not something you did. Try again later, or start from the home page.</p>
+			<p>If it keeps happening, check the status page or email <a href="mailto:hello@starhold.dev">hello@starhold.dev</a> and say roughly when it happened.</p>
+			<nav aria-label="Where to go next">
+				<a href="/">Home</a>
+				<a href="/products">Products</a>
+				<a href="https://status.starhold.fyi">Status page</a>
+				<a href="/contact">Contact</a>
+			</nav>
+		</main>
+	</body>
+</html>

@@ -91,15 +91,19 @@ for (const [name, size] of [
 }
 
 // ── 5. Page weight ──────────────────────────────────────────────────────────
-test('home weighs under 600KB and loads at most one font file', async ({ page }) => {
+// The font rule was "at most one file" when Michroma was the only self-hosted face. STAR-166 R2 made IBM Plex
+// Sans and Plex Mono the site's text faces, self-hosted on purpose, so three files is the design. What the rule
+// protects is unchanged and is what is asserted now: every font comes from our own host, there are exactly the
+// three subset woff2 files, and together they stay small.
+test('home weighs under 600KB and loads only the three self-hosted font files', async ({ page, baseURL }) => {
 	let bytes = 0;
-	const fonts = new Set<string>();
+	const fonts = new Map<string, number>();
 	page.on('response', async (r) => {
 		const body = await r.body().catch(() => null);
 		// Transfer size when the browser reports it; body length is the fallback.
 		const sizes = await r.request().sizes().catch(() => null);
 		bytes += sizes ? sizes.responseBodySize + sizes.responseHeadersSize : (body?.length ?? 0);
-		if (r.request().resourceType() === 'font') fonts.add(r.url());
+		if (r.request().resourceType() === 'font') fonts.set(r.url(), body?.length ?? 0);
 	});
 	await page.goto('/');
 	await page.waitForLoadState('networkidle');
@@ -112,7 +116,13 @@ test('home weighs under 600KB and loads at most one font file', async ({ page })
 	});
 	await page.waitForLoadState('networkidle');
 	expect(bytes, `transferred ${bytes} bytes`).toBeLessThan(600 * 1024);
-	expect(fonts.size).toBeLessThanOrEqual(1);
+	expect([...fonts.keys()].map((u) => u.replace(baseURL!, '')).sort()).toEqual([
+		'/fonts/ibm-plex-mono-latin.woff2',
+		'/fonts/ibm-plex-sans-latin.woff2',
+		'/fonts/michroma-latin.woff2'
+	]);
+	const fontBytes = [...fonts.values()].reduce((a, b) => a + b, 0);
+	expect(fontBytes, `fonts weigh ${fontBytes} bytes`).toBeLessThan(80 * 1024);
 });
 
 // ── 6. FAQ structured data matches the page ─────────────────────────────────

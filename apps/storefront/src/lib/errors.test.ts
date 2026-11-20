@@ -5,10 +5,10 @@ import { copyFor, errFallbackSrc, errSrcset, errSvg, pickErr, poolFor } from './
 
 describe('shared error set (STAR-168)', () => {
 	it('has the shared copy for 404 and 500, and the default for unknown codes', () => {
-		expect(copyFor(404)).toMatchObject({ code: '404', title: 'LOST IN SPACE' });
+		expect(copyFor(404)).toMatchObject({ code: '404', title: 'We cannot find that page' });
 		expect(copyFor(500).title.length).toBeGreaterThan(3);
 		expect(copyFor(500).explanation.length).toBeGreaterThan(20);
-		expect(copyFor(418)).toMatchObject({ code: '418', title: 'UNEXPECTED SIGNAL' });
+		expect(copyFor(418)).toMatchObject({ code: '418', title: 'Something went wrong' });
 	});
 
 	it('status is kept: the code shown is the status received', () => {

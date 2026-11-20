@@ -204,10 +204,14 @@ test('B3.1 no pending evidence renders and no employer entity is named', async (
 
 test('B3.2 every number on a marketing page is derived, except the founding year', async ({ page }) => {
 	// 90 and 12 are the stated retention periods in the form notice under the contact and invite forms.
+	// The voicemail number on /contact (lib/site-links.ts CONTACT_PHONE, added after this test was written) is a
+	// documented constant, not a claim: its digit groups are read from that file, never typed here.
+	const phone = readFileSync(join(APP_ROOT, 'src/lib/site-links.ts'), 'utf8').match(/CONTACT_PHONE = '([^']+)'/)![1];
 	const allowed = new Set([
 		'2026',
 		'90',
 		'12',
+		...(phone.match(/\d+/g) ?? []),
 		...Object.values(STATS)
 			.filter((v) => typeof v === 'number')
 			.map(String)
@@ -353,8 +357,19 @@ test('B5.5 the home page works with JavaScript disabled', async ({ browser }) =>
 
 test('B5.6 first paint makes no third-party request and stays inside budget', async ({ page, baseURL }) => {
 	const ownHost = new URL(baseURL!).host;
-	const responses: { url: string; body: Promise<Buffer> }[] = [];
-	page.on('response', (r) => responses.push({ url: r.url(), body: r.body().catch(() => Buffer.alloc(0)) }));
+	// Transfer means bytes on the wire. This used to add up decoded bodies, which counts every compressed script
+	// and stylesheet at its unpacked size and so reported about twice what a visitor downloads (STAR-299).
+	const responses: { url: string; body: Promise<number> }[] = [];
+	page.on('response', (r) =>
+		responses.push({
+			url: r.url(),
+			body: r
+				.finished()
+				.then(() => r.request().sizes())
+				.then((s) => s.responseBodySize)
+				.catch(() => 0)
+		})
+	);
 
 	await page.goto('/', { waitUntil: 'load' });
 
@@ -367,7 +382,7 @@ test('B5.6 first paint makes no third-party request and stays inside budget', as
 	// client chunks; the small component stylesheets are already inlined (vite.config.ts) to claw three back.
 	expect(responses.length, 'too many requests on first paint').toBeLessThanOrEqual(31);
 
-	const bytes = (await Promise.all(responses.map((r) => r.body))).reduce((n, b) => n + b.byteLength, 0);
+	const bytes = (await Promise.all(responses.map((r) => r.body))).reduce((n, b) => n + b, 0);
 	expect(bytes / 1024, 'transfer budget exceeded (KB)').toBeLessThanOrEqual(250);
 });
 

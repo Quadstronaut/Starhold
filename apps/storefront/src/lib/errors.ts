@@ -30,6 +30,16 @@ export type ErrCopy = { code: string; title: string; explanation: string };
 
 export const errLinks = copyJson.links;
 export const errContact = copyJson.contact;
+/** STAR-299: the four "where to go next" links, same labels as the fleet pages, site-relative here. */
+export const errNext: { label: string; links: { href: string; label: string; external?: boolean }[] } = {
+	label: copyJson.next.label,
+	links: [
+		{ href: '/', label: copyJson.next.home },
+		{ href: '/products', label: copyJson.next.products },
+		{ href: 'https://status.starhold.fyi', label: copyJson.next.status, external: true },
+		{ href: '/contact', label: copyJson.next.contact }
+	]
+};
 
 /** Title and explanation for a status; any code without its own entry gets `default`. */
 export function copyFor(status: number): ErrCopy {
