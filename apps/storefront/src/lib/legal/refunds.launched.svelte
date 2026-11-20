@@ -34,7 +34,7 @@
 	<p>The refund is in full, with nothing held back, when it is our fault: a billing error, a duplicate charge, or a service we failed to provide. It is also in full when you leave because we made a material change to our terms, and wherever the law where you live gives you a right to a full refund.</p>
 
 	<h2>How refunds are paid</h2>
-	<p>The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side. Refunds go back to your original payment method through them. Some providers review a refund before they pay it out. While the provider works through it, the status reads "refund issued, provider processing", and it can take several business days to reach you.</p>
+	<p>The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side. Polar uses Stripe to process card payments, and Starhold never sees your card number. Refunds go back to your original payment method through them. Some providers review a refund before they pay it out. While the provider works through it, the status reads "refund issued, provider processing", and it can take several business days to reach you.</p>
 
 	<h2>Billing problems</h2>
 	<p>If a charge looks wrong, write to <a href="mailto:hello@starhold.dev">hello@starhold.dev</a> first. We answer billing questions within 5 business days. You always keep your card network's chargeback rights.</p>

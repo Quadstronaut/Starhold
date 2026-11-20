@@ -20,6 +20,8 @@ const PRELAUNCH = /checkout is paused|nothing is for sale|when it reopens|under 
 const Q71 =
 	"If the report fails or isn't what we described, ask within 14 days and we refund it in full. EU/UK buyers keep their legal withdrawal rights.";
 
+const POLAR_USES_STRIPE = 'uses Stripe to process card payments';
+
 describe('legal pages · all three', () => {
 	for (const k of Object.keys(PAGES) as (keyof typeof PAGES)[]) {
 		// All three amended 2026-11-17 (LEGAL-3) and again 2026-11-19 (LEGAL-4, operator approved): renewal, sanctions, copyright, Starbot data, Cloudflare delivery.
@@ -35,7 +37,13 @@ describe('legal pages · all three', () => {
 			for (const banned of [/Stripe/i, /Managed Ops/i, /hourly/i, /class[- ]action waiver/i, /continued use/i, /JoJo/i, /QuadstroNot/i, /QFlix/i, /\bcart\b/i, /gatus/i, /Postmark/i, /Turnstile/i, /Scaleway/i])
 				// Postmark (email) and Cloudflare Turnstile (bot check on the scan forms) are wired and are named in the
 				// Privacy Policy only (STAR-271, STAR-278).
-				if (!(k === 'privacy' && ['Postmark', 'Turnstile'].includes(banned.source))) expect(raw(k), String(banned)).not.toMatch(banned);
+				// Stripe is named once per document, only as Polar's card processor (LEGAL-4, operator ruling 2026-11-19;
+				// source https://polar.sh/legal/payment-processor-partners). Starhold has no Stripe account in the flow.
+				if (!(k === 'privacy' && ['Postmark', 'Turnstile'].includes(banned.source))) expect(raw(k).replace(POLAR_USES_STRIPE, ''), String(banned)).not.toMatch(banned);
+		});
+		it(`${k}: names Stripe once, as Polar's card processor`, () => {
+			expect(text(k)).toContain(POLAR_USES_STRIPE);
+			expect(raw(k).match(/Stripe/g)).toHaveLength(1);
 		});
 	}
 });

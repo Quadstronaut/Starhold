@@ -18,6 +18,8 @@
 //               removed from a server, that server's data is deleted right away (was 48 hours later).
 //               Amended 2026-11-19 (LEGAL-4, second pass): Privacy only. Up to two servers per paid subscription, purchases
 //               inside Discord, and Starbot sends no email (its Postmark mentions removed).
+//               Amended 2026-11-19 (LEGAL-4, third pass, all three documents): Polar is named as the seller and Stripe as
+//               the card processor Polar uses (https://polar.sh/legal/payment-processor-partners).
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { createHash } from 'node:crypto';
@@ -47,9 +49,9 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // The approved launch text, as legal_hash sees the served /legal/<name>.txt. Changing the wording changes these:
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
-	terms: '4e6f667aae617e287a7e10ad3d73c6a92e646c2080a257538884a0799bbff255',
-	privacy: '34ad735a6c352f3c3b49c2fb817438905354e97711d60adf6d366723acd6feb6',
-	refunds: '06fc76cea5aee95f75e186e30cd6fe3fcc3a9978846c553913b11fe3429641e7'
+	terms: '10d93e5fcda23b27d6a3a1c2d42eea0a5a0b08707b4763b7bd9da799c1c0c950',
+	privacy: 'dca32759239badc3759f06d54cf5966e4377dba355db1a0b2e4f332ccf2b0aa5',
+	refunds: '5e2189b97a7ff6be937b515e655b2c0ad71523c1810bf9c241928907c9ba98f6'
 };
 
 const textOf = (state: 'prelaunch' | 'launched', k: (typeof KEYS)[number]) =>

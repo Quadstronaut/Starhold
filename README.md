@@ -144,7 +144,7 @@ One sign-in for every service, at [starship.starhold.app](https://starship.starh
 
 ## 💳 Billing
 
-- Paid plans are sold through [Polar](https://polar.sh), the merchant of record. Polar handles the payment and the sales tax.
+- Paid plans are sold through [Polar](https://polar.sh), the merchant of record. Polar handles the payment and the sales tax, and uses Stripe to process cards. Starhold never sees card numbers.
 - **Cancel any time.** Run out the period you paid for, or take a prorated refund now. There are no cancellation fees.
 - **The $5 Umbermark report** is refunded in full if it fails or is not what we described and you ask within 14 days.
 - On Solatype and Heliostat, hitting a limit stops the action: nothing upgrades without your click, and nothing is billed beyond your plan.
