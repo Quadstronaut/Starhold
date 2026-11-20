@@ -23,7 +23,7 @@ Four tools for builders, sysadmins and teams. Each one says what it does, what i
 [![Repo](https://img.shields.io/badge/repo-what_is_here-D29922?style=for-the-badge)](#repo)
 [![Contact](https://img.shields.io/badge/contact-hello%40starhold.dev-BC52EE?style=for-the-badge)](#contact)
 
-**[starhold.dev](https://starhold.dev)** · **[Docs](https://starhold.fyi)** · **[Hangar](https://starhold.app)** · **[Fleet status](https://status.starhold.fyi)**
+**[starhold.dev](https://starhold.dev)** · **[Docs](https://starhold.fyi)** · **[Products](https://starhold.dev/products)** · **[Fleet status](https://status.starhold.fyi)**
 
 </div>
 
@@ -172,7 +172,7 @@ The [privacy policy](https://starhold.dev/legal/privacy) has the details, and ea
 |---|---|
 | 📡 **Fleet status** | [status.starhold.fyi](https://status.starhold.fyi): whether each service is up right now |
 | 📚 **Docs** | [starhold.fyi](https://starhold.fyi): how each service works, what it supports today, where its limits are, and a dated build log |
-| 🚀 **Hangar** | [starhold.app](https://starhold.app): every service on one page |
+| 🚀 **Products** | [starhold.dev/products](https://starhold.dev/products): every service on one page |
 | 💬 **Discord** | [discord.gg/Ug8CM86Bxv](https://discord.gg/Ug8CM86Bxv): a place to hang out and ask questions |
 
 <a id="backing"></a>
@@ -197,7 +197,7 @@ The source of the public Starhold websites. The four products live in their own 
 |---|---|---|---|
 | [`apps/storefront`](apps/storefront) | [starhold.dev](https://starhold.dev) | SvelteKit, TypeScript | The storefront: services, principles, contact form, terms, privacy and refund pages |
 | [`apps/docs`](apps/docs) | [starhold.fyi](https://starhold.fyi) | Astro Starlight | The docs and the build log |
-| [`apps/hangar`](apps/hangar) | [starhold.app](https://starhold.app) | Static HTML and CSS | The launcher page |
+| [`apps/hangar`](apps/hangar) | Retired | Static HTML and CSS | The old launcher page. Its content now lives at [starhold.dev/products](https://starhold.dev/products) |
 | [`apps/status`](apps/status) | [status.starhold.fyi](https://status.starhold.fyi) | Static HTML and CSS | The page shell of the fleet status site |
 
 ```sh
@@ -227,6 +227,6 @@ The code here is published so you can read it. It is not open source. All rights
 
 <div align="center">
 
-<sub>Starhold · <a href="https://starhold.dev">starhold.dev</a> · <a href="https://starhold.fyi">starhold.fyi</a> · <a href="https://starhold.app">starhold.app</a> · <a href="https://status.starhold.fyi">status</a></sub>
+<sub>Starhold · <a href="https://starhold.dev">starhold.dev</a> · <a href="https://starhold.fyi">starhold.fyi</a> · <a href="https://starhold.dev/products">products</a> · <a href="https://status.starhold.fyi">status</a></sub>
 
 </div>

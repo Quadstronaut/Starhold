@@ -5,7 +5,7 @@
 			"id": "self-hosted-fleet",
 			"claim": "Starhold runs on machines we administer: a dedicated server and a VPS.",
 			"status": "verified",
-			"verifier": "https://starhold.app",
+			"verifier": "https://starhold.dev/products",
 			"sources": ["https://status.starhold.fyi"]
 		},
 		{

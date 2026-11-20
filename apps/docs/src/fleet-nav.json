@@ -3,7 +3,7 @@
     { "id": "store",  "label": "Store",  "href": "https://starhold.dev" },
     { "id": "docs",   "label": "Docs",   "href": "https://starhold.fyi" },
     { "id": "status", "label": "Status", "href": "https://status.starhold.fyi" },
-    { "id": "hangar", "label": "Hangar", "href": "https://starhold.app" }
+    { "id": "products", "label": "Products", "href": "https://starhold.dev/products" }
   ],
   "legal": [
     { "label": "Terms",   "href": "https://starhold.dev/legal/terms" },
