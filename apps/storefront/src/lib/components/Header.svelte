@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { primary, cta } from '#lib/nav.js';
+	import { primary, cta, accountLinks } from '#lib/nav.js';
 	import Brand from '#lib/components/Brand.svelte';
 
-	// Hamburger drawer state — only reachable below the 640px breakpoint.
+	// Hamburger drawer state — only reachable below the 900px breakpoint.
 	let menuOpen = $state(false);
 	const closeMenu = () => (menuOpen = false);
 
@@ -17,34 +17,40 @@
 	<nav aria-label="Main">
 		<Brand />
 
-		<!-- Services · Principles · Questions · Hangar · Docs: inline on desktop,
-		     inside the drawer on mobile. No sign-in link until it works. -->
+		<!-- One link per audience, then Pricing · Products · Docs: inline on desktop,
+		     inside the drawer below 900px. -->
 		<ul id="nav-primary" class="primary" class:open={menuOpen}>
 			{#each primary as item (item.href)}
 				<li>
 					<a href={item.href} rel={item.external ? 'noopener' : undefined} onclick={closeMenu}>{item.label}</a>
 				</li>
 			{/each}
-			<li class="drawer-only drawer-cta">
-				<a class="btn btn-primary" href={cta.href} onclick={closeMenu}>{cta.label}</a>
-			</li>
 		</ul>
 
-		<div class="bar-end">
-			<a class="btn btn-primary header-cta" href={cta.href}>{cta.label}</a>
+		<button
+			class="hamburger"
+			aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+			aria-expanded={menuOpen}
+			aria-controls="nav-primary"
+			onclick={() => (menuOpen = !menuOpen)}
+		>
+			<span></span><span></span><span></span>
+		</button>
 
-			<button
-				class="hamburger"
-				aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-				aria-expanded={menuOpen}
-				aria-controls="nav-primary"
-				onclick={() => (menuOpen = !menuOpen)}
-			>
-				<span></span><span></span><span></span>
-			</button>
+		<!-- STAR-299: the two entry buttons are always on screen, never behind the menu.
+		     Beside the links on desktop; their own full-width row on phones and tablets.
+		     Before launch there is no sign-in, so the one invite button takes their place. -->
+		<div class="entry" class:pair={!!accountLinks} data-testid="header-entry">
+			{#if accountLinks}
+				<a class="btn btn-primary" href={accountLinks.create.href} rel="noopener">{accountLinks.create.label}</a>
+				<a class="btn btn-secondary" href={accountLinks.signIn.href} rel="noopener">{accountLinks.signIn.label}</a>
+			{:else}
+				<a class="btn btn-primary" href={cta.href}>{cta.label}</a>
+			{/if}
 		</div>
 	</nav>
 </header>
+
 <style>
 	header {
 		position: sticky;
@@ -58,7 +64,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: var(--sp-5);
+		gap: var(--sp-3) var(--sp-5);
 		max-width: var(--page);
 		margin: 0 auto;
 		padding: var(--sp-3) var(--sp-5);
@@ -68,7 +74,7 @@
 	ul {
 		display: flex;
 		align-items: center;
-		gap: var(--sp-5);
+		gap: var(--sp-4);
 		list-style: none;
 		margin: 0;
 		padding: 0;
@@ -78,32 +84,29 @@
 	}
 
 	.primary {
-		/* claims the slack so the CTA sits hard right */
+		/* claims the slack so the entry buttons sit hard right */
 		margin-right: auto;
 	}
 	.primary a {
 		color: var(--text);
 		font-size: var(--fs-1);
 		font-weight: 600;
+		white-space: nowrap;
 	}
 	.primary a:hover {
 		color: var(--accent);
 		text-decoration: none;
 	}
 
-	.bar-end {
+	.entry {
 		display: flex;
 		align-items: center;
-		gap: var(--sp-4);
+		gap: var(--sp-2);
 	}
-
-	.header-cta {
+	.entry .btn {
 		font-size: var(--fs-0);
 		padding: var(--sp-2) var(--sp-4);
-	}
-
-	.drawer-only {
-		display: none;
+		white-space: nowrap;
 	}
 
 	.hamburger {
@@ -124,23 +127,27 @@
 		border-radius: 1px;
 	}
 
-	/* ── mobile drawer (<640px) ────────────────────────────────────────── */
-	@media (max-width: 639px) {
+	/* ── phones and tablets (<900px): menu button, entry row, drawer ───── */
+	@media (max-width: 899px) {
 		nav {
 			padding: var(--sp-3) var(--sp-4);
-			gap: var(--sp-3);
 		}
 		.hamburger {
 			display: flex;
-		}
-		.bar-end {
 			margin-left: auto;
 		}
-		.header-cta {
-			display: none;
+		/* The entry buttons get the full width under the logo, one column each. */
+		.entry {
+			order: 3;
+			width: 100%;
 		}
-		.drawer-only {
-			display: block;
+		.entry.pair {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+		}
+		.entry .btn {
+			width: 100%;
+			font-size: var(--fs-1);
 		}
 
 		/* Closed means display:none, not a clipped container. A max-height trick
@@ -148,7 +155,7 @@
 		   reader — "collapsed" has to mean gone, not merely unpainted. */
 		.primary {
 			display: none;
-			order: 3;
+			order: 4;
 			width: 100%;
 			margin-right: 0;
 			flex-direction: column;
@@ -162,17 +169,6 @@
 			display: block;
 			padding: var(--sp-3) 0;
 			border-top: 1px solid var(--border);
-		}
-		/* The CTA is a button, not a drawer row. `.primary a` outranks
-		   `.btn-primary` on specificity, so restate both padding and ink here or
-		   the label renders as plain white on amber. */
-		.primary .drawer-cta a {
-			display: flex;
-			justify-content: center;
-			padding: var(--sp-3) var(--sp-5);
-			margin: var(--sp-3) 0;
-			border-top: 0;
-			color: var(--accent-ink);
 		}
 	}
 </style>

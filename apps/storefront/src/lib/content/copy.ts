@@ -69,17 +69,17 @@ export type Feature = {
 // STAR-145 home (design brief section 3, arbiter rulings 1-9). Voice is "we"
 // everywhere. Delivered pledges only; everything else is marked "coming soon".
 export const home = {
-	title: 'Starhold — privacy-first services we host and operate',
+	title: 'Starhold: useful software that leaves your privacy alone',
 	description:
-		'Privacy-first tools for builders, sysadmins, and teams. Every service states what it does, what it will cost, and whether you can use it today.',
+		'Online tools for small businesses and teams, and free apps for home. Every product states what it does, what it will cost, and whether you can use it today.',
 
 	hero: {
 		eyebrow: pick(
 			'Starhold is under development. Access varies by service.',
 			'Open now: sign in with a Starhold Account. Some services are still in development.'
 		),
-		h1: 'Privacy-first services we host and operate.',
-		sub: 'We build and operate privacy-first tools for builders, sysadmins, and teams. Every service states what it does, what it will cost, and whether you can use it today.',
+		h1: 'Useful software that leaves your privacy alone.',
+		sub: 'We make online tools for small businesses and teams, and free apps for home. No adverts and no third-party trackers. Every product states what it does, what it will cost, and whether you can use it today.',
 		ctaPrimary: pick(
 			{ label: 'Request an invite', href: '/invite' },
 			{ label: 'Get started', href: '/#services' }
@@ -121,12 +121,22 @@ export const home = {
 		evidence: ev('automated-tests')
 	},
 
-	/** Section 3. The four groups mirror the Hangar's categories, in its order. */
+	/** Section 3 (STAR-299). One product list, two views: by who it is for, and everything in one table.
+	 *  The lists themselves live in ./catalog.ts. */
 	work: {
-		eyebrow: 'Services',
-		h2: { pre: 'Find the tool for the', em: 'job' },
-		sub: `Each service carries one of five labels, so you know before you click whether you can use it today. ${OPEN_MEANS}`,
-		hangar: { label: 'Browse everything in the Hangar', href: 'https://starhold.app' }
+		eyebrow: 'Products',
+		h2: { pre: 'What we', em: 'make' },
+		sub: `The same products, shown two ways. Pick the view that suits you. ${OPEN_MEANS}`,
+		views: { label: 'How to show the products', audience: 'By who it’s for', everything: 'Everything' },
+		products: { label: 'The products page', href: '/products' },
+		pricing: { label: 'See every price', href: '/pricing' }
+	},
+
+	/** Open source is its own section: outside both product views and outside every audience (STAR-299). */
+	openSource: {
+		eyebrow: 'Open source',
+		h2: { pre: 'Open source.', em: 'Free.' },
+		sub: 'Free for everyone. Nothing here is for sale.'
 	},
 
 	/** Section 4. Three steps, numbered by a CSS counter so no digit lives in the copy. */
@@ -140,8 +150,8 @@ export const home = {
 				{ title: 'We reply by hand', body: "We review every request ourselves. Access isn't guaranteed." }
 			],
 			[
-				{ title: 'Choose a service', body: 'Pick the one you need. Each shows what it does and its price.' },
-				{ title: 'Sign in', body: 'Sign in with Google through your Starhold Account. There is no separate password.' },
+				{ title: 'Choose a product', body: 'Pick the one you need. Each shows what it does and its price.' },
+				{ title: 'Create a free account', body: 'Sign in with Google through your Starhold Account. The first sign-in creates the account. There is no separate password.' },
 				{ title: 'Use it', body: 'Start on the free tier, or buy a paid plan when you need more. Manage plans, export your data or delete your account from your Starhold Account.' }
 			]
 		)
@@ -168,8 +178,9 @@ export const home = {
 	/** Section 7 (ruling 4). The only note that says who is behind the "we". */
 	operator: {
 		eyebrow: 'Who runs it',
-		h2: 'Quadstronaut',
-		lede: 'We’re one person in Arizona. Whoever answers your message also runs the servers.'
+		h2: 'Built by an automation engineer',
+		lede: 'Starhold is built and run by Quadstronaut, a globally deployed automation engineer. Whoever answers your message also runs the servers.',
+		link: { label: 'See what is running', href: '/products#running' }
 	},
 
 	/** Section 9. No countdowns, no scarcity. */
@@ -211,10 +222,10 @@ export const principles: Principle[] = [
 ];
 
 /** Not built yet. Listed so nobody has to guess what is missing. */
+// 'One public price table.' left this list with STAR-299: /pricing is that table.
 const NOT_BUILT = [
 	'Notification controls you can switch off.',
-	'Offline, on-your-machine tiers.',
-	'One public price table.'
+	'Offline, on-your-machine tiers.'
 ];
 // Export and delete moves out of this list at launch: Starhold Account has them (STAR-136).
 export const comingSoon: string[] = pick(['Export and delete your own data from your account.', ...NOT_BUILT], NOT_BUILT);

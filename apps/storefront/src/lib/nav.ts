@@ -1,8 +1,10 @@
 // Navigation SSOT. The header, the mobile drawer, and the footer all render
 // from these arrays — there is exactly one place to add or rename a link.
-// Shape follows the STAR-145 design brief section 2 and arbiter rulings 5-7.
+// STAR-299 shape: one link per audience (read from the one audience list, so a
+// new audience gets its link for free), then Pricing, Products and Docs.
 
-import { pick } from './launch';
+import { pick, ACCOUNT_URL } from './launch';
+import { AUDIENCES, audienceHref } from './content/catalog';
 
 export type NavItem = {
 	label: string;
@@ -11,28 +13,36 @@ export type NavItem = {
 	external?: boolean;
 };
 
-const HANGAR: NavItem = { label: 'Hangar', href: 'https://starhold.app', external: true };
 const DOCS: NavItem = { label: 'Docs', href: 'https://starhold.fyi', external: true };
 
-/** Header: Services · Principles · Questions · Hangar · Docs, then the CTA.
- *  No "Sign in" and no /account link until sign-in works (ruling 7). */
+/** Header: the audiences, then Pricing · Products · Docs, then the account buttons. */
 export const primary: NavItem[] = [
-	{ label: 'Services', href: '/#services' },
-	{ label: 'Principles', href: '/#principles' },
-	{ label: 'Questions', href: '/#faq' },
-	HANGAR,
+	...AUDIENCES.map((a) => ({ label: a.navLabel, href: audienceHref(a) })),
+	{ label: 'Pricing', href: '/pricing' },
+	{ label: 'Products', href: '/products' },
 	DOCS
 ];
 
-/** The one visually distinct call to action that rides in the header. */
+/** The single call to action. Before launch it is the only header button; after launch the
+ *  header shows the two account buttons below instead, and this stays the "start here" link. */
 export const cta: NavItem = pick<NavItem>(
 	{ label: 'Request an invite', href: '/invite' },
 	{ label: 'Get started', href: '/#services' }
 );
 
-/** Footer, first row: the header links plus fleet status and contact. */
+/** "Create account" beside "Sign in", everywhere a header shows (operator, 2026-11-19: people who
+ *  do not see a create button never make an account). Starhold Account has no separate sign-up
+ *  step: the first Google sign-in creates the account, so both lead to the same place.
+ *  Null before launch: no account link until sign-in works (STAR-145 ruling 7). */
+export const accountLinks: { create: NavItem; signIn: NavItem } | null = pick(null, {
+	create: { label: 'Create account', href: ACCOUNT_URL, external: true },
+	signIn: { label: 'Sign in', href: ACCOUNT_URL, external: true }
+});
+
+/** Footer, first row: the header links plus open source, fleet status and contact. */
 export const footerSite: NavItem[] = [
 	...primary,
+	{ label: 'Open source', href: '/#open-source' },
 	{ label: 'Fleet status', href: 'https://status.starhold.fyi', external: true },
 	{ label: 'Contact', href: '/contact' }
 ];

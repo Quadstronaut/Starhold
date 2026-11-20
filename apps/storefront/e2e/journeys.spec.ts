@@ -4,18 +4,24 @@ import { LAUNCHED, pick } from './_launch';
 // STAR-145 journeys (brief unasked item 6). Each one is a visitor's path, not a
 // unit check: they go through real links and the real intake endpoint.
 
-test('journey 1: a free user goes from the home page to the Hangar', async ({ page }) => {
+test('journey 1: a free user finds the free tool, then how it all runs', async ({ page }) => {
 	await page.goto('/');
 	// the free tool is findable on the home page and is labelled open
-	const zenith = page.locator('#services article.service', { hasText: 'Zenithmark' });
-	await expect(zenith.locator('.tag')).toHaveText(pick('Open · free', 'Open'));
-	// the Hangar is one click from the header, and the link leaves for starhold.app
-	const hangar = page.locator('header').getByRole('link', { name: 'Hangar' });
-	await expect(hangar).toHaveAttribute('href', 'https://starhold.app');
-	// the services section also points at it
-	await expect(page.locator('#services').getByRole('link', { name: /Hangar/ })).toHaveAttribute('href', 'https://starhold.app');
-	// and the free tool opens on its own host
+	const zenith = page.locator('#by-audience article.product', { hasText: 'Zenithmark' }).first();
+	await expect(zenith.locator('.tag')).toHaveText(pick('Open · free', 'Open · paid plans'));
+	// and it opens on its own host
 	await expect(zenith.getByRole('link', { name: /Open Zenithmark/ })).toHaveAttribute('href', 'https://domainscanner.starhold.app');
+	// STAR-299: the Hangar is folded in as the Products page, one click from the header and from the home list
+	await expect(page.locator('#services').getByRole('link', { name: /products page/i })).toHaveAttribute('href', '/products');
+	await page.locator('header').getByRole('link', { name: 'Products' }).click();
+	await expect(page).toHaveURL(/\/products$/);
+	// it leads with the products themselves, then the supporting sections
+	const ids = await page.locator('main > section[id]').evaluateAll((els) => els.map((e) => e.id));
+	expect(ids).toEqual(['products', 'running', 'where', 'checks', 'who']);
+	await expect(page.locator('#products article[data-product]')).toHaveCount(7);
+	await expect(page.locator('#products article[data-product="starbot"] a')).toHaveCount(0); // closed: no link
+	await expect(page.locator('#running li[data-product]')).toHaveCount(7);
+	await expect(page.locator('#who')).toContainText('globally deployed automation engineer');
 });
 
 // Before launch the door is the invite form. After launch the invite flow is closed: the same

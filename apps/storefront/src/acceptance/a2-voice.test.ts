@@ -3,6 +3,7 @@
 // the literal template text of every marketing surface.
 import { describe, it, expect } from 'vitest';
 import * as copy from '../lib/content/copy';
+import { AUDIENCES, OPEN_SOURCE, OPEN_SOURCE_THANKS, NOT_YET, PRODUCTS_PAGE, PRICING, ACCOUNT_CTA } from '../lib/content/catalog';
 import { LAUNCHED } from '../lib/launch';
 import evidence from '../lib/content/evidence.json';
 import {
@@ -18,6 +19,8 @@ import {
 	METAPHORS
 } from './_helpers';
 
+const catalog = { AUDIENCES, OPEN_SOURCE, OPEN_SOURCE_THANKS, NOT_YET, PRODUCTS_PAGE, PRICING, ACCOUNT_CTA };
+
 /** Every marketing string in copy.ts, minus the stats import re-export. */
 const COPY_STRINGS = collectStrings({
 	home: copy.home,
@@ -30,7 +33,9 @@ const COPY_STRINGS = collectStrings({
 	comingSoon: copy.comingSoon,
 	dysonsphere: copy.dysonsphere,
 	shush: copy.shush,
-	site: copy.site
+	site: copy.site,
+	// STAR-299: the audience list, open source section, "not yet" list and the new pages' copy
+	catalog
 }).join('\n');
 
 const EVIDENCE_CLAIMS = evidence.items.map((i) => i.claim).join('\n');
@@ -73,6 +78,8 @@ describe('A2 · voice', () => {
 		// FAQ questions are the visitor's own words (What can I use today?), so they are exempt.
 		let scanned = SURFACE;
 		for (const item of copy.faq.items) scanned = scanned.replace(item.q, '');
+		// So are the outcome lines on the audience cards (Is my email set up safely?).
+		for (const a of AUDIENCES) for (const item of a.items) scanned = scanned.replace(item.outcome, '');
 		const hits = singular.filter((t) =>
 			new RegExp("(?<![\\w-])" + t.replace(/'/g, "['’]") + "(?![\\w-])", t === 'I' || t.startsWith("I'") ? '' : 'i').test(scanned)
 		);
@@ -80,9 +87,10 @@ describe('A2 · voice', () => {
 	});
 
 	it('A2.4b the only note about who is behind the we is the Who runs it section', () => {
-		expect(copy.home.operator.lede).toBe('We’re one person in Arizona. Whoever answers your message also runs the servers.');
-		const elsewhere = collectStrings({ hero: copy.home.hero, services: copy.services, faq: copy.faq, principles: copy.principles }).join('\n');
-		expect(elsewhere).not.toMatch(/one person/i);
+		// Operator wording, 2026-11-19 (STAR-299): lead with the engineer, not the place.
+		expect(copy.home.operator.lede).toBe('Starhold is built and run by Quadstronaut, a globally deployed automation engineer. Whoever answers your message also runs the servers.');
+		const elsewhere = collectStrings({ hero: copy.home.hero, services: copy.services, faq: copy.faq, principles: copy.principles, catalog }).join('\n');
+		expect(elsewhere).not.toMatch(/one person|engineer|Arizona/i);
 	});
 	it('A2.5 the operator goes by Quadstronaut', () => {
 		expect(HOME_TEXT).toContain('Quadstronaut');

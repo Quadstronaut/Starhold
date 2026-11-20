@@ -7,7 +7,8 @@ import { test, expect } from '@playwright/test';
 test('home renders the positioning hero and the services section', async ({ page }) => {
 	await page.goto('/');
 	await expect(page.locator('h1')).toHaveCount(1);
-	await expect(page.locator('h1')).toContainText(/host and operate/i);
+	await expect(page.locator('h1')).toContainText(/leaves your privacy alone/i);
+	await expect(page.locator('#services')).toBeVisible();
 	await expect(page.locator('#fleet')).toBeVisible();
 });
 
@@ -27,6 +28,14 @@ test('removed pages answer 301 to the home page', async ({ request }) => {
 	}
 });
 
+
+test('the first name of the Products page and the Hangar name answer 301 to /products', async ({ request }) => {
+	for (const path of ['/how-it-runs', '/hangar']) {
+		const res = await request.get(path, { maxRedirects: 0 });
+		expect(res.status(), path).toBe(301);
+		expect(res.headers()['location'], path).toBe('/products');
+	}
+});
 
 test('the old Shush page answers 301 to /shush', async ({ request }) => {
 	const res = await request.get('/products/shushgame', { maxRedirects: 0 });

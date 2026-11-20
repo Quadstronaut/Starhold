@@ -28,7 +28,11 @@ export const MOVED_PATHS: Readonly<Record<string, string>> = {
 	'/services/dysonsphere': '/dysonsphere',
 	'/products/dysonsphere': '/dysonsphere',
 	// Shush moved from /products/shushgame to /shush (STAR-145).
-	'/products/shushgame': '/shush'
+	'/products/shushgame': '/shush',
+	// STAR-299: the page first built as "How it runs" is the Products page (operator, 2026-11-20). It also
+	// takes over from the Hangar, so the Hangar's name lands there too.
+	'/how-it-runs': '/products',
+	'/hangar': '/products'
 };
 
 const REMOVED = new Set(REMOVED_PATHS);

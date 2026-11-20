@@ -122,9 +122,8 @@ describe('launch switch', () => {
 			const { copy } = await load(true);
 			expect(copy.comingSoon).toEqual([
 				'Notification controls you can switch off.',
-				'Offline, on-your-machine tiers.',
-				'One public price table.'
-			]);
+				'Offline, on-your-machine tiers.'
+			]); // 'One public price table.' left the list with STAR-299: /pricing is that table
 			const starbot = copy.serviceItems.find((s) => s.id === 'starbot')!;
 			expect(starbot.status).toBe(STARBOT_AVAILABLE ? 'Open · paid plans' : 'In development');
 		});

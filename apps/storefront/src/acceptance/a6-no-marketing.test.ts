@@ -14,7 +14,11 @@ const HOME_FILES = [
 	'src/lib/components/Faq.svelte',
 	'src/lib/components/Heading.svelte',
 	'src/lib/components/Wordmark.svelte',
-	'src/lib/components/HeroArt.svelte'
+	'src/lib/components/HeroArt.svelte',
+	// STAR-299: the home page's hero and its two product views
+	'src/lib/components/PageHero.svelte',
+	'src/lib/components/ProductViews.svelte',
+	'src/lib/components/ProductCard.svelte'
 ];
 
 describe('STAR-145 · no marketing on the home page', () => {
