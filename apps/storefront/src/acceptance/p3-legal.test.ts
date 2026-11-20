@@ -84,6 +84,16 @@ describe('terms', () => {
 		expect(t).toContain('The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side.');
 		expect(t).toContain('Our open-source code is covered by its own licence (for example MIT); these terms cover the hosted services.');
 	});
+	it('has section 8a Starbot right after section 8, without renumbering (STARBOT-45)', () => {
+		const t = text('terms');
+		expect(t.indexOf('8. Discord apps')).toBeGreaterThan(-1);
+		expect(t.indexOf('8a. Starbot')).toBeGreaterThan(t.indexOf('8. Discord apps'));
+		expect(t.indexOf('9. Backing the work')).toBeGreaterThan(t.indexOf('8a. Starbot'));
+		expect(t).toContain('Starbot never asks for or keeps your bot token.');
+		expect(t).toContain('The Suite is sold on starhold.app only.');
+		expect(t).toContain('where Polar is the seller (section 6)');
+		expect(t).toContain('is provided as is (section 12).');
+	});
 });
 
 describe('privacy', () => {
@@ -179,13 +189,13 @@ describe('privacy', () => {
 			expect(t()).toContain('If you asked to be told when DysonSphere opens, we will email you once.');
 		expect(t()).not.toContain('We do not send email yet');
 	});
-	it('Shush is marked as built today and Starbot as applying from the day it opens (M11, STARBOT-28)', () => {
+	it('Shush is marked as built today; the Starbot row applies to Starbot (M11, STARBOT-28, STARBOT-45)', () => {
 		expect(t()).toContain('Shush as built today, and Starbot from the day it opens');
-		expect(t()).toContain('This row applies from the day Starbot opens; Starbot is not available yet.');
+		expect(t()).toContain('This row applies to Starbot.');
 		expect(t()).not.toMatch(/bot['’]s token|bot token is given|72 hours of paying/i);
 		// LEGAL-4, operator ruling 2026-11-19: no bot tokens held; a removed server's data goes at once.
 		expect(t()).toContain('Starbot never asks for a bot token and stores none.');
-		expect(t()).toContain("If Starbot is removed from your server, that server's data is deleted right away, with no grace period.");
+		expect(t()).toContain("If Starbot is removed from your server, it stops working there at once and that server's data, including its backup copy, is deleted within about five minutes. There is no way to get it back.");
 		expect(t()).not.toContain('48 hours later');
 		expect(raw('privacy')).toMatch(/<tr><td>Starbot<\/td>/);
 		expect(raw('privacy')).toMatch(/<tr><td>Shush<\/td>/);

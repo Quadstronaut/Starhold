@@ -24,6 +24,10 @@
 //               Account sends a service message; Starbot still stores no address.
 //               Amended 2026-11-19 (LEGAL-4, fifth pass): Privacy only. The Starbot row says the Starhold Account holds
 //               the email address if it was shared at sign-in; no shared address means the dashboard notice only.
+//               Amended 2026-11-20 (STARBOT-45, operator approved): Terms section 8a Starbot; Privacy Starbot row says a removed
+//               server stops at once and its data, backup copy included, goes within about five minutes.
+//               Amended 2026-11-20 (STARBOT-45, operator approved): Privacy Starbot row opens with "This row applies to
+//               Starbot." (was "This row applies from the day Starbot opens; Starbot is not available yet.").
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { createHash } from 'node:crypto';
@@ -53,8 +57,8 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // The approved launch text, as legal_hash sees the served /legal/<name>.txt. Changing the wording changes these:
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
-	terms: '10d93e5fcda23b27d6a3a1c2d42eea0a5a0b08707b4763b7bd9da799c1c0c950',
-	privacy: '9e16e92a88ea851e07cf8ebc067f9cf21f7e79e711684c9c67be539e9c130143',
+	terms: '4ff2787ad1f35b6c8f0d12b7f5b79f28841eb90116a7d55a9861e105651532b8',
+	privacy: '33a8cf59ecc257af4bececd521b3358a6cf29062efd06e61d3115f4fec7fec41',
 	refunds: '5e2189b97a7ff6be937b515e655b2c0ad71523c1810bf9c241928907c9ba98f6'
 };
 
