@@ -20,6 +20,8 @@
 //               inside Discord, and Starbot sends no email (its Postmark mentions removed).
 //               Amended 2026-11-19 (LEGAL-4, third pass, all three documents): Polar is named as the seller and Stripe as
 //               the card processor Polar uses (https://polar.sh/legal/payment-processor-partners).
+//               Amended 2026-11-19 (LEGAL-4, fourth pass): Privacy only. A paid Starbot plan on no server: the Starhold
+//               Account sends a service message; Starbot still stores no address.
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { createHash } from 'node:crypto';
@@ -50,7 +52,7 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
 	terms: '10d93e5fcda23b27d6a3a1c2d42eea0a5a0b08707b4763b7bd9da799c1c0c950',
-	privacy: 'dca32759239badc3759f06d54cf5966e4377dba355db1a0b2e4f332ccf2b0aa5',
+	privacy: '962cf115768f51b417a9b962f50738c9c270b310058ce7f64aacfdbcb42217c1',
 	refunds: '5e2189b97a7ff6be937b515e655b2c0ad71523c1810bf9c241928907c9ba98f6'
 };
 

@@ -31,10 +31,11 @@ A free public page with components, incidents, scheduled maintenance and monitor
 | Components per page | 20 | 50 | 50 |
 | Monitors, across the account | 5 | 20 | 50 |
 | Fastest check | 300 seconds | 60 seconds | 60 seconds |
+| Page views per 7 days, per page | 10,000 (soft limit) | No limit | No limit |
 | Email subscribers per page | 50 | 1,000 | 1,000 |
 | Emails sent a month | 100 | 5,000 | 15,000 |
 
-RSS, Atom, the JSON endpoint and the badge are free on every plan. The [pricing page](https://status.starhold.app/pricing) has the full table.
+The free plan's 10,000 page views in 7 days is a soft limit for each page. Nothing is blocked or changed above it; the page's owner sees a usage meter in the dashboard. RSS, Atom, the JSON endpoint and the badge are free on every plan. The [pricing page](https://status.starhold.app/pricing) has the full table.
 
 ## Fair terms and privacy defaults
 
