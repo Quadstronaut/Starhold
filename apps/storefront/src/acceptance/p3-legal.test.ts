@@ -161,8 +161,11 @@ describe('privacy', () => {
 			'Our products send email through Postmark, from no-reply@starhold.app; replies go to hello@starhold.dev.'
 		);
 		// LEGAL-4: Starbot holds no address. The Starhold Account sends the plan-on-no-server notice (Starship df97479, Starbot 8731fe3).
-		expect(t()).toContain('Starbot does not store your email address. If a paid plan is on no server, the dashboard says so, and your Starhold Account, if you have one, emails you a service message about it: once each time that happens and, where we know the renewal date, once shortly before each renewal. It is not marketing.');
+		expect(t()).toContain('Starbot itself keeps no email address. Your Starhold Account holds your email address only if you chose to share it at sign-in. If a paid plan is on no server, the dashboard says so, and if your Starhold Account has your email address it sends you a service message about it: once each time that happens and, where we know the renewal date, once shortly before each renewal. It is not marketing.');
 		expect(t()).not.toContain('Starbot sends no email');
+		// Operator, 2026-11-19: nobody may read the row as "Starhold does not have your email".
+		expect(t()).not.toContain('Starbot does not store your email address');
+		expect(t()).toContain('Without a Starhold Account, or without a shared email address, you get the dashboard notice only.');
 		expect(t()).not.toMatch(/starbot@starhold\.app|Starbot's service messages/);
 		expect(t()).toContain('including the service messages your Starhold Account sends about a Starbot plan');
 		// LEGAL-4, operator rulings 2026-11-19: two servers per paid subscription; Discord purchases.

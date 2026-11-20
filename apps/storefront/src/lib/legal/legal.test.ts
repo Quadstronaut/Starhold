@@ -22,6 +22,8 @@
 //               the card processor Polar uses (https://polar.sh/legal/payment-processor-partners).
 //               Amended 2026-11-19 (LEGAL-4, fourth pass): Privacy only. A paid Starbot plan on no server: the Starhold
 //               Account sends a service message; Starbot still stores no address.
+//               Amended 2026-11-19 (LEGAL-4, fifth pass): Privacy only. The Starbot row says the Starhold Account holds
+//               the email address if it was shared at sign-in; no shared address means the dashboard notice only.
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { createHash } from 'node:crypto';
@@ -52,7 +54,7 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
 	terms: '10d93e5fcda23b27d6a3a1c2d42eea0a5a0b08707b4763b7bd9da799c1c0c950',
-	privacy: '962cf115768f51b417a9b962f50738c9c270b310058ce7f64aacfdbcb42217c1',
+	privacy: '9e16e92a88ea851e07cf8ebc067f9cf21f7e79e711684c9c67be539e9c130143',
 	refunds: '5e2189b97a7ff6be937b515e655b2c0ad71523c1810bf9c241928907c9ba98f6'
 };
 
