@@ -43,7 +43,9 @@ Four tools for builders, sysadmins and teams. Each one says what it does, what i
 | 🛡️ | [**Umbermark**](https://serverscanner.starhold.app) | A scored hardening report for a Linux server, with a link you can share | Scans | $5 report; $5, $19 or $49 a month |
 | ✉️ | [**Zenithmark**](https://domainscanner.starhold.app) | A mail and DNS scorecard for a domain, with daily monitoring as a paid plan | Scorecard | $5 or $19 a month |
 
-Prices are in US dollars. The pricing page of each service is the authority; the tables below were copied from them on 2026-11-14.
+Prices are in US dollars. The pricing page of each service is the authority, and [starhold.dev/pricing](https://starhold.dev/pricing) lists every price on one page. The tables below were last checked against them on 2026-11-20.
+
+The **Starhold Suite** is one plan at $49 a month. It includes the middle plan of every tool. You buy it from your [Starhold Account](https://starship.starhold.app/account/subscriptions); single plans stay available.
 
 ```mermaid
 flowchart LR
@@ -85,6 +87,8 @@ Formerly Status (renamed 2026-11-14; same address, pages and keys). Status pages
 | Free | $0 | 1 | Public | 5 | 50 | 100 |
 | Private | $5 a month | 1 | Public, password or named viewers | 20 | 1,000 | 5,000 |
 | MSP | $19 a month | 5 | Public, password or named viewers | 50 | 1,000 | 15,000 |
+
+The free plan includes 10,000 page views in 7 days for each page. That is a soft limit: nothing is blocked or changed above it, and the page's owner sees a usage meter in the dashboard.
 
 [Site](https://status.starhold.app) · [Pricing](https://status.starhold.app/pricing) · [Docs](https://status.starhold.app/docs)
 
@@ -162,7 +166,7 @@ One sign-in for every service, at [starship.starhold.app](https://starship.starh
 The [privacy policy](https://starhold.dev/legal/privacy) has the details, and each product has its own notice for what it adds.
 
 > [!IMPORTANT]
-> **Not built yet, and we say so:** notification controls you can switch off, offline tiers that run on your own machine, and one public price table.
+> **Not built yet, and we say so:** notification controls you can switch off, and offline tiers that run on your own machine.
 
 <a id="status-docs"></a>
 
@@ -195,7 +199,7 @@ The source of the public Starhold websites. The four products live in their own 
 
 | Path | Site | Built with | What it is |
 |---|---|---|---|
-| [`apps/storefront`](apps/storefront) | [starhold.dev](https://starhold.dev) | SvelteKit, TypeScript | The storefront: services, principles, contact form, terms, privacy and refund pages |
+| [`apps/storefront`](apps/storefront) | [starhold.dev](https://starhold.dev) | SvelteKit, TypeScript | The storefront: the home page with two product views (by audience, everything), pages for Home, Small business and Teams, pricing, the Products page, contact form, terms, privacy and refund pages |
 | [`apps/docs`](apps/docs) | [starhold.fyi](https://starhold.fyi) | Astro Starlight | The docs and the build log |
 | [`apps/hangar`](apps/hangar) | Retired | Static HTML and CSS | The old launcher page. Its content now lives at [starhold.dev/products](https://starhold.dev/products) |
 | [`apps/status`](apps/status) | [status.starhold.fyi](https://status.starhold.fyi) | Static HTML and CSS | The page shell of the fleet status site |

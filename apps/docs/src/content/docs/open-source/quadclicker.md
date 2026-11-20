@@ -22,7 +22,7 @@ Source: [github.com/Quadstronaut/QuadClicker](https://github.com/Quadstronaut/Qu
 | Platform | Release status | Notes |
 |---|---|---|
 | Windows x64 | **v0.1.1 — shipped** | Self-contained single-file EXE, no .NET install required |
-| macOS | **Unreleased** — code-complete, unverified | Never compiled or run; an Xcode-equipped Mac is required |
+| macOS | **Unreleased** — builds and unit tests pass in CI, never run by a person | Compiled and unit-tested on a GitHub macOS runner; never launched on a real Mac, unsigned, no download |
 | Linux | **Unreleased** — build verified, no package yet | Verified on Ubuntu 24.04 (Qt 6.4.2); no `.deb` / AppImage published yet |
 
 ---
@@ -88,7 +88,7 @@ Start and stop hotkeys are independently configurable, global (fire when the app
 **Platform notes:**
 
 - **Windows** — Win32 `RegisterHotKey`; no special permissions required
-- **macOS** — Requires Accessibility permission in System Settings; macOS status is unverified (code sourced from the Swift implementation)
+- **macOS** — Requires Accessibility permission in System Settings; the macOS app builds in CI but has never been run on a real Mac, so this is taken from the Swift source
 - **Linux (X11)** — `XGrabKey` on X11; works on any X session
 - **Linux (Wayland)** — Global hotkeys are **not supported**. `HotkeyManager` detects Wayland at startup and disables itself entirely. **There is no KDE D-Bus fallback** — the X11 path is the only implementation. Use the Start/Stop button or the system tray instead. XWayland does work (hotkeys function normally under XWayland's X11 compatibility layer)
 
