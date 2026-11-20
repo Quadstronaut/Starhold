@@ -165,6 +165,10 @@ describe('privacy', () => {
 		expect(t()).toContain('Shush as built today, and Starbot from the day it opens');
 		expect(t()).toContain('This row applies from the day Starbot opens; Starbot is not available yet.');
 		expect(t()).not.toMatch(/bot['’]s token|bot token is given|72 hours of paying/i);
+		// LEGAL-4, operator ruling 2026-11-19: no bot tokens held; a removed server's data goes at once.
+		expect(t()).toContain('Starbot never asks for a bot token and stores none.');
+		expect(t()).toContain("If Starbot is removed from your server, that server's data is deleted right away, with no grace period.");
+		expect(t()).not.toContain('48 hours later');
 		expect(raw('privacy')).toMatch(/<tr><td>Starbot<\/td>/);
 		expect(raw('privacy')).toMatch(/<tr><td>Shush<\/td>/);
 	});

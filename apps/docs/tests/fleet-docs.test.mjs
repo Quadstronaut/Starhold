@@ -235,5 +235,6 @@ test('Starbot says what it keeps and deletes, for the one shared bot (M11, STARB
 	assert.doesNotMatch(text, /keeps nothing/i);
 	assert.match(text, /What Starbot keeps and deletes/);
 	assert.match(text, /Starbot never asks for your bot token/);
-	assert.match(text, /deleted 48 hours later/);
+	assert.match(text, /deleted right away, with no grace period/);
+	assert.doesNotMatch(text, /48 hours/);
 });

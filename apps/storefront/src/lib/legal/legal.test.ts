@@ -14,6 +14,8 @@
 //               purchase-record basis, account and abuse retention rows, deletion timing, Product updates email, Turnstile.
 //               Amended 2026-11-19 (STARBOT-28, operator standing approval): Starbot is one shared bot. The Privacy row says it
 //               applies from the day Starbot opens; the bot-token deadline is removed from the Refund Policy.
+//               Amended 2026-11-19 (LEGAL-4, operator ruling): Privacy only. Starbot stores no bot token; when Starbot is
+//               removed from a server, that server's data is deleted right away (was 48 hours later).
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { createHash } from 'node:crypto';
@@ -44,7 +46,7 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
 	terms: '4e6f667aae617e287a7e10ad3d73c6a92e646c2080a257538884a0799bbff255',
-	privacy: 'ace642fa07bd3e7f73b7ba986182063c7ac195d5a27962d57a831fd8401ae5a7',
+	privacy: '91b37f9a0668cf8c861c9334e51b869b5e1b1c8edfd0d0c9fa31e1edc07c0cef',
 	refunds: '06fc76cea5aee95f75e186e30cd6fe3fcc3a9978846c553913b11fe3429641e7'
 };
 
