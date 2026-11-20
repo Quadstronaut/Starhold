@@ -11,7 +11,7 @@
 // Launch also needs: the Starbot dashboard switch (STARBOT_AVAILABLE=true in its env), the Starship gate for
 // product starbot, and the new Polar products. Flip this, run --apply, deploy.
 // ─────────────────────────────────────────────────────────────────────────────
-export const STARBOT_AVAILABLE = false;
+export const STARBOT_AVAILABLE = true;
 
 /** Where the Add button goes once Starbot is open. */
 export const STARBOT_ADD_URL = 'https://dash.starhold.app';
