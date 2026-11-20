@@ -19,7 +19,7 @@ Starhold hosts and operates these services for people who care where their data 
 
 ## Starhold Suite
 
-The Starhold Suite is one plan at $49 a month. It includes the middle plan of every tool: Umbermark Pro, Zenithmark Monitor 5, Heliostat MSP, Solatype Pro, and Starbot (one server, opening soon). You buy it from the [Starhold Account page](https://starship.starhold.app/account/subscriptions). Single plans stay available.
+The Starhold Suite is one plan at $49 a month. It includes the middle plan of every tool: Umbermark Pro, Zenithmark Monitor 5, Heliostat MSP, Solatype Pro, and Starbot Pro (two servers, opening soon). You buy it from the [Starhold Account page](https://starship.starhold.app/account/subscriptions). Single plans stay available.
 
 ## Getting in
 

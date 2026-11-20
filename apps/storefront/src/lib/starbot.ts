@@ -18,7 +18,7 @@ export const STARBOT_ADD_URL = 'https://dash.starhold.app';
 
 /** The single availability line. Mirror of the "starbot" key in docs/shared/availability.json. */
 export const STARBOT_AVAILABILITY = STARBOT_AVAILABLE
-	? 'Open: free to add; Plus $5, Pro $19 a month'
+	? 'Open: free to add; Plus $5, Pro $19 a month, two servers each'
 	: 'Not open yet.';
 
 /** The primary button's text. While closed it is shown disabled. */
