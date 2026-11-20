@@ -18,7 +18,7 @@
 </svelte:head>
 
 <PageHero pick={data.hero} eyebrow={a.label} h1={a.heading} lede={a.intro}>
-	<a class="btn btn-secondary" href="/#all-products">See everything we make</a>
+	<a class="btn btn-secondary" href="/#all-products">See everything I make</a>
 </PageHero>
 
 <section class="section" data-audience={a.id}>

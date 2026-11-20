@@ -121,11 +121,11 @@ const proseText = (html) =>
 		.replace(/\s+/g, ' ');
 const pages = () => walk(DIST).filter((f) => f.endsWith('index.html') && !f.includes(join(DIST, 'pagefind')));
 
-// STAR-152 (arbiter ruling 9): "we" voice everywhere, so first person singular is the banned form.
-// Dated log entries before 2026-10-24 are history and stay untouched (Q41).
-test('no first person singular on any page', () => {
+// STAR-302: Starhold is one person, so a team "we" for who builds or runs it is the banned form.
+// "We" stays only where the company speaks about data or refunds. Dated log entries before 2026-10-24 are history (Q41).
+test('no team we on any page', () => {
 	for (const f of pages().filter((f) => !/2026-0[67]-/.test(f))) {
-		const hits = proseText(read(f)).replace(/"[^"]*"|“[^”]*”|&quot;.*?&quot;/g, ' ').match(/(?<![\w-])(I|I'll|I'm|I've|my|me|mine|myself)(?![\w-])/g);
+		const hits = proseText(read(f)).replace(/"[^"]*"|“[^”]*”|&quot;.*?&quot;/g, ' ').match(/(?<![\w-])(we (make|build|run|host|operate|administer)|our (team|operator)|ourselves)(?![\w-])/gi);
 		assert.equal(hits, null, `${f.slice(DIST.length)}: ${hits}`);
 	}
 });

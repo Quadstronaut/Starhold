@@ -31,7 +31,7 @@
 </script>
 
 {#if status === 'sent'}
-	<p class="card sent">Got it. We will email <strong>{email}</strong> once, when DysonSphere opens.</p>
+	<p class="card sent">Got it. I will email <strong>{email}</strong> once, when DysonSphere opens.</p>
 {:else}
 	<form onsubmit={submit}>
 		<label>

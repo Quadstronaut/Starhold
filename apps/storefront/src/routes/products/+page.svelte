@@ -101,7 +101,7 @@
 	<h2>{home.operator.h2}</h2>
 	<div class="prose">
 		<p data-evidence="single-operator">{home.operator.lede}</p>
-		<p><a href="/contact">Write to us →</a></p>
+		<p><a href="/contact">Write to me →</a></p>
 	</div>
 </section>
 

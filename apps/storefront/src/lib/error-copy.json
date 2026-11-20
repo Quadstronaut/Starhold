@@ -28,7 +28,7 @@
   },
   "codes": {
     "400": {
-      "title": "We could not read that request",
+      "title": "I could not read that request",
       "explanation": "A link may have been cut short, or a form arrived incomplete. Go back and try again, or start from the home page."
     },
     "401": {
@@ -40,7 +40,7 @@
       "explanation": "If you followed a link you expected to work, its access may have changed. Go back, or email hello@starhold.dev with the address."
     },
     "404": {
-      "title": "We cannot find that page",
+      "title": "I cannot find that page",
       "explanation": "There is no page at this address. It may have moved, or the link may have a typo in it. Go back, or start from the home page."
     },
     "405": {
@@ -56,12 +56,12 @@
       "explanation": "This service limits how many requests it accepts from one connection, and yours has reached that limit for now. Wait a while, then try again. When the service knows how long the limit lasts, its reply says so."
     },
     "500": {
-      "title": "Something went wrong on our side",
+      "title": "Something went wrong on my side",
       "explanation": "It is not something you did. Try again later. If it keeps happening, check the status page, or email hello@starhold.dev and say roughly when it happened."
     },
     "502": {
-      "title": "We could not reach the service behind this page",
-      "explanation": "The problem is on our side, not yours. Try again later, or check the status page."
+      "title": "I could not reach the service behind this page",
+      "explanation": "The problem is on my side, not yours. Try again later, or check the status page."
     },
     "503": {
       "title": "This service is not answering right now",
@@ -69,7 +69,7 @@
     },
     "504": {
       "title": "The service took too long to answer",
-      "explanation": "We stopped waiting for it. Try again later, or check the status page. If the same page keeps timing out, email hello@starhold.dev."
+      "explanation": "I stopped waiting for it. Try again later, or check the status page. If the same page keeps timing out, email hello@starhold.dev."
     },
     "default": {
       "title": "Something went wrong",

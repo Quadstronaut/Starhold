@@ -151,7 +151,7 @@ describe('A4 · information architecture', () => {
 		const err = read('src/routes/+error.svelte');
 		for (const l of ['copyFor(', 'errLinks.back', 'errLinks.home', 'poolFor(', 'pickErr(']) expect(err).toContain(l);
 		expect(err).not.toMatch(/<script[^>]*>\s*(?!lang)[^<]*document\./);
-		expect(copy404()).toContain('We cannot find that page'); // plain headline since STAR-299; the space title lives in the art
+		expect(copy404()).toContain('I cannot find that page'); // plain headline since STAR-299; the space title lives in the art
 		expect(err).toContain('errNext.links');
 		// STAR-299: the last-resort page SvelteKit serves when the error page itself cannot render: static, no script
 		const last = read('src/error.html');

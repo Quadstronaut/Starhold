@@ -56,7 +56,7 @@ export type Audience = {
 	intro: string;
 	items: AudienceItem[];
 	packages: Package[];
-	/** Show the "what we don't do yet" list on this audience's page. */
+	/** Show the "what I don't do yet" list on this audience's page. */
 	notYet?: boolean;
 };
 
@@ -66,7 +66,7 @@ export const AUDIENCES: Audience[] = [
 		label: 'Home',
 		navLabel: 'For home',
 		heading: 'For you at home',
-		intro: 'Most of what we sell today is for businesses and teams, and we would rather say so. This is what we have for home right now.',
+		intro: 'Most of what I sell today is for businesses and teams, and I would rather say so. This is what I have for home right now.',
 		items: [
 			{
 				service: 'shushgame',
@@ -76,7 +76,7 @@ export const AUDIENCES: Audience[] = [
 			{
 				service: 'starbot',
 				outcome: 'A Discord bot for your server',
-				body: 'One shared bot that we run, for a club, a game group or friends.'
+				body: 'One shared bot that I run, for a club, a game group or friends.'
 			},
 			{
 				service: 'dysonsphere',
@@ -299,19 +299,19 @@ export const OPEN_SOURCE: OpenSourceProject[] = [
 ];
 
 /** A thank you, never an ask: no link and no button beside it. */
-export const OPEN_SOURCE_THANKS = 'Our Patreon supporters paid for the time to build these. Thank you.';
+export const OPEN_SOURCE_THANKS = 'My Patreon supporters paid for the time to build these. Thank you.';
 
-// ── What we don't do yet ─────────────────────────────────────────────────────
+// ── What I don't do yet ─────────────────────────────────────────────────────
 // Shown on /for/teams and /pricing. Every line must be true on the day it ships;
 // each names where the fact comes from. Drop a line the day it stops being true.
 export const NOT_YET = {
-	heading: { pre: 'What we don’t do', em: 'yet' },
+	heading: { pre: 'What I don’t do', em: 'yet' },
 	sub: 'Better you read this here than find out later.',
 	items: [
 		// copy.ts home.how: "Sign in with Google ... There is no separate password."
 		'Sign-in is with a Google account only. There is no email and password sign-in.',
 		// lib/site-links.ts: the phone line is voicemail only and is answered by email.
-		'No live phone support. We answer by email and through the contact form.',
+		'No live phone support. I answer by email and through the contact form.',
 		// copy.ts home.fleet: "it does not guarantee uninterrupted availability".
 		'No uptime guarantee. Current health is on the public status page.',
 		// copy.ts comingSoon: the "Not built yet" list, already held to the same rule.
@@ -329,7 +329,7 @@ export const PRODUCTS_PAGE = {
 	description: 'Every Starhold product: what it is, whether you can use it today, and where to open it.',
 	eyebrow: 'Products',
 	h1: 'Products',
-	lede: 'Everything we make: what each product is, whether you can use it today, and where to open it.',
+	lede: 'Everything I make: what each product is, whether you can use it today, and where to open it.',
 	list: { pre: 'Every', em: 'product' },
 	listSub: 'One line each. The status label says whether you can use it today.',
 	running: { pre: 'What is', em: 'running' },

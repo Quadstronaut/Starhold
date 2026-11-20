@@ -187,7 +187,7 @@ test('header and footer follow the brief; Sign in shows only once sign-in works'
 test('404 shows the shared Starhold error page', async ({ page }) => {
 	const res = await page.goto('/no-such-page');
 	expect(res?.status()).toBe(404);
-	await expect(page.locator('h1')).toHaveText('404 · We cannot find that page');
+	await expect(page.locator('h1')).toHaveText('404 · I cannot find that page');
 	await expect(page.locator('main .err-band').getByRole('link')).toHaveText(['← Go back', 'Home →']);
 	// the headline is ordinary text, not the red used for form errors (a global .err rule used to leak in)
 	expect(await page.locator('h1').evaluate((e) => getComputedStyle(e).color)).toBe('rgb(230, 233, 240)');

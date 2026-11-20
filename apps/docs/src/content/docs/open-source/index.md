@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-These are **Quadstronaut projects**: personal open-source work by our operator. They are not Starhold products. Starhold is proud to surface utilities that solve real problems and happen to come from the same shop.
+These are **Quadstronaut projects**: personal open-source work by the operator. They are not Starhold products. Starhold is proud to surface utilities that solve real problems and happen to come from the same shop.
 
 ## QuadClicker
 

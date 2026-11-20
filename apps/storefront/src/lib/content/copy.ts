@@ -2,8 +2,8 @@
 // Marketing copy, single source of truth.
 //
 // Rules this file is held to (and src/acceptance/a2-voice.test.ts enforces):
-//   • Voice is "we" (STAR-145 ruling 9). No first person singular anywhere.
-//     The only note about who is behind the "we" is home.operator.
+//   • Voice is first person singular, "I" (STAR-302): Starhold is one person.
+//     "We" survives only where the company speaks about data (privacy lines).
 //   • Metaphor budget. The register stays space/ops, but thin: <=8 metaphor
 //     words on the whole home page, <=2 in the hero.
 //   • Every sentence that asserts a fact about the world carries an evidence id
@@ -79,7 +79,7 @@ export const home = {
 			'Open now: sign in with a Starhold Account. Some services are still in development.'
 		),
 		h1: 'Useful software that leaves your privacy alone.',
-		sub: 'We make online tools for small businesses and teams, and free apps for home. No adverts and no third-party trackers. Every product states what it does, what it will cost, and whether you can use it today.',
+		sub: 'I make online tools for small businesses and teams, and free apps for home. No adverts and no third-party trackers. Every product states what it does, what it will cost, and whether you can use it today.',
 		ctaPrimary: pick(
 			{ label: 'Request an invite', href: '/invite' },
 			{ label: 'Get started', href: '/#services' }
@@ -125,7 +125,7 @@ export const home = {
 	 *  The lists themselves live in ./catalog.ts. */
 	work: {
 		eyebrow: 'Products',
-		h2: { pre: 'What we', em: 'make' },
+		h2: { pre: 'What I', em: 'make' },
 		sub: `The same products, shown two ways. Pick the view that suits you. ${OPEN_MEANS}`,
 		views: { label: 'How to show the products', audience: 'By who it’s for', everything: 'Everything' },
 		products: { label: 'The products page', href: '/products' },
@@ -146,8 +146,8 @@ export const home = {
 		steps: pick(
 			[
 				{ title: 'Choose a service', body: 'Pick the one you need. Each shows whether you can use it today. Open services need no invite.' },
-				{ title: 'Request an invite', body: "Give us an email and the service you want. A line about your use helps but isn't required." },
-				{ title: 'We reply by hand', body: "We review every request ourselves. Access isn't guaranteed." }
+				{ title: 'Request an invite', body: "Give me an email and the service you want. A line about your use helps but isn't required." },
+				{ title: 'I reply by hand', body: "I review every request myself. Access isn't guaranteed." }
 			],
 			[
 				{ title: 'Choose a product', body: 'Pick the one you need. Each shows what it does and its price.' },
@@ -162,7 +162,7 @@ export const home = {
 	principles: {
 		eyebrow: 'Principles',
 		h2: { pre: 'Privacy is a design constraint, not a', em: 'slogan' },
-		sub: 'These are in place today. The rest are not built yet, and we say so.',
+		sub: 'These are in place today. The rest are not built yet, and I say so.',
 		soonHeading: 'Not built yet'
 	},
 
@@ -170,7 +170,7 @@ export const home = {
 	fleet: {
 		eyebrow: 'Fleet status',
 		h2: 'Designed so one machine failing doesn’t take it down.',
-		body: 'We run services on machines we administer. That design reduces reliance on any single machine; it does not guarantee uninterrupted availability. Current health is on the public fleet status page.',
+		body: 'I run services on machines I administer. That design reduces reliance on any single machine; it does not guarantee uninterrupted availability. Current health is on the public fleet status page.',
 		link: { href: 'https://status.starhold.fyi', label: 'See current health' },
 		evidence: ev('self-hosted-fleet')
 	},
@@ -204,7 +204,7 @@ export type Principle = {
 export const principles: Principle[] = [
 	{
 		title: 'No third-party trackers.',
-		detail: 'No cookie banner, because nothing on this site needs one. Open DevTools: every request goes to our own hosts.',
+		detail: 'No cookie banner, because nothing on this site needs one. Open DevTools: every request goes to my own hosts.',
 		evidence: ev('no-third-party-tracking'),
 		link: { href: '/legal/privacy', label: 'Read the policy' }
 	},
@@ -380,7 +380,7 @@ export const faq = {
 		{
 			q: pick('How do I get an invite?', 'How do I get started?'),
 			a: pick(
-				"Pick a service and give an email. A line about your use helps but isn't required. We review by hand; access isn't guaranteed.",
+				"Pick a service and give an email. A line about your use helps but isn't required. I review by hand; access isn't guaranteed.",
 				'Pick a service and sign in with a Starhold Account. Free tiers cost nothing, and paid plans are on sale.'
 			),
 			link: pick({ href: '/invite', label: 'Request an invite' }, { href: '/#services', label: 'Pick a service' })
@@ -419,13 +419,13 @@ export const faq = {
 export const invite = {
 	title: pick('Request an invite · Starhold', 'Get started · Starhold'),
 	description: pick(
-		'Ask for access to a Starhold service. We review every request by hand.',
+		'Ask for access to a Starhold service. I review every request by hand.',
 		'Sign in with a Starhold Account to use a Starhold service.'
 	),
 	eyebrow: 'Access',
 	h1: pick('Request an invite', 'Get started'),
 	lede: pick(
-		"Pick a service and give an email. A line about your use helps but isn't required. We review by hand; access isn't guaranteed.",
+		"Pick a service and give an email. A line about your use helps but isn't required. I review by hand; access isn't guaranteed.",
 		'Pick a service and sign in with your Starhold Account. Free tiers cost nothing, and paid plans are on sale.'
 	),
 	emailLabel: 'Email',
@@ -457,10 +457,10 @@ export const account = {
 	lede: pick('Starhold Account is in development.', 'One account for every Starhold service.'),
 	body: pick(
 		[
-			'There is no sign-in yet, and nothing on this page is a control. Until sign-in exists, request access through the invite form, and write to us if something is wrong.'
+			'There is no sign-in yet, and nothing on this page is a control. Until sign-in exists, request access through the invite form, and write to me if something is wrong.'
 		],
 		[
-			'Sign in with Google at starship.starhold.app. From there you manage your plans, export your data and delete your account. Write to us if something is wrong.'
+			'Sign in with Google at starship.starhold.app. From there you manage your plans, export your data and delete your account. Write to me if something is wrong.'
 		]
 	),
 	cta: pick({ label: 'Request an invite', href: '/invite' }, { label: 'Sign in', href: ACCOUNT_URL }),
@@ -474,7 +474,7 @@ export const contact = {
 	eyebrow: 'Get in touch',
 	h1Invite: pick('Request an invite', 'Get started'),
 	introInvite: pick(
-		'Pick the service you want to try and say a little about what you would use it for. We read every request by hand.',
+		'Pick the service you want to try and say a little about what you would use it for. I read every request by hand.',
 		'Pick the service you want to try, then sign in with your Starhold Account.'
 	),
 	/** Heading and button of the invite form on /contact?intent=invite (redirected away at launch). */
@@ -491,7 +491,7 @@ export const contact = {
 		{ id: 'unsure', label: 'Not sure yet' }
 	],
 	h1Contact: 'Contact',
-	introContact: 'Questions, billing problems, or something that does not fit a form. Either channel reaches us.',
+	introContact: 'Questions, billing problems, or something that does not fit a form. Either channel reaches me.',
 	emailLabel: 'Email'
 };
 

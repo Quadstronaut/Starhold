@@ -36,7 +36,7 @@
 	<p class="phone">
 		<span class="eyebrow">Voicemail</span>
 		<a href={'tel:' + CONTACT_PHONE_TEL}>{CONTACT_PHONE}</a>
-		<span class="phone-note">This line is not answered. Leave your name, email address and what you need, and we reply by email.</span>
+		<span class="phone-note">This line is not answered. Leave your name, email address and what you need, and I reply by email.</span>
 	</p>
 
 	{#if DISCORD_INVITE}

@@ -137,19 +137,13 @@ test('B1.3b a service card preselects its service on the invite form (closed aft
 });
 // ═══ B2 · voice ═════════════════════════════════════════════════════════════
 
-test('B2.1 we voice: no first person singular renders on any marketing route', async ({ page }) => {
+test('B2.1 I voice: no team "we" says who builds or runs Starhold on any marketing route', async ({ page }) => {
+	// STAR-302: Starhold is one person. "We" stays only in data and legal lines.
+	const teamWe = /(?<![\w-])(we (make|build|run|host|operate|administer|review|read|reply|answer|sell|say)|our (team|own hosts|operator)|ourselves)(?![\w-])/i;
 	for (const route of MARKETING) {
 		await page.goto(route);
 		const text = await bodyText(page);
-		// FAQ questions are the visitor's words, so they are removed before the scan
-		const faq = await page.locator('#faq summary').allInnerTexts();
-		// so are the outcome lines on the audience cards (Is my email set up safely?)
-		const outcomes = await page.locator('article.product .outcome').allInnerTexts();
-		const scanned = [...faq, ...outcomes].reduce((s, q) => s.replace(q, ''), text);
-		const hits = ['I', 'me', 'my', 'mine', 'myself'].filter((t) =>
-			new RegExp('(?<![\\w-])' + t + '(?![\\w-])', t === 'I' ? '' : 'i').test(scanned)
-		);
-		expect(hits, route + ' uses first person singular').toEqual([]);
+		expect(text, route + ' uses team we').not.toMatch(teamWe);
 	}
 	await page.goto('/');
 	await expect(page.locator('#operator')).toContainText('globally deployed automation engineer');

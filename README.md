@@ -166,7 +166,7 @@ One sign-in for every service, at [starship.starhold.app](https://starship.starh
 The [privacy policy](https://starhold.dev/legal/privacy) has the details, and each product has its own notice for what it adds.
 
 > [!IMPORTANT]
-> **Not built yet, and we say so:** notification controls you can switch off, and offline tiers that run on your own machine.
+> **Not built yet, and I say so:** notification controls you can switch off, and offline tiers that run on your own machine.
 
 <a id="status-docs"></a>
 
