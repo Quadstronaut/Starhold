@@ -1,19 +1,19 @@
 ---
 title: Starbot
-description: One bot, run by Starhold. Add it to your Discord server in one click. Open, paid plans.
+description: One bot, run by Starhold. Add it to your Discord server in one click. Not open yet.
 sidebar:
   order: 6
 ---
 
 **Starbot is one bot, run by Starhold. Add it to your Discord server in one click.**
 
-- **State:** Open · paid plans.
-- **Availability:** Open: free to add; Plus $5, Pro $19 a month, two servers each.
+- **State:** In development.
+- **Availability:** Not open yet.
 - **Where:** [dash.starhold.app](https://dash.starhold.app)
 
 ## How to add it
 
-On [dash.starhold.app](https://dash.starhold.app), click **Add Starbot to your server**, pick the server on Discord's own screen, and you are done. You need the Manage Server permission on that server. You never use a developer portal, and Starbot never asks for your bot token.
+The Add button on [dash.starhold.app](https://dash.starhold.app) is disabled until Starbot opens. After that, click **Add Starbot to your server**, pick the server on Discord's own screen, and you are done. You need the Manage Server permission on that server. You never use a developer portal, and Starbot never asks for your bot token.
 
 ## Plans
 

@@ -13,13 +13,13 @@ Starhold hosts and operates these services for people who care where their data 
 | [Zenithmark](/services/zenithmark/) | Mail and DNS scorecard for a domain | Open · paid plans | Open: free scorecard; monitoring $5 or $19 a month |
 | [Solatype](/services/render/) | OG image, PDF and screenshot API | Open · paid plans | Open: free tier; Hobby $5, Pro $19, Scale $49 a month |
 | [Heliostat](/services/status/) | Private and white-label status pages for MSPs | Open · paid plans | Open: free tier; Private $5, MSP $19 a month |
-| [Starbot](/services/starbot/) | One bot, run by Starhold. Add it to your Discord server in one click. | Open · paid plans | Open: free to add; Plus $5, Pro $19 a month, two servers each |
+| [Starbot](/services/starbot/) | One bot, run by Starhold. Add it to your Discord server in one click. | In development | Not open yet. |
 | [Shush](/services/shushgame/) | The quiet game on Discord | Open · free | Open |
 | [DysonSphere](/services/dysonsphere/) | Personal hosting, built to be hard to break | In development | Interest form only |
 
 ## Starhold Suite
 
-The Starhold Suite is one plan at $49 a month. It includes the middle plan of every tool: Umbermark Pro, Zenithmark Monitor 5, Heliostat MSP, Solatype Pro, and Starbot Pro (two servers). You buy it from the [Starhold Account page](https://starship.starhold.app/account/subscriptions). Single plans stay available.
+The Starhold Suite is one plan at $49 a month. It includes the middle plan of every tool: Umbermark Pro, Zenithmark Monitor 5, Heliostat MSP, Solatype Pro, and Starbot Pro (two servers, opening soon). You buy it from the [Starhold Account page](https://starship.starhold.app/account/subscriptions). Single plans stay available.
 
 ## Getting in
 
