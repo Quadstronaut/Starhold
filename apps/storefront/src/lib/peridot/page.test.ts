@@ -4,6 +4,7 @@ import { render } from 'svelte/server';
 import Page from '../../routes/peridot/+page.svelte';
 import PrivacyPage from '../../routes/peridot/privacy/+page.svelte';
 import DeletePage from '../../routes/peridot/delete/+page.svelte';
+import TermsPage from '../../routes/peridot/terms/+page.svelte';
 import Footer from '../components/Footer.svelte';
 import { exists, read } from '../../acceptance/_helpers';
 import { PERIDOT_SUPPORTERS, PERIDOT_DEDICATION, PATREON_URL, PATREON_LINK_TEXT } from './page-content';
@@ -48,6 +49,8 @@ describe('STAR-301 /peridot', () => {
 	it('links to the privacy and delete pages, and they link back', () => {
 		expect(body).toContain('href="/peridot/privacy"');
 		expect(body).toContain('href="/peridot/delete"');
+		expect(body).toContain('href="/peridot/terms"');
+		expect(read('src/routes/peridot/terms/+page.svelte')).toContain('href="/peridot"');
 		expect(read('src/routes/peridot/privacy/+page.svelte')).toContain('href="/peridot"');
 		expect(read('src/routes/peridot/delete/+page.svelte')).toContain('href="/peridot"');
 	});
@@ -82,7 +85,7 @@ describe('STAR-301 footer on /peridot routes', () => {
 	it('/peridot page plus peridot footer has exactly one patreon link, "Starhold on Patreon"; privacy and delete have none', () => {
 		const all = patreonLinks(render(Page).body + render(Footer, { props: { showBackTheWork: false } }).body);
 		expect(all.map((m) => m[2].trim())).toEqual(['Starhold on Patreon']);
-		for (const P of [PrivacyPage, DeletePage]) {
+		for (const P of [PrivacyPage, DeletePage, TermsPage]) {
 			expect(patreonLinks(render(P).body + render(Footer, { props: { showBackTheWork: false } }).body)).toHaveLength(0);
 		}
 	});

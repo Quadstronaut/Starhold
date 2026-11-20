@@ -46,6 +46,7 @@
 
 	<nav aria-label="Peridot pages">
 		<a href="/peridot/privacy">Peridot privacy policy</a> ·
-		<a href="/peridot/delete">Delete your Peridot data</a>
+		<a href="/peridot/delete">Delete your Peridot data</a> ·
+		<a href="/peridot/terms">Peridot terms of use</a>
 	</nav>
 </section>

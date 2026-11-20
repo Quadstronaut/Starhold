@@ -17,7 +17,8 @@ const ROUTES = [
 	'/legal/privacy',
 	'/legal/refunds',
 	'/peridot/privacy',
-	'/peridot/delete'
+	'/peridot/delete',
+	'/peridot/terms'
 ];
 
 for (const route of ROUTES) {

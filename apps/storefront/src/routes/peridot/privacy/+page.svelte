@@ -12,5 +12,5 @@
 <!-- PERI-10: static page for Google Play. No script, form, cookie or external request. Not linked from the site nav. -->
 <section class="section legal">
 	{@html html}
-	<nav aria-label="Peridot pages"><a href="/peridot">About Peridot</a> · <a href="/peridot/delete">Delete your Peridot data</a></nav>
+	<nav aria-label="Peridot pages"><a href="/peridot">About Peridot</a> · <a href="/peridot/delete">Delete your Peridot data</a> · <a href="/peridot/terms">Peridot terms of use</a></nav>
 </section>

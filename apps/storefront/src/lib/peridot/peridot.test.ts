@@ -1,5 +1,5 @@
 // PERI-10: drift guard for the Peridot policy pages (Google Play privacy + deletion URLs).
-// privacy.md and delete.md are word-for-word copies of Quadstronaut/Period docs/play/site/*.md.
+// privacy.md, delete.md and terms.md are word-for-word copies of Quadstronaut/Period docs/play/site/*.md.
 // The test parses each Markdown file on its own, renders the real route component, and fails if any
 // heading, paragraph or list item is missing, altered, extra, or out of order in the served HTML.
 import { describe, it, expect } from 'vitest';
@@ -8,6 +8,7 @@ import { render } from 'svelte/server';
 import { exists, read } from '../../acceptance/_helpers';
 import PrivacyPage from '../../routes/peridot/privacy/+page.svelte';
 import DeletePage from '../../routes/peridot/delete/+page.svelte';
+import TermsPage from '../../routes/peridot/terms/+page.svelte';
 import { markdownToHtml } from './markdown';
 
 const mdPath = (n: string) => new URL(`./${n}.md`, import.meta.url);
@@ -48,7 +49,8 @@ function pageBlocks(html: string): Block[] {
 
 const PAGES = [
 	{ slug: 'privacy', Page: PrivacyPage, title: 'Peridot privacy policy', other: 'delete', otherTitle: 'Delete your Peridot data' },
-	{ slug: 'delete', Page: DeletePage, title: 'Delete your Peridot data', other: 'privacy', otherTitle: 'Peridot privacy policy' }
+	{ slug: 'delete', Page: DeletePage, title: 'Delete your Peridot data', other: 'privacy', otherTitle: 'Peridot privacy policy' },
+	{ slug: 'terms', Page: TermsPage, title: 'Peridot terms of use', other: 'privacy', otherTitle: 'Peridot privacy policy' }
 ];
 
 describe.each(PAGES)('PERI-10 /peridot/$slug', ({ slug, Page, title, other, otherTitle }) => {

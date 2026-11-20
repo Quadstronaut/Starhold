@@ -21,7 +21,8 @@ const PAGES = [
 	'legal/refunds',
 	'peridot',
 	'peridot/privacy',
-	'peridot/delete'
+	'peridot/delete',
+	'peridot/terms'
 ];
 
 const ENDPOINTS = ['api/intake'];
