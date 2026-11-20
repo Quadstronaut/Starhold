@@ -40,8 +40,8 @@
 			<tr><td>Backups of the above.</td><td>Recover from disk or host loss.</td><td>Legitimate interests</td></tr>
 		</tbody>
 	</table>
-		<h3>Shush as built today, and Starbot from the day it opens</h3>
-	<p>These two services are not written up in full yet. The Shush row is what it holds as built today, not a promise about how it will work. The Starbot row describes the shared bot and applies from the day Starbot opens.</p>
+		<h3>Shush as built today, and Starbot</h3>
+	<p>These two services are not written up in full yet. The Shush row is what it holds as built today, not a promise about how it will work. The Starbot row describes the shared bot.</p>
 	<table>
 		<thead>
 			<tr><th>Service</th><th>What it holds today</th><th>Kept for</th></tr>
