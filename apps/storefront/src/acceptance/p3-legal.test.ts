@@ -150,10 +150,15 @@ describe('privacy', () => {
 	});
 	it('email statement is true after launch and agrees with the DysonSphere notice (M6, STAR-271)', () => {
 		expect(t()).toContain(
-			'Our products send email through Postmark, from no-reply@starhold.app (Starbot from starbot@starhold.app); replies go to hello@starhold.dev.'
+			'Our products send email through Postmark, from no-reply@starhold.app; replies go to hello@starhold.dev.'
 		);
-		// LEGAL-4: Starbot service mail (token reminders, removal notice); address read from Polar at send time, never stored.
-		expect(t()).toContain('We read it when we send and do not store it. We send these messages through Postmark.');
+		// LEGAL-4: the shared Starbot sends no email at all (Starbot master e3401be: mail path deleted).
+		expect(t()).toContain('Starbot sends no email and does not store your email address.');
+		expect(t()).not.toMatch(/starbot@starhold\.app|Starbot's service messages/);
+		// LEGAL-4, operator rulings 2026-11-19: two servers per paid subscription; Discord purchases.
+		expect(t()).toContain('up to two for each paid subscription. One account can hold several subscriptions.');
+		expect(t()).toContain('We receive no payment details from Discord.');
+		expect(t()).not.toContain('the server it covers');
 		expect(t()).toContain('We send only the email that is required to operate the service and maintain your account: sign-in and account notices, billing and refund notices, and alerts and updates you turned on, such as status-page subscriptions, monitoring alerts and score-drop alerts.');
 		// LEGAL-3 D9: true before and after the Product updates box is switched on.
 			expect(t()).toContain('We send no marketing email, upsells or newsletters unless you tick the Product updates box, which allows at most one email a month about Starhold products.');

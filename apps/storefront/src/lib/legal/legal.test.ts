@@ -16,6 +16,8 @@
 //               applies from the day Starbot opens; the bot-token deadline is removed from the Refund Policy.
 //               Amended 2026-11-19 (LEGAL-4, operator ruling): Privacy only. Starbot stores no bot token; when Starbot is
 //               removed from a server, that server's data is deleted right away (was 48 hours later).
+//               Amended 2026-11-19 (LEGAL-4, second pass): Privacy only. Up to two servers per paid subscription, purchases
+//               inside Discord, and Starbot sends no email (its Postmark mentions removed).
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { createHash } from 'node:crypto';
@@ -46,7 +48,7 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
 	terms: '4e6f667aae617e287a7e10ad3d73c6a92e646c2080a257538884a0799bbff255',
-	privacy: '91b37f9a0668cf8c861c9334e51b869b5e1b1c8edfd0d0c9fa31e1edc07c0cef',
+	privacy: '34ad735a6c352f3c3b49c2fb817438905354e97711d60adf6d366723acd6feb6',
 	refunds: '06fc76cea5aee95f75e186e30cd6fe3fcc3a9978846c553913b11fe3429641e7'
 };
 

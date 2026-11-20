@@ -316,7 +316,7 @@ export const serviceItems: Service[] = [
 		status: labelFor('starbot'),
 		availability: availabilityFor('starbot'),
 		what: 'One bot, run by Starhold. Add it to your Discord server in one click.',
-		note: 'Free to add. Plus $5 and Pro $19 a month, for one server. It never asks for your bot token.'
+		note: 'Free to add. Plus $5 and Pro $19 a month, each for two servers. It never asks for your bot token.'
 	},
 	{
 		id: 'dysonsphere',
