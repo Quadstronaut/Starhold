@@ -54,6 +54,7 @@ Only the event shapes the Peridot app sends. Everything else is rejected, so thi
 |---|---|---|
 | Event size | 32 KiB | the largest real Peridot event, a problem report at its caps, is about 22 KB |
 | Tags per event | 128 | a Delete-all-data request carries up to 102 |
+| Events per request | 500 | the same cap the public relays use; a longer history is fetched in pages |
 | Per public key | 10,000 at once, then 1 per second | the one-time upgrade re-sends every entry |
 | Everyone together | 50,000 at once, then 100 per second | a ceiling for floods from fresh keys |
 | Connections | about 4,000 at once | the container's open-file limit |
