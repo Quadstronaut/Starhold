@@ -1,7 +1,7 @@
 <svelte:head><title>Terms of Service · Starhold</title></svelte:head>
 
 <section class="section legal">
-	<div class="label">Last updated 2026-11-19</div>
+	<div class="label">Last updated 2026-11-21</div>
 	<h1>Terms of Service</h1>
 
 	<p>These are the shared rules for using Starhold: the Starhold Account and the services we run. Each product may add its own short terms on its own site. Where a product's terms and these differ for that product, the product's terms win. Our <a href="/legal/privacy">Privacy Policy</a> and <a href="/legal/refunds">Refund Policy</a> are part of this agreement.</p>
@@ -27,7 +27,7 @@
 	</ul>
 
 	<h2>6. Payments and providers</h2>
-	<p>Payments are handled by payment providers who act as the merchant of record. Today that is Polar. Polar is the seller (merchant of record) and uses Stripe to process card payments. If we add another provider, we will list it here and in the <a href="/legal/privacy">Privacy Policy</a> before it goes live. The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side. When you buy, your contract of sale is with the provider. The provider takes your payment, collects and pays sales tax and VAT where it must, and keeps its own records. We do not see your card details. Prices are shown at checkout. Paid plans are monthly subscriptions. A subscription renews automatically at the start of each month, and you are charged the plan price until you cancel. You can cancel at any time on the Subscription Management page of your Starhold Account. Cancelling stops the next renewal, and you choose whether to run out the period or take a prorated refund now (see the <a href="/legal/refunds">Refund Policy</a>). If we raise the price of a plan you pay for, we will tell you at least 30 days before the new price applies, and you can cancel before then. One-off purchases do not renew.</p>
+	<p>Payments are handled by payment providers who act as the merchant of record. Today that is Polar. Polar is the seller (merchant of record) and uses Stripe to process card payments. If we add another provider, we will list it here and in the <a href="/legal/privacy">Privacy Policy</a> before it goes live. The merchant of record (today Polar) is the seller of record and issues refunds; we trigger them for you from our side. When you buy, your contract of sale is with the provider. The provider takes your payment, collects and pays sales tax and VAT where it must, and keeps its own records. We do not see your card details. Prices are shown at checkout. Paid plans are subscriptions billed in advance, monthly or yearly; you choose when you buy. A monthly plan renews automatically each month, and a yearly plan once a year on the date you started it, and you are charged the plan price for the next period until you cancel. About 30 days before a yearly plan renews, we email you the renewal date and the amount. You can cancel at any time on the Subscription Management page of your Starhold Account. Cancelling stops the next renewal, and you choose whether to run out the period or take a prorated refund now (see the <a href="/legal/refunds">Refund Policy</a>). If we raise the price of a plan you pay for, we will tell you at least 30 days before the new price applies, and you can cancel before then. One-off purchases do not renew.</p>
 
 	<h2>7. Cancel, delete and refunds</h2>
 	<p>Cancelling and deleting your account are two different actions, and you choose. The <a href="/legal/refunds">Refund Policy</a> explains both, and how refunds work.</p>
@@ -75,5 +75,5 @@
 	<h2>20. Contact</h2>
 	<p>Copper Jerky LLC, doing business as Starhold, 6917 W. Hedge Rose Dr, Tucson, AZ 85757, USA. Email: <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
 
-	<p class="label">Last updated 2026-11-19.</p>
+	<p class="label">Last updated 2026-11-21.</p>
 </section>

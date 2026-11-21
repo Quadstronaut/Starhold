@@ -1,7 +1,7 @@
 <svelte:head><title>Refund Policy · Starhold</title></svelte:head>
 
 <section class="section legal">
-	<div class="label">Last updated 2026-11-19</div>
+	<div class="label">Last updated 2026-11-21</div>
 	<h1>Refund Policy</h1>
 
 	<p>Nothing here limits rights you have under the consumer law where you live.</p>
@@ -10,13 +10,13 @@
 	<p>If the report fails or isn't what we described, ask within 14 days and we refund it in full. EU/UK buyers keep their legal withdrawal rights.</p>
 
 	<h2>Subscriptions</h2>
-	<p>Every plan renews automatically each month until you cancel. You can cancel at any time on the Subscription Management page of your Starhold Account. You choose how to end a plan, and there are no cancellation fees. Cancelling and deleting your account are two separate actions. A plan bought inside Discord is refunded under Discord's rules, through Discord.</p>
+	<p>A monthly plan renews automatically each month, and a yearly plan once a year on the date you started it, until you cancel. A yearly plan is charged once, in advance, for the next 12 months, and about 30 days before it renews we email you the date and the amount. To move a plan between monthly and yearly, cancel it, then start the other once it has ended. You can cancel at any time on the Subscription Management page of your Starhold Account. You choose how to end a plan, and there are no cancellation fees. Cancelling and deleting your account are two separate actions. A plan bought inside Discord is refunded under Discord's rules, through Discord.</p>
 
 	<h3>Cancel</h3>
 	<p>Cancel stops renewal. Your account and your data stay. You choose:</p>
 	<ul>
 		<li><strong>Run out the period.</strong> You keep access until the end of the time you paid for.</li>
-		<li><strong>Prorated refund now.</strong> We refund the unused part of the period, less the payment processing cost (see below), and access ends.</li>
+		<li><strong>Prorated refund now.</strong> We refund the unused part of the period, less the payment processing cost (see below), and access ends. For a yearly plan the period is the year you paid for, so the refund covers the unused part of that year.</li>
 	</ul>
 	<p>If you are in the EU or UK, you may also withdraw from a new subscription within 14 days of buying it. Tell us, and we refund the unused part of the period with nothing held back.</p>
 
@@ -39,5 +39,5 @@
 	<h2>Billing problems</h2>
 	<p>If a charge looks wrong, write to <a href="mailto:hello@starhold.dev">hello@starhold.dev</a> first. We answer billing questions within 5 business days. You always keep your card network's chargeback rights.</p>
 
-	<p class="label">Last updated 2026-11-19.</p>
+	<p class="label">Last updated 2026-11-21.</p>
 </section>

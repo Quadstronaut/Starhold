@@ -33,6 +33,9 @@
 //               Discord is refunded under Discord's rules, through Discord.
 //               Amended 2026-11-20 at the Starbot open (STARBOT-45): Privacy section heading and note no longer say the
 //               Starbot row applies "from the day Starbot opens".
+//               Amended 2026-11-21 (SHIP-6, DRAFT, NOT YET APPROVED OR PUBLISHED): Terms section 6 and the Refund Policy
+//               say a plan is monthly or yearly, a yearly plan renews once a year with an email about 30 days before,
+//               moving between monthly and yearly is cancel-then-start, and a yearly prorated refund covers the unused year.
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { createHash } from 'node:crypto';
@@ -62,9 +65,9 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // The approved launch text, as legal_hash sees the served /legal/<name>.txt. Changing the wording changes these:
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
-	terms: '4ff2787ad1f35b6c8f0d12b7f5b79f28841eb90116a7d55a9861e105651532b8',
+	terms: 'a2470e3d955e3d6aeb333442667eddd94e2ac4a89f29e50a4fc2702b6ac5fc77',
 	privacy: '8d2d9ef6bf9de0652321f1d0819ce191a313b8f7d4ba04fc8a1ad34d77cd11b8',
-	refunds: 'aff1b7d8f2e019e2ed58e8c054faf48a0d6a382c0724b866427aa9b884d0b061'
+	refunds: 'd7a3e140ee280d90bdf632f79b271d4def558eacf6ad4d53b9c3ff80e769192d'
 };
 
 const textOf = (state: 'prelaunch' | 'launched', k: (typeof KEYS)[number]) =>
@@ -109,9 +112,11 @@ describe('legal documents · launched state', () => {
 				expect(t, w).not.toMatch(new RegExp('\\b' + w + '\\b', 'i'));
 		});
 	}
-	it('dated 2026-11-19 (LEGAL-4); pre-launch keeps master\'s date', () => {
+	// SHIP-6 (yearly plans, DRAFT held for the operator's yearly refund ruling): Terms and Refunds dated 2026-11-21.
+	const LAUNCHED_DATE: Record<(typeof KEYS)[number], string> = { terms: '2026-11-21', privacy: '2026-11-19', refunds: '2026-11-21' };
+	it('dated (LEGAL-4, SHIP-6); pre-launch keeps master\'s date', () => {
 		for (const k of KEYS) {
-			expect(textOf('launched', k)).toContain('Last updated 2026-11-19');
+			expect(textOf('launched', k)).toContain('Last updated ' + LAUNCHED_DATE[k]);
 			expect(textOf('prelaunch', k)).toContain('Last updated 2026-10-24');
 		}
 	});
