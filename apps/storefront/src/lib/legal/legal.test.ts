@@ -36,6 +36,8 @@
 //               Amended 2026-11-21 (SHIP-6, DRAFT, NOT YET APPROVED OR PUBLISHED): Terms section 6 and the Refund Policy
 //               say a plan is monthly or yearly, a yearly plan renews once a year with an email about 30 days before,
 //               moving between monthly and yearly is cancel-then-start, and a yearly prorated refund covers the unused year.
+//               Amended 2026-11-21 (SHIP-6, operator ruling on upgrades): an upgrade is charged in full and starts that
+//               day; the old plan's unused part is refunded pro rata with nothing held back; yearly -> monthly is cancel-then-start.
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { createHash } from 'node:crypto';
@@ -65,9 +67,9 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // The approved launch text, as legal_hash sees the served /legal/<name>.txt. Changing the wording changes these:
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
-	terms: 'a2470e3d955e3d6aeb333442667eddd94e2ac4a89f29e50a4fc2702b6ac5fc77',
+	terms: '21e50247c66fedaa8ce65a2e6532629f73de01779f140183914736606be6f372',
 	privacy: '8d2d9ef6bf9de0652321f1d0819ce191a313b8f7d4ba04fc8a1ad34d77cd11b8',
-	refunds: 'd7a3e140ee280d90bdf632f79b271d4def558eacf6ad4d53b9c3ff80e769192d'
+	refunds: '41d8837e8e4cd9a6f639a7f6776d45beee9a02c0cee93da7cf4d29a091bc6877'
 };
 
 const textOf = (state: 'prelaunch' | 'launched', k: (typeof KEYS)[number]) =>
