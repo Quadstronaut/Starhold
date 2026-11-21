@@ -132,8 +132,13 @@ describe('A4 · information architecture', () => {
 
 	it('A4.10 footer: site links, legal links, hello@ address, Back the work, and the closing line', () => {
 		expect(nav.footerSite.map((i) => i.label)).toEqual([
-			'For home', 'Small business', 'Teams', 'Pricing', 'Products', 'Docs', 'Open source', 'Fleet status', 'Contact'
+			'For home', 'Small business', 'Teams', 'Pricing', 'Products', 'Docs', 'Open source', 'Fleet status', 'Outage reader',
+			'Contact'
 		]);
+		// HELIO-6: the outage reader is the github.io address, which does not depend on Starhold's DNS
+		expect(nav.footerSite.find((i) => i.label === 'Outage reader')).toEqual({
+			label: 'Outage reader', href: 'https://starholdsoftware.github.io/status-reader/', external: true
+		});
 		expect(nav.legal.map((i) => i.label)).toEqual(['Terms', 'Privacy', 'Refunds']);
 		expect(nav.backTheWork.label).toBe('Back the work');
 		expect(new URL(nav.backTheWork.href).host).toBe('www.patreon.com');
