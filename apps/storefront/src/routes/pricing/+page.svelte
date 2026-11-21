@@ -8,11 +8,16 @@
 	import { AUDIENCES, PRICING } from '#lib/content/catalog.js';
 	import { SUITE_LINE } from '#lib/availability.js';
 	import { LAUNCHED, ACCOUNT_URL } from '#lib/launch.js';
+	import { noteWithYearly, suiteYearlySuffix } from '#lib/yearly.js';
 
 	// STAR-299: the one public price table. No price is typed on this page: each product's
 	// price line is its availability line (lib/availability.ts), the Suite line is SUITE_LINE,
 	// and the payment and refund paragraph is the FAQ answer, reused word for word.
+	// SHIP-6: yearly prices come from lib/yearly.ts and appear only while YEARLY_PLANS is on; while it
+	// is off `items` equals serviceItems and the suffix is "", so the page is byte-identical.
 	let { data } = $props();
+	const items = serviceItems.map((s) => ({ ...s, note: noteWithYearly(s.id, s.note) }));
+	const suiteYearly = suiteYearlySuffix();
 	const payment = faq.items.find((i) => i.q === PRICING.paymentFaq);
 	const external = (href: string) => !href.startsWith('/');
 </script>
@@ -37,7 +42,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				{#each serviceItems as s (s.id)}
+				{#each items as s (s.id)}
 					<tr data-product={s.id}>
 						<th scope="row">{s.name} <span class="tag">{s.status}</span></th>
 						<td data-l="What it does">{s.what}</td>
@@ -57,7 +62,7 @@
 				<tr data-product="suite">
 					<th scope="row">Starhold Suite</th>
 					<td data-l="What it does">One bill for every tool.</td>
-					<td data-l="Plans and prices"><span class="line" data-testid="suite-line">{SUITE_LINE}.</span></td>
+					<td data-l="Plans and prices"><span class="line" data-testid="suite-line">{SUITE_LINE}.{suiteYearly}</span></td>
 					<td data-l="Link">
 						{#if LAUNCHED}<a href={`${ACCOUNT_URL}/account/subscriptions`} rel="noopener">Get the Suite →</a>{/if}
 					</td>
