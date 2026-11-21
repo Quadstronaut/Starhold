@@ -12,13 +12,15 @@
 // and the yearly refund rule is in the published Terms and Refund Policy. Keep the shape
 // `export const YEARLY_PLANS = <bool>;`.
 // ─────────────────────────────────────────────────────────────────────────────
-export const YEARLY_PLANS = false;
+// ON since 2026-11-21: operator approved the prices ("for now"); Terms section 6 and the Refund Policy describe yearly
+// plans (starhold-ops #239). Rollback: set false and redeploy (the page then renders exactly as before SHIP-6).
+export const YEARLY_PLANS = true;
 
 /** One plan as the pricing page names it: its monthly price (must match the availability line) and its yearly one. */
 export type YearlyPlan = { plan: string; monthly: number; yearly: number };
 
 /**
- * Working yearly prices in USD: ten months for twelve. The operator has NOT confirmed them; this table is
+ * Yearly prices in USD: ten months for twelve. Operator approved them 2026-11-21 ("for now"); this table is
  * the one place to change them (Starship's catalog.yaml `yearly_price_cents` must say the same).
  * Starbot is absent on purpose: its website plans have no yearly option yet, and its Discord prices never do.
  */

@@ -15,16 +15,33 @@ import { TIER_USD } from '#lib/content/catalog.js';
 const golden = JSON.parse(readFileSync(join(__dirname, 'golden', 'pricing-switch-off.json'), 'utf8'));
 const props = { data: { hero: heroPool[0].id } };
 
-describe('SHIP-6 yearly switch off', () => {
-	it('ships off', () => {
-		expect(yearly.YEARLY_PLANS).toBe(false);
+describe('SHIP-6 yearly switch', () => {
+	it('is on (operator approved the prices 2026-11-21; Terms and Refund Policy published the same day)', () => {
+		expect(yearly.YEARLY_PLANS).toBe(true);
+	});
+});
+
+describe('SHIP-6 yearly switch off (forced off): the rollback renders /pricing byte for byte as before', () => {
+	beforeEach(() => {
+		vi.resetModules();
+		vi.doMock('#lib/yearly.js', async (orig) => {
+			const real = (await orig()) as typeof yearly;
+			return {
+				...real,
+				YEARLY_PLANS: false,
+				noteWithYearly: (id: string, note: string | undefined) => real.noteWithYearly(id, note, false),
+				suiteYearlySuffix: () => real.suiteYearlySuffix(false)
+			};
+		});
 	});
 
 	it('renders /pricing byte for byte as before', async () => {
+		const { render: renderFresh } = await import('svelte/server');
 		const Page = (await import('./+page.svelte')).default;
-		const { head, body } = render(Page, { props });
+		const { head, body } = renderFresh(Page, { props });
 		expect(head).toBe(golden.head);
 		expect(body).toBe(golden.body);
+		vi.doUnmock('#lib/yearly.js');
 	});
 
 	it('adds nothing while off', () => {
