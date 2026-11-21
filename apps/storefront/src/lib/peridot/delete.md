@@ -4,7 +4,7 @@ Peridot is a menstrual cycle tracking app for Android made by Starhold (COPPER J
 
 ## There is no Peridot account to delete on our side
 
-There is no Peridot account, account database or readable copy of your records on any Starhold server, so there is no deletion request to send us. Starhold runs one of the Nostr relays Peridot uses; it holds circle messages only in encrypted form, and Delete all data reaches it like every other relay (see below). The one exception is a problem report you chose to send (see "Problem reports" below). Everything Peridot keeps is on your phone, plus, if you use Google Drive backup, one encrypted file in your own Google Drive. You delete it in the app, or, for a backup file you kept, in Google Drive.
+There is no Peridot account, account database or readable copy of your records on any Starhold server, so there is no deletion request to send us. Starhold runs one of the Nostr relays Peridot uses; it holds circle messages only in encrypted form (see below). Delete all data sends its requests to every built-in relay. Starhold's relay honours them; a relay run by someone else may not. The one exception is a problem report you chose to send (see "Problem reports" below). Everything Peridot keeps is on your phone, plus, if you use Google Drive backup, one encrypted file in your own Google Drive. You delete it in the app, or, for a backup file you kept, in Google Drive.
 
 ## How to delete your data
 
