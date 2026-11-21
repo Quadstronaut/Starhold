@@ -4,7 +4,7 @@ Peridot is a menstrual cycle tracking app for Android made by Starhold (COPPER J
 
 ## There is no Peridot account to delete on our side
 
-Starhold runs no servers that hold Peridot data. There is no Peridot account, account database or copy of your records on any Starhold server, so there is nothing for Starhold to delete and no deletion request to send us. The one exception is a problem report you chose to send (see "Problem reports" below). Everything Peridot keeps is on your phone, plus, if you use Google Drive backup, one encrypted file in your own Google Drive. You delete it in the app, or, for a backup file you kept, in Google Drive.
+There is no Peridot account, account database or readable copy of your records on any Starhold server, so there is no deletion request to send us. Starhold runs one of the Nostr relays Peridot uses; it holds circle messages only in encrypted form, and Delete all data reaches it like every other relay (see below). The one exception is a problem report you chose to send (see "Problem reports" below). Everything Peridot keeps is on your phone, plus, if you use Google Drive backup, one encrypted file in your own Google Drive. You delete it in the app, or, for a backup file you kept, in Google Drive.
 
 ## How to delete your data
 
@@ -33,7 +33,7 @@ Uninstalling Peridot removes all of its data from your phone. Uninstalling alone
 
 ## What may remain
 
-- **Relays:** Nostr relays are run by independent third parties. Peridot overwrites and asks them to delete your circle entries, but cannot force a relay to comply or check what it did. Anything a relay keeps is encrypted and unreadable to it.
+- **Relays:** Peridot uses Starhold's own relay and Nostr relays run by independent third parties. Peridot overwrites and asks them to delete your circle entries, but cannot force a relay to comply or check what it did. Anything a relay keeps is encrypted and unreadable to it.
 - **Circle members:** entries you shared with a circle before deleting are already on the phones of its members, inside their own Peridot app. Leaving the circle or deleting your data stops anything new from reaching them, and deleting your data tells their apps to remove your entries; an app that is not updated or never comes online again may keep them.
 - **Google Drive backup:** if Drive could not be reached when you deleted your data, or you kept the file when turning backup off, the encrypted backup file stays in your Drive until you delete it there (see above).
 - **Google sign-in:** to remove Peridot's access to your Google account, open your Google Account (myaccount.google.com) > Security > Your connections to third-party apps and services, choose Peridot and remove its access.

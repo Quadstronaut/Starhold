@@ -1,14 +1,14 @@
 # Peridot privacy policy
 
-Last updated: 19 November 2026
+Last updated: 20 November 2026
 
 Peridot is a menstrual cycle tracking app for Android made by Starhold (COPPER JERKY LLC). This policy explains what happens to the information you put into Peridot.
 
 ## Summary
 
 - Your cycle records are stored on your phone, encrypted.
-- Starhold runs no servers that hold Peridot data and receives none of your data, except a report you choose to send (see "What Starhold receives").
-- Data leaves your phone only when you use circles (encrypted, through public Nostr relays), sign in with Google (optional: Peridot also works without a Google account), turn on backup to your Google Drive (encrypted on your phone first; off by default), send a problem report or report a circle member.
+- Starhold runs a Nostr relay that carries Peridot's encrypted circle messages. It cannot read your circles. Apart from that, Starhold receives none of your data, except a report you choose to send (see "What Starhold receives").
+- Data leaves your phone only when you use circles (encrypted, through Nostr relays: Starhold's and public ones), sign in with Google (optional: Peridot also works without a Google account), turn on backup to your Google Drive (encrypted on your phone first; off by default), send a problem report or report a circle member.
 - Peridot contains no advertising, analytics or crash-reporting software.
 
 ## Information stored on your phone
@@ -28,10 +28,11 @@ The database is encrypted with SQLCipher. Its key is derived from a random secre
 **Circles (optional).** A circle is a group of up to 12 people you choose. When you are in a circle, Peridot sends the entries that circle is set to receive (period days, and symptoms only if you turn that on for the circle) to the other members through Nostr relays.
 
 - Entries are encrypted on your phone with a key that only the circle's members hold before they are sent. The relays, Starhold and anyone else in between cannot read them.
-- Nostr relays are servers run by independent third parties, not by Starhold. The default relays are relay.damus.io, nos.lol, relay.primal.net and nostr.mom. You can change the list in Settings > Relay management.
-- Relays can see, and may store, technical information that is not encrypted: your Peridot public key, the random ID of each circle, the time of each event, the type of event, the public keys of members an event is addressed to, approval votes, and the IP address your phone connects from. The label that identifies each entry on a relay is a keyed hash that only your Recovery Key can produce, so it does not show which dates you logged, and entries are padded to the same size so their length does not show what kind of entry they are. The time of an event is when it was sent, not the date it describes.
+- Nostr relays are servers that store and pass on these messages. Peridot uses Starhold's own relay, pnostr.starhold.app, and public relays run by independent third parties: nos.lol, relay.primal.net, nostr.mom and offchain.pub. Every message is sent to all of them, so circles keep working when one is down. You can add relays, and remove relays you added, in Settings > Relay management.
+- Relays can see, and may store, technical information that is not encrypted: your Peridot public key, the random ID of each circle, the time, type and size of each event, the public keys of members an event is addressed to, approval votes, and the IP address your phone connects from.
+- Starhold's relay can see the same information as any relay, except your IP address: it keeps no access log and is not given your phone's network address. It cannot read circles: entries, circle names, display names and circle keys are encrypted on the phones, and Starhold has no key that opens them. The label that identifies each entry on a relay is a keyed hash that only your Recovery Key can produce, so it does not show which dates you logged, and entries are padded to the same size so their length does not show what kind of entry they are. The time of an event is when it was sent, not the date it describes.
 - The circle name, sent when a circle key is shared with a member, and your display name, sent when you ask to join a circle, are encrypted to the one person they are for. Relays cannot read them.
-- Each relay's own privacy policy applies to what it stores. Peridot asks relays to delete your circle entries when you delete your data (see below), but cannot force a relay to comply.
+- Each public relay's own privacy policy applies to what it stores; this policy applies to Starhold's relay. Peridot asks relays to delete your circle entries when you delete your data (see below), but cannot force a relay to comply.
 
 **Sign-in (optional).** You can use Peridot without any account: choose "Continue without Google" and nothing about sign-in leaves your phone. If you choose Google sign-in, you authenticate with Google directly; Google returns your account ID, name and profile picture link to the app. Peridot keeps the ID and name on your phone and does not send them to Starhold. Google's privacy policy applies to the sign-in itself. Your encryption keys do not depend on your Google account, and signing in sends no cycle data to Google.
 
@@ -47,9 +48,9 @@ The database is encrypted with SQLCipher. Its key is derived from a random secre
 
 **Notifications.** Period reminders are scheduled on your phone. No push-notification service is used.
 
-**Problem reports (optional).** Settings > About > Report a problem sends a report only when you press Send, after showing you exactly what will be sent. It contains the text you wrote; the app version, Android version and phone model only if you switch on device details; and a contact address only if you tick "I would like a reply". It never contains cycle records, symptoms, circle or member names, keys or your Recovery Key. The app encrypts the report on your phone to Starhold's report key, signs it with a one-time key that is not your Peridot identity, and sends it through the Nostr relays it already uses, asking them to drop it after 14 days. Relays see that an encrypted message was sent, its time and the IP address your phone connects from, but cannot read it.
+**Problem reports (optional).** Settings > About > Report a problem sends a report only when you press Send, after showing you exactly what will be sent. It contains the text you wrote; the app version, Android version and phone model only if you switch on device details; and a contact address only if you tick "I would like a reply". It never contains cycle records, symptoms, circle or member names, keys or your Recovery Key. The app encrypts the report on your phone to Starhold's report key, signs it with a one-time key that is not your Peridot identity, and sends it through the Nostr relays it already uses, asking them to drop it after 14 days. Relays see that an encrypted message was sent and its time, and public relays also the IP address your phone connects from, but none can read it.
 
-**Reports about a circle member (optional).** In a circle, a member's menu has Report. It sends a report only when you press Send, after showing you exactly what will be sent. It always contains the text you wrote and the public key of the person you are reporting, and the screen says so. It contains their display name only if you tick it, and the symptom tags they share with you only if you tick that. Device details and a contact address are optional in the same way as for a problem report. It never contains your own name, your public key, your cycle records or the reported person's cycle dates. It is sent the same way as a problem report: encrypted on your phone to Starhold's report key, signed with a one-time key that is not your Peridot identity, through the Nostr relays. The person you report is not told. Starhold cannot see circles and cannot remove anyone from one; a report does not change your circle.
+**Reports about a circle member (optional).** In a circle, a member's menu has Report. It sends a report only when you press Send, after showing you exactly what will be sent. It always contains the text you wrote and the public key of the person you are reporting, and the screen says so. It contains their display name only if you tick it, and the symptom tags they share with you only if you tick that. Device details and a contact address are optional in the same way as for a problem report. It never contains your own name, your public key, your cycle records or the reported person's cycle dates. It is sent the same way as a problem report: encrypted on your phone to Starhold's report key, signed with a one-time key that is not your Peridot identity, through the Nostr relays. The person you report is not told. Starhold cannot read circles and cannot remove anyone from one; a report does not change your circle.
 
 **Blocking a circle member.** A member's menu also has Block. Blocking happens on your phone only and sends nothing: the person is not told, and neither is anyone else. Their name, cycle data and symptoms are hidden on your phone, nothing new from them is stored, and their join requests and invites are ignored. A circle has one key for all its members, so Peridot cannot hide your entries from one member only: while a person you blocked is in a circle with you, your new entries are not sent to that circle at all, and they are not sent later. To share with the other members again, propose the person's removal or leave the circle. You can unblock at any time; entries they sent while blocked may be missing afterwards.
 
@@ -57,9 +58,9 @@ The database is encrypted with SQLCipher. Its key is derived from a random secre
 
 ## What Starhold receives
 
-Nothing, unless you send a report. Starhold operates no server that holds Peridot data, has no Peridot account database and cannot see, export or hand over your records. If Starhold is sold, closes or receives a legal demand, there is no Peridot user data on Starhold's side to transfer or disclose.
+Starhold's relay carries circle messages in encrypted form, with the technical information any relay can see (see "Circles" above). Starhold cannot read them. Beyond that, Starhold receives nothing unless you send a report. Starhold has no Peridot account database and cannot read, export or hand over your records. If Starhold is sold, closes or receives a legal demand, what its relay holds is encrypted messages it cannot read and that technical information.
 
-The one exception is a report you choose to send: a problem report from the app or the feedback form, or a report about a circle member from the app. Starhold receives the text you wrote, plus device details and a contact address only if you added them. A report about a circle member also carries that person's public key, and their display name and the symptom tags they share with you only if you ticked them. Starhold receives nothing else. Each report is kept as an issue in a private GitHub repository, so GitHub (GitHub, Inc.) also stores it; GitHub's privacy policy applies to that storage. Reports are used only to fix problems, to understand what was reported about a member and, if you asked, to reply, and are never copied anywhere public. Starhold cannot act inside a circle on a report: it cannot see circles, read entries or remove a member.
+The one exception is a report you choose to send: a problem report from the app or the feedback form, or a report about a circle member from the app. Starhold receives the text you wrote, plus device details and a contact address only if you added them. A report about a circle member also carries that person's public key, and their display name and the symptom tags they share with you only if you ticked them. Starhold receives nothing else. Each report is kept as an issue in a private GitHub repository, so GitHub (GitHub, Inc.) also stores it; GitHub's privacy policy applies to that storage. Reports are used only to fix problems, to understand what was reported about a member and, if you asked, to reply, and are never copied anywhere public. Starhold cannot act inside a circle on a report: it cannot read circles or entries, or remove a member.
 
 ## Your choices and controls
 
@@ -68,7 +69,7 @@ The one exception is a report you choose to send: a problem report from the app 
 - **Google Drive backup:** off by default; turn it on or off in Settings > Data > Google Drive backup.
 - **Block or report a circle member:** in the circle, open the member's menu. Block hides them on your phone and pauses your sharing with any circle they are in; unblock from the same menu or the Blocked list on the Circles screen. Report sends Starhold what you choose to send.
 - **Leave a circle:** possible at any time; the circle's key is replaced so later entries are unreadable to you.
-- **Relays:** add or remove relays in Settings > Relay management.
+- **Relays:** add relays, and remove relays you added, in Settings > Relay management. The built-in relays, Starhold's included, cannot be switched off in this version.
 - **Uninstalling** Peridot removes its data from your phone.
 
 ## Recovery Key
@@ -85,7 +86,7 @@ Peridot is intended for people 18 and over and is not directed at children.
 
 ## Security
 
-Encryption at rest (SQLCipher), end-to-end encryption for circle data (XChaCha20-Poly1305; circle keys exchanged with NIP-44), encryption on the phone for the Google Drive backup (XChaCha20-Poly1305, key derived from the Recovery Key), TLS for every network connection (wss:// relays, https:// Google, https:// feedback form). No method of storage or transmission is perfectly secure; Peridot's design aims to make Starhold unable to access your records at all.
+Encryption at rest (SQLCipher), end-to-end encryption for circle data (XChaCha20-Poly1305; circle keys exchanged with NIP-44), encryption on the phone for the Google Drive backup (XChaCha20-Poly1305, key derived from the Recovery Key), TLS for every network connection (wss:// relays, https:// Google, https:// feedback form). No method of storage or transmission is perfectly secure; Peridot's design aims to make Starhold unable to read your records at all.
 
 ## Changes
 

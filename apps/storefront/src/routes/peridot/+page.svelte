@@ -18,12 +18,12 @@
 	<h1>Peridot</h1>
 
 	<h2>What it is</h2>
-	<p>Peridot is a period tracker for Android. It keeps everything on your phone, encrypted. Starhold runs no servers for it, so there is nothing for anyone to hand over.</p>
+	<p>Peridot is a period tracker for Android. It keeps everything on your phone, encrypted. What you share with a circle travels encrypted through relays, one of them run by Starhold, and Starhold cannot read it.</p>
 	<p>Peridot is free. There is no price, no purchases and no ads.</p>
 
 	<h2>Why it exists</h2>
 	<p>After the Dobbs decision in 2022, period tracking data became a legal risk. Most apps store it on company servers, where it can be subpoenaed, sold or breached, and their answer was a privacy policy that can be changed at any time.</p>
-	<p>Peridot takes a different approach. It cannot hand over your data because it never has your data.</p>
+	<p>Peridot takes a different approach. It keeps no readable cycle data anywhere a company or government can reach.</p>
 
 	<h2>Where to get it</h2>
 	{#if PERIDOT_PLAY_URL}
