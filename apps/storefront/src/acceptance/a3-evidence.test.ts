@@ -45,6 +45,8 @@ const ALLOWED_HOSTS = [
 	'starhold.fyi',
 	'status.starhold.fyi',
 	'starhold.app',
+	// STAR-310: the free domain check the home page hands off to
+	'domainscanner.starhold.app',
 	'shushgame.com',
 	'github.com',
 	'discord.com'

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Heading from '#lib/components/Heading.svelte';
 	import PageHero from '#lib/components/PageHero.svelte';
+	import HeroDomainCheck from '#lib/components/HeroDomainCheck.svelte';
 	import ProductViews from '#lib/components/ProductViews.svelte';
 	import Faq from '#lib/components/Faq.svelte';
 	import { home, principles, comingSoon, faq } from '#lib/content/copy.js';
@@ -34,6 +35,7 @@
 
 <!-- 1 · Hero: what this is, who it is for, and the next action -->
 <PageHero pick={data.hero} eyebrow={home.hero.eyebrow} h1={home.hero.h1} lede={home.hero.sub} wordmark>
+	{#snippet extra()}<HeroDomainCheck />{/snippet}
 	<a class="btn btn-primary" data-testid="cta-primary" href={home.hero.ctaPrimary.href}>
 		{home.hero.ctaPrimary.label}
 	</a>

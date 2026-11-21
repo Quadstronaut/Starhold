@@ -16,6 +16,7 @@
 		lede,
 		wordmark = false,
 		verbatimEyebrow = false,
+		extra,
 		children
 	}: {
 		pick: string;
@@ -26,6 +27,8 @@
 		wordmark?: boolean;
 		/** Render the eyebrow as written (status labels), not uppercased. */
 		verbatimEyebrow?: boolean;
+		/** Rendered between the lede and the buttons (STAR-310: the home page's domain check). */
+		extra?: Snippet;
 		children?: Snippet;
 	} = $props();
 
@@ -62,6 +65,7 @@
 		<div class="hero-copy">
 			<h1>{h1}</h1>
 			<p class="lede">{lede}</p>
+			{#if extra}{@render extra()}{/if}
 			{#if children}<div class="btn-row">{@render children()}</div>{/if}
 		</div>
 	</div>

@@ -76,6 +76,14 @@
 			"sources": [
 				"apps/storefront/src/routes/legal/privacy/+page.svelte"
 			]
+		},
+		{
+			"id": "zenithmark-free-check",
+			"claim": "Zenithmark's scan is free with no account, grades a domain's public email and DNS settings, and its scan form asks for a bot check first.",
+			"status": "verified",
+			"verifier": "https://domainscanner.starhold.app/",
+			"sources": ["https://domainscanner.starhold.app/privacy"],
+			"note": "STAR-310, checked 2026-11-21 against Zenithmark origin/master: POST /scan needs no account and verifies Turnstile when it is wired (it is, live); turnstile-lazy.js holds every submit until a token arrives; the report shows a letter grade. GET /?domain= only fills the field in."
 		}
 	]
 }

@@ -90,6 +90,21 @@ export const home = {
 		)
 	},
 
+	/** STAR-310: "type a domain, get a grade". A plain GET form to Zenithmark's landing page, which reads
+	 *  ?domain= and fills its own scan form in. Zenithmark validates the name and runs the bot check there;
+	 *  this page loads nothing from it. Each sentence of `note` was checked against Zenithmark's code and its
+	 *  privacy page (2026-11-21): the free scan needs no account, the report gives a letter grade, and the
+	 *  scan form holds every scan until its bot check passes. */
+	heroCheck: {
+		action: 'https://domainscanner.starhold.app/',
+		field: 'domain',
+		label: 'Type a domain, get a grade',
+		example: 'example.com',
+		button: 'Get a grade',
+		note: 'Free, no account needed. This opens Zenithmark, my domain checker, with the domain filled in. Press Scan there, pass a short bot check, and get a letter grade for the domain’s public email and DNS settings.',
+		evidence: ev('zenithmark-free-check')
+	},
+
 	/** Section 2. Credibility arrives before the pitch, and it is checkable. */
 	proofHeading: 'Things you can check before you read another word',
 	proof: [

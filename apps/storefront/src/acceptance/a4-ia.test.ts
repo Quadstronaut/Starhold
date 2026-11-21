@@ -133,8 +133,10 @@ describe('A4 · information architecture', () => {
 	it('A4.10 footer: site links, legal links, hello@ address, Back the work, and the closing line', () => {
 		expect(nav.footerSite.map((i) => i.label)).toEqual([
 			'For home', 'Small business', 'Teams', 'Pricing', 'Products', 'Docs', 'Open source', 'Fleet status', 'Outage reader',
-			'Contact'
+			'Changelog', 'Contact'
 		]);
+		// STAR-310: the changelog is a page on this site
+		expect(nav.footerSite.find((i) => i.label === 'Changelog')).toEqual({ label: 'Changelog', href: '/changelog' });
 		// HELIO-6: the outage reader is the github.io address, which does not depend on Starhold's DNS
 		expect(nav.footerSite.find((i) => i.label === 'Outage reader')).toEqual({
 			label: 'Outage reader', href: 'https://starholdsoftware.github.io/status-reader/', external: true

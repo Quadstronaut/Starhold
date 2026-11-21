@@ -47,6 +47,8 @@ export const footerSite: NavItem[] = [
 	// HELIO-6: reads the fleet's signed status posts from public relays when the status page is down. github.io,
 	// not a Starhold host, so the link still works when Starhold's own DNS does not.
 	{ label: 'Outage reader', href: 'https://starholdsoftware.github.io/status-reader/', external: true },
+	// STAR-310: what shipped, with an RSS feed.
+	{ label: 'Changelog', href: '/changelog' },
 	{ label: 'Contact', href: '/contact' }
 ];
 
