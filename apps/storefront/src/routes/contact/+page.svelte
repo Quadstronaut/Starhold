@@ -1,7 +1,6 @@
 <script lang="ts">
 	import {
 		DISCORD_INVITE,
-		DISCORD_TICKET_URL,
 		CONTACT_EMAIL,
 		CONTACT_PHONE,
 		CONTACT_PHONE_TEL
@@ -44,7 +43,6 @@
 		     invite to send people to. Half a door is worse than no door. -->
 		<p class="discord">
 			<a class="btn btn-secondary" href={DISCORD_INVITE} rel="noopener">Discord</a>
-			<a href={DISCORD_TICKET_URL} rel="noopener">Already in the server? Open a ticket in #contact</a>
 		</p>
 	{/if}
 </section>
