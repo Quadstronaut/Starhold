@@ -4,8 +4,10 @@
 		PERIDOT_DEDICATION,
 		PATREON_URL,
 		PATREON_LINK_TEXT,
-		PERIDOT_PLAY_URL
+		PERIDOT_PLAY_URL,
+		PERIDOT_DOWNLOAD_ENABLED
 	} from '#lib/peridot/page-content.js';
+	import PeridotDownload from '#lib/peridot/PeridotDownload.svelte';
 </script>
 
 <svelte:head>
@@ -30,6 +32,11 @@
 		<p><a href={PERIDOT_PLAY_URL}>Get Peridot on Google Play</a></p>
 	{:else}
 		<p>Coming to Google Play.</p>
+	{/if}
+
+	<!-- PERI-15: flag is OFF, so this renders nothing today. -->
+	{#if PERIDOT_DOWNLOAD_ENABLED}
+		<PeridotDownload />
 	{/if}
 
 	<h2>Thanks</h2>
