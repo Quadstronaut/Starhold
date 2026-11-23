@@ -18,9 +18,9 @@ test('journey 1: a free user finds the free tool, then how it all runs', async (
 	// it leads with the products themselves, then the supporting sections
 	const ids = await page.locator('main > section[id]').evaluateAll((els) => els.map((e) => e.id));
 	expect(ids).toEqual(['products', 'running', 'where', 'checks', 'who']);
-	await expect(page.locator('#products article[data-product]')).toHaveCount(7);
+	await expect(page.locator('#products article[data-product]')).toHaveCount(8);
 	await expect(page.locator('#products article[data-product="starbot"] a')).toHaveCount(0); // closed: no link
-	await expect(page.locator('#running li[data-product]')).toHaveCount(7);
+	await expect(page.locator('#running li[data-product]')).toHaveCount(8);
 	await expect(page.locator('#who')).toContainText('globally deployed automation engineer');
 });
 

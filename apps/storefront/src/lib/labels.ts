@@ -44,6 +44,7 @@ export const PRODUCT_LABELS: Record<string, Label> = pick<Record<string, Label>>
 		account: LABEL_IN_DEVELOPMENT, // Starhold Account
 		starbot: STARBOT_AVAILABLE ? LABEL_OPEN_PAID : LABEL_IN_DEVELOPMENT,
 		shushgame: LABEL_OPEN_FREE,
+		echo: LABEL_OPEN_FREE,
 		dysonsphere: LABEL_IN_DEVELOPMENT,
 		'hangar-hosting': LABEL_RETIRED,
 		'custom-bots': LABEL_RETIRED
@@ -56,6 +57,7 @@ export const PRODUCT_LABELS: Record<string, Label> = pick<Record<string, Label>>
 		account: LABEL_OPEN, // Starhold Account: sign in with Google at ACCOUNT_URL
 		starbot: STARBOT_AVAILABLE ? LABEL_OPEN_PAID_LAUNCHED : LABEL_IN_DEVELOPMENT,
 		shushgame: LABEL_OPEN_FREE,
+		echo: LABEL_OPEN_FREE,
 		dysonsphere: LABEL_IN_DEVELOPMENT,
 		'hangar-hosting': LABEL_RETIRED,
 		'custom-bots': LABEL_RETIRED

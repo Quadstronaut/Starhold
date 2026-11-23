@@ -23,6 +23,7 @@ describe('availability source', () => {
 			render: LAUNCHED ? 'Open: free tier; Hobby $5, Pro $19, Scale $49 a month' : 'Free tier open; sign-in and checkout closed',
 			status: LAUNCHED ? 'Open: free tier; Private $5, MSP $19 a month' : 'Public pages open; sign-in closed',
 			shushgame: 'Open',
+			echo: 'Open: free, no account',
 			starbot: STARBOT_AVAILABLE ? 'Open: free to add; Plus $5, Pro $19 a month, two servers each' : 'Not open yet.',
 			dysonsphere: 'Interest form only'
 		});

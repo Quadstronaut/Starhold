@@ -163,6 +163,11 @@ export const AUDIENCES: Audience[] = [
 				service: 'render',
 				outcome: 'Images, PDFs and screenshots by API',
 				body: 'An API that makes Open Graph images, PDFs and screenshots inside your own application.'
+			},
+			{
+				service: 'echo',
+				outcome: 'What does the internet see when I connect?',
+				body: 'Your public address, user agent, headers and TLS details, as a page or one line for a script. Free, no account.'
 			}
 		],
 		packages: [
@@ -173,7 +178,8 @@ export const AUDIENCES: Audience[] = [
 					{ service: 'umbermark', tier: 'entry' },
 					{ service: 'zenithmark', tier: 'free' },
 					{ service: 'status', tier: 'free' },
-					{ service: 'render', tier: 'free' }
+					{ service: 'render', tier: 'free' },
+					{ service: 'echo', tier: 'free' }
 				]
 			},
 			{
@@ -211,6 +217,7 @@ const FREE_TIER: Record<string, boolean | null> = {
 	umbermark: true,
 	zenithmark: true,
 	render: true,
+	echo: true,
 	shushgame: true,
 	starbot: true,
 	dysonsphere: null // no plans of any kind yet

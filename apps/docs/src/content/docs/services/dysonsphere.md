@@ -2,7 +2,7 @@
 title: DysonSphere
 description: Personal hosting, built to be hard to break. In development.
 sidebar:
-  order: 8
+  order: 9
 ---
 
 **Personal hosting, built to be hard to break.**

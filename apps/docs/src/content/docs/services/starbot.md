@@ -2,7 +2,7 @@
 title: Starbot
 description: One bot, run by Starhold. Add it to your Discord server in one click. Open, paid plans.
 sidebar:
-  order: 6
+  order: 7
 ---
 
 **Starbot is one bot, run by Starhold. Add it to your Discord server in one click.**

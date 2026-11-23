@@ -2,7 +2,7 @@
 title: Shush
 description: The quiet game on Discord. Open, free.
 sidebar:
-  order: 7
+  order: 8
 ---
 
 **The Quiet Game.** A Discord server that is itself the game: every day, one word becomes forbidden. Say it and you die.

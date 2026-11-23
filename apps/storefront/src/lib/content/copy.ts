@@ -319,6 +319,18 @@ export const serviceItems: Service[] = [
 		what: 'An API for OG images, PDFs and screenshots.'
 	},
 	{
+		id: 'echo',
+		name: 'Echo',
+		host: 'echo.starhold.app',
+		href: 'https://echo.starhold.app',
+		action: 'Open Echo',
+		invite: false,
+		status: labelFor('echo'),
+		availability: availabilityFor('echo'),
+		what: 'What the internet sees when you connect: your public address, user agent, headers and TLS details, as a page, plain text or JSON.',
+		note: 'Free. No account, no keys, no cookies. Echo itself keeps nothing; the web server’s error log can hold an address for up to a month.'
+	},
+	{
 		id: 'shushgame',
 		name: 'Shush',
 		host: 'shushgame.com',
@@ -362,7 +374,7 @@ export const services = {
 	inviteHref: (id: string) => pick(`/invite?service=${id}`, `/#services`),
 	groups: [
 		{ id: 'teams', title: 'For teams and MSPs', ids: ['status'] },
-		{ id: 'builders', title: 'For builders and sysadmins', ids: ['umbermark', 'zenithmark', 'render'] },
+		{ id: 'builders', title: 'For builders and sysadmins', ids: ['umbermark', 'zenithmark', 'render', 'echo'] },
 		{ id: 'discord', title: 'Discord apps', ids: ['shushgame', 'starbot'] },
 		{ id: 'personal', title: 'Personal hosting', ids: ['dysonsphere'] }
 	],

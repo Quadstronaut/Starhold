@@ -17,7 +17,7 @@ test('products: one section per audience, a label chip on every card, every prod
 	const cards = page.locator('#by-audience article.product');
 	// a product may sit under more than one audience, so count the distinct products
 	const ids = await cards.evaluateAll((els) => [...new Set(els.map((e) => e.getAttribute('data-product')))].sort());
-	expect(ids).toEqual(['dysonsphere', 'render', 'shushgame', 'starbot', 'status', 'umbermark', 'zenithmark']);
+	expect(ids).toEqual(['dysonsphere', 'echo', 'render', 'shushgame', 'starbot', 'status', 'umbermark', 'zenithmark']);
 	const tags = await cards.locator('.tag').allTextContents();
 	for (const t of tags)
 		expect(
@@ -51,7 +51,7 @@ test('product views: the switch shows one view, remembers it, and puts it in the
 	await expect(page).toHaveURL(/#all-products$/);
 	// one row per product, then the Suite; columns as ruled
 	await expect(everything.locator('thead th')).toHaveText(['Product', 'What it does', 'Who it’s for', 'Free tier', 'Starts at', 'Link']);
-	await expect(everything.locator('tbody tr')).toHaveCount(8);
+	await expect(everything.locator('tbody tr')).toHaveCount(9);
 	await expect(everything.locator('tr[data-product="shushgame"] .who-tag')).toHaveText(['Home']);
 	await expect(everything.locator('tr[data-product="umbermark"] .who-tag')).toHaveText(['Small business', 'Teams']);
 
@@ -83,7 +83,7 @@ test('product views: without JavaScript both views show, one after the other', a
 	await expect(page.locator('#by-audience')).toBeVisible();
 	await expect(page.locator('#all-products')).toBeVisible();
 	await expect(page.locator('#by-audience .view-title')).toBeVisible();
-	await expect(page.locator('#all-products tbody tr')).toHaveCount(8);
+	await expect(page.locator('#all-products tbody tr')).toHaveCount(9);
 	// the two options are plain links to each view
 	await expect(page.getByTestId('view-switch').getByRole('link')).toHaveText(['By who it’s for', 'Everything']);
 	await ctx.close();

@@ -167,6 +167,7 @@ const SERVICE_PAGES = {
 	zenithmark: 'services/zenithmark',
 	render: 'services/render',
 	status: 'services/status',
+	echo: 'services/echo',
 	starbot: 'services/starbot',
 	shushgame: 'services/shushgame',
 	dysonsphere: 'services/dysonsphere'

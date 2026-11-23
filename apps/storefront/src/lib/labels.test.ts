@@ -27,6 +27,7 @@ describe('shared product labels', () => {
 			umbermark: LAUNCHED ? 'Open · paid plans' : 'Open · early access, paid plans',
 			zenithmark: LAUNCHED ? 'Open · paid plans' : 'Open · free',
 			shushgame: 'Open · free',
+			echo: 'Open · free',
 			render: LAUNCHED ? 'Open · paid plans' : 'Invitation only',
 			status: LAUNCHED ? 'Open · paid plans' : 'Invitation only',
 			starbot: STARBOT_AVAILABLE ? (LAUNCHED ? 'Open · paid plans' : 'Open · early access, paid plans') : 'In development',

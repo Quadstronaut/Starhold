@@ -24,6 +24,7 @@ export const AVAILABILITY: Record<string, string> = pick(
 		render: 'Free tier open; sign-in and checkout closed',
 		status: 'Public pages open; sign-in closed',
 		shushgame: 'Open',
+		echo: 'Open: free, no account',
 		starbot: STARBOT_AVAILABILITY,
 		dysonsphere: 'Interest form only'
 	},
@@ -33,6 +34,7 @@ export const AVAILABILITY: Record<string, string> = pick(
 		render: 'Open: free tier; Hobby $5, Pro $19, Scale $49 a month',
 		status: 'Open: free tier; Private $5, MSP $19 a month',
 		shushgame: 'Open',
+		echo: 'Open: free, no account',
 		starbot: STARBOT_AVAILABILITY,
 		dysonsphere: 'Interest form only'
 	}
