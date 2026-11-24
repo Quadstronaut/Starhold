@@ -3,7 +3,7 @@
 //     was rendered from origin/master 710bb74 with the same props, before this change.
 //   * Switch on: every product with yearly plans gets one honest line (amount, "charged once a year", the saving
 //     as a fact, renewal), the Suite line gets its yearly price, and nothing nudges toward yearly.
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render } from 'svelte/server';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -21,6 +21,11 @@ describe('SHIP-6 yearly switch', () => {
 	});
 });
 
+// Mock hygiene (STAR-315): vi.doMock only QUEUES a registration; the queue is applied at the next import, and
+// consecutive mocks of one module are resolved in parallel, so the last one to finish wins. A test that queues a
+// mock and never imports leaves it pending to race the next describe's mock (this file failed about one run in
+// five that way: the 'on' render came out with the 'off' mock). So every test under a doMock beforeEach imports
+// the page, and the unmock is queued in afterEach, which also runs when an assertion fails.
 describe('SHIP-6 yearly switch off (forced off): the rollback renders /pricing byte for byte as before', () => {
 	beforeEach(() => {
 		vi.resetModules();
@@ -34,6 +39,7 @@ describe('SHIP-6 yearly switch off (forced off): the rollback renders /pricing b
 			};
 		});
 	});
+	afterEach(() => vi.doUnmock('#lib/yearly.js'));
 
 	it('renders /pricing byte for byte as before', async () => {
 		const { render: renderFresh } = await import('svelte/server');
@@ -41,9 +47,10 @@ describe('SHIP-6 yearly switch off (forced off): the rollback renders /pricing b
 		const { head, body } = renderFresh(Page, { props });
 		expect(head).toBe(golden.head);
 		expect(body).toBe(golden.body);
-		vi.doUnmock('#lib/yearly.js');
 	});
+});
 
+describe('SHIP-6 yearly switch off: the helpers', () => {
 	it('adds nothing while off', () => {
 		expect(yearly.noteWithYearly('umbermark', undefined, false)).toBeUndefined();
 		expect(yearly.noteWithYearly('umbermark', 'a note', false)).toBe('a note');
@@ -93,6 +100,7 @@ describe('SHIP-6 yearly switch on (rendered with the switch forced on)', () => {
 			};
 		});
 	});
+	afterEach(() => vi.doUnmock('#lib/yearly.js'));
 
 	it('shows each yearly line once, the Suite yearly price, and no nudges', async () => {
 		// Same module graph as the re-imported page (resetModules gives svelte a fresh runtime).
@@ -108,6 +116,5 @@ describe('SHIP-6 yearly switch on (rendered with the switch forced on)', () => {
 		for (const nudge of ['best value', 'most popular', 'recommended plan', 'save ', '% off', 'free months']) {
 			expect(text.toLowerCase(), nudge).not.toContain(nudge);
 		}
-		vi.doUnmock('#lib/yearly.js');
 	});
 });
