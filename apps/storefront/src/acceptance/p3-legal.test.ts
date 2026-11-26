@@ -26,7 +26,7 @@ describe('legal pages · all three', () => {
 	for (const k of Object.keys(PAGES) as (keyof typeof PAGES)[]) {
 		// All three amended 2026-11-17 (LEGAL-3) and again 2026-11-19 (LEGAL-4, operator approved): renewal, sanctions, copyright, Starbot data, Cloudflare delivery.
 		// SHIP-6 (DRAFT): Terms and Refunds re-dated 2026-11-21 for yearly plans; Privacy unchanged.
-		const dated = k === 'privacy' ? '2026-11-19' : '2026-11-21';
+		const dated = k === 'privacy' ? '2026-11-26' : '2026-11-21';
 		it(`${k}: dated ${dated}, says Starhold not Starhold Software`, () => {
 			expect(text(k)).toContain(`Last updated ${dated}`);
 			expect(raw(k)).not.toMatch(/Starhold Software/);

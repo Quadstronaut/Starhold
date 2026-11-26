@@ -38,6 +38,8 @@
 //               moving between monthly and yearly is cancel-then-start, and a yearly prorated refund covers the unused year.
 //               Amended 2026-11-21 (SHIP-6, operator ruling on upgrades): an upgrade is charged in full and starts that
 //               day; the old plan's unused part is refunded pro rata with nothing held back; yearly -> monthly is cancel-then-start.
+//               Amended 2026-11-26 (ECHO-1, approved by operator delegation 2026-11-25, published 2026-11-26): Privacy only. Echo (echo.starhold.app) row in section 3 and an Echo
+//               request-counter row in section 6. Previously approved privacy hash: 8d2d9ef6bf9de0652321f1d0819ce191a313b8f7d4ba04fc8a1ad34d77cd11b8.
 //   both      : /legal/<name>.txt is the same document as the HTML page, deterministic, text/plain.
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { createHash } from 'node:crypto';
@@ -68,7 +70,7 @@ const PRELAUNCH_SOURCE_SHA: Record<(typeof KEYS)[number], string> = {
 // that is the point. Re-approve, then update the hashes here and on production Starship (deploy/DEPLOY.md, Launch day).
 const APPROVED_LAUNCH_HASH: Record<(typeof KEYS)[number], string> = {
 	terms: '21e50247c66fedaa8ce65a2e6532629f73de01779f140183914736606be6f372',
-	privacy: '8d2d9ef6bf9de0652321f1d0819ce191a313b8f7d4ba04fc8a1ad34d77cd11b8',
+	privacy: '94503628656c6ac6e43d648e39cddbca5cd39d355a53788d31112d45c6ce7ed2',
 	refunds: '41d8837e8e4cd9a6f639a7f6776d45beee9a02c0cee93da7cf4d29a091bc6877'
 };
 
@@ -115,7 +117,7 @@ describe('legal documents · launched state', () => {
 		});
 	}
 	// SHIP-6 (yearly plans, DRAFT held for the operator's yearly refund ruling): Terms and Refunds dated 2026-11-21.
-	const LAUNCHED_DATE: Record<(typeof KEYS)[number], string> = { terms: '2026-11-21', privacy: '2026-11-19', refunds: '2026-11-21' };
+	const LAUNCHED_DATE: Record<(typeof KEYS)[number], string> = { terms: '2026-11-21', privacy: '2026-11-26', refunds: '2026-11-21' };
 	it('dated (LEGAL-4, SHIP-6); pre-launch keeps master\'s date', () => {
 		for (const k of KEYS) {
 			expect(textOf('launched', k)).toContain('Last updated ' + LAUNCHED_DATE[k]);

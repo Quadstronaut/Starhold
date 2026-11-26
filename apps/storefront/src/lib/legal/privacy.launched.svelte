@@ -1,7 +1,7 @@
 <svelte:head><title>Privacy Policy · Starhold</title></svelte:head>
 
 <section class="section legal">
-	<div class="label">Last updated 2026-11-19</div>
+	<div class="label">Last updated 2026-11-26</div>
 	<h1>Privacy Policy</h1>
 
 	<p>This policy says what personal data Starhold collects, why, on what legal basis, who receives it, how long we keep it, and how to use your rights. It covers the Starhold Account, our websites (starhold.dev, starhold.fyi, starhold.app), the contact form and our Discord server. Each product (Umbermark, Zenithmark, Heliostat and Solatype) has its own privacy notice for what it adds. Peridot has its own privacy policy.</p>
@@ -32,6 +32,7 @@
 			<tr><td>Error logs, which may include your IP address.</td><td>Find and fix failures.</td><td>Legitimate interests</td></tr>
 			<tr><td>Abuse-prevention records: a keyed hash of your IP address (pseudonymous).</td><td>Stop abuse of free tools.</td><td>Legitimate interests</td></tr>
 			<tr><td>Your IP address, held in memory only.</td><td>Spam control on forms.</td><td>Legitimate interests</td></tr>
+			<tr><td>Echo (echo.starhold.app): your IP address, request headers, user agent and connection details, used only to show them back to you in the answer. Echo does not store them itself; if the web server fails, its error log can contain your IP address for up to 30 days (see Error logs below). A request counter for your address (for IPv6, your /64 network) is held in memory only and is lost when Echo restarts.</td><td>Show you what the internet sees when you connect, and stop abuse of a free service.</td><td>Contract (the answer you asked for); legitimate interests (the counter)</td></tr>
 			<tr><td>Contact messages: your name, email and message.</td><td>Answer you.</td><td>Legitimate interests (replying to you)</td></tr>
 			<tr><td>Email for the DysonSphere notice.</td><td>Send one email when DysonSphere opens.</td><td>Consent</td></tr>
 			<tr><td>Starhold Account details: your sign-in (through Google), your plan, and your email address only if you choose to share it at sign-in.</td><td>Run your account.</td><td>Contract</td></tr>
@@ -89,6 +90,7 @@
 			<tr><td>Usage counts (anonymous)</td><td>90 days</td><td>The day of the tally</td></tr>
 			<tr><td>Abuse-prevention records</td><td>24 hours to 1 year, depending on the product</td><td>Record created</td></tr>
 			<tr><td>Error logs</td><td>30 days</td><td>Log line written</td></tr>
+			<tr><td>Echo request counters</td><td>In memory only; lost when Echo restarts. An idle entry can stay until the limiter has seen 512 more requests.</td><td>Your last request</td></tr>
 			<tr><td>Backups</td><td>Deleted data leaves backups within 30 days</td><td>Deletion from live data</td></tr>
 			<tr><td>Free scan reports</td><td>30 days</td><td>Report created</td></tr>
 			<tr><td>Paid reports, unclaimed</td><td>3 months, or until you delete it</td><td>Payment. A report claimed into an account lives with the account.</td></tr>
@@ -144,7 +146,7 @@
 	<h2>14. Contact</h2>
 	<p>Copper Jerky LLC, doing business as Starhold — <a href="mailto:hello@starhold.dev">hello@starhold.dev</a>.</p>
 
-	<p class="label">Last updated 2026-11-19.</p>
+	<p class="label">Last updated 2026-11-26.</p>
 </section>
 
 <style>
